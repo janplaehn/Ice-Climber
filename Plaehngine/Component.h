@@ -1,16 +1,22 @@
 #pragma once
 
+class GameObject;
+class Transform;
+
 #include <set>
 #include "objectPool.h"
-
-class GameObject;
-class Plaehngine;
-class Sprite;
+#include "Vector2D.h"
+#include "GameObject.h"
+#include "Plaehngine.h"
+#include "GameTime.h"
+#include "SDL.h"
+#include "Input.h"
+#include <string>
 
 class Component
 {
-
 	friend class GameObject;
+
 protected:
 	Plaehngine* _engine;	// used to access the engine
 	GameObject * _gameObject;		// the game object this component is part of

@@ -14,6 +14,7 @@ void GameObject::Create(bool placeInWorld)
 	}
 
 	_enabled = false;
+	_gameObjects.insert(this);
 }
 
 void GameObject::Init()
@@ -36,16 +37,19 @@ void GameObject::Update(float dt)
 
 void GameObject::Destroy()
 {
-	for (auto it = _components.begin(); it != _components.end(); it++)
-		(*it)->Destroy();
+	for (auto it = _components.begin(); it != _components.end(); it++) {
+		if ((*it) != nullptr) {
+			(*it)->Destroy();
+		}
+	}
 }
 
 GameObject::~GameObject()
 {
-	//Todo: Unload Components and stuff here?
+
 }
 
-void GameObject::AddReceiver(GameObject * go)
+void GameObject::AddReceiver(GameObject* go)
 {
 	_receivers.push_back(go);
 }

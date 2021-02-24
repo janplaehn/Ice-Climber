@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ice Climber", "..\Ice Climber\Ice Climber Clone\Ice Climber.vcxproj", "{E903F53B-0316-4804-BB81-76B967B784E0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ice Climber", "Ice Climber Clone\Ice Climber.vcxproj", "{E903F53B-0316-4804-BB81-76B967B784E0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Plaehngine", "..\Ice Climber\Plaehngine\Plaehngine.vcxproj", "{FE3CB27C-2CB2-4CE7-942D-83CFBE9E1C96}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Plaehngine", "Plaehngine\Plaehngine.vcxproj", "{FE3CB27C-2CB2-4CE7-942D-83CFBE9E1C96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

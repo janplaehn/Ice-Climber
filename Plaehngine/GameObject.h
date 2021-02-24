@@ -13,7 +13,7 @@ protected:
 	std::vector<Component*> _components;
 
 public:
-	enum Message { HIT, ALIEN_HIT, ALIEN_CHANGEDIR, GAME_OVER, LEVEL_WIN, NO_MSG, QUIT };
+	enum Message { HIT, GAME_OVER, LEVEL_WIN, NO_MSG, QUIT };
 
 	Transform* _transform = nullptr;
 	bool _enabled;

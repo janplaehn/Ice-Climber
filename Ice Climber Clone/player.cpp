@@ -1,11 +1,10 @@
 #include "player.h"
-#include "gameSettings.h"
 
 //Todo: Move everything to components!
 void Player::Init()
 {
 	GameObject::Init();
-	lives = GameSettings::NUM_LIVES;
+	lives = 3;
 }
 
 void Player::Receive(Message m)

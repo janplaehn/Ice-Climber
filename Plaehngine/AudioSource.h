@@ -1,7 +1,6 @@
 #pragma once
 #include "Component.h"
-#include <string>
-#include <SDL_mixer.h>
+#include "Audio.h"
 
 
 class AudioSource : public Component

@@ -1,11 +1,5 @@
-
-#include "renderComponent.h"
-#include "component.h"
-#include "GameObject.h"
-#include "Transform.h"
-#include "Plaehngine.h"
-#include "sprite.h"
-#include "Vector2D.h"
+#include "RenderComponent.h"
+#include "Sprite.h"
 
 void RenderComponent::Update(float dt)
 {

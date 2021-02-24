@@ -1,4 +1,4 @@
-#include "collideComponent.h"
+#include "CollideComponent.h"
 #include "Transform.h"
 
 void CollideComponent::Update(float dt)

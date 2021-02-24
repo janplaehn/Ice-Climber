@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.h"
-#include "Vector2D.h"
 
 class Transform : public Component
 {
@@ -15,4 +14,3 @@ public:
 	Vector2D _pivot;
 	SDL_RendererFlip _flipType;
 };
-

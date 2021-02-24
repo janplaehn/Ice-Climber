@@ -3,6 +3,7 @@
 #include "SDL_image.h"
 #include "Vector2D.h"
 #include "Transform.h"
+#include "Screen.h"
 
 Sprite::Sprite(SDL_Texture* texture)
 {
@@ -16,7 +17,7 @@ void Sprite::Draw(Transform* transform)
 
 	//Apply Position
 	rect.x = transform->_position.x;
-	rect.y = transform->_position.y;
+	rect.y = transform->_position.y * -1.0f + Screen::HEIGHT;
 
 	SDL_QueryTexture(_texture, NULL, NULL, &(rect.w), &(rect.h));
 

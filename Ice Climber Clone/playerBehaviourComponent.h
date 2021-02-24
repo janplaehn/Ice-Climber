@@ -20,8 +20,6 @@ public:
 	// param move depends on the time, so the player moves always at the same speed on any computer
 	void Move(float move);
 
-	// return true if enough time has passed from the previous rocket
-	bool CanFire();
-
-	ObjectPool<class Rocket>* rockets_pool;
+private:
+	float _playerSpeed = 160;
 };
