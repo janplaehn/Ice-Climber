@@ -5,8 +5,8 @@
 Rigidbody::Rigidbody(Plaehngine* engine, GameObject* go)
 	: Component(engine, go)
 {
-	_previousPosition = _gameObject->_transform->_position;
-	_collider = _gameObject->GetComponent<AABBCollider>();
+	_previousPosition = _transform->_position;
+	_collider = GetComponent<AABBCollider>();
 	Physics::_rigidbodies.push_back(this);
 }
 
@@ -17,7 +17,7 @@ bool Rigidbody::IsOnGround() const
 
 void Rigidbody::Update(float dt)
 {
-	_previousPosition = _gameObject->_transform->_position;
+	_previousPosition = _transform->_position;
 
 	if (_isKinematic) {
 		_velocity = Vector2D::Zero();

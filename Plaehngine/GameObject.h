@@ -3,6 +3,7 @@
 // GameObject represents objects which moves are drawn
 #include <vector>
 #include "Screen.h"
+#include <string>
 
 class Component;
 class Transform;
@@ -14,11 +15,12 @@ protected:
 	std::vector<Component*> _components;
 
 public:
-	GameObject(bool placeInWorld = true);
+	GameObject();
 
 	Transform* _transform = nullptr;
 	bool _enabled;
-	bool _isInWorld;
+
+	std::string _tag = "Default";
 
 	static class Plaehngine* _engine;
 	static std::vector<GameObject*> _gameObjects;	// http://www.cplusplus.com/reference/set/set/
@@ -29,6 +31,12 @@ public:
 	T* AddComponent() {
 		Component* component = new T(_engine, this);
 		_components.push_back(component);
+		for (Component* existingComponent : _components)
+		{
+			if (existingComponent != component) {
+				existingComponent->OnComponentAdded(component);
+			}
+		}
 		return dynamic_cast<T*>(component);
 	}
 

@@ -22,15 +22,19 @@ public:
 
 	void OnCollision(class AABBCollider* other);
 
-	Sprite* _walkSprite;
-	Sprite* _jumpSprite;
+	class Sprite* _walkSprite;
+	class Sprite* _jumpSprite;
+
+	class AudioSource* _jumpSource;
+	class AudioSource* _tileBreakSource;
 
 private:
 	const float WALKSPEED = 400;
-	const float JUMPFORCE = 600;
+	const float JUMPFORCE = 450;
 
 	class Rigidbody* _rigidbody;
 	class SpriteRenderer* _spriteRenderer;
+	class AABBCollider* _collider;
 
 	bool _isOnGround = false;
 };

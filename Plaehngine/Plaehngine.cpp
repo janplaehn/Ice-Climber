@@ -151,16 +151,23 @@ void Plaehngine::Run()
 		}
 
 		//Debug Drawing
-		Physics::DrawCollisions();
+		//Physics::DrawCollisions();
 
 		//FPS Counter:
-		/*std::stringstream fpsNumber;
-		fpsNumber << std::fixed << std::setprecision(1) << (1.0f / dt);
-		std::string bonusText = "FPS: " + fpsNumber.str();
-		DrawText(Vector2D(0, 0), bonusText.c_str());*/
+		/*if (dt != 0) {
+			int fps = 1.0f / dt;
+			std::string fpsText = "FPS: " + std::to_string(fps);
+			DrawText(Vector2D(0, 0), fpsText.c_str());
+		}*/
+
 
 		SwapBuffers();
 		ClearWindow();
+
+		if (dt < (1.0f / 60.0f)) {
+			int delay = (int)((1.0f / 60.0f - dt) * 1000.0f);
+			SDL_Delay(delay);
+		}
 	}
 }
 

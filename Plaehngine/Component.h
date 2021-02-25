@@ -18,21 +18,26 @@ class Component
 	friend class GameObject;
 
 protected:
-	Plaehngine* _engine;	// used to access the engine
-
-	//Todo: Add more Sandbox features!
-	//Todo: Add Transforms!! (Position, Rotation, Scale, Pivot!)
+	Plaehngine* _engine;
 
 public:
-	GameObject* _gameObject;		// the game object this component is part of
+	GameObject* _gameObject;
+	Transform* _transform;
 
 	Component(Plaehngine* engine, GameObject* go);
 	virtual ~Component() {}
+
+	template <class T>
+	T* GetComponent() {
+		return _gameObject->GetComponent<T>();
+	}
 
 	virtual void Init() {}
 	virtual void Update(float dt) = 0;
 	virtual void Receive(int message) {}
 	virtual void OnCollision(class AABBCollider* otherCollider) {};
+	virtual void OnComponentAdded(Component* component) {};
+
 	virtual void Destroy() {}
 };
 

@@ -28,5 +28,4 @@ private:
 			return (sr1->order < sr2->order);
 		}
 	};
-
 };

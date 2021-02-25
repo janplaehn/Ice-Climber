@@ -16,12 +16,12 @@ void SpriteRenderer::Update(float dt)
 
 void SpriteRenderer::Draw()
 {
-	if (_gameObject->_transform == nullptr) {
+	if (_transform == nullptr) {
 		SDL_LogWarn(SDL_LOG_CATEGORY_RENDER, "Can not draw a component that is not placed in the world!");
 		return;
 	}
 
-	if (_sprite) _sprite->Draw(_gameObject->_transform);
+	if (_sprite) _sprite->Draw(_transform);
 }
 
 void SpriteRenderer::Destroy()

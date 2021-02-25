@@ -5,13 +5,9 @@
 #include "AABBCollider.h"
 #include <set>
 
-GameObject::GameObject(bool placeInWorld)
+GameObject::GameObject()
 {
-	_isInWorld = placeInWorld;
-
-	if (_isInWorld) {
-		_transform = AddComponent<Transform>();
-	}
+	_transform = AddComponent<Transform>();
 
 	_enabled = false;
 

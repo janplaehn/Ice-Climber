@@ -6,7 +6,7 @@
 AABBCollider::AABBCollider(Plaehngine* engine, GameObject* go)
 	: Component(engine, go)
 {
-	SpriteRenderer* renderer = _gameObject->GetComponent<SpriteRenderer>();
+	SpriteRenderer* renderer = GetComponent<SpriteRenderer>();
 	if (renderer != nullptr && renderer->_sprite != nullptr) {
 		InitializeWithSprite(renderer->_sprite);
 	}
@@ -27,11 +27,10 @@ void AABBCollider::Update(float dt)
 void AABBCollider::Render()
 {
 	SDL_Rect rect;
-	Transform* transform = _gameObject->_transform;
 
 	//Apply Position
-	rect.x = transform->_position.x;
-	rect.y = transform->_position.y * -1.0f + Screen::HEIGHT;
+	rect.x = _transform->_position.x;
+	rect.y = _transform->_position.y * -1.0f + Screen::HEIGHT;
 	rect.w = _width;
 	rect.h = _height;
 
@@ -40,8 +39,8 @@ void AABBCollider::Render()
 	//rect.h *= transform->_scale.y;
 
 	//Apply Pivot
-	rect.x -= rect.w * transform->_pivot.x;
-	rect.y -= rect.h * transform->_pivot.y;
+	rect.x -= rect.w * _transform->_pivot.x;
+	rect.y -= rect.h * _transform->_pivot.y;
 
 	SDL_SetRenderDrawColor(_engine->_renderer, 0, 255, 0, 255);
 	SDL_RenderDrawRect(_engine->_renderer, &rect);
@@ -54,10 +53,9 @@ void AABBCollider::Destroy()
 
 SDL_Rect AABBCollider::GetRect()
 {
-	//Todo: Include Scale
 	SDL_Rect rect;
-	rect.x = _gameObject->_transform->_position.x - _width * _gameObject->_transform->_pivot.x;
-	rect.y = _gameObject->_transform->_position.y + _height * _gameObject->_transform->_pivot.y;
+	rect.x = _transform->_position.x - _width * _transform->_pivot.x * _transform->_scale.x;
+	rect.y = _transform->_position.y + _height * _transform->_pivot.y * _transform->_scale.y;
 	rect.w = _width;
 	rect.h = _height;
 	return rect;

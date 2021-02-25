@@ -6,4 +6,5 @@ Component::Component(Plaehngine* engine, GameObject* go)
 {
 	_engine = engine;
 	_gameObject = go;
+	_transform = _gameObject->_transform;
 }

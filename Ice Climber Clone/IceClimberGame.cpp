@@ -8,6 +8,7 @@
 #include "Input.h"
 #include "Transform.h"
 #include <Rigidbody.h>
+#include <Camera.h>
 
 void IceClimberGame::Create(class Plaehngine* engine)
 {
@@ -23,7 +24,7 @@ void IceClimberGame::Create(class Plaehngine* engine)
 
 
 	//Setup background Music
-	GameObject* music = new GameObject(false);
+	GameObject* music = new GameObject();
 	AudioSource* musicSrc = music->AddComponent<AudioSource>();
 	musicSrc->_clip = Audio::LoadSound("Assets/Music/stage.wav");
 	musicSrc->_isLooping = true;
@@ -35,18 +36,29 @@ void IceClimberGame::Create(class Plaehngine* engine)
 	player->_transform->_pivot = Vector2D(0.5f, 1);
 	player->_transform->_position.x = Screen::WIDTH / 2;
 	player->_transform->_position.y = 36;
-	PlayerBehaviour* player_behaviour = player->AddComponent<PlayerBehaviour>();
+	PlayerBehaviour* playerBehaviour = player->AddComponent<PlayerBehaviour>();
 	SpriteRenderer* player_render = player->AddComponent<SpriteRenderer>();
 	player_render->order = 10;
-	player_behaviour->_walkSprite = Sprite::Create("Assets/Sprites/Characters/Popo/walk1.png");
-	player_behaviour->_jumpSprite = Sprite::Create("Assets/Sprites/Characters/Popo/jump1.png");
-	player_render->_sprite = player_behaviour->_walkSprite;
+	playerBehaviour->_walkSprite = Sprite::Create("Assets/Sprites/Characters/Popo/walk1.png");
+	playerBehaviour->_jumpSprite = Sprite::Create("Assets/Sprites/Characters/Popo/jump1.png");
+	player_render->_sprite = playerBehaviour->_walkSprite;
 	AABBCollider* player_collider = player->AddComponent<AABBCollider>();
-	AudioSource* player_audio = player->AddComponent<AudioSource>();
-	player_audio->_clip = Audio::LoadSound("Assets/Sounds/sound.wav");
+	playerBehaviour->_jumpSource = player->AddComponent<AudioSource>();
+	playerBehaviour->_jumpSource->_clip = Audio::LoadSound("Assets/Sounds/jump.wav");
+	playerBehaviour->_tileBreakSource = player->AddComponent<AudioSource>();
+	playerBehaviour->_tileBreakSource->_clip = Audio::LoadSound("Assets/Sounds/tileBreak.wav");
 	Rigidbody* playerRb = player->AddComponent<Rigidbody>();
 	playerRb->_linearDrag = 5.0f;
 	playerRb->_gravityScale = 0.5f;
+
+	//Setup Topi
+	GameObject* topi1 = new GameObject();
+	topi1->_transform->_pivot = Vector2D(0.5f, 1);
+	topi1->_transform->_position.x = 56;
+	topi1->_transform->_position.y = 24;
+	SpriteRenderer* topi1_render = topi1->AddComponent<SpriteRenderer>();
+	topi1_render->order = 11;
+	topi1_render->_sprite = Sprite::Create("Assets/Sprites/Characters/Topi/walk.png");
 
 
 	//Setup Ground Collider
@@ -58,10 +70,12 @@ void IceClimberGame::Create(class Plaehngine* engine)
 
 
 	//Setup Stage Colliders
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 7; i++)
 	{
 		float height = 64 + i * 48;
-		float width = (i == 0) ? 32 : 40;
+		float width = 40;
+		if (i == 0) width = 32;
+		if ((i == 4) || (i == 5) || (i == 6)) width = 48;
 
 		GameObject* stageLeft = new GameObject();
 		stageLeft->_transform->_pivot = Vector2D(0, 1);
@@ -82,6 +96,7 @@ void IceClimberGame::Create(class Plaehngine* engine)
 		for (int x = 0; x < tileCount; x++)
 		{
 			GameObject* tile = new GameObject();
+			tile->_tag = "Tile";
 			tile->_transform->_pivot = Vector2D(0, 1);
 			tile->_transform->_position = Vector2D(width + x * 8, height);
 			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
@@ -110,6 +125,16 @@ void IceClimberGame::Update(float dt)
 	Input::KeyStatus keys = Input::GetKeyStatus();
 	if (keys._escape) {
 		_engine->Quit();
+	}
+
+	const float MAX_CAMERA_DISTANCE = 100;
+	if (player->_transform->_position.y > (Camera::_position.y + MAX_CAMERA_DISTANCE)) {
+
+		Camera::_position.y += dt * 10;
+
+		if ((Camera::_position.y + MAX_CAMERA_DISTANCE) > player->_transform->_position.y) {
+			Camera::_position.y = player->_transform->_position.y - MAX_CAMERA_DISTANCE;
+		}
 	}
 }
 

@@ -9,7 +9,7 @@ void Physics::Run()
 {
 	for (int i = 0; i < _rigidbodies.size(); i++)
 	{
-		_rigidbodies[i]->_gameObject->_transform->_position = _rigidbodies[i]->_gameObject->_transform->_position + _rigidbodies[i]->_targetMoveDelta;
+		_rigidbodies[i]->_transform->_position = _rigidbodies[i]->_transform->_position + _rigidbodies[i]->_targetMoveDelta;
 
 		for (int j = 0; j < _colliders.size(); j++)
 		{
@@ -84,7 +84,7 @@ Vector2D Physics::CalculateColliderDistance(AABBCollider* a, AABBCollider* b)
 void Physics::PreventCollision(Rigidbody* rb, AABBCollider* collider)
 {
 	//Undo the move applied to transform
-	rb->_gameObject->_transform->_position.y = rb->_gameObject->_transform->_position.y - rb->_targetMoveDelta.y;
+	rb->_transform->_position.y = rb->_transform->_position.y - rb->_targetMoveDelta.y;
 	rb->_velocity.y = 0;
 	return;
 
@@ -119,17 +119,17 @@ void Physics::PreventCollision(Rigidbody* rb, AABBCollider* collider)
 
 	if (abs(clampedMoveDelta.x) < abs(intersection->w) && abs(rb->_targetMoveDelta.x) > abs(intersection->w)) {
 		//Collision on top or bottom
-		rb->_gameObject->_transform->_position.y = rb->_gameObject->_transform->_position.y - rb->_targetMoveDelta.y;
+		rb->_transform->_position.y = rb->_transform->_position.y - rb->_targetMoveDelta.y;
 		rb->_velocity.y = 0;
 	}
 	if (abs(clampedMoveDelta.y) < abs(intersection->h) && abs(rb->_targetMoveDelta.y) > abs(intersection->h)) {
 		//Collision on right or left
-		rb->_gameObject->_transform->_position.x = rb->_gameObject->_transform->_position.x - rb->_targetMoveDelta.x;
+		rb->_transform->_position.x = rb->_transform->_position.x - rb->_targetMoveDelta.x;
 		rb->_velocity.x = 0;
 	}
 	else {
 		//Collision exactly on corner
-		rb->_gameObject->_transform->_position = rb->_gameObject->_transform->_position - rb->_targetMoveDelta;
+		rb->_transform->_position = rb->_transform->_position - rb->_targetMoveDelta;
 		rb->_velocity = Vector2D::Zero();
 	}
 
