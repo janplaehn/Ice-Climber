@@ -8,6 +8,10 @@
 #include "Game.h"
 #include "Screen.h"
 #include "SDL_image.h"
+#include "SpriteRenderer.h"
+#include <iomanip>
+#include <sstream>
+#include "Physics.h"
 
 
 //Todo: Add A Config to initialize this
@@ -80,11 +84,18 @@ bool Plaehngine::Init(Game* game)
 }
 
 
-// Destroys the Plaehngine instance
+// Destroys the Plaehngine instance (move this maybe?)
 void Plaehngine::Destroy()
 {
 	// clean up
 	_game->Destroy();
+
+	for (int i = GameObject::_gameObjects.size() - 1; i >= 0; i--)
+	{
+		if (GameObject::_gameObjects[i] != nullptr) {
+			GameObject::_gameObjects[i]->Destroy();
+		}
+	}
 
 	SDL_Log("Shutting down the engine\n");
 
@@ -111,7 +122,7 @@ void Plaehngine::SwapBuffers() {
 
 void Plaehngine::ClearWindow() {
 	//Clear screen
-	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 1);
+	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
 	SDL_RenderClear(_renderer);
 }
 
@@ -128,15 +139,36 @@ void Plaehngine::Run()
 
 		Input::ProcessInput();
 		_game->Update(dt);
-		_game->Draw();
+
+		for (auto go = GameObject::_gameObjects.begin(); go != GameObject::_gameObjects.end(); go++)
+			(*go)->Update(dt);
+
+		Physics::Run();
+
+		//Drawing
+		for (SpriteRenderer* renderer : SpriteRenderer::_spriteRenderers) {
+			renderer->Draw();
+		}
+
+		//Debug Drawing
+		Physics::DrawCollisions();
+
+		//FPS Counter:
+		/*std::stringstream fpsNumber;
+		fpsNumber << std::fixed << std::setprecision(1) << (1.0f / dt);
+		std::string bonusText = "FPS: " + fpsNumber.str();
+		DrawText(Vector2D(0, 0), bonusText.c_str());*/
+
+		SwapBuffers();
+		ClearWindow();
 	}
 }
 
 void Plaehngine::DrawText(Vector2D position, const char * msg)
 {
-	SDL_Color black = { 0, 0, 0 };  // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
+	SDL_Color white = {255,255,255};  // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
 
-	SDL_Surface* surf = TTF_RenderText_Solid(_font, msg, black); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
+	SDL_Surface* surf = TTF_RenderText_Solid(_font, msg, white); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
 
 	SDL_Texture* msg_texture = SDL_CreateTextureFromSurface(_renderer, surf); //now you can convert it into a texture
 

@@ -21,6 +21,7 @@ void Sprite::Draw(Transform* transform)
 
 	SDL_QueryTexture(_texture, NULL, NULL, &(rect.w), &(rect.h));
 
+	//Apply Scale
 	rect.w *= transform->_scale.x;
 	rect.h *= transform->_scale.y;
 
@@ -54,6 +55,20 @@ Sprite* Sprite::Create(const char* path)
 	Sprite* sprite = new Sprite(texture);
 
 	return sprite;
+}
+
+int Sprite::GetWidth()
+{
+	int width, height;
+	SDL_QueryTexture(_texture, NULL, NULL, &width, &height);
+	return width;
+}
+
+int Sprite::GetHeight()
+{
+	int width, height;
+	SDL_QueryTexture(_texture, NULL, NULL, &width, &height);
+	return height;
 }
 
 

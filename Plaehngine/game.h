@@ -11,10 +11,6 @@ public:
 
 	virtual void Update(float dt) = 0;
 
-
-	//Todo: Move to Renderer Class
-	virtual void Draw() = 0;
-
 	virtual void Receive(Message m) = 0;
 
 	virtual void Destroy() = 0;

@@ -2,7 +2,8 @@
 
 // GameObject represents objects which moves are drawn
 #include <vector>
-#include <set>
+#include "Screen.h"
+
 class Component;
 class Transform;
 
@@ -13,6 +14,8 @@ protected:
 	std::vector<Component*> _components;
 
 public:
+	GameObject(bool placeInWorld = true);
+
 	enum Message { HIT, GAME_OVER, LEVEL_WIN, NO_MSG, QUIT };
 
 	Transform* _transform = nullptr;
@@ -20,11 +23,9 @@ public:
 	bool _isInWorld;
 
 	static class Plaehngine* _engine;
-	static std::set<GameObject*> _gameObjects;	// http://www.cplusplus.com/reference/set/set/
+	static std::vector<GameObject*> _gameObjects;	// http://www.cplusplus.com/reference/set/set/
 
 	virtual ~GameObject();
-
-	virtual void Create(bool placeInWorld);
 
 	template <class T>
 	T* AddComponent() {
@@ -49,6 +50,7 @@ public:
 	virtual void Update(float dt);
 	virtual void Destroy();
 	virtual void AddReceiver(GameObject *go);
-	virtual void Receive(Message m) {}
+	virtual void Receive(Message m);
+	void OnCollision(class AABBCollider* otherCollider);
 	void Send(Message m);
 };

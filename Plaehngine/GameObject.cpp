@@ -1,12 +1,12 @@
-#include "gameObject.h"
-#include "component.h"
+#include "GameObject.h"
+#include "Component.h"
 #include "Plaehngine.h"
 #include "Transform.h"
+#include "AABBCollider.h"
 #include <set>
 
-void GameObject::Create(bool placeInWorld)
+GameObject::GameObject(bool placeInWorld)
 {
-
 	_isInWorld = placeInWorld;
 
 	if (_isInWorld) {
@@ -14,7 +14,8 @@ void GameObject::Create(bool placeInWorld)
 	}
 
 	_enabled = false;
-	_gameObjects.insert(this);
+
+	_gameObjects.push_back(this);
 }
 
 void GameObject::Init()
@@ -42,6 +43,7 @@ void GameObject::Destroy()
 			(*it)->Destroy();
 		}
 	}
+	_gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), this), _gameObjects.end());
 }
 
 GameObject::~GameObject()
@@ -65,5 +67,32 @@ void GameObject::Send(Message m)
 	}
 }
 
+void GameObject::Receive(Message m) {
+	switch (m)
+	{
+	case GameObject::HIT:
+		SDL_Log("HIT RECEIVED!");
+		break;
+	case GameObject::GAME_OVER:
+		break;
+	case GameObject::LEVEL_WIN:
+		break;
+	case GameObject::NO_MSG:
+		break;
+	case GameObject::QUIT:
+		break;
+	default:
+		break;
+	}
+}
+
+void GameObject::OnCollision(AABBCollider* otherCollider)
+{
+	for (Component* component : _components)
+	{
+		component->OnCollision(otherCollider);
+	}
+}
+
 Plaehngine* GameObject::_engine;
-std::set<GameObject*> GameObject::_gameObjects;
+std::vector<GameObject*> GameObject::_gameObjects;

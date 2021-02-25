@@ -23,8 +23,10 @@ public:
 
 	// Create a sprite given a string.
 	// All sprites are 32*32 pixels.
-	// Todo: This should be moved to Sprite class for sure
-	static Sprite* Create(const char* path);	
+	static Sprite* Create(const char* path);
+
+	int GetWidth();
+	int GetHeight();
 
 private:
 	static SDL_Renderer* _renderer;
