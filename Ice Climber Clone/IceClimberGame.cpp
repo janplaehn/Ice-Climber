@@ -92,10 +92,6 @@ void IceClimberGame::Create(class Plaehngine* engine)
 
 	}
 
-
-
-	player->AddReceiver(this);
-
 	SpriteRenderer::SortRenderers();
 }
 
@@ -115,15 +111,6 @@ void IceClimberGame::Update(float dt)
 	if (keys._escape) {
 		_engine->Quit();
 	}
-}
-
-void IceClimberGame::Receive(Message m)
-{
-	if (m == GAME_OVER)
-	{
-		bIsRunning = false;
-	}
-
 }
 
 void IceClimberGame::Destroy()

@@ -19,7 +19,5 @@ public:
 
 	virtual void Update(float dt);
 
-	virtual void Receive(Message m);
-
 	virtual void Destroy();
 };

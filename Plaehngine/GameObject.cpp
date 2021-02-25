@@ -46,52 +46,18 @@ void GameObject::Destroy()
 	_gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), this), _gameObjects.end());
 }
 
-GameObject::~GameObject()
-{
-
-}
-
-void GameObject::AddReceiver(GameObject* go)
-{
-	_receivers.push_back(go);
-}
-
-void GameObject::Send(Message m)
-{
-	for (auto i = 0; i < _receivers.size(); i++)
-	{
-		if (!_receivers[i]->_enabled)
-			continue;
-
-		_receivers[i]->Receive(m);
-	}
-}
-
-void GameObject::Receive(Message m) {
-	switch (m)
-	{
-	case GameObject::HIT:
-		SDL_Log("HIT RECEIVED!");
-		break;
-	case GameObject::GAME_OVER:
-		break;
-	case GameObject::LEVEL_WIN:
-		break;
-	case GameObject::NO_MSG:
-		break;
-	case GameObject::QUIT:
-		break;
-	default:
-		break;
-	}
-}
-
 void GameObject::OnCollision(AABBCollider* otherCollider)
 {
 	for (Component* component : _components)
 	{
 		component->OnCollision(otherCollider);
 	}
+}
+
+
+GameObject::~GameObject()
+{
+
 }
 
 Plaehngine* GameObject::_engine;

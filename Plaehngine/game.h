@@ -11,8 +11,6 @@ public:
 
 	virtual void Update(float dt) = 0;
 
-	virtual void Receive(Message m) = 0;
-
 	virtual void Destroy() = 0;
 
 protected:

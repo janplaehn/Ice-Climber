@@ -16,8 +16,6 @@ protected:
 public:
 	GameObject(bool placeInWorld = true);
 
-	enum Message { HIT, GAME_OVER, LEVEL_WIN, NO_MSG, QUIT };
-
 	Transform* _transform = nullptr;
 	bool _enabled;
 	bool _isInWorld;
@@ -49,8 +47,5 @@ public:
 	virtual void Init();
 	virtual void Update(float dt);
 	virtual void Destroy();
-	virtual void AddReceiver(GameObject *go);
-	virtual void Receive(Message m);
 	void OnCollision(class AABBCollider* otherCollider);
-	void Send(Message m);
 };
