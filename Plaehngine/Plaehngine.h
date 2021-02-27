@@ -29,6 +29,8 @@ public:
 
 	SDL_Renderer* _renderer;
 
+	void RenderPoint(Vector2D point);
+
 private:
 	//Todo: Move to Renderer
 	void SwapBuffers();

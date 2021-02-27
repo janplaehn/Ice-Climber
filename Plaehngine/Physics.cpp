@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "Physics.h"
 #include "Rigidbody.h"
+#include "Plaehngine.h"
 
 void Physics::Run()
 {
@@ -16,6 +17,8 @@ void Physics::Run()
 		for (int j = 0; j < _colliders.size(); j++)
 		{
 			if (_rigidbodies[i]->_collider == _colliders[j]) continue;
+
+			if (!_colliders[j]->_enabled || !_colliders[j]->_gameObject->_enabled) continue;
 
 			if (IsColliding(_rigidbodies[i]->_collider, _colliders[j])) {
 
@@ -74,16 +77,20 @@ bool Physics::IsColliding(Vector2D point, AABBCollider* collider)
 
 }
 
-bool Physics::PointCast(Vector2D position, AABBCollider& result, bool includeDisabled)
+bool Physics::PointCast(Vector2D position, AABBCollider** result, bool includeDisabled)
 {
+	_pointCastPositions.push_back(position);
+
 	for (int j = 0; j < _colliders.size(); j++)
 	{
 		if (!(_colliders[j]->_enabled && _colliders[j]->_gameObject->_enabled) && !includeDisabled) continue;
 
 		if (IsColliding(position, _colliders[j])) {
-			return _colliders[j];
+			*result = _colliders[j];
+			return true;
 		}
 	}
+	return false;
 }
 
 Vector2D Physics::CalculateColliderDistance(AABBCollider* a, AABBCollider* b)
@@ -169,13 +176,21 @@ void Physics::PreventCollision(Rigidbody* rb, AABBCollider* collider)
 
 }
 
-void Physics::DrawCollisions()
+void Physics::DrawCollisions(Plaehngine* engine)
 {
 	for (int i = 0; i < _colliders.size(); i++)
 	{
 		_colliders[i]->Render();
 	}
+
+	for (int i = 0; i < _pointCastPositions.size(); i++)
+	{
+		engine->RenderPoint(_pointCastPositions[i]);
+	}
+
+	_pointCastPositions.clear();
 }
 
 std::vector<AABBCollider*> Physics::_colliders;
 std::vector<Rigidbody*> Physics::_rigidbodies;
+std::vector<Vector2D> Physics::_pointCastPositions;

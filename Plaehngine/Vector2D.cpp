@@ -1,5 +1,8 @@
 #include "Vector2D.h"
 #include <math.h>
+#include "SDL.h"
+#include "Camera.h"
+#include "Screen.h"
 
 Vector2D::Vector2D()
 {

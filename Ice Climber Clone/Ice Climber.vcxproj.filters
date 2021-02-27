@@ -43,6 +43,9 @@
       <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
     <ClCompile Include="LifeUI.cpp">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Nitpicker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -61,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="LifeUI.h">
       <Filter>Header Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Nitpicker.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

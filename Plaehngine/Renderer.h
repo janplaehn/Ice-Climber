@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Transform.h"
+
 class Renderer :  public Component
 {
 public:
@@ -13,11 +14,9 @@ public:
 	int _order = 0;
 
 	static std::vector<Renderer*> _renderers;
-
 	static void SortRenderers();
 
 private:
-
 	struct furtherBack
 	{
 		inline bool operator() (Renderer* sr1, Renderer* sr2) {
@@ -31,4 +30,3 @@ private:
 		}
 	};
 };
-

@@ -13,6 +13,7 @@
 #include <Animation.h>
 #include "GameOverUIBehaviour.h"
 #include "LifeUI.h"
+#include "Nitpicker.h"
 
 void IceClimberGame::Create(class Plaehngine* engine)
 {
@@ -48,7 +49,7 @@ void IceClimberGame::Create(class Plaehngine* engine)
 	playerBehaviour->_jumpSprite = Sprite::Create("Assets/Sprites/Characters/Popo/jump1.png");
 	playerWalkAnim->_spriteSheet = playerBehaviour->_walkSprite;
 	AABBCollider* player_collider = player->AddComponent<AABBCollider>();
-	player_collider->_width = 16;
+	player_collider->_width = 8;
 	player_collider->_height = 24;
 	player_collider->_offset = Vector2D(0, 4);
 	playerBehaviour->_jumpSource = player->AddComponent<AudioSource>();
@@ -71,13 +72,36 @@ void IceClimberGame::Create(class Plaehngine* engine)
 		topi->_transform->_pivot = Vector2D(0.5f, 1);
 		topi->_transform->_position.x = 0 + i * 40;
 		topi->_transform->_position.y = 24 + i * 96;
-		topi->AddComponent<TopiBehaviour>();
-		Animation* topiRender = topi->AddComponent<Animation>();
-		topiRender->_order = -101;
-		topiRender->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Topi/walk.png");
-		topiRender->_spriteWidth = 16;
+		TopiBehaviour* topiBehaviour = topi->AddComponent<TopiBehaviour>();
+		topiBehaviour->_animation = topi->AddComponent<Animation>();
+		topiBehaviour->_animation->_order = -101;
+		topiBehaviour->_animation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Topi/walk.png");
+		topiBehaviour->_animation->_spriteWidth = 16;
 		topi->AddComponent<AABBCollider>()->_isTrigger = true;
+
+		topiBehaviour->_ice = new GameObject();
+		topiBehaviour->_ice->_tag = "Topi";
+		topiBehaviour->_ice->_transform->_pivot = Vector2D(0.5f, 1);
+		topiBehaviour->_ice->_transform->_position = topi->_transform->_position + Vector2D::Left() * 16;
+		SpriteRenderer* iceRenderer = topiBehaviour->_ice->AddComponent<SpriteRenderer>();
+		iceRenderer->_sprite = Sprite::Create("Assets/Sprites/Characters/Topi/ice.png");
+		iceRenderer->_order = topiBehaviour->_animation->_order;
+		topiBehaviour->_ice->AddComponent<AABBCollider>()->_isTrigger = true;
+
 	}
+
+	//Setup Nitpicker
+	GameObject* nitpicker = new GameObject();
+	nitpicker->_tag = "Topi";
+	nitpicker->_transform->_position.y = 200;
+	nitpicker->_transform->_position.x = 0;
+	Animation* nitAnimation =  nitpicker->AddComponent<Animation>();
+	nitAnimation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Nitpicker/fly.png");
+	nitAnimation->_spriteWidth = 16;
+	nitAnimation->_frameRate = 8;
+	nitAnimation->_order = 1;
+	nitpicker->AddComponent<AABBCollider>()->_isTrigger = true;
+	nitpicker->AddComponent<Nitpicker>();
 
 	//Setup Ground Collider
 	GameObject* floor = new GameObject();
@@ -152,6 +176,159 @@ void IceClimberGame::Create(class Plaehngine* engine)
 		lifeUIelementRenderer->_sprite = Sprite::Create("Assets/Sprites/UI/life.png");
 		lifeUIComponent->_lifeRenderers.push_back(lifeUIelementRenderer);
 	}
+
+	//Setup Bonus Stage Colldiders :(
+	{
+
+		//1st floor
+		GameObject* stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(0, 400);
+		AABBCollider* stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 56;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(1, 1);
+		stage->_transform->_position = Vector2D(Screen::WIDTH, 400);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 56;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(72, 400);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 48;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(1, 1);
+		stage->_transform->_position = Vector2D(Screen::WIDTH - 72, 400);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 48;
+		stageCollider->_height = 7;
+
+		//2nd floor
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(48, 432);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 32;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(1, 1);
+		stage->_transform->_position = Vector2D(Screen::WIDTH - 48, 432);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 32;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(104, 432);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 48;
+		stageCollider->_height = 7;
+
+		//First Cloud
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0.5, 1);
+		stage->_transform->_position = Vector2D(128, 480);
+		stage->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Environment/cloud.png");
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 48;
+		stageCollider->_height = 7;
+
+
+		//The Rest I guess
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(40, 528);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 56;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(144, 520);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 32;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(168, 560);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 24;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(96, 568);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 48;
+		stageCollider->_height = 7;
+
+		//Second Cloud
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0.5, 1);
+		stage->_transform->_position = Vector2D(128, 608);
+		stage->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Environment/cloud.png");
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 48;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(128, 648);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 32;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(64, 656);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 24;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(152, 680);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 24;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(96, 696);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 24;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(112, 720);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 32;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(0, 1);
+		stage->_transform->_position = Vector2D(48, 760);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 56;
+		stageCollider->_height = 7;
+
+		stage = new GameObject();
+		stage->_transform->_pivot = Vector2D(1, 1);
+		stage->_transform->_position = Vector2D(Screen::WIDTH - 48, 760);
+		stageCollider = stage->AddComponent<AABBCollider>();
+		stageCollider->_width = 48;
+		stageCollider->_height = 7;
+	}
+
 
 	SpriteRenderer::SortRenderers();
 }

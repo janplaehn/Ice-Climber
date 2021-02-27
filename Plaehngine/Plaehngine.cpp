@@ -13,6 +13,7 @@
 #include <sstream>
 #include "Physics.h"
 #include "Renderer.h"
+#include "Camera.h"
 
 
 //Todo: Add A Config to initialize this
@@ -116,6 +117,20 @@ void Plaehngine::Quit() {
 	exit(0);
 }
 
+void Plaehngine::RenderPoint(Vector2D point)
+{
+	SDL_Rect rect;
+
+	//Apply Position
+	rect.x = point.x - Camera::_position.x;
+	rect.y = point.y + -Camera::_position.y * -1.0f + Screen::HEIGHT;
+	rect.w = 1;
+	rect.h = 1;
+
+	SDL_SetRenderDrawColor(_renderer, 0, 255, 0, 255);
+	SDL_RenderDrawRect(_renderer, &rect);
+}
+
 void Plaehngine::SwapBuffers() {
 	//Update screen
 	SDL_RenderPresent(_renderer);
@@ -133,6 +148,7 @@ void Plaehngine::Run()
 	float lastTime = GameTime::GetElapsedTime();
 	while (true)
 	{
+
 		float newTime = GameTime::GetElapsedTime();
 		float dt = newTime - lastTime;
 		dt = dt * GameTime::_timeScale;
@@ -153,7 +169,7 @@ void Plaehngine::Run()
 		}
 
 		//Debug Drawing
-		//Physics::DrawCollisions();
+		//Physics::DrawCollisions(this);
 
 		//FPS Counter:
 		/*if (dt != 0) {

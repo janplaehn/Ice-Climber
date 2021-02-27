@@ -11,12 +11,12 @@ public:
 	static void Run();
 
 	//For Debugging Purposes
-	static void DrawCollisions();
+	static void DrawCollisions(class Plaehngine* _engine);
 
 	static bool IsColliding(AABBCollider* first, AABBCollider* second);
 	static bool IsColliding(Vector2D point, AABBCollider* collider);
 
-	static bool PointCast(Vector2D position, AABBCollider& result, bool includeDisabled);
+	static bool PointCast(Vector2D position, AABBCollider** result, bool includeDisabled);
 
 	static Vector2D CalculateColliderDistance(AABBCollider* a, AABBCollider* b);
 
@@ -25,4 +25,6 @@ public:
 
 protected:
 	static void PreventCollision(Rigidbody* rb, AABBCollider* collider);
+
+	static std::vector<Vector2D> _pointCastPositions;
 };
