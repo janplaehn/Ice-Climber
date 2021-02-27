@@ -21,6 +21,8 @@ public:
 	// (All sprites are 32*32 pixels, clipping is not supported)
 	void Draw(class Transform* transform);
 
+	void Draw(class Transform* transform, SDL_Rect clip);
+
 	// Create a sprite given a string.
 	// All sprites are 32*32 pixels.
 	static Sprite* Create(const char* path);

@@ -33,8 +33,13 @@ private:
 	const float JUMPFORCE = 450;
 
 	class Rigidbody* _rigidbody;
-	class SpriteRenderer* _spriteRenderer;
+	class Animation* _animation;
 	class AABBCollider* _collider;
 
 	bool _isOnGround = false;
+	bool _isInvincible = false;
+	float _invincibilityTime = 0;
+	float _invincibilityDuration = 2.0f;
+
+	int _lives = 3;
 };

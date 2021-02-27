@@ -78,3 +78,23 @@ Vector2D Vector2D::One()
 {
 	return Vector2D(1, 1);
 }
+
+Vector2D Vector2D::Up()
+{
+	return Vector2D(0, 1);
+}
+
+Vector2D Vector2D::Down()
+{
+	return Vector2D(0, -1);
+}
+
+Vector2D Vector2D::Right()
+{
+	return Vector2D(1, 0);
+}
+
+Vector2D Vector2D::Left()
+{
+	return Vector2D(-1, 0);
+}

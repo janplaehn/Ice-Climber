@@ -18,7 +18,7 @@ public:
 	GameObject();
 
 	Transform* _transform = nullptr;
-	bool _enabled;
+	bool _enabled = true;
 
 	std::string _tag = "Default";
 

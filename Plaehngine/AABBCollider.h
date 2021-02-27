@@ -8,6 +8,8 @@ class AABBCollider : public Component
 public:
 	float _width = 10;
 	float _height = 10;
+	Vector2D _offset;
+	bool _isTrigger = false;
 
 	AABBCollider(Plaehngine* engine, GameObject* go);
 	void InitializeWithSprite(class Sprite* sprite);

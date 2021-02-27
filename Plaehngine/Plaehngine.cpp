@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <sstream>
 #include "Physics.h"
+#include "Renderer.h"
 
 
 //Todo: Add A Config to initialize this
@@ -146,7 +147,7 @@ void Plaehngine::Run()
 		Physics::Run();
 
 		//Drawing
-		for (SpriteRenderer* renderer : SpriteRenderer::_spriteRenderers) {
+		for (Renderer* renderer : Renderer::_renderers) {
 			renderer->Draw();
 		}
 

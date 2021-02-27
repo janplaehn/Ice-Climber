@@ -12,6 +12,8 @@ GameObject::GameObject()
 	_enabled = false;
 
 	_gameObjects.push_back(this);
+
+	Init();
 }
 
 void GameObject::Init()

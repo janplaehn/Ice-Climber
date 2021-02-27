@@ -17,7 +17,7 @@ void Physics::Run()
 
 			if (IsColliding(_rigidbodies[i]->_collider, _colliders[j])) {
 
-				PreventCollision(_rigidbodies[i], _colliders[j]);
+				if (!_rigidbodies[i]->_collider->_isTrigger && !_colliders[j]->_isTrigger) PreventCollision(_rigidbodies[i], _colliders[j]);
 
 				_rigidbodies[i]->_collider->_gameObject->OnCollision(_colliders[j]);
 				_colliders[j]->_gameObject->OnCollision(_colliders[i]);

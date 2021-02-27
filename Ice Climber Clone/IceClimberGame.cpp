@@ -9,6 +9,8 @@
 #include "Transform.h"
 #include <Rigidbody.h>
 #include <Camera.h>
+#include "TopiBehaviour.h"
+#include <Animation.h>
 
 void IceClimberGame::Create(class Plaehngine* engine)
 {
@@ -33,16 +35,20 @@ void IceClimberGame::Create(class Plaehngine* engine)
 
 	//Setup Player
 	player = new GameObject();
-	player->_transform->_pivot = Vector2D(0.5f, 1);
+	player->_transform->_pivot = Vector2D(0.5f, 0.75f);
 	player->_transform->_position.x = Screen::WIDTH / 2;
 	player->_transform->_position.y = 36;
 	PlayerBehaviour* playerBehaviour = player->AddComponent<PlayerBehaviour>();
-	SpriteRenderer* player_render = player->AddComponent<SpriteRenderer>();
-	player_render->order = 10;
-	playerBehaviour->_walkSprite = Sprite::Create("Assets/Sprites/Characters/Popo/walk1.png");
+	Animation* playerWalkAnim = player->AddComponent<Animation>();
+	playerWalkAnim->order = 10;
+	playerWalkAnim->_spriteWidth = 32;
+	playerBehaviour->_walkSprite = Sprite::Create("Assets/Sprites/Characters/Popo/walk.png");
 	playerBehaviour->_jumpSprite = Sprite::Create("Assets/Sprites/Characters/Popo/jump1.png");
-	player_render->_sprite = playerBehaviour->_walkSprite;
+	playerWalkAnim->_spriteSheet = playerBehaviour->_walkSprite;
 	AABBCollider* player_collider = player->AddComponent<AABBCollider>();
+	player_collider->_width = 16;
+	player_collider->_height = 24;
+	player_collider->_offset = Vector2D(0, 4);
 	playerBehaviour->_jumpSource = player->AddComponent<AudioSource>();
 	playerBehaviour->_jumpSource->_clip = Audio::LoadSound("Assets/Sounds/jump.wav");
 	playerBehaviour->_tileBreakSource = player->AddComponent<AudioSource>();
@@ -51,22 +57,28 @@ void IceClimberGame::Create(class Plaehngine* engine)
 	playerRb->_linearDrag = 5.0f;
 	playerRb->_gravityScale = 0.5f;
 
-	//Setup Topi
-	GameObject* topi1 = new GameObject();
-	topi1->_transform->_pivot = Vector2D(0.5f, 1);
-	topi1->_transform->_position.x = 56;
-	topi1->_transform->_position.y = 24;
-	SpriteRenderer* topi1_render = topi1->AddComponent<SpriteRenderer>();
-	topi1_render->order = 11;
-	topi1_render->_sprite = Sprite::Create("Assets/Sprites/Characters/Topi/walk.png");
-
+	//Setup Topis
+	for (int i = 0; i < 3; i++)
+	{
+		GameObject* topi = new GameObject();
+		topi->_tag = "Topi";
+		topi->_transform->_pivot = Vector2D(0.5f, 1);
+		topi->_transform->_position.x = 0 + i * 40;
+		topi->_transform->_position.y = 24 + i * 96;
+		topi->AddComponent<TopiBehaviour>();
+		Animation* topiRender = topi->AddComponent<Animation>();
+		topiRender->order = -101;
+		topiRender->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Topi/walk.png");
+		topiRender->_spriteWidth = 16;
+		topi->AddComponent<AABBCollider>()->_isTrigger = true;
+	}
 
 	//Setup Ground Collider
 	GameObject* floor = new GameObject();
 	floor->_transform->_pivot = Vector2D(0, 1);
 	AABBCollider* floorCollider = floor->AddComponent<AABBCollider>();
 	floorCollider->_width = Screen::WIDTH;
-	floorCollider->_height = 23;
+	floorCollider->_height = 20;
 
 
 	//Setup Stage Colliders

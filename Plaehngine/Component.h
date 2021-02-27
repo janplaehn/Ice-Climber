@@ -23,6 +23,7 @@ protected:
 public:
 	GameObject* _gameObject;
 	Transform* _transform;
+	bool _enabled = true;
 
 	Component(Plaehngine* engine, GameObject* go);
 	virtual ~Component() {}

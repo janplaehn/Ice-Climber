@@ -4,7 +4,7 @@
 #include "AudioSource.h"
 #include "Rigidbody.h"
 #include "AABBCollider.h"
-#include "SpriteRenderer.h"
+#include "Animation.h"
 #include "AABBCollider.h"
 
 void PlayerBehaviour::Init()
@@ -13,7 +13,7 @@ void PlayerBehaviour::Init()
 	time_fire_pressed = -10000.f;
 
 	_rigidbody = GetComponent<Rigidbody>();
-	_spriteRenderer = GetComponent<SpriteRenderer>();
+	_animation = GetComponent<Animation>();
 	_collider = GetComponent<AABBCollider>();
 }
 
@@ -28,7 +28,7 @@ void PlayerBehaviour::Update(float dt)
 	{
 		_rigidbody->_velocity.y = JUMPFORCE;
 		_jumpSource->Play();
-		_spriteRenderer->_sprite = _jumpSprite;
+		_animation->_spriteSheet = _jumpSprite;
 	}
 
 	if (_transform->_position.x > (Screen::WIDTH))
@@ -37,9 +37,43 @@ void PlayerBehaviour::Update(float dt)
 	if (_transform->_position.x < 0)
 		_transform->_position.x = (Screen::WIDTH);
 
-	_isOnGround = false;
-
 	_transform->_flipType = (_rigidbody->_velocity.x > 0) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+
+	if (_isOnGround) {
+		_animation->_frameRate = abs(_rigidbody->_velocity.x) * 0.3f;
+
+		if (abs(_rigidbody->_velocity.x) < 10.0f) {
+			_animation->_frameRate = 0;
+			_animation->_frameStart = 0;
+		}
+	}
+	else {
+		_animation->_frameRate = 0;
+		if (_rigidbody->_velocity.y > 200.0f) {
+			_animation->_frameStart = 0;
+		}
+		else {
+			_animation->_frameStart = 32;
+		}
+	}
+
+	if (_isInvincible) {
+		_invincibilityTime -= dt;
+
+		float param, fractpart;
+		double intpart;
+		param = _invincibilityTime * 10.0f;
+		fractpart = modf(param, &intpart);
+
+		_animation->_enabled = (fractpart > 0.5f);
+		if (_invincibilityTime < 0) {
+			_isInvincible = false;
+			_animation->_enabled = true;
+		}
+	}
+
+
+	_isOnGround = false;
 }
 
 void PlayerBehaviour::Move(float move)
@@ -49,13 +83,18 @@ void PlayerBehaviour::Move(float move)
 
 void PlayerBehaviour::OnCollision(AABBCollider* other)
 {
-	if (other->_transform->_position.y < _transform->_position.y) { //Todo: Fix this madness! Check for Top and bottom instead or return a hit point from the collision!
+	if (other->_transform->_position.y < _transform->_position.y && !other->_isTrigger) { //Todo: Fix this madness! Check for Top and bottom instead or return a hit point from the collision!
 		_isOnGround = true;
-		_spriteRenderer->_sprite = _walkSprite;
+		_animation->_spriteSheet = _walkSprite;
 	}
 
-	if ((other->_gameObject->_tag == "Tile") && (other->_transform->_position.y > _transform->_position.y + _collider->_height)) {
+	if ((other->_gameObject->_tag == "Tile") && (other->_transform->_position.y > _transform->_position.y + _collider->_height/2)) {
 		other->_gameObject->Destroy();
 		_tileBreakSource->Play();
+	}
+	else if ((other->_gameObject->_tag == "Topi") && !_isInvincible) {
+		_isInvincible = true;
+		_invincibilityTime = _invincibilityDuration;
+		_lives--;
 	}
 }

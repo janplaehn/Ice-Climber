@@ -33,6 +33,25 @@ void Sprite::Draw(Transform* transform)
 	SDL_RenderCopyEx(_renderer, _texture, NULL /*clip*/, &rect, transform->_rotation, NULL /*center*/, transform->_flipType);
 }
 
+void Sprite::Draw(Transform* transform, SDL_Rect clip)
+{
+	SDL_Rect rect;
+
+	//Apply Position & Camera
+	rect.x = transform->_position.x - Camera::_position.x;
+	rect.y = (transform->_position.y - Camera::_position.y) * -1.0f + Screen::HEIGHT;
+
+	//Apply Scale
+	rect.w = clip.w * transform->_scale.x;
+	rect.h = clip.h * transform->_scale.y;
+
+	//Apply Pivot
+	rect.x -= rect.w * transform->_pivot.x;
+	rect.y -= rect.h * transform->_pivot.y;
+
+	SDL_RenderCopyEx(_renderer, _texture, &clip, &rect, transform->_rotation, NULL /*center*/, transform->_flipType);
+}
+
 Sprite* Sprite::Create(const char* path)
 {
 	SDL_Surface* surf = IMG_Load(path);

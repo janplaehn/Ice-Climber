@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "SpriteRenderer.h"
 #include "Sprite.h"
+#include "Camera.h"
 
 AABBCollider::AABBCollider(Plaehngine* engine, GameObject* go)
 	: Component(engine, go)
@@ -29,8 +30,8 @@ void AABBCollider::Render()
 	SDL_Rect rect;
 
 	//Apply Position
-	rect.x = _transform->_position.x;
-	rect.y = _transform->_position.y * -1.0f + Screen::HEIGHT;
+	rect.x = _transform->_position.x + _offset.x - Camera::_position.x;
+	rect.y = (_transform->_position.y + _offset.y - Camera::_position.y) * -1.0f + Screen::HEIGHT;
 	rect.w = _width;
 	rect.h = _height;
 
@@ -54,8 +55,8 @@ void AABBCollider::Destroy()
 SDL_Rect AABBCollider::GetRect()
 {
 	SDL_Rect rect;
-	rect.x = _transform->_position.x - _width * _transform->_pivot.x * _transform->_scale.x;
-	rect.y = _transform->_position.y + _height * _transform->_pivot.y * _transform->_scale.y;
+	rect.x = _transform->_position.x + _offset.x - _width * _transform->_pivot.x * _transform->_scale.x;
+	rect.y = _transform->_position.y + _offset.y + _height * _transform->_pivot.y * _transform->_scale.y;
 	rect.w = _width;
 	rect.h = _height;
 	return rect;

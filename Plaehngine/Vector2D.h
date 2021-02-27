@@ -33,6 +33,14 @@ public:
 
 	static Vector2D Zero();
 
+	static Vector2D Up();
+
+	static Vector2D Right();
+
+	static Vector2D Down();
+
+	static Vector2D Left();
+
 	static Vector2D One();
 };
 
