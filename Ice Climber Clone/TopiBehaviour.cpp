@@ -1,5 +1,6 @@
 #include "TopiBehaviour.h"
 #include "Transform.h"
+#include <Camera.h>
 
 void TopiBehaviour::Update(float dt)
 {
@@ -10,4 +11,8 @@ void TopiBehaviour::Update(float dt)
 
 	if (_transform->_position.x < 0)
 		_transform->_position.x = (Screen::WIDTH);
+
+	if ((_transform->_position.y - Camera::_position.y) < -16) {
+		_gameObject->_enabled = false;
+	}
 }

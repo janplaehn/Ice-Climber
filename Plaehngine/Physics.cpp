@@ -9,6 +9,8 @@ void Physics::Run()
 {
 	for (int i = 0; i < _rigidbodies.size(); i++)
 	{
+		if (!_rigidbodies[i]->_enabled || !_rigidbodies[i]->_gameObject->_enabled) return;
+
 		_rigidbodies[i]->_transform->_position = _rigidbodies[i]->_transform->_position + _rigidbodies[i]->_targetMoveDelta;
 
 		for (int j = 0; j < _colliders.size(); j++)
@@ -50,6 +52,38 @@ bool Physics::IsColliding(AABBCollider* a, AABBCollider* b)
 	if (aTop < bBottom) return false;
 	if (bTop < aBottom) return false;
 	return true;
+}
+
+bool Physics::IsColliding(Vector2D point, AABBCollider* collider)
+{
+	SDL_Rect rect = collider->GetRect();
+
+	float left, right, top, bottom;
+
+	left = rect.x;
+	right = rect.x + collider->_width;
+	bottom = rect.y - collider->_height;
+	top = rect.y;
+
+	if (right < point.x) return false;
+	if (point.x < left) return false;
+	if (top < point.y) return false;
+	if (point.y < bottom) return false;
+	return true;
+
+
+}
+
+bool Physics::PointCast(Vector2D position, AABBCollider& result, bool includeDisabled)
+{
+	for (int j = 0; j < _colliders.size(); j++)
+	{
+		if (!(_colliders[j]->_enabled && _colliders[j]->_gameObject->_enabled) && !includeDisabled) continue;
+
+		if (IsColliding(position, _colliders[j])) {
+			return _colliders[j];
+		}
+	}
 }
 
 Vector2D Physics::CalculateColliderDistance(AABBCollider* a, AABBCollider* b)

@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{3e55ba5b-cffe-4319-b61f-ed4bd52025b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\UI">
+      <UniqueIdentifier>{d6f34029-6a80-449e-9c1e-c8ca4f9aa974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\UI">
+      <UniqueIdentifier>{548236e8-4d27-4db7-9e14-9303a143ed42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IceClimberGame.cpp">
@@ -33,6 +39,12 @@
     <ClCompile Include="TopiBehaviour.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverUIBehaviour.cpp">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IceClimberGame.h">
@@ -43,6 +55,12 @@
     </ClInclude>
     <ClInclude Include="TopiBehaviour.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverUIBehaviour.h">
+      <Filter>Header Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeUI.h">
+      <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -148,6 +148,7 @@ void Plaehngine::Run()
 
 		//Drawing
 		for (Renderer* renderer : Renderer::_renderers) {
+			if (renderer->_enabled && renderer->_gameObject->_enabled)
 			renderer->Draw();
 		}
 

@@ -30,8 +30,12 @@ void GameObject::Update(float dt)
 	if (!_enabled)
 		return;
 
-	for (auto it = _components.begin(); it != _components.end(); it++)
-		(*it)->Update(dt);
+	for (auto it = _components.begin(); it != _components.end(); it++) {
+		if ((*it)->_enabled) {
+			(*it)->Update(dt);
+		}
+	}
+		
 }
 
 void GameObject::Destroy()

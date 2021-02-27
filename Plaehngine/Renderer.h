@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "Transform.h"
 class Renderer :  public Component
 {
 public:
@@ -9,7 +10,7 @@ public:
 	virtual void Draw() = 0;
 	virtual void Destroy() = 0;
 
-	int order = 0;
+	int _order = 0;
 
 	static std::vector<Renderer*> _renderers;
 
@@ -20,7 +21,13 @@ private:
 	struct furtherBack
 	{
 		inline bool operator() (Renderer* sr1, Renderer* sr2) {
-			return (sr1->order < sr2->order);
+			if (!sr1->_transform->_isInScreenSpace && sr2->_transform->_isInScreenSpace) {
+				return true;
+			}
+			if (sr1->_transform->_isInScreenSpace && !sr2->_transform->_isInScreenSpace) {
+				return false;
+			}
+			return (sr1->_order < sr2->_order);
 		}
 	};
 };

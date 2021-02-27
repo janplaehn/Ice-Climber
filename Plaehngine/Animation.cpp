@@ -16,9 +16,9 @@ void Animation::Update(float dt)
 
 	if (_timer > (1 / _frameRate)) {
 		_timer = 0;
-		_frameStart += _spriteWidth;
-		if (_frameStart + _spriteWidth > _spriteSheet->GetWidth()) {
-			_frameStart = 0;
+		_frame ++;
+		if ((_frame + 1) * _spriteWidth > _spriteSheet->GetWidth()) {
+			_frame = 0;
 		}
 	}
 }
@@ -33,7 +33,7 @@ void Animation::Draw()
 	}
 
 	SDL_Rect clip;
-	clip.x = _frameStart;
+	clip.x = _frame * _spriteWidth;
 	clip.y = 0;
 	clip.h = _spriteSheet->GetHeight();
 	clip.w = _spriteWidth;

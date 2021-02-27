@@ -14,6 +14,9 @@ public:
 	static void DrawCollisions();
 
 	static bool IsColliding(AABBCollider* first, AABBCollider* second);
+	static bool IsColliding(Vector2D point, AABBCollider* collider);
+
+	static bool PointCast(Vector2D position, AABBCollider& result, bool includeDisabled);
 
 	static Vector2D CalculateColliderDistance(AABBCollider* a, AABBCollider* b);
 

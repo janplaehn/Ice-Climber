@@ -27,6 +27,13 @@ public:
 
 	class AudioSource* _jumpSource;
 	class AudioSource* _tileBreakSource;
+	class AudioSource* _deathSource;
+	class AudioSource* _gameOverSource;
+
+	class GameObject* _gameOverUI;
+	class LifeUI* _lifeUI;
+
+	int _lives = 3;
 
 private:
 	const float WALKSPEED = 400;
@@ -41,5 +48,8 @@ private:
 	float _invincibilityTime = 0;
 	float _invincibilityDuration = 2.0f;
 
-	int _lives = 3;
+	Vector2D _lastGroundedPosition = Vector2D::Zero();
+
+	void LoseLife();
+
 };

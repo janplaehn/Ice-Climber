@@ -13,4 +13,5 @@ public:
 	Vector2D _scale;
 	Vector2D _pivot;
 	SDL_RendererFlip _flipType;
+	bool _isInScreenSpace = false;
 };

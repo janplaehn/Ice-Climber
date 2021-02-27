@@ -6,6 +6,8 @@
 #include "AABBCollider.h"
 #include "Animation.h"
 #include "AABBCollider.h"
+#include "LifeUI.h"
+#include <Camera.h>
 
 void PlayerBehaviour::Init()
 {
@@ -44,16 +46,16 @@ void PlayerBehaviour::Update(float dt)
 
 		if (abs(_rigidbody->_velocity.x) < 10.0f) {
 			_animation->_frameRate = 0;
-			_animation->_frameStart = 0;
+			_animation->_frame = 0;
 		}
 	}
 	else {
 		_animation->_frameRate = 0;
 		if (_rigidbody->_velocity.y > 200.0f) {
-			_animation->_frameStart = 0;
+			_animation->_frame = 0;
 		}
 		else {
-			_animation->_frameStart = 32;
+			_animation->_frame = 1;
 		}
 	}
 
@@ -74,6 +76,10 @@ void PlayerBehaviour::Update(float dt)
 
 
 	_isOnGround = false;
+
+	if ((_transform->_position.y - Camera::_position.y) < 0) {
+		LoseLife();
+	}
 }
 
 void PlayerBehaviour::Move(float move)
@@ -85,16 +91,32 @@ void PlayerBehaviour::OnCollision(AABBCollider* other)
 {
 	if (other->_transform->_position.y < _transform->_position.y && !other->_isTrigger) { //Todo: Fix this madness! Check for Top and bottom instead or return a hit point from the collision!
 		_isOnGround = true;
+		_lastGroundedPosition = _transform->_position;
 		_animation->_spriteSheet = _walkSprite;
 	}
 
 	if ((other->_gameObject->_tag == "Tile") && (other->_transform->_position.y > _transform->_position.y + _collider->_height/2)) {
-		other->_gameObject->Destroy();
+		other->_gameObject->_enabled = false;
 		_tileBreakSource->Play();
 	}
 	else if ((other->_gameObject->_tag == "Topi") && !_isInvincible) {
-		_isInvincible = true;
-		_invincibilityTime = _invincibilityDuration;
-		_lives--;
+		LoseLife();
+	}
+}
+
+void PlayerBehaviour::LoseLife()
+{
+	_isInvincible = true;
+	_invincibilityTime = _invincibilityDuration;
+	_transform->_position = _lastGroundedPosition;
+	_lives--;
+	_deathSource->Play();
+	_lifeUI->UpdateLifeCounter(_lives);
+	_rigidbody->_velocity = Vector2D::Zero();
+
+	if (_lives < 0) {
+		_gameObject->_enabled = false;
+		_gameOverUI->_enabled = true;
+		_gameOverSource->Play();
 	}
 }

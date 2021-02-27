@@ -15,6 +15,6 @@ public:
 	float _frameRate = 12;
 
 	float _timer = 0;
-	float _frameStart = 0;
+	int _frame = 0;
 };
 

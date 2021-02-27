@@ -16,9 +16,16 @@ void Sprite::Draw(Transform* transform)
 {
 	SDL_Rect rect;
 
-	//Apply Position & Camera
-	rect.x = transform->_position.x - Camera::_position.x;
-	rect.y = (transform->_position.y - Camera::_position.y) * -1.0f + Screen::HEIGHT;
+	if (transform->_isInScreenSpace) {
+		//Apply Position
+		rect.x = transform->_position.x;
+		rect.y = transform->_position.y * -1.0f + Screen::HEIGHT;
+	}
+	else {
+		//Apply Position & Camera
+		rect.x = transform->_position.x - Camera::_position.x;
+		rect.y = (transform->_position.y - Camera::_position.y) * -1.0f + Screen::HEIGHT;
+	}
 
 	SDL_QueryTexture(_texture, NULL, NULL, &(rect.w), &(rect.h));
 
@@ -37,9 +44,17 @@ void Sprite::Draw(Transform* transform, SDL_Rect clip)
 {
 	SDL_Rect rect;
 
-	//Apply Position & Camera
-	rect.x = transform->_position.x - Camera::_position.x;
-	rect.y = (transform->_position.y - Camera::_position.y) * -1.0f + Screen::HEIGHT;
+
+	if (transform->_isInScreenSpace) {
+		//Apply Position
+		rect.x = transform->_position.x;
+		rect.y = transform->_position.y * -1.0f + Screen::HEIGHT;
+	}
+	else {
+		//Apply Position & Camera
+		rect.x = transform->_position.x - Camera::_position.x;
+		rect.y = (transform->_position.y - Camera::_position.y) * -1.0f + Screen::HEIGHT;
+	}
 
 	//Apply Scale
 	rect.w = clip.w * transform->_scale.x;
