@@ -1,6 +1,7 @@
 #pragma once
-#include "Component.h"
-class Nitpicker : public Component
+#include "Enemy.h"
+
+class Nitpicker : public Enemy
 {
 public:
 	Nitpicker(Plaehngine* engine, GameObject* go);
@@ -16,5 +17,10 @@ public:
 	float _verticalAcceleration = 3;
 
 	Vector2D _maxSpeed = Vector2D(35, 10);
+
+	class Sprite* _deathSprite;
+
+	// Inherited via Enemy
+	virtual void Damage() override;
 };
 

@@ -43,6 +43,7 @@ void AABBCollider::Render()
 	rect.x -= rect.w * _transform->_pivot.x;
 	rect.y -= rect.h * _transform->_pivot.y;
 
+
 	SDL_SetRenderDrawColor(_engine->_renderer, 0, 255, 0, 255);
 	SDL_RenderDrawRect(_engine->_renderer, &rect);
 }

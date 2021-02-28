@@ -24,13 +24,14 @@ public:
 
 	class Sprite* _walkSprite;
 	class Sprite* _jumpSprite;
+	class Sprite* _attackSprite;
 
 	class AudioSource* _jumpSource;
-	class AudioSource* _tileBreakSource;
 	class AudioSource* _deathSource;
 	class AudioSource* _gameOverSource;
 
 	class GameObject* _gameOverUI;
+	class GameObject* _hammer;
 	class LifeUI* _lifeUI;
 
 	int _lives = 3;
@@ -52,4 +53,7 @@ private:
 
 	void LoseLife();
 
+	bool _isAttacking = false;
+	float _attackDuration = 2.0f / 8.0f;
+	float _attackTimer = 0;
 };

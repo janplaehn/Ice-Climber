@@ -3,7 +3,7 @@
 
 void Input::Init()
 {
-	_key._fire = _key._left = _key._right = _key._escape = false;
+	_key._jump = _key._left = _key._right = _key._escape = false;
 }
 
 void Input::ProcessInput()
@@ -21,7 +21,10 @@ void Input::ProcessInput()
 				_key._escape = true;
 				break;
 			case SDLK_SPACE:
-				_key._fire = true;
+				_key._jump = true;
+				break;
+			case SDLK_a:
+				_key._attack = true;
 				break;
 			case SDLK_LEFT:
 				_key._left = true;
@@ -37,7 +40,10 @@ void Input::ProcessInput()
 			switch (event.key.keysym.sym)
 			{
 			case SDLK_SPACE:
-				_key._fire = false;
+				_key._jump = false;
+				break;
+			case SDLK_a:
+				_key._attack = false;
 				break;
 			case SDLK_LEFT:
 				_key._left = false;

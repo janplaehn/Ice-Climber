@@ -146,21 +146,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cloud.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameOverUIBehaviour.cpp" />
+    <ClCompile Include="HammerTrigger.cpp" />
     <ClCompile Include="IceClimberGame.cpp" />
     <ClCompile Include="LifeUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Nitpicker.cpp" />
     <ClCompile Include="PlayerBehaviour.cpp" />
-    <ClCompile Include="TopiBehaviour.cpp" />
+    <ClCompile Include="Topi.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cloud.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameOverUIBehaviour.h" />
+    <ClInclude Include="HammerTrigger.h" />
     <ClInclude Include="IceClimberGame.h" />
     <ClInclude Include="LifeUI.h" />
     <ClInclude Include="Nitpicker.h" />
     <ClInclude Include="PlayerBehaviour.h" />
-    <ClInclude Include="TopiBehaviour.h" />
+    <ClInclude Include="Topi.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plaehngine\Plaehngine.vcxproj">

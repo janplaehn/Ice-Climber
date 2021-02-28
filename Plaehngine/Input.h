@@ -6,7 +6,8 @@ public:
 
 	struct KeyStatus
 	{
-		bool _fire; // space
+		bool _jump; // space
+		bool _attack; // a
 		bool _left; // left arrow
 		bool _right; // right arrow
 		bool _escape; // escape button

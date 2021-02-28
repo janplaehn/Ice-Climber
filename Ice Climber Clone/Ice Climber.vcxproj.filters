@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Components\UI">
       <UniqueIdentifier>{548236e8-4d27-4db7-9e14-9303a143ed42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\Enemies">
+      <UniqueIdentifier>{1118e7fc-7f53-4a75-9c40-c87ede7edb36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Enemies">
+      <UniqueIdentifier>{69318893-2fdf-447f-a623-b2719abd8ba5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IceClimberGame.cpp">
@@ -36,17 +42,26 @@
     <ClCompile Include="PlayerBehaviour.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="TopiBehaviour.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameOverUIBehaviour.cpp">
       <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
     <ClCompile Include="LifeUI.cpp">
       <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Cloud.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="HammerTrigger.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
     <ClCompile Include="Nitpicker.cpp">
+      <Filter>Source Files\Components\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topi.cpp">
+      <Filter>Source Files\Components\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,17 +71,26 @@
     <ClInclude Include="PlayerBehaviour.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="TopiBehaviour.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="GameOverUIBehaviour.h">
       <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="LifeUI.h">
       <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Cloud.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="Nitpicker.h">
+      <Filter>Header Files\Components\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="HammerTrigger.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Topi.h">
+      <Filter>Header Files\Components\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

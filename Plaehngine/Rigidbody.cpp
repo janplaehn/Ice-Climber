@@ -21,6 +21,7 @@ void Rigidbody::Update(float dt)
 
 	if (_isKinematic) {
 		_velocity = Vector2D::Zero();
+		_targetMoveDelta = Vector2D::Zero();
 		return;
 	}
 

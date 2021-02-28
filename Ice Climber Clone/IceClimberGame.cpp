@@ -9,11 +9,13 @@
 #include "Transform.h"
 #include <Rigidbody.h>
 #include <Camera.h>
-#include "TopiBehaviour.h"
+#include "Topi.h"
 #include <Animation.h>
 #include "GameOverUIBehaviour.h"
 #include "LifeUI.h"
 #include "Nitpicker.h"
+#include "Cloud.h"
+#include "HammerTrigger.h"
 
 void IceClimberGame::Create(class Plaehngine* engine)
 {
@@ -40,13 +42,14 @@ void IceClimberGame::Create(class Plaehngine* engine)
 	player = new GameObject();
 	player->_transform->_pivot = Vector2D(0.5f, 0.75f);
 	player->_transform->_position.x = Screen::WIDTH / 2;
-	player->_transform->_position.y = 36;
+	player->_transform->_position.y = 32;
 	PlayerBehaviour* playerBehaviour = player->AddComponent<PlayerBehaviour>();
 	Animation* playerWalkAnim = player->AddComponent<Animation>();
 	playerWalkAnim->_order = 10;
 	playerWalkAnim->_spriteWidth = 32;
 	playerBehaviour->_walkSprite = Sprite::Create("Assets/Sprites/Characters/Popo/walk.png");
 	playerBehaviour->_jumpSprite = Sprite::Create("Assets/Sprites/Characters/Popo/jump1.png");
+	playerBehaviour->_attackSprite = Sprite::Create("Assets/Sprites/Characters/Popo/attack.png");
 	playerWalkAnim->_spriteSheet = playerBehaviour->_walkSprite;
 	AABBCollider* player_collider = player->AddComponent<AABBCollider>();
 	player_collider->_width = 8;
@@ -58,24 +61,35 @@ void IceClimberGame::Create(class Plaehngine* engine)
 	playerBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/death.wav");
 	playerBehaviour->_gameOverSource = player->AddComponent<AudioSource>();
 	playerBehaviour->_gameOverSource->_clip = Audio::LoadSound("Assets/Sounds/gameOver.wav");
-	playerBehaviour->_tileBreakSource = player->AddComponent<AudioSource>();
-	playerBehaviour->_tileBreakSource->_clip = Audio::LoadSound("Assets/Sounds/tileBreak.wav");
 	Rigidbody* playerRb = player->AddComponent<Rigidbody>();
 	playerRb->_linearDrag = 5.0f;
 	playerRb->_gravityScale = 0.5f;
 
+	playerBehaviour->_hammer = new GameObject();
+	HammerTrigger* hammerTrigger =  playerBehaviour->_hammer->AddComponent<HammerTrigger>();
+	AABBCollider* hammerCol = playerBehaviour->_hammer->AddComponent<AABBCollider>();
+	playerBehaviour->_hammer->AddComponent<Rigidbody>()->_isKinematic = true;
+	hammerCol->_isTrigger = true;
+	playerBehaviour->_hammer->_transform->_position = player->_transform->_position;
+	hammerCol->_width = 8;
+	hammerCol->_height = 8;
+	hammerTrigger->_tileBreakSource = playerBehaviour->_hammer->AddComponent<AudioSource>();
+	hammerTrigger->_tileBreakSource->_clip = Audio::LoadSound("Assets/Sounds/tileBreak.wav");
+
+
 	//Setup Topis
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		GameObject* topi = new GameObject();
 		topi->_tag = "Topi";
 		topi->_transform->_pivot = Vector2D(0.5f, 1);
 		topi->_transform->_position.x = 0 + i * 40;
 		topi->_transform->_position.y = 24 + i * 96;
-		TopiBehaviour* topiBehaviour = topi->AddComponent<TopiBehaviour>();
+		Topi* topiBehaviour = topi->AddComponent<Topi>();
 		topiBehaviour->_animation = topi->AddComponent<Animation>();
 		topiBehaviour->_animation->_order = -101;
 		topiBehaviour->_animation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Topi/walk.png");
+		topiBehaviour->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Topi/death.png");
 		topiBehaviour->_animation->_spriteWidth = 16;
 		topi->AddComponent<AABBCollider>()->_isTrigger = true;
 
@@ -89,19 +103,21 @@ void IceClimberGame::Create(class Plaehngine* engine)
 		topiBehaviour->_ice->AddComponent<AABBCollider>()->_isTrigger = true;
 
 	}
-
-	//Setup Nitpicker
-	GameObject* nitpicker = new GameObject();
-	nitpicker->_tag = "Topi";
-	nitpicker->_transform->_position.y = 200;
-	nitpicker->_transform->_position.x = 0;
-	Animation* nitAnimation =  nitpicker->AddComponent<Animation>();
-	nitAnimation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Nitpicker/fly.png");
-	nitAnimation->_spriteWidth = 16;
-	nitAnimation->_frameRate = 8;
-	nitAnimation->_order = 1;
-	nitpicker->AddComponent<AABBCollider>()->_isTrigger = true;
-	nitpicker->AddComponent<Nitpicker>();
+	for (int i = 0; i < 2; i++)
+	{
+		//Setup Nitpicker
+		GameObject* nitpicker = new GameObject();
+		nitpicker->_tag = "Topi";
+		nitpicker->_transform->_position.y = 200 + i * 248;
+		nitpicker->_transform->_position.x = 0;
+		Animation* nitAnimation = nitpicker->AddComponent<Animation>();
+		nitAnimation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Nitpicker/fly.png");
+		nitAnimation->_spriteWidth = 16;
+		nitAnimation->_frameRate = 8;
+		nitAnimation->_order = 1;
+		nitpicker->AddComponent<AABBCollider>()->_isTrigger = true;
+		nitpicker->AddComponent<Nitpicker>()->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");
+	}
 
 	//Setup Ground Collider
 	GameObject* floor = new GameObject();
@@ -239,6 +255,7 @@ void IceClimberGame::Create(class Plaehngine* engine)
 		stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->_width = 48;
 		stageCollider->_height = 7;
+		stage->AddComponent<Cloud>()->_moveRight = true;
 
 
 		//The Rest I guess
@@ -278,6 +295,7 @@ void IceClimberGame::Create(class Plaehngine* engine)
 		stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->_width = 48;
 		stageCollider->_height = 7;
+		stage->AddComponent<Cloud>()->_moveRight = false;
 
 		stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(0, 1);
