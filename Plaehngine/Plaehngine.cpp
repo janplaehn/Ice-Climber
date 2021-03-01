@@ -34,7 +34,7 @@ bool Plaehngine::Init(Game* game)
 	}
 
 	//Create window
-	_window = SDL_CreateWindow("TODO: SET GAME NAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Screen::WINDOWWIDTH, Screen::WINDOWHEIGHT, SDL_WINDOW_SHOWN);
+	_window = SDL_CreateWindow("GAME NAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Screen::WINDOWWIDTH, Screen::WINDOWHEIGHT, SDL_WINDOW_SHOWN);
 	if (_window == NULL)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Window could not be created! SDL_Error: %s\n", SDL_GetError());

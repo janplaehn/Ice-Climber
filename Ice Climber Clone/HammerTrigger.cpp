@@ -1,7 +1,5 @@
 #include "HammerTrigger.h"
-#include "AABBCollider.h"
-#include "Transform.h"
-#include "AudioSource.h"
+#include "ComponentEssentials.h"
 #include "Enemy.h"
 
 void HammerTrigger::Update(float dt)

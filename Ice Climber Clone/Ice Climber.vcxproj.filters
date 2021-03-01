@@ -57,10 +57,10 @@
     <ClCompile Include="Nitpicker.cpp">
       <Filter>Source Files\Components\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Topi.cpp">
+      <Filter>Source Files\Components\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Components\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,10 +86,10 @@
     <ClInclude Include="HammerTrigger.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Topi.h">
+      <Filter>Header Files\Components\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Header Files\Components\Enemies</Filter>
     </ClInclude>
   </ItemGroup>

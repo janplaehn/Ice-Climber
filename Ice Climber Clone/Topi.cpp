@@ -4,6 +4,7 @@
 #include <Physics.h>
 #include "AABBCollider.h"
 #include "Animation.h"
+#include "AudioSource.h"
 
 Topi::Topi(Plaehngine* engine, GameObject* go)
 	: Enemy(engine, go)
@@ -93,6 +94,7 @@ void Topi::Update(float dt)
 			}
 			else if (_state == DEADWALKING) {
 				_state = DEADFALLING;
+				_fallSource->Play();
 				_fallTimer = _fallCooldown;
 			}
 			else if (_state == FETCHICE) {
@@ -107,7 +109,7 @@ void Topi::Update(float dt)
 		}
 		else {
 			if (_state == DEADFALLING && _fallTimer < 0) {
-				_transform->_position.y = result->_transform->_position.y + 8;
+				_transform->_position.y = result->_transform->_position.y + result->_height;
 				_state = DEADWALKING;
 				ChangeDirection();
 			}
@@ -127,9 +129,9 @@ void Topi::ChangeDirection()
 
 void Topi::Damage()
 {
-	//_gameObject->_enabled = false;
 	GetComponent<AABBCollider>()->_enabled = false;
 	_state = DEADWALKING;
 	_animation->_frame = 0;
 	ChangeDirection();
+	_deathSource->Play();
 }

@@ -46,6 +46,7 @@
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioSource.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ComponentEssentials.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />

@@ -173,5 +173,8 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ComponentEssentials.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

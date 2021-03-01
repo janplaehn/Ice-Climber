@@ -1,5 +1,5 @@
 #include "GameOverUIBehaviour.h"
-#include "Transform.h"
+#include "ComponentEssentials.h"
 
 void GameOverUIBehaviour::Update(float dt)
 {

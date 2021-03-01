@@ -12,6 +12,9 @@ public:
 	GameObject* _ice;
 	class Sprite* _deathSprite;
 
+	class AudioSource* _deathSource;
+	class AudioSource* _fallSource;
+
 protected:
 	const float WALKSPEED = 10;
 	const float FALLSPEED = 50;

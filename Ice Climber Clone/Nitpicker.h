@@ -19,6 +19,7 @@ public:
 	Vector2D _maxSpeed = Vector2D(35, 10);
 
 	class Sprite* _deathSprite;
+	class AudioSource* _deathSource;
 
 	// Inherited via Enemy
 	virtual void Damage() override;

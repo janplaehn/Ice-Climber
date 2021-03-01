@@ -93,6 +93,11 @@ void IceClimberGame::Create(class Plaehngine* engine)
 		topiBehaviour->_animation->_spriteWidth = 16;
 		topi->AddComponent<AABBCollider>()->_isTrigger = true;
 
+		topiBehaviour->_deathSource = topi->AddComponent<AudioSource>();
+		topiBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/topiDeath.wav");
+		topiBehaviour->_fallSource = topi->AddComponent<AudioSource>();
+		topiBehaviour->_fallSource->_clip = Audio::LoadSound("Assets/Sounds/topiFall.wav");
+
 		topiBehaviour->_ice = new GameObject();
 		topiBehaviour->_ice->_tag = "Topi";
 		topiBehaviour->_ice->_transform->_pivot = Vector2D(0.5f, 1);
@@ -116,7 +121,10 @@ void IceClimberGame::Create(class Plaehngine* engine)
 		nitAnimation->_frameRate = 8;
 		nitAnimation->_order = 1;
 		nitpicker->AddComponent<AABBCollider>()->_isTrigger = true;
-		nitpicker->AddComponent<Nitpicker>()->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");
+		Nitpicker* nitBehaviour = nitpicker->AddComponent<Nitpicker>();
+		nitBehaviour->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");
+		nitBehaviour->_deathSource = AddComponent<AudioSource>();
+		nitBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/nitpickerDeath.wav");
 	}
 
 	//Setup Ground Collider

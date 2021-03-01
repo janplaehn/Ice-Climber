@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "AABBCollider.h"
 #include "Animation.h"
+#include "AudioSource.h"
 
 Nitpicker::Nitpicker(Plaehngine* engine, GameObject* go)
 	: Enemy(engine, go)
@@ -49,6 +50,7 @@ void Nitpicker::Update(float dt)
 void Nitpicker::Damage()
 {
 	if (_isDead) return;
+	_deathSource->Play();
 	_isDead = true;
 	_gameObject->GetComponent<AABBCollider>()->_enabled = false;
 	_gameObject->GetComponent<Animation>()->_spriteSheet = _deathSprite;

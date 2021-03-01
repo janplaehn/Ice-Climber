@@ -1,13 +1,8 @@
 #include "PlayerBehaviour.h"
 #include "Screen.h"
-#include "Transform.h"
-#include "AudioSource.h"
-#include "Rigidbody.h"
-#include "AABBCollider.h"
-#include "Animation.h"
-#include "AABBCollider.h"
+#include "ComponentEssentials.h"
 #include "LifeUI.h"
-#include <Camera.h>
+#include "Camera.h"
 
 void PlayerBehaviour::Init()
 {
