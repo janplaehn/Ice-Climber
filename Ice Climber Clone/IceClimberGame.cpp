@@ -1,10 +1,11 @@
 #include "IceClimbergame.h"
 #include "Scenes.h"
 #include "PlayScene.h"
+#include "MainMenu.h"
 
 void IceClimberGame::Init()
 {
-	Scenes::LoadScene<PlayScene>();
+	Scenes::LoadScene<MainMenu>();
 }
 
 void IceClimberGame::Update()

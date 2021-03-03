@@ -17,6 +17,7 @@ public:
 	void SetVolume(float value);
 	void OnFinishedPlaying(int channel);
 	virtual void Update() {};
+	virtual void Destroy();
 
 	bool _isLooping = false;
 	Mix_Chunk* _clip;

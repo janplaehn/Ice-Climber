@@ -196,6 +196,7 @@ void PlayScene::Load()
 	{
 
 		//1st floor
+
 		GameObject* stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(0, 1);
 		stage->_transform->_position = Vector2D(0, 400);

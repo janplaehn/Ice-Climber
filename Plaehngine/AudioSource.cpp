@@ -76,9 +76,12 @@ bool AudioSource::IsPlaying()
 	return isPlaying;
 }
 
-AudioSource::~AudioSource()
-{
+void AudioSource::Destroy() {
 	if (_clip != nullptr) {
 		Mix_FreeChunk(_clip);
 	}
+}
+
+AudioSource::~AudioSource()
+{
 }

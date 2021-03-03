@@ -46,6 +46,7 @@ void Input::ProcessInput()
 				break;
 			case SDLK_a:
 				_key._attack = false;
+				_key._attack = false;
 				break;
 			case SDLK_LEFT:
 				_key._left = false;
@@ -55,10 +56,14 @@ void Input::ProcessInput()
 				break;
 			}
 		}
+		if (event.type == SDL_QUIT)
+		{
+			_engine->Quit();
+		}
 
 	}
 
-	Input::KeyStatus keys = Input::GetKeyStatus();
+	KeyStatus keys = GetKeyStatus();
 	if (keys._escape) {
 		_engine->Quit();
 	}
