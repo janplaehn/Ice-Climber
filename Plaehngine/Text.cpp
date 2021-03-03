@@ -7,8 +7,6 @@ Text::Text()
 
 void Text::Update()
 {
-	if (!_enabled) return;
-	_font->Draw(_transform, SDL_Color(), _text);
 }
 
 void Text::BeginPlay()
@@ -23,6 +21,8 @@ void Text::LocateFont()
 
 void Text::Draw()
 {
+	if (!_enabled) return;
+	_font->Draw(_transform, SDL_Color(), _text);
 }
 
 void Text::Destroy()

@@ -3,10 +3,12 @@
 #include "PlayScene.h"
 #include "MainMenu.h"
 #include "TtfFont.h"
+#include "ImageFont.h"
 
 void IceClimberGame::Init()
 {
 	TtfFont::Create("Assets/Fonts/retro.ttf", "Retro", 16);
+	ImageFont::Create("Assets/Fonts/iceClimber.png", "Ice Climber", "0123456789ABDGLNOPRSUWY!x.TIME", 8, 8);
 	Scenes::LoadScene<MainMenu>();
 }
 

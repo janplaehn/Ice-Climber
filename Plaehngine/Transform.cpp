@@ -8,3 +8,12 @@ Transform::Transform()
 	_pivot = Vector2D::One() / 2;
 	_flipType = SDL_FLIP_NONE;
 }
+
+Transform::Transform(const Transform* transform)
+{
+	_position = transform->_position;
+	_rotation = transform->_rotation;
+	_scale = transform->_scale;
+	_pivot = transform->_pivot;
+	_flipType = transform->_flipType;
+}

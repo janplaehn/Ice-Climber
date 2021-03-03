@@ -5,6 +5,7 @@ class Transform : public Component
 {
 public:
 	Transform();
+	Transform(const Transform* transform);
 
 	virtual void Update() {};
 
