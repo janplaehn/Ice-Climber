@@ -10,6 +10,7 @@
 #include <sstream>
 #include "Physics.h"
 #include "Game.h"
+#include "Font.h"
 
 void Graphics::Init(Game* game)
 {
@@ -39,12 +40,6 @@ void Graphics::Init(Game* game)
 	SDL_RenderSetLogicalSize(_renderer, Screen::_width, Screen::_height);
 
 	TTF_Init();
-	_font = TTF_OpenFont("data/space_invaders.ttf", 10); //this opens a font style and sets a size
-	if (_font == NULL)
-	{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "font cannot be created! SDL_Error: %s\n", SDL_GetError());
-	}
-
 	IMG_Init(IMG_INIT_PNG);
 
 	//Initialize renderer color
@@ -81,8 +76,8 @@ void Graphics::Quit()
 {
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
-	TTF_CloseFont(_font);
 	IMG_Quit();
+	Font::UnloadAllFonts();
 	TTF_Quit();
 }
 
@@ -112,11 +107,11 @@ void Graphics::RenderPoint(Vector2D point)
 	SDL_RenderDrawRect(_renderer, &rect);
 }
 
-void Graphics::DrawText(Vector2D position, const char* msg)
+void Graphics::DrawText(TTF_Font* font, Vector2D position, const char* msg)
 {
 	SDL_Color white = { 255,255,255 };  // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
 
-	SDL_Surface* surf = TTF_RenderText_Solid(_font, msg, white); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
+	SDL_Surface* surf = TTF_RenderText_Solid(font, msg, white); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
 
 	SDL_Texture* msg_texture = SDL_CreateTextureFromSurface(_renderer, surf); //now you can convert it into a texture
 
@@ -165,5 +160,4 @@ void Graphics::DrawRect(SDL_Rect* rect, int r, int g, int b, int a)
 }
 
 SDL_Window* Graphics::_window;
-TTF_Font* Graphics::_font;
 SDL_Renderer* Graphics::_renderer;

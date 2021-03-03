@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include "MainMenuController.h"
+#include "ComponentEssentials.h"
 
 void MainMenu::Load()
 {
@@ -19,4 +20,9 @@ void MainMenu::Load()
 	musicSrc->_clip = Audio::LoadSound("Assets/Music/bonus.wav");
 	musicSrc->_isLooping = true;
 	musicSrc->Play();
+
+	GameObject* textHolder = new GameObject();
+	Text* text = textHolder->AddComponent<Text>();
+	text->_text = "This is a test text";
+	text->_fontName = "Retro";
 }

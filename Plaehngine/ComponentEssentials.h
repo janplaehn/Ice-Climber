@@ -7,3 +7,4 @@
 #include "SpriteRenderer.h"
 #include "Rigidbody.h"
 #include "Transform.h"
+#include "Text.h"

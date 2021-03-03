@@ -23,6 +23,7 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioSource.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -41,7 +42,9 @@
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="TtfFont.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +53,7 @@
     <ClInclude Include="AudioSource.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ComponentEssentials.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Game.h" />
@@ -67,7 +71,9 @@
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GameTime.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="TtfFont.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

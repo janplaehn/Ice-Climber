@@ -2,9 +2,11 @@
 #include "Scenes.h"
 #include "PlayScene.h"
 #include "MainMenu.h"
+#include "TtfFont.h"
 
 void IceClimberGame::Init()
 {
+	TtfFont::Create("Assets/Fonts/retro.ttf", "Retro", 16);
 	Scenes::LoadScene<MainMenu>();
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Transform.h"
+#include "Graphics.h"
 
 class Renderer :  public Component
 {
