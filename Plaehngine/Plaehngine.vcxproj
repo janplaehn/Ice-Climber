@@ -23,6 +23,7 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioSource.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="AudioSource.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ComponentEssentials.h" />
+    <ClInclude Include="Graphics.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />

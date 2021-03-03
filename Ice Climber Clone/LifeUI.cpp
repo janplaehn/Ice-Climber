@@ -9,6 +9,6 @@ void LifeUI::UpdateLifeCounter(int amount)
 	}
 }
 
-void LifeUI::Update(float dt)
+void LifeUI::Update()
 {
 }

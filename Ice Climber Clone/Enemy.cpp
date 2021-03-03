@@ -1,5 +1,5 @@
 #include "Enemy.h"
 
-void Enemy::Update(float dt)
+void Enemy::Update()
 {
 }

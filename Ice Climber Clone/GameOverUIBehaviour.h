@@ -9,5 +9,5 @@ protected:
 	const float _moveSpeed = 75;
 	const int _maxY = Screen::HEIGHT - 56;
 
-	virtual void Update(float dt) override;
+	virtual void Update() override;
 };

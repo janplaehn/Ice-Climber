@@ -1,7 +1,7 @@
 #include "Renderer.h"
 #include <algorithm>
 
-void Renderer::Update(float dt)
+void Renderer::Update()
 {
 }
 

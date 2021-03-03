@@ -4,7 +4,6 @@
 
 class Sprite
 {
-	friend class Plaehngine;
 
 	SDL_Texture* _texture;
 
@@ -29,7 +28,4 @@ public:
 
 	int GetWidth();
 	int GetHeight();
-
-private:
-	static SDL_Renderer* _renderer;
 };

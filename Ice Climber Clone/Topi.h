@@ -6,7 +6,7 @@ class Topi : public Enemy
 public:
 	Topi(Plaehngine* engine, GameObject* go);
 
-	virtual void Update(float dt);
+	virtual void Update();
 
 	class Animation* _animation;
 	GameObject* _ice;

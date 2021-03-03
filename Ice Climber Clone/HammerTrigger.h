@@ -5,7 +5,7 @@ class HammerTrigger : public Component
 public:
 	HammerTrigger(Plaehngine* engine, GameObject* go) : Component(engine, go) {};
 
-	virtual void Update(float dt) override;
+	virtual void Update() override;
 
 	void OnCollision(class AABBCollider* other);
 

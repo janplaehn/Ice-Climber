@@ -6,7 +6,7 @@ class Nitpicker : public Enemy
 public:
 	Nitpicker(Plaehngine* engine, GameObject* go);
 
-	virtual void Update(float dt) override;
+	virtual void Update() override;
 
 	Vector2D _speed = Vector2D::Zero();
 

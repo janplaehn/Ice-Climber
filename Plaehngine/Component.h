@@ -11,6 +11,7 @@ class Transform;
 #include "GameTime.h"
 #include "SDL.h"
 #include "Input.h"
+#include "GameTime.h"
 #include <string>
 
 class Component
@@ -34,7 +35,7 @@ public:
 	}
 
 	virtual void Init() {}
-	virtual void Update(float dt) = 0;
+	virtual void Update() = 0;
 	virtual void Receive(int message) {}
 	virtual void OnCollision(class AABBCollider* otherCollider) {};
 	virtual void OnComponentAdded(Component* component) {};

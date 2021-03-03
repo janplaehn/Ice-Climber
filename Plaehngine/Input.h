@@ -1,8 +1,9 @@
 #pragma once
+
 class Input
 {
-	friend class Plaehngine;
 public:
+	static void Init(class Plaehngine* engine);
 
 	struct KeyStatus
 	{
@@ -18,8 +19,8 @@ public:
 	static Input::KeyStatus GetKeyStatus();
 
 private:
-	static void Init();
 
 	static KeyStatus _key;
+	static class Plaehngine* _engine;
 };
 

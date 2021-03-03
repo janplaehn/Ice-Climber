@@ -2,9 +2,9 @@
 #include "ComponentEssentials.h"
 #include "Enemy.h"
 
-void HammerTrigger::Update(float dt)
+void HammerTrigger::Update()
 {
-	_timer -= dt;
+	_timer -= GameTime::_delta;
 	if (_timer > 0) return;
 
 	if (_triggeredTiles.size() == 0) return;

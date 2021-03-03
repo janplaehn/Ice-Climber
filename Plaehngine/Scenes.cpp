@@ -3,8 +3,13 @@
 Scene* Scenes::_currentScene;
 Scene* Scenes::_sceneToLoad;
 
-void Scenes::Update()
+void Scenes::Run()
 {
+	for (GameObject* go : GameObject::_gameObjects)
+	{
+		go->Update();
+	}
+
 	if (_sceneToLoad != nullptr) {
 		if (_currentScene) {
 			_currentScene->Unload();

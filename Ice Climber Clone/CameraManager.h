@@ -5,7 +5,7 @@ class CameraManager :	public Component
 public:
 	CameraManager(Plaehngine* engine, GameObject* go) : Component(engine, go) {};
 
-	virtual void Update(float dt) override;
+	virtual void Update() override;
 
 	class Transform* _player;
 

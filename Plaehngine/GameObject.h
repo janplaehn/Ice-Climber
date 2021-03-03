@@ -52,8 +52,8 @@ public:
 		return nullptr;
 	}
 
-	virtual void Init();
-	virtual void Update(float dt);
+	virtual void BeginPlay();
+	virtual void Update();
 	virtual void Destroy();
 	void OnCollision(class AABBCollider* otherCollider);
 };

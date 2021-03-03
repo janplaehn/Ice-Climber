@@ -6,7 +6,7 @@ class Transform : public Component
 public:
 	Transform(Plaehngine* engine, GameObject* go);
 
-	virtual void Update(float dt) {};
+	virtual void Update() {};
 
 	Vector2D _position = Vector2D::Zero();
 	float _rotation;

@@ -15,7 +15,7 @@ bool Rigidbody::IsOnGround() const
 		return _isOnGround;
 }
 
-void Rigidbody::Update(float dt)
+void Rigidbody::Update()
 {
 	_previousPosition = _transform->_position;
 
@@ -25,22 +25,22 @@ void Rigidbody::Update(float dt)
 		return;
 	}
 
-	ApplyDrag(dt);
-	ApplyGravity(dt);
+	ApplyDrag();
+	ApplyGravity();
 	
-	_targetMoveDelta = _velocity * dt;
+	_targetMoveDelta = _velocity * GameTime::_delta;
 }
 
-void Rigidbody::ApplyDrag(float dt)
+void Rigidbody::ApplyDrag()
 {
-	float appliedDrag = (1.0f - _linearDrag * dt);
+	float appliedDrag = (1.0f - _linearDrag * GameTime::_delta);
 	if (appliedDrag < 0) appliedDrag = 0;
 	_velocity = _velocity * appliedDrag;
 }
 
-void Rigidbody::ApplyGravity(float dt)
+void Rigidbody::ApplyGravity()
 {
-	_velocity.y -= GRAVITY * dt * _gravityScale;
+	_velocity.y -= GRAVITY * GameTime::_delta * _gravityScale;
 }
 
 void Rigidbody::OnCollision(AABBCollider* otherCollider) {

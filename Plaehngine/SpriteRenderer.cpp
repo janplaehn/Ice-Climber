@@ -9,7 +9,7 @@ SpriteRenderer::SpriteRenderer(Plaehngine* engine, GameObject* go)
 	_renderers.push_back(this);
 }
 
-void SpriteRenderer::Update(float dt)
+void SpriteRenderer::Update()
 {
 	if (!_gameObject->_enabled) return;
 }

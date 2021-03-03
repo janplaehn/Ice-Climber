@@ -17,13 +17,13 @@ public:
 
 	const float GRAVITY = 981.0f;
 
-	virtual void Update(float dt) override;
+	virtual void Update() override;
 	virtual void OnCollision(class AABBCollider* otherCollider);
 	virtual void Destroy();
 
 protected:
-	void ApplyDrag(float dt);
-	void ApplyGravity(float dt);
+	void ApplyDrag();
+	void ApplyGravity();
 
 private:
 	Vector2D _previousPosition;

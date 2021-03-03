@@ -7,7 +7,7 @@ class Renderer :  public Component
 public:
 	Renderer(Plaehngine* engine, GameObject* go) : Component(engine, go) {};
 
-	virtual void Update(float dt) = 0;
+	virtual void Update() = 0;
 	virtual void Draw() = 0;
 	virtual void Destroy() = 0;
 

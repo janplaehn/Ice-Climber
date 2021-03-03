@@ -11,6 +11,6 @@ public:
 
 	void UpdateLifeCounter(int amount);
 
-	virtual void Update(float dt) override;
+	virtual void Update() override;
 };
 

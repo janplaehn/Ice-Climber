@@ -1,9 +1,11 @@
 #include "Input.h"
 #include "SDL.h"
+#include "Plaehngine.h"
 
-void Input::Init()
+void Input::Init(Plaehngine* engine)
 {
 	_key._jump = _key._left = _key._right = _key._escape = false;
+	_engine = engine;
 }
 
 void Input::ProcessInput()
@@ -55,6 +57,11 @@ void Input::ProcessInput()
 		}
 
 	}
+
+	Input::KeyStatus keys = Input::GetKeyStatus();
+	if (keys._escape) {
+		_engine->Quit();
+	}
 }
 
 Input::KeyStatus Input::GetKeyStatus()
@@ -63,3 +70,4 @@ Input::KeyStatus Input::GetKeyStatus()
 }
 
 Input::KeyStatus Input::_key;
+Plaehngine* Input::_engine;

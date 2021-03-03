@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "Screen.h"
 #include "Camera.h"
+#include "Graphics.h"
 
 Sprite::Sprite(SDL_Texture* texture)
 {
@@ -37,7 +38,7 @@ void Sprite::Draw(Transform* transform)
 	rect.x -= rect.w * transform->_pivot.x;
 	rect.y -= rect.h * transform->_pivot.y;
 
-	SDL_RenderCopyEx(_renderer, _texture, NULL /*clip*/, &rect, transform->_rotation, NULL /*center*/, transform->_flipType);
+	Graphics::RenderTexture(_texture, NULL /*clip*/, &rect, transform->_rotation, transform->_flipType);
 }
 
 void Sprite::Draw(Transform* transform, SDL_Rect clip)
@@ -64,28 +65,12 @@ void Sprite::Draw(Transform* transform, SDL_Rect clip)
 	rect.x -= rect.w * transform->_pivot.x;
 	rect.y -= rect.h * transform->_pivot.y;
 
-	SDL_RenderCopyEx(_renderer, _texture, &clip, &rect, transform->_rotation, NULL /*center*/, transform->_flipType);
+	Graphics::RenderTexture(_texture, &clip, &rect, transform->_rotation, transform->_flipType);
 }
 
 Sprite* Sprite::Create(const char* path)
 {
-	SDL_Surface* surf = IMG_Load(path);
-	if (surf == NULL)
-	{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Unable to load image %s! SDL_image Error: %s\n", path, SDL_GetError());
-		return NULL;
-	}
-
-	//Create texture from surface pixels
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(_renderer, surf);
-	if (texture == NULL)
-	{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Unable to create texture from %s! SDL Error: %s\n", path, SDL_GetError());
-		return NULL;
-	}
-
-	//Get rid of old loaded surface
-	SDL_FreeSurface(surf);
+	SDL_Texture* texture = Graphics::CreateTexture(path);
 
 	Sprite* sprite = new Sprite(texture);
 
@@ -111,5 +96,3 @@ void Sprite::Destroy()
 {
 	SDL_DestroyTexture(_texture);
 }
-
-SDL_Renderer* Sprite::_renderer = nullptr;

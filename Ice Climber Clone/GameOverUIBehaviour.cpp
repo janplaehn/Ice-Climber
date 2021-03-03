@@ -3,9 +3,9 @@
 #include "Scenes.h"
 #include "PlayScene.h"
 
-void GameOverUIBehaviour::Update(float dt)
+void GameOverUIBehaviour::Update()
 {
-	_transform->_position.y += dt * _moveSpeed;
+	_transform->_position.y += GameTime::_delta * _moveSpeed;
 	if (_transform->_position.y > _maxY) {
 		_transform->_position.y = _maxY;
 		Scenes::LoadScene<PlayScene>();

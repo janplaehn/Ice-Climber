@@ -9,22 +9,22 @@ Nitpicker::Nitpicker(Plaehngine* engine, GameObject* go)
 {
 }
 
-void Nitpicker::Update(float dt)
+void Nitpicker::Update()
 {
 
-	_transform->_position = _transform->_position + _speed * dt;
+	_transform->_position = _transform->_position + _speed * GameTime::_delta;
 
 	if (_isDead) return;
 
 	//Horizontal movement
 	if (_accelerateHorizontally) {
-		_speed.x += _horizontalAcceleration * dt;
+		_speed.x += _horizontalAcceleration * GameTime::_delta;
 		if (_speed.x > _maxSpeed.x) {
 			_accelerateHorizontally = false;
 		}
 	}
 	else {
-		_speed.x -= _horizontalAcceleration * dt;
+		_speed.x -= _horizontalAcceleration * GameTime::_delta;
 		if (_speed.x < -_maxSpeed.x) {
 			_accelerateHorizontally = true;
 		}
@@ -32,13 +32,13 @@ void Nitpicker::Update(float dt)
 
 	//VErtical movement
 	if (_accelerateVertically) {
-		_speed.y += _verticalAcceleration * dt;
+		_speed.y += _verticalAcceleration * GameTime::_delta;
 		if (_speed.y > _maxSpeed.y) {
 			_accelerateVertically = false;
 		}
 	}
 	else {
-		_speed.y -= _verticalAcceleration * dt;
+		_speed.y -= _verticalAcceleration * GameTime::_delta;
 		if (_speed.y < -_maxSpeed.y) {
 			_accelerateVertically = true;
 		}

@@ -7,7 +7,7 @@ class SpriteRenderer : public Renderer
 public:
 	SpriteRenderer(Plaehngine* engine, GameObject* go);
 
-	virtual void Update(float dt);
+	virtual void Update();
 	virtual void Draw();
 	virtual void Destroy();
 

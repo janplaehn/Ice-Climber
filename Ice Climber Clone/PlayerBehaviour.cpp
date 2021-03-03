@@ -14,14 +14,14 @@ void PlayerBehaviour::Init()
 	_collider = GetComponent<AABBCollider>();
 }
 
-void PlayerBehaviour::Update(float dt)
+void PlayerBehaviour::Update()
 {
 	Input::KeyStatus keys =	Input::GetKeyStatus();
 
 	if (_isAttacking) {
 		_animation->_spriteSheet = _attackSprite;
 		_animation->_frameRate = 8;
-		_attackTimer += dt;
+		_attackTimer += GameTime::_delta;
 		_hammer->_enabled = true;
 		_hammer->GetComponent<AABBCollider>()->_offset = (_transform->_flipType == SDL_FLIP_HORIZONTAL) ? Vector2D(12, 4) :  Vector2D(-12, 4);
 		if (_attackTimer > _attackDuration) {
@@ -34,9 +34,9 @@ void PlayerBehaviour::Update(float dt)
 	}
 
 	if (keys._right)
-		Move(dt * WALKSPEED);
+		Move(GameTime::_delta * WALKSPEED);
 	if (keys._left)
-		Move(-dt * WALKSPEED);
+		Move(-GameTime::_delta * WALKSPEED);
 	if (keys._jump && _isOnGround && !_isAttacking)
 	{
 		_rigidbody->_velocity.y = JUMPFORCE;
@@ -84,7 +84,7 @@ void PlayerBehaviour::Update(float dt)
 	}
 
 	if (_isInvincible) {
-		_invincibilityTime -= dt;
+		_invincibilityTime -= GameTime::_delta;
 
 		float param, fractpart;
 		double intpart;

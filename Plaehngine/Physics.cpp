@@ -5,6 +5,7 @@
 #include "Physics.h"
 #include "Rigidbody.h"
 #include "Plaehngine.h"
+#include "Graphics.h"
 
 void Physics::Run()
 {
@@ -109,7 +110,7 @@ void Physics::DrawCollisions(Plaehngine* engine)
 
 	for (int i = 0; i < _pointCastPositions.size(); i++)
 	{
-		engine->RenderPoint(_pointCastPositions[i]);
+		Graphics::RenderPoint(_pointCastPositions[i]);
 	}
 
 	_pointCastPositions.clear();

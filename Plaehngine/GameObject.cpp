@@ -3,6 +3,7 @@
 #include "Plaehngine.h"
 #include "Transform.h"
 #include "AABBCollider.h"
+#include "GameTime.h"
 #include <set>
 
 GameObject::GameObject()
@@ -13,10 +14,10 @@ GameObject::GameObject()
 
 	_gameObjects.push_back(this);
 
-	Init();
+	BeginPlay();
 }
 
-void GameObject::Init()
+void GameObject::BeginPlay()
 {
 
 	for (auto it = _components.begin(); it != _components.end(); it++)
@@ -25,14 +26,14 @@ void GameObject::Init()
 	_enabled = true;
 }
 
-void GameObject::Update(float dt)
+void GameObject::Update()
 {
 	if (!_enabled)
 		return;
 
 	for (auto it = _components.begin(); it != _components.end(); it++) {
 		if ((*it)->_enabled) {
-			(*it)->Update(dt);
+			(*it)->Update();
 		}
 	}
 		

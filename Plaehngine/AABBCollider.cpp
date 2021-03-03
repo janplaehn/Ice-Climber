@@ -3,6 +3,7 @@
 #include "SpriteRenderer.h"
 #include "Sprite.h"
 #include "Camera.h"
+#include "Graphics.h"
 
 AABBCollider::AABBCollider(Plaehngine* engine, GameObject* go)
 	: Component(engine, go)
@@ -21,7 +22,7 @@ void AABBCollider::InitializeWithSprite(Sprite* sprite)
 	_height = sprite->GetHeight();
 }
 
-void AABBCollider::Update(float dt)
+void AABBCollider::Update()
 {
 }
 
@@ -43,9 +44,7 @@ void AABBCollider::Render()
 	rect.x -= rect.w * _transform->_pivot.x;
 	rect.y -= rect.h * _transform->_pivot.y;
 
-
-	SDL_SetRenderDrawColor(_engine->_renderer, 0, 255, 0, 255);
-	SDL_RenderDrawRect(_engine->_renderer, &rect);
+	Graphics::DrawRect(&rect, 0, 255, 0, 255);
 }
 
 void AABBCollider::Destroy()

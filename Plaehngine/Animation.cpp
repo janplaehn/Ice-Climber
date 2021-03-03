@@ -7,11 +7,11 @@ Animation::Animation(Plaehngine* engine, GameObject* go)
 	_renderers.push_back(this);
 }
 
-void Animation::Update(float dt)
+void Animation::Update()
 {
 	if (_frameRate == 0) return;
 	
-	_timer += dt;
+	_timer += GameTime::_delta;
 	if (_timer > (1 / _frameRate)) {
 		_timer -= (1 / _frameRate);
 		_frame++;

@@ -9,13 +9,13 @@ public:
 	static void LoadScene() {
 		_sceneToLoad = new T();
 	}
-	static void UnloadAll() {
+	static void Quit() {
 		if (_currentScene) {
 			_currentScene->Unload();
 		}
 	}
 
-	static void Update();
+	static void Run();
 
 private:
 	static Scene* _currentScene;

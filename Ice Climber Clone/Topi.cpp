@@ -11,13 +11,13 @@ Topi::Topi(Plaehngine* engine, GameObject* go)
 {
 }
 
-void Topi::Update(float dt)
+void Topi::Update()
 {
 	_ice->_enabled = (_state == WALKWITHICE);
 	_ice->_transform->_position	= (_transform->_flipType == SDL_FLIP_HORIZONTAL) ? _transform->_position + Vector2D::Right() * 10 : _transform->_position + Vector2D::Left() * 10;
 
 	if (_state == WALKWITHICE && _tilesRebuilt > 0) {
-		_rebuildTimer += dt;
+		_rebuildTimer += GameTime::_delta;
 		if (_rebuildTimer > _rebuildCooldown) {
 			_state = WALKING;
 			_rebuildTimer = 0;
@@ -26,14 +26,14 @@ void Topi::Update(float dt)
 
 	Vector2D moveAmount;
 	if (_state == DEADFALLING) {
-		moveAmount = Vector2D::Down() * FALLSPEED * dt;
-		_fallTimer -= dt;
+		moveAmount = Vector2D::Down() * FALLSPEED * GameTime::_delta;
+		_fallTimer -= GameTime::_delta;
 	}
 	else if (_state == DEADWALKING) {
-		moveAmount = (_transform->_flipType == SDL_FLIP_HORIZONTAL) ? Vector2D::Right() * WALKSPEED * 2 * dt : Vector2D::Left() * WALKSPEED * 2 * dt;
+		moveAmount = (_transform->_flipType == SDL_FLIP_HORIZONTAL) ? Vector2D::Right() * WALKSPEED * 2 * GameTime::_delta : Vector2D::Left() * WALKSPEED * 2 * GameTime::_delta;
 	}
 	else {
-		moveAmount = (_transform->_flipType == SDL_FLIP_HORIZONTAL) ? Vector2D::Right() * WALKSPEED * dt : Vector2D::Left() * WALKSPEED * dt;
+		moveAmount = (_transform->_flipType == SDL_FLIP_HORIZONTAL) ? Vector2D::Right() * WALKSPEED * GameTime::_delta : Vector2D::Left() * WALKSPEED * GameTime::_delta;
 	}
 
 	if (_state == FETCHICE) {

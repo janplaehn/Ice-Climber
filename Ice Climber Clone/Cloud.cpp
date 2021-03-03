@@ -1,11 +1,11 @@
 #include "Cloud.h"
 #include "Transform.h"
 
-void Cloud::Update(float dt)
+void Cloud::Update()
 {
 	Vector2D direction = _moveRight ? Vector2D::Right() : Vector2D::Left();
 
-	_transform->_position = _transform->_position + direction * SPEED * dt;
+	_transform->_position = _transform->_position + direction * SPEED * GameTime::_delta;
 
 	if (_transform->_position.x > (Screen::WIDTH))
 		_transform->_position.x = 0;

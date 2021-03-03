@@ -9,7 +9,7 @@ public:
 	bool _moveRight = true;
 
 
-	virtual void Update(float dt) override;
+	virtual void Update() override;
 
 
 private:
