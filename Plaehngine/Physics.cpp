@@ -93,87 +93,11 @@ bool Physics::PointCast(Vector2D position, AABBCollider** result, bool includeDi
 	return false;
 }
 
-Vector2D Physics::CalculateColliderDistance(AABBCollider* a, AABBCollider* b)
-{
-	float dx = 0;
-	float dy = 0;
-
-	SDL_Rect rectA = a->GetRect();
-	SDL_Rect rectB = b->GetRect();
-
-	if (rectA.x < rectB.x)
-	{
-		dx = rectB.x - (rectA.x + rectA.w);
-	}
-	else if (rectA.x > rectB.x)
-	{
-		dx = rectA.x - (rectB.x + rectB.w);
-	}
-
-	if (rectA.y < rectB.y)
-	{
-		dy = rectB.y - (rectA.y + rectA.h);
-	}
-	else if (rectA.y > rectB.y)
-	{
-		dy = rectA.y - (rectB.y + rectB.h);
-	}
-
-	return Vector2D(dx,dy);
-}
-
 void Physics::PreventCollision(Rigidbody* rb, AABBCollider* collider)
 {
 	//Undo the move applied to transform
 	rb->_transform->_position.y = rb->_transform->_position.y - rb->_targetMoveDelta.y;
 	rb->_velocity.y = 0;
-	return;
-
-	Vector2D distance = Physics::CalculateColliderDistance(rb->_collider, collider);
-	float xAxisTimeToCollide = (int)rb->_targetMoveDelta.x != 0 ? abs(distance.x / (int)rb->_targetMoveDelta.x) : 0;
-	float yAxisTimeToCollide = (int)rb->_targetMoveDelta.y != 0 ? abs(distance.y / (int)rb->_targetMoveDelta.y) : 0;
-
-	SDL_Rect* intersection = new SDL_Rect();
-	const SDL_Rect* rectA = new SDL_Rect(rb->_collider->GetRect());
-	const SDL_Rect* rectB = new SDL_Rect(collider->GetRect());
-	SDL_IntersectRect(rectA, rectB, intersection);
-
-	//Clamp MoveDelta?
-
-
-	Vector2D clampedMoveDelta = rb->_targetMoveDelta;
-	if (rb->_targetMoveDelta.x != 0) {
-		float xRatio = abs(intersection->w) / abs(rb->_targetMoveDelta.x);
-		if (xRatio < 1) {
-			rb->_velocity.x *= xRatio;
-			clampedMoveDelta.x = rb->_targetMoveDelta.x * xRatio;
-		}
-	}
-
-	if (rb->_targetMoveDelta.y != 0) {
-		float yRatio = abs(intersection->h) / abs(rb->_targetMoveDelta.y);
-		if (yRatio < 1) {
-			rb->_velocity.y *= yRatio;
-			clampedMoveDelta.y = rb->_targetMoveDelta.y * yRatio;
-		}
-	}
-
-	if (abs(clampedMoveDelta.x) < abs(intersection->w) && abs(rb->_targetMoveDelta.x) > abs(intersection->w)) {
-		//Collision on top or bottom
-		rb->_transform->_position.y = rb->_transform->_position.y - rb->_targetMoveDelta.y;
-		rb->_velocity.y = 0;
-	}
-	if (abs(clampedMoveDelta.y) < abs(intersection->h) && abs(rb->_targetMoveDelta.y) > abs(intersection->h)) {
-		//Collision on right or left
-		rb->_transform->_position.x = rb->_transform->_position.x - rb->_targetMoveDelta.x;
-		rb->_velocity.x = 0;
-	}
-	else {
-		//Collision exactly on corner
-		rb->_transform->_position = rb->_transform->_position - rb->_targetMoveDelta;
-		rb->_velocity = Vector2D::Zero();
-	}
-
 }
 
 void Physics::DrawCollisions(Plaehngine* engine)

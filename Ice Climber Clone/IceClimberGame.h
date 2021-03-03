@@ -4,13 +4,6 @@
 class IceClimberGame : public Game
 {
 
-	GameObject* player;
-	GameObject* _background;
-
-	bool game_over = false;
-
-	unsigned int score = 0;
-
 public:
 
 	virtual void Create(class Plaehngine* engine);

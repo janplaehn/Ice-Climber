@@ -33,6 +33,8 @@
     <ClCompile Include="PlayerSettings.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Scenes.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Screen.cpp" />
@@ -57,6 +59,8 @@
     <ClInclude Include="PlayerSettings.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Scenes.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Screen.h" />

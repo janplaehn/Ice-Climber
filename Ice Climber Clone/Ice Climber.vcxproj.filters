@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Components\Enemies">
       <UniqueIdentifier>{69318893-2fdf-447f-a623-b2719abd8ba5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{47cb726c-3004-41b2-a20b-2fb3386eac90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{3064126b-a39e-45b9-93c8-5a093656938a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IceClimberGame.cpp">
@@ -63,6 +69,12 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Components\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IceClimberGame.h">
@@ -91,6 +103,12 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Components\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

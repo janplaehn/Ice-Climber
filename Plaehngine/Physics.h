@@ -18,8 +18,6 @@ public:
 
 	static bool PointCast(Vector2D position, AABBCollider** result, bool includeDisabled);
 
-	static Vector2D CalculateColliderDistance(AABBCollider* a, AABBCollider* b);
-
 	static std::vector<AABBCollider*> _colliders;
 	static std::vector<Rigidbody*> _rigidbodies;
 

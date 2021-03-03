@@ -34,15 +34,15 @@ public:
 	class GameObject* _hammer;
 	class LifeUI* _lifeUI;
 
+	class Rigidbody* _rigidbody;
+	class Animation* _animation;
+	class AABBCollider* _collider;
+
 	int _lives = 3;
 
 private:
 	const float WALKSPEED = 400;
 	const float JUMPFORCE = 450;
-
-	class Rigidbody* _rigidbody;
-	class Animation* _animation;
-	class AABBCollider* _collider;
 
 	bool _isOnGround = false;
 	bool _isInvincible = false;

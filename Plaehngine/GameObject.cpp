@@ -45,6 +45,7 @@ void GameObject::Destroy()
 			(*it)->Destroy();
 		}
 	}
+	_components.clear();
 	_gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), this), _gameObjects.end());
 }
 

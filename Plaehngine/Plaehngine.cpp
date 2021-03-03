@@ -14,6 +14,7 @@
 #include "Physics.h"
 #include "Renderer.h"
 #include "Camera.h"
+#include "Scenes.h"
 
 
 //Todo: Add A Config to initialize this
@@ -78,6 +79,8 @@ bool Plaehngine::Init(Game* game)
 
 	SDL_Log("Engine up and running...\n");
 
+	GameObject::_engine = this;
+
 	_game = game;
 	_game->Create(this);
 	_game->Init();
@@ -92,12 +95,7 @@ void Plaehngine::Destroy()
 	// clean up
 	_game->Destroy();
 
-	for (int i = GameObject::_gameObjects.size() - 1; i >= 0; i--)
-	{
-		if (GameObject::_gameObjects[i] != nullptr) {
-			GameObject::_gameObjects[i]->Destroy();
-		}
-	}
+	Scenes::UnloadAll();
 
 	SDL_Log("Shutting down the engine\n");
 
@@ -155,10 +153,11 @@ void Plaehngine::Run()
 		lastTime = newTime;
 
 		Input::ProcessInput();
-		_game->Update(dt);
 
-		for (auto go = GameObject::_gameObjects.begin(); go != GameObject::_gameObjects.end(); go++)
-			(*go)->Update(dt);
+		for (GameObject* go : GameObject::_gameObjects)
+		{
+			go->Update(dt);
+		}
 
 		Physics::Run();
 
@@ -182,9 +181,16 @@ void Plaehngine::Run()
 		SwapBuffers();
 		ClearWindow();
 
+		Scenes::Update();
+
 		if (dt < (1.0f / 60.0f)) {
 			int delay = (int)((1.0f / 60.0f - dt) * 1000.0f);
 			SDL_Delay(delay);
+		}
+
+		Input::KeyStatus keys = Input::GetKeyStatus();
+		if (keys._escape) {
+			Quit();
 		}
 	}
 }
@@ -207,4 +213,3 @@ void Plaehngine::DrawText(Vector2D position, const char * msg)
 	SDL_DestroyTexture(msg_texture);
 	SDL_FreeSurface(surf);
 }
-
