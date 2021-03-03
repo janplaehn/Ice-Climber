@@ -15,7 +15,7 @@ void PlayScene::Load()
 	SpriteRenderer* background_render = background->AddComponent<SpriteRenderer>();
 	background_render->_sprite = Sprite::Create("Assets/Sprites/Backgrounds/default.png");
 	background_render->_order = -100;
-	background->_transform->_position = Vector2D(Screen::WIDTH / 2, background_render->_sprite->GetHeight() / 2);
+	background->_transform->_position = Vector2D(Screen::_width / 2, background_render->_sprite->GetHeight() / 2);
 
 
 	//Setup background Music
@@ -29,7 +29,7 @@ void PlayScene::Load()
 	//Setup Player
 	GameObject* player = new GameObject();
 	player->_transform->_pivot = Vector2D(0.5f, 0.75f);
-	player->_transform->_position.x = Screen::WIDTH / 2;
+	player->_transform->_position.x = Screen::_width / 2;
 	player->_transform->_position.y = 32;
 	PlayerBehaviour* playerBehaviour = player->AddComponent<PlayerBehaviour>();
 	playerBehaviour->_animation = player->AddComponent<Animation>();
@@ -119,7 +119,7 @@ void PlayScene::Load()
 	GameObject* floor = new GameObject();
 	floor->_transform->_pivot = Vector2D(0, 1);
 	AABBCollider* floorCollider = floor->AddComponent<AABBCollider>();
-	floorCollider->_width = Screen::WIDTH;
+	floorCollider->_width = Screen::_width;
 	floorCollider->_height = 20;
 
 
@@ -140,7 +140,7 @@ void PlayScene::Load()
 
 		GameObject* stageRight = new GameObject();
 		stageRight->_transform->_pivot = Vector2D(1, 1);
-		stageRight->_transform->_position = Vector2D(Screen::WIDTH, height);
+		stageRight->_transform->_position = Vector2D(Screen::_width, height);
 		AABBCollider* stageColliderRight = stageRight->AddComponent<AABBCollider>();
 		stageColliderRight->_width = width;
 		stageColliderRight->_height = 7;
@@ -182,7 +182,7 @@ void PlayScene::Load()
 	{
 		GameObject* lifeUIelement = new GameObject();
 		lifeUIelement->_transform->_pivot = Vector2D(0, 0);
-		lifeUIelement->_transform->_position = Vector2D(2 + i * 10, Screen::HEIGHT - 2);
+		lifeUIelement->_transform->_position = Vector2D(2 + i * 10, Screen::_height - 2);
 		lifeUIelement->_transform->_isInScreenSpace = true;
 		SpriteRenderer* lifeUIelementRenderer = lifeUIelement->AddComponent<SpriteRenderer>();
 		lifeUIelementRenderer->_sprite = Sprite::Create("Assets/Sprites/UI/life.png");
@@ -205,7 +205,7 @@ void PlayScene::Load()
 
 		stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(1, 1);
-		stage->_transform->_position = Vector2D(Screen::WIDTH, 400);
+		stage->_transform->_position = Vector2D(Screen::_width, 400);
 		stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->_width = 56;
 		stageCollider->_height = 7;
@@ -219,7 +219,7 @@ void PlayScene::Load()
 
 		stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(1, 1);
-		stage->_transform->_position = Vector2D(Screen::WIDTH - 72, 400);
+		stage->_transform->_position = Vector2D(Screen::_width - 72, 400);
 		stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->_width = 48;
 		stageCollider->_height = 7;
@@ -234,7 +234,7 @@ void PlayScene::Load()
 
 		stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(1, 1);
-		stage->_transform->_position = Vector2D(Screen::WIDTH - 48, 432);
+		stage->_transform->_position = Vector2D(Screen::_width - 48, 432);
 		stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->_width = 32;
 		stageCollider->_height = 7;
@@ -340,7 +340,7 @@ void PlayScene::Load()
 
 		stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(1, 1);
-		stage->_transform->_position = Vector2D(Screen::WIDTH - 48, 760);
+		stage->_transform->_position = Vector2D(Screen::_width - 48, 760);
 		stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->_width = 48;
 		stageCollider->_height = 7;

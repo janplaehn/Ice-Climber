@@ -4,7 +4,7 @@ class Animation : public Renderer
 {
 
 public:
-	Animation(Plaehngine* engine, GameObject* go);
+	Animation();
 
 	virtual void Update();
 	virtual void Draw();

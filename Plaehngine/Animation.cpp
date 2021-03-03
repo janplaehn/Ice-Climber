@@ -1,8 +1,7 @@
 #include "Animation.h"
 #include "Sprite.h"
 
-Animation::Animation(Plaehngine* engine, GameObject* go)
-	: Renderer(engine, go)
+Animation::Animation()
 {
 	_renderers.push_back(this);
 }

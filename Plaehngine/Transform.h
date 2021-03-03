@@ -4,7 +4,7 @@
 class Transform : public Component
 {
 public:
-	Transform(Plaehngine* engine, GameObject* go);
+	Transform();
 
 	virtual void Update() {};
 

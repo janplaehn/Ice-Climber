@@ -3,7 +3,6 @@
 class CameraManager :	public Component
 {
 public:
-	CameraManager(Plaehngine* engine, GameObject* go) : Component(engine, go) {};
 
 	virtual void Update() override;
 

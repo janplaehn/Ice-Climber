@@ -18,15 +18,12 @@ class Component
 {
 	friend class GameObject;
 
-protected:
-	Plaehngine* _engine;
-
 public:
 	GameObject* _gameObject;
 	Transform* _transform;
 	bool _enabled = true;
 
-	Component(Plaehngine* engine, GameObject* go);
+	Component();
 	virtual ~Component() {}
 
 	template <class T>
@@ -34,7 +31,7 @@ public:
 		return _gameObject->GetComponent<T>();
 	}
 
-	virtual void Init() {}
+	virtual void BeginPlay() {};
 	virtual void Update() = 0;
 	virtual void Receive(int message) {}
 	virtual void OnCollision(class AABBCollider* otherCollider) {};

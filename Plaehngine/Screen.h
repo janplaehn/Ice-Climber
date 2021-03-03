@@ -2,11 +2,10 @@
 static class Screen
 {
 public:
-	//Todo: Get these from player settings instead and dont make them const!
-	static const int WINDOWWIDTH =  1024;
-	static const int WINDOWHEIGHT = 960;
+	static int _windowWidth;
+	static int _windowHeight;
 
-	static const int WIDTH = 256;
-	static const int HEIGHT = 240;
+	static int _width;
+	static int _height;
 };
 

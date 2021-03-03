@@ -4,7 +4,6 @@
 class Nitpicker : public Enemy
 {
 public:
-	Nitpicker(Plaehngine* engine, GameObject* go);
 
 	virtual void Update() override;
 

@@ -22,14 +22,15 @@ public:
 
 	std::string _tag = "Default";
 
-	static class Plaehngine* _engine;
 	static std::vector<GameObject*> _gameObjects;	// http://www.cplusplus.com/reference/set/set/
 
 	virtual ~GameObject();
 
 	template <class T>
 	T* AddComponent() {
-		Component* component = new T(_engine, this);
+		Component* component = new T();
+		component->_gameObject = this;
+		component->_transform = _transform;
 		_components.push_back(component);
 		for (Component* existingComponent : _components)
 		{

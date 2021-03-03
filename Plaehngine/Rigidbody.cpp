@@ -2,17 +2,21 @@
 #include "Transform.h"
 #include "AABBCollider.h"
 
-Rigidbody::Rigidbody(Plaehngine* engine, GameObject* go)
-	: Component(engine, go)
+Rigidbody::Rigidbody()
 {
-	_previousPosition = _transform->_position;
-	_collider = GetComponent<AABBCollider>();
 	Physics::_rigidbodies.push_back(this);
 }
 
+void Rigidbody::BeginPlay()
+{
+	_previousPosition = _transform->_position;
+	_collider = GetComponent<AABBCollider>();
+}
+
+
 bool Rigidbody::IsOnGround() const
 {
-		return _isOnGround;
+	return _isOnGround;
 }
 
 void Rigidbody::Update()

@@ -5,18 +5,16 @@
 #include "Camera.h"
 #include "Graphics.h"
 
-AABBCollider::AABBCollider(Plaehngine* engine, GameObject* go)
-	: Component(engine, go)
+AABBCollider::AABBCollider()
 {
-	SpriteRenderer* renderer = GetComponent<SpriteRenderer>();
-	if (renderer != nullptr && renderer->_sprite != nullptr) {
-		InitializeWithSprite(renderer->_sprite);
-	}
-
 	Physics::_colliders.push_back(this);
 }
 
-void AABBCollider::InitializeWithSprite(Sprite* sprite)
+void AABBCollider::BeginPlay() {
+
+}
+
+void AABBCollider::ApplySpriteSize(Sprite* sprite)
 {
 	_width = sprite->GetWidth();
 	_height = sprite->GetHeight();
@@ -32,7 +30,7 @@ void AABBCollider::Render()
 
 	//Apply Position
 	rect.x = _transform->_position.x + _offset.x - Camera::_position.x;
-	rect.y = (_transform->_position.y + _offset.y - Camera::_position.y) * -1.0f + Screen::HEIGHT;
+	rect.y = (_transform->_position.y + _offset.y - Camera::_position.y) * -1.0f + Screen::_height;
 	rect.w = _width;
 	rect.h = _height;
 

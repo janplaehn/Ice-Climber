@@ -4,7 +4,6 @@
 class Topi : public Enemy
 {
 public:
-	Topi(Plaehngine* engine, GameObject* go);
 
 	virtual void Update();
 

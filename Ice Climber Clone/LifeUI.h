@@ -5,7 +5,6 @@ class LifeUI : public Component
 {
 
 public:
-	LifeUI(Plaehngine* engine, GameObject* go) : Component(engine, go) {};
 
 	std::vector<class Renderer*> _lifeRenderers;
 

@@ -8,12 +8,8 @@ class PlayerBehaviour : public Component
 	float time_fire_pressed;	// time from the last time the fire button was pressed
 
 public:
-	PlayerBehaviour(Plaehngine* engine, GameObject* go) : Component(engine, go) {};
 
-	virtual ~PlayerBehaviour() {}
-
-	virtual void Init();
-
+	virtual void BeginPlay();
 	virtual void Update();
 
 	// move the player left or right

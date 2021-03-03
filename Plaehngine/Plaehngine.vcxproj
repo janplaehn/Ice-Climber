@@ -27,10 +27,10 @@
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Plaehngine.cpp" />
     <ClCompile Include="AABBCollider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Plaehngine.cpp" />
     <ClCompile Include="PlayerSettings.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -58,7 +58,6 @@
     <ClInclude Include="AABBCollider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="PlayerSettings.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />

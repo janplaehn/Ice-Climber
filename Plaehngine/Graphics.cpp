@@ -9,15 +9,24 @@
 #include <iomanip>
 #include <sstream>
 #include "Physics.h"
+#include "Game.h"
 
-bool Graphics::Init()
+void Graphics::Init(Game* game)
 {
+	Screen::_windowWidth = game->GetWindowSize().x;
+	Screen::_windowHeight = game->GetWindowSize().y;
+	Screen::_width = game->GetResolution().x;
+	Screen::_height = game->GetResolution().y;
+
 	//Create window
-	_window = SDL_CreateWindow("GAME NAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Screen::WINDOWWIDTH, Screen::WINDOWHEIGHT, SDL_WINDOW_SHOWN);
+	_window = SDL_CreateWindow(game->GetName().c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Screen::_windowWidth, Screen::_windowHeight, SDL_WINDOW_SHOWN);
 	if (_window == NULL)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Window could not be created! SDL_Error: %s\n", SDL_GetError());
-		return false;
+	}
+	SDL_Surface* surf = IMG_Load(game->GetIconPath().c_str());
+	if (surf != NULL) {
+		SDL_SetWindowIcon(_window, surf);
 	}
 
 	//Create renderer for window
@@ -25,17 +34,15 @@ bool Graphics::Init()
 	if (_renderer == NULL)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Renderer could not be created! SDL Error: %s\n", SDL_GetError());
-		return false;
 	}
 
-	SDL_RenderSetLogicalSize(_renderer, Screen::WIDTH, Screen::HEIGHT);
+	SDL_RenderSetLogicalSize(_renderer, Screen::_width, Screen::_height);
 
 	TTF_Init();
 	_font = TTF_OpenFont("data/space_invaders.ttf", 10); //this opens a font style and sets a size
 	if (_font == NULL)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "font cannot be created! SDL_Error: %s\n", SDL_GetError());
-		return false;
 	}
 
 	IMG_Init(IMG_INIT_PNG);
@@ -46,8 +53,6 @@ bool Graphics::Init()
 
 	//Clear screen
 	SDL_RenderClear(_renderer);
-
-	return true;
 }
 
 void Graphics::Run()
@@ -99,7 +104,7 @@ void Graphics::RenderPoint(Vector2D point)
 
 	//Apply Position
 	rect.x = point.x - Camera::_position.x;
-	rect.y = point.y + -Camera::_position.y * -1.0f + Screen::HEIGHT;
+	rect.y = point.y + -Camera::_position.y * -1.0f + Screen::_height;
 	rect.w = 1;
 	rect.h = 1;
 

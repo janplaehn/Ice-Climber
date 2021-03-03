@@ -3,8 +3,7 @@
 #include "AABBCollider.h"
 #include <algorithm>
 
-SpriteRenderer::SpriteRenderer(Plaehngine* engine, GameObject* go)
-	: Renderer(engine, go)
+SpriteRenderer::SpriteRenderer()
 {
 	_renderers.push_back(this);
 }

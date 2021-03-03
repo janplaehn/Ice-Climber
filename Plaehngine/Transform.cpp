@@ -1,7 +1,6 @@
 #include "Transform.h"
 
-Transform::Transform(Plaehngine* engine, GameObject* go)
-	: Component(engine, go)
+Transform::Transform()
 {
 	_position = Vector2D::Zero();
 	_rotation = 0;

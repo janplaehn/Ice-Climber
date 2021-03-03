@@ -4,7 +4,7 @@
 #include "LifeUI.h"
 #include "Camera.h"
 
-void PlayerBehaviour::Init()
+void PlayerBehaviour::BeginPlay()
 {
 
 	time_fire_pressed = -10000.f;
@@ -55,11 +55,11 @@ void PlayerBehaviour::Update()
 		return;
 	}
 
-	if (_transform->_position.x > (Screen::WIDTH))
+	if (_transform->_position.x > (Screen::_width))
 		_transform->_position.x = 0;
 
 	if (_transform->_position.x < 0)
-		_transform->_position.x = (Screen::WIDTH);
+		_transform->_position.x = (Screen::_width);
 
 	if (abs(_rigidbody->_velocity.x) > 0.1f) {
 		_transform->_flipType = (_rigidbody->_velocity.x > 0) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;

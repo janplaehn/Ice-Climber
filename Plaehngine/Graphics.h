@@ -7,7 +7,7 @@ class Graphics
 {
 public:
 
-	static bool Init();
+	static void Init(class Game* game);
 
 	static void Run();
 

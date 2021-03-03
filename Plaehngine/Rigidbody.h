@@ -5,7 +5,7 @@ class Rigidbody : public Component
 {
 	friend class Physics;
 public:
-	Rigidbody(Plaehngine* engine, GameObject* go);
+	Rigidbody();
 
 	Vector2D _velocity;
 	float _gravityScale = 1.0f;
@@ -17,6 +17,7 @@ public:
 
 	const float GRAVITY = 981.0f;
 
+	virtual void BeginPlay();
 	virtual void Update() override;
 	virtual void OnCollision(class AABBCollider* otherCollider);
 	virtual void Destroy();

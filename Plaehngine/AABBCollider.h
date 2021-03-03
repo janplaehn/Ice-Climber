@@ -11,10 +11,12 @@ public:
 	Vector2D _offset;
 	bool _isTrigger = false;
 
-	AABBCollider(Plaehngine* engine, GameObject* go);
-	void InitializeWithSprite(class Sprite* sprite);
+	AABBCollider();
 
-	ObjectPool<GameObject>* _collisionObjects = new ObjectPool<GameObject>(); // collision will be tested with these objects
+	void ApplySpriteSize(class Sprite* sprite);
+
+	virtual void BeginPlay();
+
 	virtual void Update();
 
 	virtual void Render();

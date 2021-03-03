@@ -3,7 +3,6 @@
 class Enemy : public Component
 {
 public:
-    Enemy(Plaehngine* engine, GameObject* go) : Component(engine, go) {};
 
     virtual void Update() override = 0;
     virtual void Damage() = 0;

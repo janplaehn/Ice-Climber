@@ -19,5 +19,9 @@ void Scenes::Run()
 		SpriteRenderer::SortRenderers();
 		_currentScene = _sceneToLoad;
 		_sceneToLoad = nullptr;
+
+		for (GameObject* go : GameObject::_gameObjects) {
+			go->BeginPlay();
+		}
 	}
 }

@@ -6,7 +6,6 @@
 class AudioSource : public Component
 {
 public:
-	AudioSource(Plaehngine* engine, GameObject* go) : Component(engine, go) {};
 
 	void Play();
 	void Pause();

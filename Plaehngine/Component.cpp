@@ -2,9 +2,6 @@
 
 //Todo: Add AnimationComponent
 
-Component::Component(Plaehngine* engine, GameObject* go)
+Component::Component()
 {
-	_engine = engine;
-	_gameObject = go;
-	_transform = _gameObject->_transform;
 }

@@ -9,21 +9,14 @@
 GameObject::GameObject()
 {
 	_transform = AddComponent<Transform>();
-
-	_enabled = false;
-
 	_gameObjects.push_back(this);
-
-	BeginPlay();
 }
 
 void GameObject::BeginPlay()
 {
-
-	for (auto it = _components.begin(); it != _components.end(); it++)
-		(*it)->Init();
-
-	_enabled = true;
+	for (Component* c : _components) {
+		c->BeginPlay();
+	}
 }
 
 void GameObject::Update()
@@ -31,20 +24,15 @@ void GameObject::Update()
 	if (!_enabled)
 		return;
 
-	for (auto it = _components.begin(); it != _components.end(); it++) {
-		if ((*it)->_enabled) {
-			(*it)->Update();
-		}
-	}
-		
+	for (Component* c : _components) {
+		c->Update();
+	}		
 }
 
 void GameObject::Destroy()
 {
-	for (auto it = _components.begin(); it != _components.end(); it++) {
-		if ((*it) != nullptr) {
-			(*it)->Destroy();
-		}
+	for (Component* c : _components) {
+		c->Destroy();
 	}
 	_components.clear();
 	_gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), this), _gameObjects.end());
@@ -64,5 +52,4 @@ GameObject::~GameObject()
 
 }
 
-Plaehngine* GameObject::_engine;
 std::vector<GameObject*> GameObject::_gameObjects;

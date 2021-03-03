@@ -4,11 +4,6 @@
 #include "Animation.h"
 #include "AudioSource.h"
 
-Nitpicker::Nitpicker(Plaehngine* engine, GameObject* go)
-	: Enemy(engine, go)
-{
-}
-
 void Nitpicker::Update()
 {
 

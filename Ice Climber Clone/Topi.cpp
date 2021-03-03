@@ -6,11 +6,6 @@
 #include "Animation.h"
 #include "AudioSource.h"
 
-Topi::Topi(Plaehngine* engine, GameObject* go)
-	: Enemy(engine, go)
-{
-}
-
 void Topi::Update()
 {
 	_ice->_enabled = (_state == WALKWITHICE);
@@ -49,7 +44,7 @@ void Topi::Update()
 
 	_transform->_position = _transform->_position + moveAmount;
 
-	if (_transform->_position.x > Screen::WIDTH) {
+	if (_transform->_position.x > Screen::_width) {
 		if (_state == FETCHICE) {
 			ChangeDirection();
 			_state = WALKWITHICE;
@@ -70,7 +65,7 @@ void Topi::Update()
 			_gameObject->_enabled = false;
 		}
 		else {
-			_transform->_position.x = Screen::WIDTH;
+			_transform->_position.x = Screen::_width;
 		}
 	}
 

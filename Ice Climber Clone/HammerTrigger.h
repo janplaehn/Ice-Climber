@@ -3,7 +3,6 @@
 class HammerTrigger : public Component
 {
 public:
-	HammerTrigger(Plaehngine* engine, GameObject* go) : Component(engine, go) {};
 
 	virtual void Update() override;
 
