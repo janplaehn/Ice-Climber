@@ -31,6 +31,7 @@ public:
 		return _gameObject->GetComponent<T>();
 	}
 
+	virtual void Awake() {};
 	virtual void BeginPlay() {};
 	virtual void Update() = 0;
 	virtual void Receive(int message) {}

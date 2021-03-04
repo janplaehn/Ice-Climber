@@ -1,0 +1,32 @@
+#pragma once
+#include "Component.h"
+
+using ButtonFunction = void(*)();
+
+class Button : public Component
+{
+public:
+	Button();
+
+	virtual void OnPressed() = 0;
+	virtual void OnSelected() = 0;
+	virtual void OnDeselected() = 0;
+	virtual void OnDeactivate() = 0;
+	virtual void OnActivate() = 0;
+
+	virtual void Awake();
+
+	void Press();
+	void Select();
+	void Deselect();
+	void Deactivate();
+	void Activate();
+
+	ButtonFunction _onPressedFunction;
+	class Text* _text;
+
+private:
+	bool _isActive = true;
+
+};
+

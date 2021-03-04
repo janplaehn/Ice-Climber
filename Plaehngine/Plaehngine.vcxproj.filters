@@ -15,14 +15,8 @@
     <Filter Include="Header Files\Settings">
       <UniqueIdentifier>{fad19ed0-c319-45ab-81f1-5d9e681ffd1b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Utils">
-      <UniqueIdentifier>{78dd1cc5-787e-4d75-80c0-7847a383eecf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{1d9d542b-d4a3-4f38-9f5d-9d7a37690b01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utils">
-      <UniqueIdentifier>{d9e2754a-1e9c-4f64-8e1c-0656db44803e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Managers">
       <UniqueIdentifier>{c6a605e7-540c-4bef-b94e-e8f8a8287135}</UniqueIdentifier>
@@ -55,16 +49,28 @@
     <Filter Include="Source Files\Components\Physics">
       <UniqueIdentifier>{7271dad1-8f53-454a-a559-854924079295}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Structs">
+      <UniqueIdentifier>{43618822-2e34-4d2c-a7fe-048e7d21749b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AssetTypes">
+      <UniqueIdentifier>{b76f014f-ff61-4209-8279-f2810268af36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structs">
+      <UniqueIdentifier>{c562dcc1-e3bf-4d81-b40c-b27bec7c0045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AssetTypes">
+      <UniqueIdentifier>{bffa9883-d6bf-4f60-a237-ecb7e9b085f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\UI">
+      <UniqueIdentifier>{040554a0-5a20-4255-9b8b-070db5c2d308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\UI">
+      <UniqueIdentifier>{670a8679-f40b-456a-a1f5-619be60db698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Random.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Audio.cpp">
       <Filter>Source Files\Managers</Filter>
@@ -89,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files\Settings</Filter>
@@ -132,28 +135,34 @@
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Source Files\Components\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Source Files\Utils</Filter>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Source Files\Structs</Filter>
     </ClCompile>
-    <ClCompile Include="TtfFont.cpp">
-      <Filter>Source Files\Utils</Filter>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
-      <Filter>Source Files\Utils</Filter>
+      <Filter>Source Files\Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files\AssetTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\AssetTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="TtfFont.cpp">
+      <Filter>Source Files\AssetTypes</Filter>
     </ClCompile>
     <ClCompile Include="ImageFont.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\AssetTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plaehngine.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Audio.h">
       <Filter>Header Files\Managers</Filter>
@@ -182,20 +191,11 @@
     <ClInclude Include="Screen.h">
       <Filter>Header Files\Settings</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="ComponentEssentials.h">
       <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
       <Filter>Header Files\Managers</Filter>
@@ -221,17 +221,35 @@
     <ClInclude Include="Component.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Header Files\Utils</Filter>
+    <ClInclude Include="Scenes.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="TtfFont.h">
-      <Filter>Header Files\Utils</Filter>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Header Files\Utils</Filter>
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Header Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Header Files\AssetTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\AssetTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="TtfFont.h">
+      <Filter>Header Files\AssetTypes</Filter>
     </ClInclude>
     <ClInclude Include="ImageFont.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\AssetTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -38,6 +38,7 @@ public:
 				existingComponent->OnComponentAdded(component);
 			}
 		}
+		component->Awake();
 		return dynamic_cast<T*>(component);
 	}
 

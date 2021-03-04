@@ -22,6 +22,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioSource.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="ImageFont.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
@@ -53,6 +54,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioSource.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="ImageFont.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
