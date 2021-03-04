@@ -12,9 +12,9 @@ void TtfFont::Create(std::string path, std::string name, int size)
 	_fonts.push_back(font);
 }
 
-void TtfFont::Draw(Transform* transform, SDL_Color color, std::string message)
+void TtfFont::Draw(Transform* transform, SDL_Color color, std::string message, Color tint)
 {
-	Graphics::DrawText(_ttf, transform->_position, message.c_str());
+	Graphics::DrawText(_ttf, transform->_position, message.c_str(), tint);
 }
 
 void TtfFont::Destroy()

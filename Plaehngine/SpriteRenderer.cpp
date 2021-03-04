@@ -22,7 +22,7 @@ void SpriteRenderer::Draw()
 		return;
 	}
 
-	if (_sprite) _sprite->Draw(_transform);
+	if (_sprite) _sprite->Draw(_transform, _tint);
 }
 
 void SpriteRenderer::Destroy()

@@ -22,7 +22,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioSource.cpp" />
-    <ClCompile Include="BitmapFont.cpp" />
+    <ClCompile Include="ImageFont.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -53,7 +53,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioSource.h" />
-    <ClInclude Include="BitmapFont.h" />
+    <ClInclude Include="ImageFont.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ComponentEssentials.h" />

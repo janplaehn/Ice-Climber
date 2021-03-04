@@ -93,7 +93,7 @@ void Graphics::ClearWindow() {
 	SDL_RenderClear(_renderer);
 }
 
-void Graphics::RenderPoint(Vector2D point)
+void Graphics::RenderPoint(Vector2D point, Color tint)
 {
 	SDL_Rect rect;
 
@@ -103,15 +103,15 @@ void Graphics::RenderPoint(Vector2D point)
 	rect.w = 1;
 	rect.h = 1;
 
-	SDL_SetRenderDrawColor(_renderer, 0, 255, 0, 255);
+	SDL_SetRenderDrawColor(_renderer, tint.r, tint.g, tint.b, tint.a);
 	SDL_RenderDrawRect(_renderer, &rect);
 }
 
-void Graphics::DrawText(TTF_Font* font, Vector2D position, const char* msg)
+void Graphics::DrawText(TTF_Font* font, Vector2D position, const char* msg, Color tint)
 {
-	SDL_Color white = { 255,255,255 };  // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
+	SDL_Color sdlColor = { tint.r,tint.g,tint.b};  // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
 
-	SDL_Surface* surf = TTF_RenderText_Solid(font, msg, white); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
+	SDL_Surface* surf = TTF_RenderText_Solid(font, msg, sdlColor); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
 
 	SDL_Texture* msg_texture = SDL_CreateTextureFromSurface(_renderer, surf); //now you can convert it into a texture
 
@@ -126,8 +126,9 @@ void Graphics::DrawText(TTF_Font* font, Vector2D position, const char* msg)
 	SDL_FreeSurface(surf);
 }
 
-void Graphics::RenderTexture(SDL_Texture* texture, const SDL_Rect* srcRect, const SDL_Rect* dstRect, float angle, SDL_RendererFlip flip)
+void Graphics::RenderTexture(SDL_Texture* texture, const SDL_Rect* srcRect, const SDL_Rect* dstRect, float angle, SDL_RendererFlip flip, Color tint)
 {
+	SDL_SetTextureColorMod(texture, tint.r, tint.g, tint.b);
 	SDL_RenderCopyEx(_renderer, texture, srcRect, dstRect, angle, NULL /*center*/, flip);
 }
 
@@ -153,9 +154,9 @@ SDL_Texture* Graphics::CreateTexture(const char* path)
 	return texture;
 }
 
-void Graphics::DrawRect(SDL_Rect* rect, int r, int g, int b, int a)
+void Graphics::DrawRect(SDL_Rect* rect, Color tint)
 {
-	SDL_SetRenderDrawColor(_renderer, 0, 255, 0, 255);
+	SDL_SetRenderDrawColor(_renderer, tint.r, tint.g, tint.b, tint.a);
 	SDL_RenderDrawRect(_renderer, rect);
 }
 

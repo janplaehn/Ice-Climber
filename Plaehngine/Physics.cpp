@@ -110,7 +110,7 @@ void Physics::DrawCollisions(Plaehngine* engine)
 
 	for (int i = 0; i < _pointCastPositions.size(); i++)
 	{
-		Graphics::RenderPoint(_pointCastPositions[i]);
+		Graphics::RenderPoint(_pointCastPositions[i], Color(0,255,0,255));
 	}
 
 	_pointCastPositions.clear();

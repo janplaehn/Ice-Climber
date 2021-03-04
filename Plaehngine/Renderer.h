@@ -6,12 +6,12 @@
 class Renderer :  public Component
 {
 public:
-
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 	virtual void Destroy() = 0;
 
 	int _order = 0;
+	Color _tint = Color::White();
 
 	static std::vector<Renderer*> _renderers;
 	static void SortRenderers();

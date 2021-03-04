@@ -13,7 +13,7 @@ Sprite::Sprite(SDL_Texture* texture)
 }
 
 
-void Sprite::Draw(Transform* transform)
+void Sprite::Draw(Transform* transform, Color tint)
 {
 	SDL_Rect rect;
 
@@ -38,10 +38,10 @@ void Sprite::Draw(Transform* transform)
 	rect.x -= rect.w * transform->_pivot.x;
 	rect.y -= rect.h * transform->_pivot.y;
 
-	Graphics::RenderTexture(_texture, NULL /*clip*/, &rect, transform->_rotation, transform->_flipType);
+	Graphics::RenderTexture(_texture, NULL /*clip*/, &rect, transform->_rotation, transform->_flipType, tint);
 }
 
-void Sprite::Draw(Transform* transform, SDL_Rect clip)
+void Sprite::Draw(Transform* transform, SDL_Rect clip, Color tint)
 {
 	SDL_Rect rect;
 
@@ -65,7 +65,7 @@ void Sprite::Draw(Transform* transform, SDL_Rect clip)
 	rect.x -= rect.w * transform->_pivot.x;
 	rect.y -= rect.h * transform->_pivot.y;
 
-	Graphics::RenderTexture(_texture, &clip, &rect, transform->_rotation, transform->_flipType);
+	Graphics::RenderTexture(_texture, &clip, &rect, transform->_rotation, transform->_flipType, tint);
 }
 
 Sprite* Sprite::Create(const char* path)

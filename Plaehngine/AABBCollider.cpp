@@ -42,7 +42,7 @@ void AABBCollider::Render()
 	rect.x -= rect.w * _transform->_pivot.x;
 	rect.y -= rect.h * _transform->_pivot.y;
 
-	Graphics::DrawRect(&rect, 0, 255, 0, 255);
+	Graphics::DrawRect(&rect, Color(0,255,0));
 }
 
 void AABBCollider::Destroy()

@@ -30,7 +30,7 @@ void Animation::Draw()
 	clip.y = 0;
 	clip.h = _spriteSheet->GetHeight();
 	clip.w = _spriteWidth;
-	_spriteSheet->Draw(_transform, clip);
+	_spriteSheet->Draw(_transform, clip, _tint);
 }
 
 void Animation::Destroy()

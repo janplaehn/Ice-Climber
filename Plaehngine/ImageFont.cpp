@@ -12,7 +12,7 @@ void ImageFont::Create(std::string path, std::string name, std::string glyphs, i
 	_fonts.push_back(font);
 }
 
-void ImageFont::Draw(Transform* transform, SDL_Color color, std::string message)
+void ImageFont::Draw(Transform* transform, SDL_Color color, std::string message, Color tint)
 {
 	Transform* letterTransform = new Transform(transform);
 
@@ -30,7 +30,7 @@ void ImageFont::Draw(Transform* transform, SDL_Color color, std::string message)
 		clip.y = 0;
 		clip.w = _glyphWidth;
 		clip.h = _glyphHeight;
-		_spriteSheet->Draw(letterTransform, clip);
+		_spriteSheet->Draw(letterTransform, clip, tint);
 		letterTransform->_position.x += _glyphWidth;
 	}
 
