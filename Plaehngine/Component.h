@@ -6,6 +6,7 @@ class Transform;
 #include <set>
 #include "objectPool.h"
 #include "Vector2D.h"
+#include "Color.h"
 #include "GameObject.h"
 #include "Plaehngine.h"
 #include "GameTime.h"

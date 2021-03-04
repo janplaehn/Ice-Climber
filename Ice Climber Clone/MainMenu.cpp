@@ -1,6 +1,8 @@
 #include "MainMenu.h"
 #include "MainMenuController.h"
 #include "ComponentEssentials.h"
+#include "IceClimberButton.h"
+#include <UINavigator.h>
 
 void MainMenu::Load()
 {
@@ -21,12 +23,28 @@ void MainMenu::Load()
 	musicSrc->_isLooping = true;
 	musicSrc->Play();
 
+	GameObject* navigatorGo = new GameObject();
+	UINavigator* navigator =  navigatorGo->AddComponent<UINavigator>();
+
 	GameObject* textHolder = new GameObject();
 	textHolder->_transform->_position = Vector2D(Screen::_width / 2, Screen::_height - 8);
 	textHolder->_transform->_pivot = Vector2D(0.5, 0);
 	textHolder->_transform->_isInScreenSpace = true;
-	Text* text = textHolder->AddComponent<Text>();
+	Button* button = textHolder->AddComponent<IceClimberButton>();
+	Text* text = button->_text;
 	text->_text = "1 PLAYER GAME";
 	text->_fontName = "Ice Climber";
-	text->_tint = Color::Green();
+
+	navigator->_buttons.push_back(button);
+
+	textHolder = new GameObject();
+	textHolder->_transform->_position = Vector2D(Screen::_width / 2, Screen::_height - 24);
+	textHolder->_transform->_pivot = Vector2D(0.5, 0);
+	textHolder->_transform->_isInScreenSpace = true;
+	button = textHolder->AddComponent<IceClimberButton>();
+	text = button->_text;
+	text->_text = "2 PLAYER GAME";
+	text->_fontName = "Ice Climber";
+
+	navigator->_buttons.push_back(button);
 }

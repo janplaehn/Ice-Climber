@@ -15,6 +15,13 @@ Color::Color(int r, int g, int b)
 	this->b = b;
 	this->a = 255;
 }
+Color::Color()
+{
+	this->r = 255;
+	this->g = 255;
+	this->b = 255;
+	this->a = 255;
+}
 
 Color Color::White()
 {

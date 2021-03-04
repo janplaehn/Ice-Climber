@@ -48,6 +48,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TtfFont.cpp" />
+    <ClCompile Include="UINavigator.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +81,7 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TtfFont.h" />
+    <ClInclude Include="UINavigator.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

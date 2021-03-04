@@ -151,6 +151,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameOverUIBehaviour.cpp" />
     <ClCompile Include="HammerTrigger.cpp" />
+    <ClCompile Include="IceClimberButton.cpp" />
     <ClCompile Include="IceClimberGame.cpp" />
     <ClCompile Include="LifeUI.cpp" />
     <ClCompile Include="main.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameOverUIBehaviour.h" />
     <ClInclude Include="HammerTrigger.h" />
+    <ClInclude Include="IceClimberButton.h" />
     <ClInclude Include="IceClimberGame.h" />
     <ClInclude Include="LifeUI.h" />
     <ClInclude Include="MainMenu.h" />

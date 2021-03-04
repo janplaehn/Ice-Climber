@@ -159,6 +159,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
+    <ClCompile Include="UINavigator.cpp">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plaehngine.h">
@@ -249,6 +252,9 @@
       <Filter>Header Files\AssetTypes</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
+      <Filter>Header Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UINavigator.h">
       <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
   </ItemGroup>
