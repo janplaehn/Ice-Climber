@@ -2,16 +2,14 @@
 
 void UINavigator::BeginPlay()
 {
+	for (int i = 0; i < _buttons.size(); i++)
+	{
+		_buttons[i]->Deselect();
+	}
+
 	if (_buttons.size() > _buttonIndex) {
 		_buttons[_buttonIndex]->Select();
 	}
-
-	Input::AddKey(SDL_SCANCODE_LEFT);
-	Input::AddKey(SDL_SCANCODE_RIGHT);
-	Input::AddKey(SDL_SCANCODE_UP);
-	Input::AddKey(SDL_SCANCODE_DOWN);
-	Input::AddKey(SDL_SCANCODE_SPACE);
-	Input::AddKey(SDL_SCANCODE_ESCAPE);
 }
 
 void UINavigator::Update()

@@ -6,7 +6,7 @@ void Input::Init(Plaehngine* engine)
 {
 	_engine = engine;
 
-	AddKey(SDL_SCANCODE_ESCAPE);
+	WatchKey(SDL_SCANCODE_ESCAPE);
 }
 
 void Input::ProcessInput()
@@ -63,10 +63,11 @@ Input::KeyStatus Input::GetKeyStatus(int scanCode)
 	{
 		if (k._scanCode == scanCode) return k._status;
 	}
+	SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Tried to read input %s, but Scancode has not been specified before!", scanCode);
 	return UNDEFINED;
 }
 
-void Input::AddKey(int scanCode)
+void Input::WatchKey(int scanCode)
 {
 	for (Key k : _keys)
 	{

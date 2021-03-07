@@ -12,11 +12,6 @@ void PlayerBehaviour::BeginPlay()
 	_rigidbody = GetComponent<Rigidbody>();
 	_animation = GetComponent<Animation>();
 	_collider = GetComponent<AABBCollider>();
-
-	Input::AddKey(SDL_SCANCODE_RIGHT);
-	Input::AddKey(SDL_SCANCODE_LEFT);
-	Input::AddKey(SDL_SCANCODE_SPACE);
-	Input::AddKey(SDL_SCANCODE_A);
 }
 
 void PlayerBehaviour::Update()

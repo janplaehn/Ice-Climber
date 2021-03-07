@@ -25,7 +25,7 @@ public:
 
 	static KeyStatus GetKeyStatus(int scanCode);
 
-	static void AddKey(int scanCode);
+	static void WatchKey(int scanCode);
 
 	static void Quit();
 

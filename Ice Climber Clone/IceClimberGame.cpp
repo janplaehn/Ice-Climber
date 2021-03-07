@@ -9,6 +9,18 @@ void IceClimberGame::Init()
 {
 	TtfFont::Create("Assets/Fonts/retro.ttf", "Retro", 16);
 	ImageFont::Create("Assets/Fonts/iceClimber.png", "Ice Climber", "0123456789ABDGLNOPRSUWY!x.TIME", 8, 8);
+
+	Input::WatchKey(SDL_SCANCODE_RIGHT);
+	Input::WatchKey(SDL_SCANCODE_LEFT);
+	Input::WatchKey(SDL_SCANCODE_SPACE);
+	Input::WatchKey(SDL_SCANCODE_A);
+	Input::WatchKey(SDL_SCANCODE_LEFT);
+	Input::WatchKey(SDL_SCANCODE_RIGHT);
+	Input::WatchKey(SDL_SCANCODE_UP);
+	Input::WatchKey(SDL_SCANCODE_DOWN);
+	Input::WatchKey(SDL_SCANCODE_SPACE);
+	Input::WatchKey(SDL_SCANCODE_ESCAPE);
+
 	Scenes::LoadScene<MainMenu>();
 }
 
