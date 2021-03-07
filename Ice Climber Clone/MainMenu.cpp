@@ -13,8 +13,8 @@ void MainMenu::Load()
 	background_render->_order = -100;
 	background->_transform->_position = Vector2D(Screen::_width / 2, background_render->_sprite->GetHeight() / 2);
 
-	GameObject* menuController = new GameObject();
-	menuController->AddComponent<MainMenuController>();
+	GameObject* menuControllerGo = new GameObject();
+	MainMenuController* menuController =  menuControllerGo->AddComponent<MainMenuController>();
 
 	//Setup background Music
 	GameObject* music = new GameObject();
@@ -31,6 +31,7 @@ void MainMenu::Load()
 	textHolder->_transform->_pivot = Vector2D(0.5, 0);
 	textHolder->_transform->_isInScreenSpace = true;
 	Button* button = textHolder->AddComponent<IceClimberButton>();
+	button->_onPressedFunction = &(MainMenuController::LoadSinglePlayer);
 	Text* text = button->_text;
 	text->_text = "1 PLAYER GAME";
 	text->_fontName = "Ice Climber";

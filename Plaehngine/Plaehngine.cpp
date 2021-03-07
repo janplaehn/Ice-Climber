@@ -37,6 +37,7 @@ void Plaehngine::Destroy()
 	Scenes::Quit();
 	Graphics::Quit();
 	Audio::Quit();
+	Input::Quit();
 	SDL_Quit();
 	delete _game;
 }

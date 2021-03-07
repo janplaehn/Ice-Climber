@@ -4,8 +4,9 @@
 
 void Input::Init(Plaehngine* engine)
 {
-	_key._jump = _key._left = _key._right = _key._escape = false;
 	_engine = engine;
+
+	AddKey(SDL_SCANCODE_ESCAPE);
 }
 
 void Input::ProcessInput()
@@ -14,48 +15,6 @@ void Input::ProcessInput()
 
 	while (SDL_PollEvent(&event))
 	{
-		if (event.type == SDL_KEYDOWN)
-		{
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_ESCAPE:
-			case SDLK_q:
-				_key._escape = true;
-				break;
-			case SDLK_SPACE:
-				_key._jump = true;
-				break;
-			case SDLK_a:
-				_key._attack = true;
-				break;
-			case SDLK_LEFT:
-				_key._left = true;
-				break;
-			case SDLK_RIGHT:
-				_key._right = true;
-				break;
-			}
-		}
-
-		if (event.type == SDL_KEYUP)
-		{
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_SPACE:
-				_key._jump = false;
-				break;
-			case SDLK_a:
-				_key._attack = false;
-				_key._attack = false;
-				break;
-			case SDLK_LEFT:
-				_key._left = false;
-				break;
-			case SDLK_RIGHT:
-				_key._right = false;
-				break;
-			}
-		}
 		if (event.type == SDL_QUIT)
 		{
 			_engine->Quit();
@@ -63,16 +22,66 @@ void Input::ProcessInput()
 
 	}
 
-	KeyStatus keys = GetKeyStatus();
-	if (keys._escape) {
+	SDL_PumpEvents();
+	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+
+	for (int i = 0; i < _keys.size(); i++)
+	{
+		Key k = _keys[i];
+		switch (k._status)
+		{
+		case IDLE:
+			if (currentKeyStates[k._scanCode]) k._status = PRESSED;
+			else k._status = IDLE;
+			break;
+		case PRESSED:
+			if (currentKeyStates[k._scanCode]) k._status = HELD;
+			else k._status = RELEASED;
+			break;
+		case HELD:
+			if (currentKeyStates[k._scanCode]) k._status = HELD;
+			else k._status = RELEASED;
+			break;
+		case RELEASED:
+			if (currentKeyStates[k._scanCode]) k._status = PRESSED;
+			else k._status = IDLE;
+			break;
+		default:
+			break;
+		}
+		_keys[i] = k;
+	}
+
+	if (GetKeyStatus(SDL_SCANCODE_ESCAPE) == PRESSED) {
 		_engine->Quit();
 	}
 }
 
-Input::KeyStatus Input::GetKeyStatus()
+Input::KeyStatus Input::GetKeyStatus(int scanCode)
 {
-	return _key;
+	for (Key k : _keys)
+	{
+		if (k._scanCode == scanCode) return k._status;
+	}
+	return UNDEFINED;
 }
 
-Input::KeyStatus Input::_key;
+void Input::AddKey(int scanCode)
+{
+	for (Key k : _keys)
+	{
+		if (k._scanCode == scanCode) return;
+	}
+
+	Key key;
+	key._scanCode = scanCode;
+	_keys.push_back(key);
+}
+
+void Input::Quit()
+{
+	_keys.clear();
+}
+
+std::vector<Input::Key> Input::_keys;
 Plaehngine* Input::_engine;

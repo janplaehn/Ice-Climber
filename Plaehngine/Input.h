@@ -1,26 +1,35 @@
 #pragma once
+#include <vector>
 
 class Input
 {
 public:
 	static void Init(class Plaehngine* engine);
 
-	struct KeyStatus
-	{
-		bool _jump; // space
-		bool _attack; // a
-		bool _left; // left arrow
-		bool _right; // right arrow
-		bool _escape; // escape button
+	enum KeyStatus {
+		IDLE,
+		PRESSED,
+		HELD,
+		RELEASED,
+		UNDEFINED
 	};
+
+	struct Key {
+		int _scanCode = 0;
+		KeyStatus _status = IDLE;
+	};
+
+	static std::vector<Key> _keys;
 
 	static void ProcessInput();
 
-	static Input::KeyStatus GetKeyStatus();
+	static KeyStatus GetKeyStatus(int scanCode);
+
+	static void AddKey(int scanCode);
+
+	static void Quit();
 
 private:
-
-	static KeyStatus _key;
 	static class Plaehngine* _engine;
 };
 

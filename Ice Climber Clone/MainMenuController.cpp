@@ -4,7 +4,9 @@
 
 void MainMenuController::Update()
 {
-	if (Input::GetKeyStatus()._jump) {
-		Scenes::LoadScene<PlayScene>();
-	}
+}
+
+void MainMenuController::LoadSinglePlayer()
+{
+	Scenes::LoadScene<PlayScene>();
 }

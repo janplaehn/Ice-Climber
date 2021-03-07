@@ -3,5 +3,7 @@
 class MainMenuController : public Component
 {
 	virtual void Update() override;
+public:
+	static void LoadSinglePlayer();
 };
 

@@ -11,8 +11,8 @@ class IceClimberButton : public Button
 	virtual void OnDeactivate() override;
 	virtual void OnActivate() override;
 
-	Color _selectedColor = Color(128,128,128);
-	Color _defaultColor = Color::White();
+	Color _selectedColor = Color::White();
+	Color _defaultColor = Color(128, 128, 128);
 
 	class AudioSource* _buttonSound;
 };

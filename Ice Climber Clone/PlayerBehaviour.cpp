@@ -12,12 +12,15 @@ void PlayerBehaviour::BeginPlay()
 	_rigidbody = GetComponent<Rigidbody>();
 	_animation = GetComponent<Animation>();
 	_collider = GetComponent<AABBCollider>();
+
+	Input::AddKey(SDL_SCANCODE_RIGHT);
+	Input::AddKey(SDL_SCANCODE_LEFT);
+	Input::AddKey(SDL_SCANCODE_SPACE);
+	Input::AddKey(SDL_SCANCODE_A);
 }
 
 void PlayerBehaviour::Update()
 {
-	Input::KeyStatus keys =	Input::GetKeyStatus();
-
 	if (_isAttacking) {
 		_animation->_spriteSheet = _attackSprite;
 		_animation->_frameRate = 8;
@@ -33,18 +36,18 @@ void PlayerBehaviour::Update()
 		return;
 	}
 
-	if (keys._right)
+	if (Input::GetKeyStatus(SDL_SCANCODE_RIGHT) == Input::HELD || Input::GetKeyStatus(SDL_SCANCODE_RIGHT) == Input::PRESSED)
 		Move(GameTime::_delta * WALKSPEED);
-	if (keys._left)
+	if (Input::GetKeyStatus(SDL_SCANCODE_LEFT) == Input::HELD || Input::GetKeyStatus(SDL_SCANCODE_LEFT) == Input::PRESSED)
 		Move(-GameTime::_delta * WALKSPEED);
-	if (keys._jump && _isOnGround && !_isAttacking)
+	if (Input::GetKeyStatus(SDL_SCANCODE_SPACE) == Input::PRESSED && _isOnGround && !_isAttacking)
 	{
 		_rigidbody->_velocity.y = JUMPFORCE;
 		_jumpSource->Play();
 		_animation->_spriteSheet = _jumpSprite;
 
 	}
-	else if (keys._attack && _isOnGround && !_isAttacking)
+	else if (Input::GetKeyStatus(SDL_SCANCODE_A) == Input::PRESSED && _isOnGround && !_isAttacking)
 	{
 		_rigidbody->_velocity = Vector2D::Zero();
 		_animation->_spriteSheet = _attackSprite;

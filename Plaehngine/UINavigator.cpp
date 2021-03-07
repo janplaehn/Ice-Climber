@@ -5,6 +5,13 @@ void UINavigator::BeginPlay()
 	if (_buttons.size() > _buttonIndex) {
 		_buttons[_buttonIndex]->Select();
 	}
+
+	Input::AddKey(SDL_SCANCODE_LEFT);
+	Input::AddKey(SDL_SCANCODE_RIGHT);
+	Input::AddKey(SDL_SCANCODE_UP);
+	Input::AddKey(SDL_SCANCODE_DOWN);
+	Input::AddKey(SDL_SCANCODE_SPACE);
+	Input::AddKey(SDL_SCANCODE_ESCAPE);
 }
 
 void UINavigator::Update()
@@ -15,10 +22,10 @@ void UINavigator::Update()
 
 	int prevIndex = _buttonIndex;
 
-	if (Input::GetKeyStatus()._left) {
+	if (Input::GetKeyStatus(SDL_SCANCODE_LEFT) == Input::PRESSED || Input::GetKeyStatus(SDL_SCANCODE_UP) == Input::PRESSED) {
 		_buttonIndex--;
 	}
-	else if (Input::GetKeyStatus()._left) {
+	else if (Input::GetKeyStatus(SDL_SCANCODE_RIGHT) == Input::PRESSED || Input::GetKeyStatus(SDL_SCANCODE_DOWN) == Input::PRESSED) {
 		_buttonIndex++;
 	}
 
@@ -34,7 +41,7 @@ void UINavigator::Update()
 		_buttons[_buttonIndex]->Select();
 	}
 
-	if (Input::GetKeyStatus()._jump) {
+	if (Input::GetKeyStatus(SDL_SCANCODE_SPACE) == Input::PRESSED) {
 		_buttons[_buttonIndex]->Press();
 	}
 }
