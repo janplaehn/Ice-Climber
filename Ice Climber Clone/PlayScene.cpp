@@ -250,6 +250,13 @@ void PlayScene::Load()
 		stageCollider->_width = 32;
 		stageCollider->_height = 7;
 
+		GameObject* eggplant = new GameObject();
+		eggplant->_transform->_pivot = Vector2D(0, 1);
+		eggplant->_transform->_position = Vector2D(56, 440);
+		eggplant->_tag = "Eggplant";
+		eggplant->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
+		eggplant->AddComponent<AABBCollider>()->_isTrigger = true;
+
 		stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(1, 1);
 		stage->_transform->_position = Vector2D(Screen::_width - 48, 432);
@@ -290,6 +297,13 @@ void PlayScene::Load()
 		stageCollider->_width = 32;
 		stageCollider->_height = 7;
 
+		eggplant = new GameObject();
+		eggplant->_transform->_pivot = Vector2D(0, 1);
+		eggplant->_transform->_position = Vector2D(152, 528);
+		eggplant->_tag = "Eggplant";
+		eggplant->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
+		eggplant->AddComponent<AABBCollider>()->_isTrigger = true;
+
 		stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(0, 1);
 		stage->_transform->_position = Vector2D(168, 560);
@@ -303,6 +317,13 @@ void PlayScene::Load()
 		stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->_width = 48;
 		stageCollider->_height = 7;
+
+		eggplant = new GameObject();
+		eggplant->_transform->_pivot = Vector2D(0, 1);
+		eggplant->_transform->_position = Vector2D(102, 576);
+		eggplant->_tag = "Eggplant";
+		eggplant->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
+		eggplant->AddComponent<AABBCollider>()->_isTrigger = true;
 
 		//Second Cloud
 		stage = new GameObject();

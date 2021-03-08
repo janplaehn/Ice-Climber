@@ -17,32 +17,6 @@ void Physics::Run()
 	}
 }
 
-bool Physics::IsColliding(AABBCollider* a, AABBCollider* b)
-{
-	SDL_Rect rectA = a->GetRect();
-	SDL_Rect rectB = b->GetRect();
-
-	float aLeft, aRight, aTop, aBottom, bLeft, bRight, bTop, bBottom;
-
-	aLeft = rectA.x;
-	bLeft = rectB.x;
-
-	aRight = rectA.x + a->_width;
-	bRight = rectB.x + b->_width;
-
-	aBottom = rectA.y - a->_height;
-	bBottom = rectB.y - b->_height;
-
-	aTop = rectA.y;
-	bTop = rectB.y;
-
-	if (aRight < bLeft) return false;
-	if (bRight < aLeft) return false;
-	if (aTop < bBottom) return false;
-	if (bTop < aBottom) return false;
-	return true;
-}
-
 bool Physics::IsColliding(Vector2D point, AABBCollider* collider)
 {
 	SDL_Rect rect = collider->GetRect();
@@ -249,6 +223,12 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 		rb->_targetMoveDelta.x = dotprod * out_normal.y;
 		rb->_targetMoveDelta.y = dotprod * out_normal.x;
 
+
+		//This is bad and only works in our case!
+		if (out_normal.y == -1 && rb->_velocity.y < 0) {
+			rb->_transform->_position.y = collider->GetRect().y + collider->GetRect().h + rb->_collider->_offset.y - 2.0f;
+		}
+
 		if (GameMath::Sign(out_normal.x) == GameMath::Sign(rb->_velocity.x)) {
 			rb->_velocity.x = velDotprod * out_normal.y;
 		}
@@ -259,13 +239,6 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 
 	rb->_collider->_gameObject->OnCollision(collider, out_normal);
 	collider->_gameObject->OnCollision(rb->_collider, out_normal);
-}
-
-void Physics::ResolveCollision(Rigidbody* rb, AABBCollider* collider)
-{
-	//Undo the move applied to transform
-	rb->_transform->_position.y = rb->_transform->_position.y - rb->_targetMoveDelta.y;
-	rb->_velocity.y = 0;
 }
 
 void Physics::DrawCollisions()

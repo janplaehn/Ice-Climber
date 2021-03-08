@@ -14,7 +14,6 @@ public:
 	//For Debugging Purposes
 	static void DrawCollisions();
 
-	static bool IsColliding(AABBCollider* first, AABBCollider* second);
 	static bool IsColliding(Vector2D point, AABBCollider* collider);
 
 	static bool PointCast(Vector2D position, AABBCollider** result, bool includeDisabled);
@@ -29,7 +28,6 @@ protected:
 	static SDL_Rect GetSweptBroadphaseRect(Rigidbody* rb);
 	static void PreventCollisions(Rigidbody* rb);
 	static void PreventCollisions(Rigidbody* rb, AABBCollider* collider);
-	static void ResolveCollision(Rigidbody* rb, AABBCollider* collider);
 
 	static std::vector<Vector2D> _pointCastPositions;
 };

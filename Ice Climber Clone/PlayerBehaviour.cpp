@@ -20,7 +20,6 @@ void PlayerBehaviour::BeginPlay()
 
 void PlayerBehaviour::Update()
 {
-	SDL_Log(std::to_string(_transform->_position.y).c_str());
 	if (_hasWon) {
 		_transform->_position = condor->_position + Vector2D::Down() * 24;
 		if (_transform->_position.x < 1.0f) {
@@ -157,6 +156,11 @@ void PlayerBehaviour::OnCollision(AABBCollider* other, Vector2D normal)
 			timer->_shouldCount = false;
 		}
 		_hasWon = true;
+	}
+
+	if (other->_gameObject->_tag == "Eggplant") {
+		other->_gameObject->_enabled = false;
+		Scores::_eggplants++;
 	}
 
 	if ((other->_gameObject->_tag == "Topi") && !_isInvincible) {
