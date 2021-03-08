@@ -51,8 +51,8 @@ bool Physics::IsColliding(Vector2D point, AABBCollider* collider)
 
 	left = rect.x;
 	right = rect.x + collider->_width;
-	bottom = rect.y - collider->_height;
-	top = rect.y;
+	bottom = rect.y;
+	top = rect.y + collider->_height;
 
 	if (right < point.x) return false;
 	if (point.x < left) return false;
@@ -69,7 +69,7 @@ bool Physics::PointCast(Vector2D position, AABBCollider** result, bool includeDi
 
 	for (int j = 0; j < _colliders.size(); j++)
 	{
-		if (!(_colliders[j]->_enabled && _colliders[j]->_gameObject->_enabled) && !includeDisabled) continue;
+		if (!_colliders[j]->IsActiveAndEnabled() && !includeDisabled) continue;
 
 		if (IsColliding(position, _colliders[j])) {
 			*result = _colliders[j];
@@ -146,8 +146,8 @@ float Physics::SweptAABB(Rigidbody* rb, AABBCollider* collider, Vector2D& normal
 	if ((entryTime > exitTime) || (xEntry < 0.0f && yEntry < 0.0f) || xEntry > 1.0f || yEntry > 1.0f)
 	{
 		//Debug
-		Graphics::DrawRect(&rbRect, Color::Blue());
-		Graphics::DrawRect(&colRect, Color::Blue());
+		/*Graphics::DrawRect(&rbRect, Color::Blue());
+		Graphics::DrawRect(&colRect, Color::Blue());*/
 
 		normal.x = 0.0f;
 		normal.y = 0.0f;
@@ -156,8 +156,8 @@ float Physics::SweptAABB(Rigidbody* rb, AABBCollider* collider, Vector2D& normal
 	else // if there was a collision 
 	{
 		//Debug
-		Graphics::DrawRect(&rbRect, Color::Red());
-		Graphics::DrawRect(&colRect, Color::Red());
+		/*Graphics::DrawRect(&rbRect, Color::Red());
+		Graphics::DrawRect(&colRect, Color::Red());*/
 
 		// calculate normal of collided surface
 		if (xEntry > yEntry)
@@ -227,6 +227,12 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 
 	SDL_Rect broadphaseRect = GetSweptBroadphaseRect(rb);
 	if (!AABBCheck(broadphaseRect, collider->GetRect())) return;
+
+	if (rb->_isKinematic) {
+		rb->_collider->_gameObject->OnCollision(collider, Vector2D::Zero());
+		collider->_gameObject->OnCollision(rb->_collider, Vector2D::Zero());
+		return;
+	}
 
 	Vector2D out_normal = Vector2D::Zero();
 	float collisiontime = SweptAABB(rb, collider, out_normal);

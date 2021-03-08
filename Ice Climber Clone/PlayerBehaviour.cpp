@@ -3,6 +3,10 @@
 #include "ComponentEssentials.h"
 #include "LifeUI.h"
 #include "Camera.h"
+#include "Scenes.h"
+#include "BonusTimer.h"
+#include "ScoreScreen.h"
+#include "Scores.h"
 
 void PlayerBehaviour::BeginPlay()
 {
@@ -16,6 +20,16 @@ void PlayerBehaviour::BeginPlay()
 
 void PlayerBehaviour::Update()
 {
+	SDL_Log(std::to_string(_transform->_position.y).c_str());
+	if (_hasWon) {
+		_transform->_position = condor->_position + Vector2D::Down() * 24;
+		if (_transform->_position.x < 1.0f) {
+			Scores::_hasBonus = true;
+			Scenes::LoadScene<ScoreScreen>();
+		}
+		return;
+	}
+
 	if (_isAttacking) {
 		_animation->_spriteSheet = _attackSprite;
 		_animation->_frameRate = 8;
@@ -102,10 +116,25 @@ void PlayerBehaviour::Update()
 	}
 	_hammer->_transform->_position = _transform->_position;
 
-	_isOnGround = false;
+	_isOnGround = _timeSinceLastGroundHit < 0.05f;
+	_timeSinceLastGroundHit += GameTime::_delta;
 
 	if ((_transform->_position.y - Camera::_position.y) < 0) {
-		LoseLife();
+		if (_isInBonus) {
+			Scores::_hasBonus = false;
+			Scenes::LoadScene<ScoreScreen>();
+		}
+		else {
+			LoseLife();
+		}
+	}
+
+	if (!_isInBonus && _transform->_position.y > 420) {
+		for (BonusTimer* timer : _timers) {
+			timer->_gameObject->_enabled = true;
+			timer->_currentTime = 40.0f;
+		}
+		_isInBonus = true;
 	}
 }
 
@@ -116,15 +145,23 @@ void PlayerBehaviour::Move(float move)
 
 void PlayerBehaviour::OnCollision(AABBCollider* other, Vector2D normal)
 {
-	if (normal.y == -1 && !other->_isTrigger) { //Todo: Fix this madness! Check for Top and bottom instead or return a hit point from the collision!
-		_isOnGround = true;
+	if (normal.y == -1 && !other->_isTrigger) {
+		_timeSinceLastGroundHit = 0.0f;
 		_lastGroundedPosition = _transform->_position;
 		if (!_isAttacking) _animation->_spriteSheet = _walkSprite;
 	}
 
-	//if ((other->_gameObject->_tag == "Topi") && !_isInvincible) {
-	//	LoseLife();
-	//}
+	if (other->_gameObject->_tag == "Condor") {
+		condor = other->_transform;
+		for (BonusTimer* timer : _timers) {
+			timer->_shouldCount = false;
+		}
+		_hasWon = true;
+	}
+
+	if ((other->_gameObject->_tag == "Topi") && !_isInvincible) {
+		LoseLife();
+	}
 }
 
 void PlayerBehaviour::LoseLife()

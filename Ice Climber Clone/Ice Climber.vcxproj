@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BonusTimer.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Cloud.cpp" />
     <ClCompile Include="DebugPhysicsScene.cpp" />
@@ -161,9 +162,13 @@
     <ClCompile Include="Nitpicker.cpp" />
     <ClCompile Include="PlayerBehaviour.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="Scores.cpp" />
+    <ClCompile Include="ScoreScreen.cpp" />
+    <ClCompile Include="ScoreScreenController.cpp" />
     <ClCompile Include="Topi.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BonusTimer.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Cloud.h" />
     <ClInclude Include="DebugPhysicsScene.h" />
@@ -178,6 +183,9 @@
     <ClInclude Include="Nitpicker.h" />
     <ClInclude Include="PlayerBehaviour.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="Scores.h" />
+    <ClInclude Include="ScoreScreen.h" />
+    <ClInclude Include="ScoreScreenController.h" />
     <ClInclude Include="Topi.h" />
   </ItemGroup>
   <ItemGroup>

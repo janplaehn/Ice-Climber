@@ -10,8 +10,6 @@ public:
 
 	virtual void Update() override;
 
-
-private:
-	const float SPEED = 20;
+	float _speed = 20;
 };
 

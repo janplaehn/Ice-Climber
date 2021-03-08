@@ -1,6 +1,5 @@
 #pragma once
-
-#include "component.h";
+#include "Component.h"
 
 class PlayerBehaviour : public Component
 {
@@ -33,6 +32,7 @@ public:
 	class Rigidbody* _rigidbody;
 	class Animation* _animation;
 	class AABBCollider* _collider;
+	std::vector<class BonusTimer*> _timers;
 
 	int _lives = 3;
 
@@ -50,6 +50,10 @@ private:
 	void LoseLife();
 
 	bool _isAttacking = false;
+	bool _hasWon = false;
+	bool _isInBonus = false;
+	Transform* condor = nullptr;
 	float _attackDuration = 2.0f / 8.0f;
 	float _attackTimer = 0;
+	float _timeSinceLastGroundHit = 0.05f;
 };

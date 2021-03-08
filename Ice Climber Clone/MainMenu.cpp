@@ -27,7 +27,7 @@ void MainMenu::Load()
 	UINavigator* navigator =  navigatorGo->AddComponent<UINavigator>();
 
 	GameObject* textHolder = new GameObject();
-	textHolder->_transform->_position = Vector2D(Screen::_width / 2, Screen::_height - 8);
+	textHolder->_transform->_position = Vector2D(Screen::_width / 2 + 3, Screen::_height / 2 - 16);
 	textHolder->_transform->_pivot = Vector2D(0.5, 0);
 	textHolder->_transform->_isInScreenSpace = true;
 	Button* button = textHolder->AddComponent<IceClimberButton>();
@@ -39,7 +39,7 @@ void MainMenu::Load()
 	navigator->_buttons.push_back(button);
 
 	textHolder = new GameObject();
-	textHolder->_transform->_position = Vector2D(Screen::_width / 2, Screen::_height - 24);
+	textHolder->_transform->_position = Vector2D(Screen::_width / 2 + 3, Screen::_height / 2 - 32);
 	textHolder->_transform->_pivot = Vector2D(0.5, 0);
 	textHolder->_transform->_isInScreenSpace = true;
 	button = textHolder->AddComponent<IceClimberButton>();

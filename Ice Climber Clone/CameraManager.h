@@ -10,5 +10,6 @@ public:
 
 private:
 	const float MAX_CAMERA_DISTANCE = 100;
+	float _highestPlayerPos = 0;
 };
 
