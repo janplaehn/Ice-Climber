@@ -257,5 +257,8 @@
     <ClInclude Include="UINavigator.h">
       <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
+    <ClInclude Include="GameMath.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

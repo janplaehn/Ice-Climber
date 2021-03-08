@@ -7,9 +7,14 @@
 #include "Cloud.h"
 #include "HammerTrigger.h"
 #include "CameraManager.h"
+#include <Random.h>
+#include "BonusTimer.h"
+#include "Scores.h"
 
 void PlayScene::Load()
 {
+	Scores::Reset();
+
 	//Setup Background
 	GameObject* background = new GameObject();
 	SpriteRenderer* background_render = background->AddComponent<SpriteRenderer>();
@@ -24,7 +29,6 @@ void PlayScene::Load()
 	musicSrc->_clip = Audio::LoadSound("Assets/Music/stage.wav");
 	musicSrc->_isLooping = true;
 	musicSrc->Play();
-
 
 	//Setup Player
 	GameObject* player = new GameObject();
@@ -41,7 +45,7 @@ void PlayScene::Load()
 	playerBehaviour->_animation->_spriteSheet = playerBehaviour->_walkSprite;
 	playerBehaviour->_collider = player->AddComponent<AABBCollider>();
 	playerBehaviour->_collider->_width = 8;
-	playerBehaviour->_collider->_height = 24;
+	playerBehaviour->_collider->_height = 20;
 	playerBehaviour->_collider->_offset = Vector2D(0, 4);
 	playerBehaviour->_jumpSource = player->AddComponent<AudioSource>();
 	playerBehaviour->_jumpSource->_clip = Audio::LoadSound("Assets/Sounds/jump.wav");
@@ -50,10 +54,11 @@ void PlayScene::Load()
 	playerBehaviour->_gameOverSource = player->AddComponent<AudioSource>();
 	playerBehaviour->_gameOverSource->_clip = Audio::LoadSound("Assets/Sounds/gameOver.wav");
 	playerBehaviour->_rigidbody = player->AddComponent<Rigidbody>();
-	playerBehaviour->_rigidbody->_linearDrag = 5.0f;
+	playerBehaviour->_rigidbody->_linearDrag = 4.5f;
 	playerBehaviour->_rigidbody->_gravityScale = 0.5f;
 
 	playerBehaviour->_hammer = new GameObject();
+	playerBehaviour->_hammer->_tag = "Hammer";
 	HammerTrigger* hammerTrigger = playerBehaviour->_hammer->AddComponent<HammerTrigger>();
 	AABBCollider* hammerCol = playerBehaviour->_hammer->AddComponent<AABBCollider>();
 	playerBehaviour->_hammer->AddComponent<Rigidbody>()->_isKinematic = true;
@@ -124,7 +129,8 @@ void PlayScene::Load()
 
 
 	//Setup Stage Colliders
-	for (int i = 0; i < 7; i++)
+	int COUNT = 7;
+	for (int i = 0; i < COUNT; i++)
 	{
 		float height = 64 + i * 48;
 		float width = 40;
@@ -155,10 +161,10 @@ void PlayScene::Load()
 			tile->_transform->_position = Vector2D(width + x * 8, height);
 			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
 			tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
-			tile->AddComponent<AABBCollider>();
+			AABBCollider* tileCol =  tile->AddComponent<AABBCollider>();
+			tileCol->_width = 8;
+			tileCol->_height = 7;
 		}
-
-
 	}
 
 	//Setup UI
@@ -194,6 +200,17 @@ void PlayScene::Load()
 
 	//Setup Bonus Stage Colldiders :(
 	{
+
+		//1st timer
+		GameObject* timerGo = new GameObject();
+		timerGo->_transform->_pivot = Vector2D(0, 1);
+		timerGo->_transform->_position = Vector2D(24, 608);
+		BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
+		timer->_text = timerGo->AddComponent<Text>();
+		timer->_text->_text = "40.0";
+		timer->_text->_fontName = "Ice Climber";
+		timerGo->_enabled = false;
+		playerBehaviour->_timers.push_back(timer);
 
 		//1st floor
 
@@ -346,4 +363,33 @@ void PlayScene::Load()
 		stageCollider->_width = 48;
 		stageCollider->_height = 7;
 	}
+
+	//Setup Condor
+	GameObject* condorGo = new GameObject();
+	condorGo->_tag = "Condor";
+	condorGo->_transform->_pivot = Vector2D(0.5, 1);
+	condorGo->_transform->_position = Vector2D(Screen::_width / 2, 832);
+	Animation*  condorAnim = condorGo->AddComponent<Animation>();
+	condorAnim->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Condor/fly.png");
+	condorAnim->_spriteWidth = 32;
+	condorAnim->_frameRate = 8;
+	condorAnim->_order = 100;
+	AABBCollider* condorCol = condorGo->AddComponent<AABBCollider>();
+	condorCol->_isTrigger = true;
+	condorCol->_width = 32;
+	condorCol->_height = 16;
+	Cloud* cloud = condorGo->AddComponent<Cloud>();
+	cloud->_moveRight = false;
+	cloud->_speed = 40;
+
+	//2nt timer
+	GameObject* timerGo = new GameObject();
+	timerGo->_transform->_pivot = Vector2D(0, 1);
+	timerGo->_transform->_position = Vector2D(24, 848);
+	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
+	timer->_text = timerGo->AddComponent<Text>();
+	timer->_text->_text = "40.0";
+	timer->_text->_fontName = "Ice Climber";
+	timerGo->_enabled = false;
+	playerBehaviour->_timers.push_back(timer);
 }

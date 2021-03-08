@@ -1,6 +1,7 @@
 #include "HammerTrigger.h"
 #include "ComponentEssentials.h"
 #include "Enemy.h"
+#include "Scores.h"
 
 void HammerTrigger::Update()
 {
@@ -23,9 +24,10 @@ void HammerTrigger::Update()
 	_tileBreakSource->Play();
 	_timer = _coolDown;
 	_triggeredTiles.clear();
+	Scores::_tiles++;
 }
 
-void HammerTrigger::OnCollision(AABBCollider* other)
+void HammerTrigger::OnCollision(AABBCollider* other, Vector2D normal)
 {
 	if (other->_gameObject->_tag == "Tile" && _timer <= 0) {
 		_triggeredTiles.push_back(other->_gameObject);

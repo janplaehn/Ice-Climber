@@ -84,6 +84,21 @@
     <ClCompile Include="IceClimberButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DebugPhysicsScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreScreenController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scores.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IceClimberGame.h">
@@ -122,10 +137,25 @@
     <ClInclude Include="MainMenu.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="DebugPhysicsScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
     <ClInclude Include="MainMenuController.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="IceClimberButton.h">
+      <Filter>Header Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BonusTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreScreenController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scores.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

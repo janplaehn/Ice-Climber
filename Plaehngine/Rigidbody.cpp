@@ -47,12 +47,6 @@ void Rigidbody::ApplyGravity()
 	_velocity.y -= GRAVITY * GameTime::_delta * _gravityScale;
 }
 
-void Rigidbody::OnCollision(AABBCollider* otherCollider) {
-	if (_preventCollisions) {
-
-	}
-}
-
 void Rigidbody::Destroy()
 {
 	Physics::_rigidbodies.erase(std::remove(Physics::_rigidbodies.begin(), Physics::_rigidbodies.end(), this), Physics::_rigidbodies.end());

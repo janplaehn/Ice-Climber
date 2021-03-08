@@ -3,6 +3,7 @@
 #include "AABBCollider.h"
 #include "Animation.h"
 #include "AudioSource.h"
+#include "Scores.h"
 
 void Nitpicker::Update()
 {
@@ -25,7 +26,7 @@ void Nitpicker::Update()
 		}
 	}
 
-	//VErtical movement
+	//Vertical movement
 	if (_accelerateVertically) {
 		_speed.y += _verticalAcceleration * GameTime::_delta;
 		if (_speed.y > _maxSpeed.y) {
@@ -50,4 +51,5 @@ void Nitpicker::Damage()
 	_gameObject->GetComponent<AABBCollider>()->_enabled = false;
 	_gameObject->GetComponent<Animation>()->_spriteSheet = _deathSprite;
 	_speed = Vector2D(0, -60);
+	Scores::_nitpickers++;
 }

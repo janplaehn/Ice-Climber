@@ -57,5 +57,5 @@ public:
 	virtual void BeginPlay();
 	virtual void Update();
 	virtual void Destroy();
-	void OnCollision(class AABBCollider* otherCollider);
+	void OnCollision(class AABBCollider* otherCollider, class Vector2D normal);
 };

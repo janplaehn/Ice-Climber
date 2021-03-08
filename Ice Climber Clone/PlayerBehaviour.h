@@ -1,6 +1,5 @@
 #pragma once
-
-#include "component.h";
+#include "Component.h"
 
 class PlayerBehaviour : public Component
 {
@@ -16,7 +15,7 @@ public:
 	// param move depends on the time, so the player moves always at the same speed on any computer
 	void Move(float move);
 
-	void OnCollision(class AABBCollider* other);
+	void OnCollision(class AABBCollider* other, Vector2D normal);
 
 	class Sprite* _walkSprite;
 	class Sprite* _jumpSprite;
@@ -33,6 +32,7 @@ public:
 	class Rigidbody* _rigidbody;
 	class Animation* _animation;
 	class AABBCollider* _collider;
+	std::vector<class BonusTimer*> _timers;
 
 	int _lives = 3;
 
@@ -50,6 +50,10 @@ private:
 	void LoseLife();
 
 	bool _isAttacking = false;
+	bool _hasWon = false;
+	bool _isInBonus = false;
+	Transform* condor = nullptr;
 	float _attackDuration = 2.0f / 8.0f;
 	float _attackTimer = 0;
+	float _timeSinceLastGroundHit = 0.05f;
 };

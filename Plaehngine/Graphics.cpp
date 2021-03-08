@@ -59,7 +59,7 @@ void Graphics::Run()
 	}
 
 	//Debug Drawing
-	//Physics::DrawCollisions(this);
+	//Physics::DrawCollisions();
 
 	//FPS Counter:
 	/*if (dt != 0) {

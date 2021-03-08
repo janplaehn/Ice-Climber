@@ -34,9 +34,10 @@ public:
 
 	virtual void Awake() {};
 	virtual void BeginPlay() {};
+	bool IsActiveAndEnabled();
 	virtual void Update() = 0;
 	virtual void Receive(int message) {}
-	virtual void OnCollision(class AABBCollider* otherCollider) {};
+	virtual void OnCollision(class AABBCollider* otherCollider, class Vector2D normal) {};
 	virtual void OnComponentAdded(Component* component) {};
 
 	virtual void Destroy() {}
