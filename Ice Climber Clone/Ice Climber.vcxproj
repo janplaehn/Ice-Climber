@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Cloud.cpp" />
+    <ClCompile Include="DebugPhysicsScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameOverUIBehaviour.cpp" />
     <ClCompile Include="HammerTrigger.cpp" />
@@ -165,6 +166,7 @@
   <ItemGroup>
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Cloud.h" />
+    <ClInclude Include="DebugPhysicsScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameOverUIBehaviour.h" />
     <ClInclude Include="HammerTrigger.h" />

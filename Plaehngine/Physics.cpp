@@ -101,7 +101,7 @@ void Physics::PreventCollision(Rigidbody* rb, AABBCollider* collider)
 	rb->_velocity.y = 0;
 }
 
-void Physics::DrawCollisions(Plaehngine* engine)
+void Physics::DrawCollisions()
 {
 	for (int i = 0; i < _colliders.size(); i++)
 	{

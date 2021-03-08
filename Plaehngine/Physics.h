@@ -11,7 +11,7 @@ public:
 	static void Run();
 
 	//For Debugging Purposes
-	static void DrawCollisions(class Plaehngine* _engine);
+	static void DrawCollisions();
 
 	static bool IsColliding(AABBCollider* first, AABBCollider* second);
 	static bool IsColliding(Vector2D point, AABBCollider* collider);
