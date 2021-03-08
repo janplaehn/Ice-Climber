@@ -6,7 +6,7 @@ public:
 
 	virtual void Update() override;
 
-	void OnCollision(class AABBCollider* other);
+	void OnCollision(class AABBCollider* other, Vector2D normal);
 
 	class AudioSource* _tileBreakSource;
 

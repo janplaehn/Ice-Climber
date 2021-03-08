@@ -16,7 +16,7 @@ public:
 	// param move depends on the time, so the player moves always at the same speed on any computer
 	void Move(float move);
 
-	void OnCollision(class AABBCollider* other);
+	void OnCollision(class AABBCollider* other, Vector2D normal);
 
 	class Sprite* _walkSprite;
 	class Sprite* _jumpSprite;

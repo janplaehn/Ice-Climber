@@ -15,6 +15,11 @@ void DebugPhysicsScene::Load()
 		col->_height = sr->_sprite->GetHeight();
 		Rigidbody* rb = go->AddComponent<Rigidbody>();
 		rb->_velocity = Vector2D(Random::Range(-100, 100), Random::Range(-100, 100));
+		//rb->_gravityScale = 0;
+
+		//go = new GameObject();
+		//go->_transform->_position = Vector2D(Random::Range(0, Screen::_width), Random::Range(0, Screen::_height));
+		//go->AddComponent<AABBCollider>()->_isTrigger = true;
 	}
 
 	GameObject* go = new GameObject();
@@ -23,4 +28,20 @@ void DebugPhysicsScene::Load()
 	AABBCollider* col = go->AddComponent<AABBCollider>();
 	col->_width = Screen::_width;
 	col->_height = 16;
+
+	go = new GameObject();
+	go->_transform->_position = Vector2D::Zero();
+	go->_transform->_pivot = Vector2D(1, 1);
+	col = go->AddComponent<AABBCollider>();
+	col->_width = 16;
+	col->_height = Screen::_height;
+
+	go = new GameObject();
+	go->_transform->_position = Vector2D(Screen::_width, 0);
+	go->_transform->_pivot = Vector2D(0, 1);
+	col = go->AddComponent<AABBCollider>();
+	col->_width = 16;
+	col->_height = Screen::_height;
+
+
 }

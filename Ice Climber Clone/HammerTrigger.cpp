@@ -25,7 +25,7 @@ void HammerTrigger::Update()
 	_triggeredTiles.clear();
 }
 
-void HammerTrigger::OnCollision(AABBCollider* other)
+void HammerTrigger::OnCollision(AABBCollider* other, Vector2D normal)
 {
 	if (other->_gameObject->_tag == "Tile" && _timer <= 0) {
 		_triggeredTiles.push_back(other->_gameObject);

@@ -9,7 +9,7 @@ public:
 
 	Vector2D _velocity;
 	float _gravityScale = 1.0f;
-	float _linearDrag = 1.0f;
+	float _linearDrag = 0.0f;
 	bool _isKinematic = false;
 	bool _preventCollisions = true;
 
@@ -19,7 +19,6 @@ public:
 
 	virtual void BeginPlay();
 	virtual void Update() override;
-	virtual void OnCollision(class AABBCollider* otherCollider);
 	virtual void Destroy();
 
 protected:

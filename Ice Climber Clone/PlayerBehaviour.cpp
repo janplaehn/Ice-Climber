@@ -114,17 +114,17 @@ void PlayerBehaviour::Move(float move)
 	_rigidbody->_velocity.x += move;
 }
 
-void PlayerBehaviour::OnCollision(AABBCollider* other)
+void PlayerBehaviour::OnCollision(AABBCollider* other, Vector2D normal)
 {
-	if (other->_transform->_position.y < _transform->_position.y && !other->_isTrigger) { //Todo: Fix this madness! Check for Top and bottom instead or return a hit point from the collision!
+	if (normal.y == -1 && !other->_isTrigger) { //Todo: Fix this madness! Check for Top and bottom instead or return a hit point from the collision!
 		_isOnGround = true;
 		_lastGroundedPosition = _transform->_position;
 		if (!_isAttacking) _animation->_spriteSheet = _walkSprite;
 	}
 
-	if ((other->_gameObject->_tag == "Topi") && !_isInvincible) {
-		LoseLife();
-	}
+	//if ((other->_gameObject->_tag == "Topi") && !_isInvincible) {
+	//	LoseLife();
+	//}
 }
 
 void PlayerBehaviour::LoseLife()

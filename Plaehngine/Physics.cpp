@@ -7,6 +7,7 @@
 #include "Plaehngine.h"
 #include "Graphics.h"
 #include <limits>
+#include "GameMath.h"
 
 void Physics::Run()
 {
@@ -143,12 +144,20 @@ float Physics::SweptAABB(Rigidbody* rb, AABBCollider* collider, Vector2D& normal
 	// if there was no collision
 	if (entryTime > exitTime || xEntry < 0.0f && yEntry < 0.0f || xEntry > 1.0f || yEntry > 1.0f)
 	{
+		//Debug
+		Graphics::DrawRect(&rbRect, Color::Blue());
+		Graphics::DrawRect(&colRect, Color::Blue());
+
 		normal.x = 0.0f;
 		normal.y = 0.0f;
 		return 1.0f;
 	}
 	else // if there was a collision 
 	{
+		//Debug
+		Graphics::DrawRect(&rbRect, Color::Red());
+		Graphics::DrawRect(&colRect, Color::Red());
+
 		// calculate normal of collided surface
 		if (xEntry > yEntry)
 		{
@@ -191,6 +200,7 @@ void Physics::PreventCollisions(Rigidbody* rb)
 	}
 
 	rb->_transform->_position = rb->_transform->_position + rb->_targetMoveDelta;
+	rb->_targetMoveDelta = Vector2D::Zero();
 }
 
 void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
@@ -204,24 +214,25 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 
 	float remainingtime = 1.0f - collisiontime;
 
-	if (!rb->_collider->_isTrigger && !collider->_isTrigger) {
-		//rb->_targetMoveDelta = rb->_targetMoveDelta * collisiontime;
+	if (!rb->_collider->_isTrigger && !collider->_isTrigger && !rb->_isKinematic) {
 
 		// slide 
 		float dotprod = (rb->_targetMoveDelta.x * out_normal.y + rb->_targetMoveDelta.y * out_normal.x) * remainingtime;
 		float velDotprod = (rb->_velocity.x * out_normal.y + rb->_velocity.y * out_normal.x) * remainingtime;
 
-		rb->_targetMoveDelta.x = dotprod * out_normal.y;
-		rb->_targetMoveDelta.y = dotprod * out_normal.x;
+		rb->_targetMoveDelta.x = dotprod * out_normal.y * 0.95f;
+		rb->_targetMoveDelta.y = dotprod * out_normal.x * 0.95f;
 
-		rb->_velocity.x = velDotprod * out_normal.y;
-		rb->_velocity.y *= velDotprod * out_normal.x;
+		if (GameMath::Sign(out_normal.x) == GameMath::Sign(rb->_velocity.x)) {
+			rb->_velocity.x = velDotprod * out_normal.y;
+		}
+		if (GameMath::Sign(out_normal.y) == GameMath::Sign(rb->_velocity.y)) {
+			rb->_velocity.y *= velDotprod * out_normal.x;
+		}
 	}
 
-	//if (!IsColliding(rb->_collider, collider)) return;
-
-	rb->_collider->_gameObject->OnCollision(collider);
-	collider->_gameObject->OnCollision(rb->_collider);
+	rb->_collider->_gameObject->OnCollision(collider, out_normal);
+	collider->_gameObject->OnCollision(rb->_collider, out_normal);
 }
 
 void Physics::ResolveCollision(Rigidbody* rb, AABBCollider* collider)

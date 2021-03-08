@@ -38,11 +38,11 @@ void GameObject::Destroy()
 	_gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), this), _gameObjects.end());
 }
 
-void GameObject::OnCollision(AABBCollider* otherCollider)
+void GameObject::OnCollision(AABBCollider* otherCollider, Vector2D normal)
 {
 	for (Component* component : _components)
 	{
-		component->OnCollision(otherCollider);
+		component->OnCollision(otherCollider, normal);
 	}
 }
 
