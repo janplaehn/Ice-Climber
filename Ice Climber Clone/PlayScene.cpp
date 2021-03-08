@@ -26,24 +26,6 @@ void PlayScene::Load()
 	musicSrc->_isLooping = true;
 	musicSrc->Play();
 
-	const int OBJECTCOUNT = 15;
-	for (int i = 0; i < OBJECTCOUNT; i++)
-	{
-		GameObject* go = new GameObject();
-		go->_transform->_position = Vector2D(Random::Range(0, Screen::_width), Random::Range(0, Screen::_height));
-		SpriteRenderer* sr = go->AddComponent<SpriteRenderer>();
-		sr->_sprite = Sprite::Create("Assets/Sprites/UI/gameOver.png");
-		AABBCollider* col = go->AddComponent<AABBCollider>();
-		col->_width = sr->_sprite->GetWidth();
-		col->_height = sr->_sprite->GetHeight();
-		Rigidbody* rb = go->AddComponent<Rigidbody>();
-		rb->_velocity = Vector2D(Random::Range(-100, 100), Random::Range(-100, 100));
-
-		//go = new GameObject();
-		//go->_transform->_position = Vector2D(Random::Range(0, Screen::_width), Random::Range(0, Screen::_height));
-		//go->AddComponent<AABBCollider>()->_isTrigger = true;
-	}
-
 	//Setup Player
 	GameObject* player = new GameObject();
 	player->_transform->_pivot = Vector2D(0.5f, 0.75f);
@@ -60,7 +42,7 @@ void PlayScene::Load()
 	playerBehaviour->_collider = player->AddComponent<AABBCollider>();
 	playerBehaviour->_collider->_width = 8;
 	playerBehaviour->_collider->_height = 24;
-	//playerBehaviour->_collider->_offset = Vector2D(0, 4);
+	playerBehaviour->_collider->_offset = Vector2D(0, 4);
 	playerBehaviour->_jumpSource = player->AddComponent<AudioSource>();
 	playerBehaviour->_jumpSource->_clip = Audio::LoadSound("Assets/Sounds/jump.wav");
 	playerBehaviour->_deathSource = player->AddComponent<AudioSource>();
@@ -68,7 +50,7 @@ void PlayScene::Load()
 	playerBehaviour->_gameOverSource = player->AddComponent<AudioSource>();
 	playerBehaviour->_gameOverSource->_clip = Audio::LoadSound("Assets/Sounds/gameOver.wav");
 	playerBehaviour->_rigidbody = player->AddComponent<Rigidbody>();
-	playerBehaviour->_rigidbody->_linearDrag = 0.0f;
+	playerBehaviour->_rigidbody->_linearDrag = 3.0f;
 	playerBehaviour->_rigidbody->_gravityScale = 0.5f;
 
 	playerBehaviour->_hammer = new GameObject();
@@ -84,7 +66,7 @@ void PlayScene::Load()
 
 
 	//Setup Topis
-	/*for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		GameObject* topi = new GameObject();
 		topi->_tag = "Topi";
@@ -113,25 +95,25 @@ void PlayScene::Load()
 		iceRenderer->_order = topiBehaviour->_animation->_order;
 		topiBehaviour->_ice->AddComponent<AABBCollider>()->_isTrigger = true;
 
-	}*/
-	//for (int i = 0; i < 2; i++)
-	//{
-	//	//Setup Nitpicker
-	//	GameObject* nitpicker = new GameObject();
-	//	nitpicker->_tag = "Topi";
-	//	nitpicker->_transform->_position.y = 200 + i * 248;
-	//	nitpicker->_transform->_position.x = 0;
-	//	Animation* nitAnimation = nitpicker->AddComponent<Animation>();
-	//	nitAnimation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Nitpicker/fly.png");
-	//	nitAnimation->_spriteWidth = 16;
-	//	nitAnimation->_frameRate = 8;
-	//	nitAnimation->_order = 1;
-	//	nitpicker->AddComponent<AABBCollider>()->_isTrigger = true;
-	//	Nitpicker* nitBehaviour = nitpicker->AddComponent<Nitpicker>();
-	//	nitBehaviour->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");
-	//	nitBehaviour->_deathSource = nitpicker->AddComponent<AudioSource>();
-	//	nitBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/nitpickerDeath.wav");
-	//}
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		//Setup Nitpicker
+		GameObject* nitpicker = new GameObject();
+		nitpicker->_tag = "Topi";
+		nitpicker->_transform->_position.y = 200 + i * 248;
+		nitpicker->_transform->_position.x = 0;
+		Animation* nitAnimation = nitpicker->AddComponent<Animation>();
+		nitAnimation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Nitpicker/fly.png");
+		nitAnimation->_spriteWidth = 16;
+		nitAnimation->_frameRate = 8;
+		nitAnimation->_order = 1;
+		nitpicker->AddComponent<AABBCollider>()->_isTrigger = true;
+		Nitpicker* nitBehaviour = nitpicker->AddComponent<Nitpicker>();
+		nitBehaviour->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");
+		nitBehaviour->_deathSource = nitpicker->AddComponent<AudioSource>();
+		nitBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/nitpickerDeath.wav");
+	}
 
 	//Setup Ground Collider
 	GameObject* floor = new GameObject();
@@ -149,7 +131,7 @@ void PlayScene::Load()
 		if (i == 0) width = 32;
 		if ((i == 4) || (i == 5) || (i == 6)) width = 48;
 
-		/*GameObject* stageLeft = new GameObject();
+		GameObject* stageLeft = new GameObject();
 		stageLeft->_transform->_pivot = Vector2D(0, 1);
 		stageLeft->_transform->_position = Vector2D(0, height);
 		AABBCollider* stageColliderLeft = stageLeft->AddComponent<AABBCollider>();
@@ -161,20 +143,20 @@ void PlayScene::Load()
 		stageRight->_transform->_position = Vector2D(Screen::_width, height);
 		AABBCollider* stageColliderRight = stageRight->AddComponent<AABBCollider>();
 		stageColliderRight->_width = width;
-		stageColliderRight->_height = 7;*/
+		stageColliderRight->_height = 7;
 
 
-		//float tileCount = (i == 0) ? 24 : 22;
-		//for (int x = 0; x < tileCount; x++)
-		//{
-		//	GameObject* tile = new GameObject();
-		//	tile->_tag = "Tile";
-		//	//tile->_transform->_pivot = Vector2D(0, 1);
-		//	tile->_transform->_position = Vector2D(width + x * 8, height);
-		//	SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
-		//	tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
-		//	tile->AddComponent<AABBCollider>();
-		//}
+		float tileCount = (i == 0) ? 24 : 22;
+		for (int x = 0; x < tileCount; x++)
+		{
+			GameObject* tile = new GameObject();
+			tile->_tag = "Tile";
+			tile->_transform->_pivot = Vector2D(0, 1);
+			tile->_transform->_position = Vector2D(width + x * 8, height);
+			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
+			tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
+			tile->AddComponent<AABBCollider>();
+		}
 
 
 	}

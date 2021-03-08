@@ -210,7 +210,7 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 
 	Vector2D out_normal = Vector2D::Zero();
 	float collisiontime = SweptAABB(rb, collider, out_normal);
-	if (collisiontime >= 0.99f) return;
+	if (collisiontime >= 1.0f) return;
 
 	float remainingtime = 1.0f - collisiontime;
 
@@ -220,13 +220,13 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 		float dotprod = (rb->_targetMoveDelta.x * out_normal.y + rb->_targetMoveDelta.y * out_normal.x) * remainingtime;
 		float velDotprod = (rb->_velocity.x * out_normal.y + rb->_velocity.y * out_normal.x) * remainingtime;
 
-		rb->_targetMoveDelta.x = dotprod * out_normal.y * 0.95f;
-		rb->_targetMoveDelta.y = dotprod * out_normal.x * 0.95f;
+		rb->_targetMoveDelta.x = dotprod * out_normal.y;
+		rb->_targetMoveDelta.y = dotprod * out_normal.x;
 
 		if (GameMath::Sign(out_normal.x) == GameMath::Sign(rb->_velocity.x)) {
 			rb->_velocity.x = velDotprod * out_normal.y;
 		}
-		if (GameMath::Sign(out_normal.y) == GameMath::Sign(rb->_velocity.y)) {
+		if (GameMath::Sign(-out_normal.y) == GameMath::Sign(rb->_velocity.y)) {
 			rb->_velocity.y *= velDotprod * out_normal.x;
 		}
 	}
