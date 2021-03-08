@@ -1,6 +1,6 @@
 #include "BonusTimer.h"
 #include "Scenes.h"
-#include "MainMenu.h"
+#include "ScoreScreen.h"
 #include <iomanip>
 #include <sstream>
 
@@ -10,7 +10,7 @@ void BonusTimer::Update()
 	_currentTime -= GameTime::_delta;
 	if (_currentTime < 0) {
 		_currentTime = 0;
-		Scenes::LoadScene<MainMenu>();
+		Scenes::LoadScene<ScoreScreen>();
 	}
 	if (_text) {
 		std::stringstream stream;

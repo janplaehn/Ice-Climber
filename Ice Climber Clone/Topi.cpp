@@ -103,7 +103,7 @@ void Topi::Update()
 			}
 		}
 		else {
-			if (_state == DEADFALLING && _fallTimer < 0) {
+			if (_state == DEADFALLING && _fallTimer < 0 && result->_gameObject->_tag == "Tile") {
 				_transform->_position.y = result->_transform->_position.y + result->_height;
 				_state = DEADWALKING;
 				ChangeDirection();

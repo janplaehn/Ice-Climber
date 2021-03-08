@@ -155,6 +155,8 @@
     <ClCompile Include="HammerTrigger.cpp" />
     <ClCompile Include="IceClimberButton.cpp" />
     <ClCompile Include="IceClimberGame.cpp" />
+    <ClCompile Include="IntroCamera.cpp" />
+    <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="LifeUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -177,6 +179,8 @@
     <ClInclude Include="HammerTrigger.h" />
     <ClInclude Include="IceClimberButton.h" />
     <ClInclude Include="IceClimberGame.h" />
+    <ClInclude Include="IntroCamera.h" />
+    <ClInclude Include="IntroScene.h" />
     <ClInclude Include="LifeUI.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MainMenuController.h" />

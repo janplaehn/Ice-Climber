@@ -6,6 +6,7 @@
 #include "ImageFont.h"
 #include "DebugPhysicsScene.h"
 #include "ScoreScreen.h"
+#include "IntroScene.h"
 
 void IceClimberGame::Init()
 {
@@ -23,7 +24,7 @@ void IceClimberGame::Init()
 	Input::WatchKey(SDL_SCANCODE_SPACE);
 	Input::WatchKey(SDL_SCANCODE_ESCAPE);
 
-	Scenes::LoadScene<ScoreScreen>();
+	Scenes::LoadScene<MainMenu>();
 }
 
 void IceClimberGame::Update()
