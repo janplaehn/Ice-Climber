@@ -89,6 +89,7 @@ float Physics::SweptAABB(Rigidbody* rb, AABBCollider* collider, Vector2D& normal
 	SDL_Rect colRect = collider->GetRect();
 
 	// find the distance between the objects on the near and far sides for both x and y 
+
 	if (rb->_targetMoveDelta.x > 0.0f)
 	{
 		xInvEntry = colRect.x - (rbRect.x + rbRect.w);
@@ -142,7 +143,7 @@ float Physics::SweptAABB(Rigidbody* rb, AABBCollider* collider, Vector2D& normal
 	float exitTime = std::min(xExit, yExit);
 
 	// if there was no collision
-	if (entryTime > exitTime || xEntry < 0.0f && yEntry < 0.0f || xEntry > 1.0f || yEntry > 1.0f)
+	if ((entryTime > exitTime) || (xEntry < 0.0f && yEntry < 0.0f) || xEntry > 1.0f || yEntry > 1.0f)
 	{
 		//Debug
 		Graphics::DrawRect(&rbRect, Color::Blue());
@@ -190,6 +191,22 @@ float Physics::SweptAABB(Rigidbody* rb, AABBCollider* collider, Vector2D& normal
 	}
 }
 
+bool Physics::AABBCheck(SDL_Rect r1, SDL_Rect r2)
+{
+	return !(r1.x + r1.w < r2.x || r1.x > r2.x + r2.w || r1.y + r1.h < r2.y || r1.y > r2.y + r2.h);
+}
+
+SDL_Rect Physics::GetSweptBroadphaseRect(Rigidbody* rb)
+{
+	SDL_Rect rect = rb->_collider->GetRect();
+	SDL_Rect bpRect;
+	bpRect.x = rb->_velocity.x > 0 ? rect.x : rect.x + rb->_velocity.x;
+	bpRect.y = rb->_velocity.y > 0 ? rect.y : rect.y + rb->_velocity.y;
+	bpRect.w = rb->_velocity.x > 0 ? rb->_velocity.x + rect.w : rect.w - rb->_velocity.x;
+	bpRect.h = rb->_velocity.y > 0 ? rb->_velocity.y + rect.h : rect.h - rb->_velocity.y;
+	return bpRect;
+}
+
 void Physics::PreventCollisions(Rigidbody* rb)
 {
 	if (!rb->IsActiveAndEnabled()) return;
@@ -207,6 +224,9 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 {
 	if (rb->_collider == collider) return;
 	if (!collider->IsActiveAndEnabled()) return;
+
+	SDL_Rect broadphaseRect = GetSweptBroadphaseRect(rb);
+	if (!AABBCheck(broadphaseRect, collider->GetRect())) return;
 
 	Vector2D out_normal = Vector2D::Zero();
 	float collisiontime = SweptAABB(rb, collider, out_normal);

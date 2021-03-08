@@ -2,6 +2,7 @@
 class AABBCollider;
 class Rigidbody;
 class Vector2D;
+class SDL_Rect;
 
 #include <vector>
 
@@ -24,6 +25,8 @@ public:
 protected:
 
 	static float SweptAABB(Rigidbody* rb, AABBCollider* collider, Vector2D &normal);
+	static bool AABBCheck(SDL_Rect r1, SDL_Rect r2);
+	static SDL_Rect GetSweptBroadphaseRect(Rigidbody* rb);
 	static void PreventCollisions(Rigidbody* rb);
 	static void PreventCollisions(Rigidbody* rb, AABBCollider* collider);
 	static void ResolveCollision(Rigidbody* rb, AABBCollider* collider);

@@ -66,54 +66,54 @@ void PlayScene::Load()
 
 
 	//Setup Topis
-	for (int i = 0; i < 4; i++)
-	{
-		GameObject* topi = new GameObject();
-		topi->_tag = "Topi";
-		topi->_transform->_pivot = Vector2D(0.5f, 1);
-		topi->_transform->_position.x = 0 + i * 40;
-		topi->_transform->_position.y = 24 + i * 96;
-		Topi* topiBehaviour = topi->AddComponent<Topi>();
-		topiBehaviour->_animation = topi->AddComponent<Animation>();
-		topiBehaviour->_animation->_order = -101;
-		topiBehaviour->_animation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Topi/walk.png");
-		topiBehaviour->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Topi/death.png");
-		topiBehaviour->_animation->_spriteWidth = 16;
-		topi->AddComponent<AABBCollider>()->_isTrigger = true;
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	GameObject* topi = new GameObject();
+	//	topi->_tag = "Topi";
+	//	topi->_transform->_pivot = Vector2D(0.5f, 1);
+	//	topi->_transform->_position.x = 0 + i * 40;
+	//	topi->_transform->_position.y = 24 + i * 96;
+	//	Topi* topiBehaviour = topi->AddComponent<Topi>();
+	//	topiBehaviour->_animation = topi->AddComponent<Animation>();
+	//	topiBehaviour->_animation->_order = -101;
+	//	topiBehaviour->_animation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Topi/walk.png");
+	//	topiBehaviour->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Topi/death.png");
+	//	topiBehaviour->_animation->_spriteWidth = 16;
+	//	topi->AddComponent<AABBCollider>()->_isTrigger = true;
 
-		topiBehaviour->_deathSource = topi->AddComponent<AudioSource>();
-		topiBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/topiDeath.wav");
-		topiBehaviour->_fallSource = topi->AddComponent<AudioSource>();
-		topiBehaviour->_fallSource->_clip = Audio::LoadSound("Assets/Sounds/topiFall.wav");
+	//	topiBehaviour->_deathSource = topi->AddComponent<AudioSource>();
+	//	topiBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/topiDeath.wav");
+	//	topiBehaviour->_fallSource = topi->AddComponent<AudioSource>();
+	//	topiBehaviour->_fallSource->_clip = Audio::LoadSound("Assets/Sounds/topiFall.wav");
 
-		topiBehaviour->_ice = new GameObject();
-		topiBehaviour->_ice->_tag = "Topi";
-		topiBehaviour->_ice->_transform->_pivot = Vector2D(0.5f, 1);
-		topiBehaviour->_ice->_transform->_position = topi->_transform->_position + Vector2D::Left() * 16;
-		SpriteRenderer* iceRenderer = topiBehaviour->_ice->AddComponent<SpriteRenderer>();
-		iceRenderer->_sprite = Sprite::Create("Assets/Sprites/Characters/Topi/ice.png");
-		iceRenderer->_order = topiBehaviour->_animation->_order;
-		topiBehaviour->_ice->AddComponent<AABBCollider>()->_isTrigger = true;
+	//	topiBehaviour->_ice = new GameObject();
+	//	topiBehaviour->_ice->_tag = "Topi";
+	//	topiBehaviour->_ice->_transform->_pivot = Vector2D(0.5f, 1);
+	//	topiBehaviour->_ice->_transform->_position = topi->_transform->_position + Vector2D::Left() * 16;
+	//	SpriteRenderer* iceRenderer = topiBehaviour->_ice->AddComponent<SpriteRenderer>();
+	//	iceRenderer->_sprite = Sprite::Create("Assets/Sprites/Characters/Topi/ice.png");
+	//	iceRenderer->_order = topiBehaviour->_animation->_order;
+	//	topiBehaviour->_ice->AddComponent<AABBCollider>()->_isTrigger = true;
 
-	}
-	for (int i = 0; i < 2; i++)
-	{
-		//Setup Nitpicker
-		GameObject* nitpicker = new GameObject();
-		nitpicker->_tag = "Topi";
-		nitpicker->_transform->_position.y = 200 + i * 248;
-		nitpicker->_transform->_position.x = 0;
-		Animation* nitAnimation = nitpicker->AddComponent<Animation>();
-		nitAnimation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Nitpicker/fly.png");
-		nitAnimation->_spriteWidth = 16;
-		nitAnimation->_frameRate = 8;
-		nitAnimation->_order = 1;
-		nitpicker->AddComponent<AABBCollider>()->_isTrigger = true;
-		Nitpicker* nitBehaviour = nitpicker->AddComponent<Nitpicker>();
-		nitBehaviour->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");
-		nitBehaviour->_deathSource = nitpicker->AddComponent<AudioSource>();
-		nitBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/nitpickerDeath.wav");
-	}
+	//}
+	//for (int i = 0; i < 2; i++)
+	//{
+	//	//Setup Nitpicker
+	//	GameObject* nitpicker = new GameObject();
+	//	nitpicker->_tag = "Topi";
+	//	nitpicker->_transform->_position.y = 200 + i * 248;
+	//	nitpicker->_transform->_position.x = 0;
+	//	Animation* nitAnimation = nitpicker->AddComponent<Animation>();
+	//	nitAnimation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Nitpicker/fly.png");
+	//	nitAnimation->_spriteWidth = 16;
+	//	nitAnimation->_frameRate = 8;
+	//	nitAnimation->_order = 1;
+	//	nitpicker->AddComponent<AABBCollider>()->_isTrigger = true;
+	//	Nitpicker* nitBehaviour = nitpicker->AddComponent<Nitpicker>();
+	//	nitBehaviour->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");
+	//	nitBehaviour->_deathSource = nitpicker->AddComponent<AudioSource>();
+	//	nitBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/nitpickerDeath.wav");
+	//}
 
 	//Setup Ground Collider
 	GameObject* floor = new GameObject();
@@ -124,29 +124,30 @@ void PlayScene::Load()
 
 
 	//Setup Stage Colliders
-	for (int i = 0; i < 7; i++)
+	int COUNT = 1;
+	for (int i = 0; i < COUNT; i++)
 	{
 		float height = 64 + i * 48;
 		float width = 40;
 		if (i == 0) width = 32;
 		if ((i == 4) || (i == 5) || (i == 6)) width = 48;
 
-		GameObject* stageLeft = new GameObject();
+		/*GameObject* stageLeft = new GameObject();
 		stageLeft->_transform->_pivot = Vector2D(0, 1);
 		stageLeft->_transform->_position = Vector2D(0, height);
 		AABBCollider* stageColliderLeft = stageLeft->AddComponent<AABBCollider>();
 		stageColliderLeft->_width = width;
-		stageColliderLeft->_height = 7;
+		stageColliderLeft->_height = 7;*/
 
-		GameObject* stageRight = new GameObject();
+		/*GameObject* stageRight = new GameObject();
 		stageRight->_transform->_pivot = Vector2D(1, 1);
 		stageRight->_transform->_position = Vector2D(Screen::_width, height);
 		AABBCollider* stageColliderRight = stageRight->AddComponent<AABBCollider>();
 		stageColliderRight->_width = width;
-		stageColliderRight->_height = 7;
+		stageColliderRight->_height = 7;*/
 
 
-		float tileCount = (i == 0) ? 24 : 22;
+		/*float tileCount = (i == 0) ? 24 : 22;
 		for (int x = 0; x < tileCount; x++)
 		{
 			GameObject* tile = new GameObject();
@@ -156,9 +157,21 @@ void PlayScene::Load()
 			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
 			tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
 			tile->AddComponent<AABBCollider>();
+		}*/
+
+		for (int i = 0; i < 4; i++)
+		{
+			if (i == 1) continue;
+			if (i == 2) continue;
+
+			GameObject* tile = new GameObject();
+			tile->_tag = "Tile";
+			tile->_transform->_pivot = Vector2D(0, 1);
+			tile->_transform->_position = Vector2D(112 + i * 8, height);
+			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
+			tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
+			tile->AddComponent<AABBCollider>();
 		}
-
-
 	}
 
 	//Setup UI
