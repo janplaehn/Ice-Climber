@@ -22,7 +22,7 @@ void IceClimberGame::Init()
 	Input::WatchKey(SDL_SCANCODE_SPACE);
 	Input::WatchKey(SDL_SCANCODE_ESCAPE);
 
-	Scenes::LoadScene<DebugPhysicsScene>();
+	Scenes::LoadScene<MainMenu>();
 }
 
 void IceClimberGame::Update()

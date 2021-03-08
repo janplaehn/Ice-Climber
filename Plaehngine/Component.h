@@ -34,6 +34,7 @@ public:
 
 	virtual void Awake() {};
 	virtual void BeginPlay() {};
+	bool IsActiveAndEnabled();
 	virtual void Update() = 0;
 	virtual void Receive(int message) {}
 	virtual void OnCollision(class AABBCollider* otherCollider) {};

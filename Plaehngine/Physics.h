@@ -22,7 +22,11 @@ public:
 	static std::vector<Rigidbody*> _rigidbodies;
 
 protected:
-	static void PreventCollision(Rigidbody* rb, AABBCollider* collider);
+
+	static float SweptAABB(Rigidbody* rb, AABBCollider* collider, Vector2D &normal);
+	static void PreventCollisions(Rigidbody* rb);
+	static void PreventCollisions(Rigidbody* rb, AABBCollider* collider);
+	static void ResolveCollision(Rigidbody* rb, AABBCollider* collider);
 
 	static std::vector<Vector2D> _pointCastPositions;
 };
