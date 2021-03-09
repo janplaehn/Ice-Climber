@@ -218,6 +218,8 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 
 	if (!rb->_collider->_isTrigger && !collider->_isTrigger && !rb->_isKinematic) {
 
+		rb->_transform->_position = rb->_transform->_position - out_normal * 0.9f;
+
 		// slide 
 		float dotprod = (rb->_targetMoveDelta.x * out_normal.y + rb->_targetMoveDelta.y * out_normal.x) * remainingtime;
 		float velDotprod = (rb->_velocity.x * out_normal.y + rb->_velocity.y * out_normal.x) * remainingtime;
