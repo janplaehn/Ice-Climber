@@ -6,7 +6,7 @@ public:
 
 	virtual void Update() override;
 
-	class Transform* _player;
+	class Transform* _player = nullptr;
 
 private:
 	const float MAX_CAMERA_DISTANCE = 100;

@@ -10,6 +10,8 @@
 #include <Random.h>
 #include "BonusTimer.h"
 #include "Scores.h"
+#include "objectPool.h"
+#include "Debris.h"
 
 void PlayScene::Load()
 {
@@ -127,6 +129,19 @@ void PlayScene::Load()
 	floorCollider->_width = Screen::_width;
 	floorCollider->_height = 20;
 
+	const int DEBRISCOUNT = 5;
+	hammerTrigger->_debrisPool = new ObjectPool();
+	for (size_t i = 0; i < DEBRISCOUNT; i++)
+	{
+		GameObject* debrisGo = new GameObject();
+		SpriteRenderer* debrisRenderer = debrisGo->AddComponent<SpriteRenderer>();
+		debrisRenderer->_sprite = Sprite::Create("Assets/Sprites/Environment/debris_blue.png");
+		debrisRenderer->_order = 100;
+		debrisGo->AddComponent<Rigidbody>();
+		debrisGo->AddComponent<Debris>();
+
+		hammerTrigger->_debrisPool->AddGameObject(debrisGo);
+	}
 
 	//Setup Stage Colliders
 	int COUNT = 7;
@@ -162,7 +177,7 @@ void PlayScene::Load()
 			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
 			tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
 			AABBCollider* tileCol =  tile->AddComponent<AABBCollider>();
-			tileCol->_width = 8;
+			tileCol->_width = 5;
 			tileCol->_height = 7;
 		}
 	}

@@ -185,9 +185,11 @@ void Physics::PreventCollisions(Rigidbody* rb)
 {
 	if (!rb->IsActiveAndEnabled()) return;
 
-	for (int j = 0; j < _colliders.size(); j++)
-	{
-		PreventCollisions(rb, _colliders[j]);
+	if (rb->_collider != nullptr) {
+		for (int j = 0; j < _colliders.size(); j++)
+		{
+			PreventCollisions(rb, _colliders[j]);
+		}
 	}
 
 	rb->_transform->_position = rb->_transform->_position + rb->_targetMoveDelta;

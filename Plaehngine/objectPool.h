@@ -4,53 +4,29 @@
 #include  "SDL.h"
 #include "gameObject.h"
 
-template <class T>
 class ObjectPool
 {
 public:
-
-	void Create(unsigned int num_objects)
-	{
-		Deallocate();
-
-		for (unsigned int i = 0; i < num_objects; i++)
-		{
-			T * t = new T();
-			pool.push_back(t);
-		}
-	}
-
-	void Destroy()
+	~ObjectPool()
 	{
 		for (auto it = pool.begin(); it != pool.end(); it++)
 			(*it)->Destroy();
 	}
 
-	void Deallocate()
-	{
-		SDL_Log("ObjectPool::Deallocating ");
-		for (auto it = pool.begin(); it != pool.end(); it++)
-			delete *it;
+	void AddGameObject(GameObject* go) {
+		pool.push_back(go);
+		go->_enabled = false;
 	}
 
-	ObjectPool<GameObject>* ToGameobjectPool() {
-		return reinterpret_cast<ObjectPool<GameObject>*>(this);
-	}
-
-	~ObjectPool()
+	GameObject* FirstAvailable()
 	{
-		SDL_Log("ObjectPool::~ObjectPool");
-		Deallocate();
-	}
-
-	T* FirstAvailable()
-	{
-		for (auto it = pool.begin(); it != pool.end(); it++)
-			if (!(**it)._enabled)
-				return (*it);
-
-		// if it reaches this point, there is no available object in the pool
-		return NULL;
+		for (GameObject* go : pool) {
+			if (!go->_enabled) {
+				go->_enabled = true;
+				return go;
+			}
+		}
+		return nullptr;
 	}
 
 	bool AnyAvailable() {
@@ -70,7 +46,7 @@ public:
 	}
 
 	// select a random, enabled element in the object pool
-	T* SelectRandom()
+	GameObject* SelectRandom()
 	{
 		int offset = (rand() / (float)RAND_MAX) * pool.size();
 
@@ -85,6 +61,5 @@ public:
 		return NULL;
 	}
 
-	std::vector<T*> pool;
-private:
+	std::vector<GameObject*> pool;
 };

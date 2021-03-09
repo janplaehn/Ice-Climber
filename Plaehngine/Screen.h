@@ -1,5 +1,5 @@
 #pragma once
-static class Screen
+class Screen
 {
 public:
 	static int _windowWidth;

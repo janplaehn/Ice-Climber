@@ -1,8 +1,8 @@
 #pragma once
 class AABBCollider;
 class Rigidbody;
-class Vector2D;
-class SDL_Rect;
+struct Vector2D;
+struct SDL_Rect;
 
 #include <vector>
 

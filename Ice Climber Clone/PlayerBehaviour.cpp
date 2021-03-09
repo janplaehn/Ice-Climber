@@ -66,11 +66,11 @@ void PlayerBehaviour::Update()
 		return;
 	}
 
-	if (_transform->_position.x > (Screen::_width))
+	if (_transform->_position.x > Screen::_width)
 		_transform->_position.x = 0;
 
 	if (_transform->_position.x < 0)
-		_transform->_position.x = (Screen::_width);
+		_transform->_position.x = (float)Screen::_width;
 
 	if (abs(_rigidbody->_velocity.x) > 0.1f) {
 		_transform->_flipType = (_rigidbody->_velocity.x > 0) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;

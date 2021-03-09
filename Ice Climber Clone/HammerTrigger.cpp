@@ -31,6 +31,17 @@ void HammerTrigger::OnCollision(AABBCollider* other, Vector2D normal)
 {
 	if (other->_gameObject->_tag == "Tile" && _timer <= 0) {
 		_triggeredTiles.push_back(other->_gameObject);
+		if (_debrisPool->AnyAvailable()) {
+			GameObject* debris = _debrisPool->FirstAvailable();
+			debris->_transform->_position = other->_transform->_position;
+
+			if (other->_transform->_position.x > _transform->_position.x) {
+				debris->GetComponent<Rigidbody>()->_velocity = Vector2D(50, 250);
+			}
+			else{
+				debris->GetComponent<Rigidbody>()->_velocity = Vector2D(-50, 250);
+			}
+		}
 	}
 	else if (other->_gameObject->_tag == "Topi" && _timer <= 0) {
 		Enemy* enemy = other->_gameObject->GetComponent<Enemy>();

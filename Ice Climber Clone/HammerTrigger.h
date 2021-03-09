@@ -9,6 +9,7 @@ public:
 	void OnCollision(class AABBCollider* other, Vector2D normal) override;
 
 	class AudioSource* _tileBreakSource;
+	class ObjectPool* _debrisPool;
 
 private:
 	std::vector<GameObject*> _triggeredTiles; //Making sure to only break tiles once per update and that it is the closest to the hammer!

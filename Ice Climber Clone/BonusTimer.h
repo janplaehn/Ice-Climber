@@ -7,7 +7,7 @@ class BonusTimer : public Component
 
 public:
 	float _currentTime = 40;
-	class Text* _text;
+	class Text* _text = nullptr;
 	bool _shouldCount = true;
 };
 

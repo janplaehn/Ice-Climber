@@ -149,6 +149,7 @@
     <ClCompile Include="BonusTimer.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Cloud.cpp" />
+    <ClCompile Include="Debris.cpp" />
     <ClCompile Include="DebugPhysicsScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameOverUIBehaviour.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="BonusTimer.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Cloud.h" />
+    <ClInclude Include="Debris.h" />
     <ClInclude Include="DebugPhysicsScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameOverUIBehaviour.h" />
