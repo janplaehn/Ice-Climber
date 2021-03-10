@@ -12,7 +12,7 @@ public:
 private:
 	std::string _glyphs;
 	class Sprite* _spriteSheet;
-	int _glyphWidth;
-	int _glyphHeight;
+	int _glyphWidth = 0;
+	int _glyphHeight = 0;
 };
 

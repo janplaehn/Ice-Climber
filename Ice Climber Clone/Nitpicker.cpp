@@ -1,55 +1,73 @@
 #include "Nitpicker.h"
-#include "Transform.h"
-#include "AABBCollider.h"
-#include "Animation.h"
-#include "AudioSource.h"
+#include "ComponentEssentials.h"
 #include "Scores.h"
 
 void Nitpicker::Update()
 {
 
-	_transform->_position = _transform->_position + _speed * GameTime::_delta;
+	_transform->_position = _transform->_position + _velocity * GameTime::_delta;
 
 	if (_isDead) return;
 
-	//Horizontal movement
-	if (_accelerateHorizontally) {
-		_speed.x += _horizontalAcceleration * GameTime::_delta;
-		if (_speed.x > _maxSpeed.x) {
-			_accelerateHorizontally = false;
-		}
-	}
-	else {
-		_speed.x -= _horizontalAcceleration * GameTime::_delta;
-		if (_speed.x < -_maxSpeed.x) {
-			_accelerateHorizontally = true;
-		}
-	}
+	MoveHorizontally();
+	MoveVertically();
+	ComputeSpriteFlip();
+}
 
-	//Vertical movement
-	if (_accelerateVertically) {
-		_speed.y += _verticalAcceleration * GameTime::_delta;
-		if (_speed.y > _maxSpeed.y) {
-			_accelerateVertically = false;
-		}
-	}
-	else {
-		_speed.y -= _verticalAcceleration * GameTime::_delta;
-		if (_speed.y < -_maxSpeed.y) {
-			_accelerateVertically = true;
-		}
-	}
+void Nitpicker::SetDeathSprite(Sprite* sprite)
+{
+	_deathSprite = sprite;
+}
 
-	_transform->_flipType = _speed.x > 0 ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
+void Nitpicker::SetDeathAudioSource(AudioSource* source)
+{
+	_deathAudioSource = source;
 }
 
 void Nitpicker::Damage()
 {
 	if (_isDead) return;
-	_deathSource->Play();
+	_deathAudioSource->Play();
 	_isDead = true;
-	_gameObject->GetComponent<AABBCollider>()->_enabled = false;
-	_gameObject->GetComponent<Animation>()->_spriteSheet = _deathSprite;
-	_speed = Vector2D(0, -60);
+	GetComponent<AABBCollider>()->_enabled = false;
+	GetComponent<Animation>()->_spriteSheet = _deathSprite;
+	_velocity = FALL_VELOCITY;
 	Scores::_nitpickers++;
+}
+
+void Nitpicker::MoveHorizontally()
+{
+	if (_accelerateHorizontally) {
+		_velocity.x += ACCELERATION.x * GameTime::_delta;
+		if (_velocity.x > MAX_VELOCITY.x) {
+			_accelerateHorizontally = false;
+		}
+	}
+	else {
+		_velocity.x -= ACCELERATION.x * GameTime::_delta;
+		if (_velocity.x < -MAX_VELOCITY.x) {
+			_accelerateHorizontally = true;
+		}
+	}
+}
+
+void Nitpicker::MoveVertically()
+{
+	if (_accelerateVertically) {
+		_velocity.y += ACCELERATION.y * GameTime::_delta;
+		if (_velocity.y > MAX_VELOCITY.y) {
+			_accelerateVertically = false;
+		}
+	}
+	else {
+		_velocity.y -= ACCELERATION.y * GameTime::_delta;
+		if (_velocity.y < -MAX_VELOCITY.y) {
+			_accelerateVertically = true;
+		}
+	}
+}
+
+void Nitpicker::ComputeSpriteFlip()
+{
+	_transform->_flipType = (_velocity.x > 0) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
 }

@@ -2,9 +2,9 @@
 
 void UINavigator::BeginPlay()
 {
-	for (int i = 0; i < _buttons.size(); i++)
+	for (Button* button : _buttons)
 	{
-		_buttons[i]->Deselect();
+		button->Deselect();
 	}
 
 	if (_buttons.size() > _buttonIndex) {

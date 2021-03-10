@@ -1,10 +1,6 @@
 #include "Button.h"
 #include "ComponentEssentials.h"
 
-Button::Button()
-{
-}
-
 void Button::Awake()
 {
 	_text = _gameObject->AddComponent<Text>();

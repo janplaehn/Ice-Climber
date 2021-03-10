@@ -1,5 +1,5 @@
 #include "Counter.h"
-
+#include "Text.h"
 
 void Counter::BeginPlay()
 {
@@ -27,4 +27,24 @@ std::string Counter::ToString(int number, int digitCount)
 		string = '0' + string;
 	}
 	return string;
+}
+
+void Counter::SetTargetNumber(float number)
+{
+	_targetNumber = number;
+}
+
+void Counter::SetDigitCount(float count)
+{
+	_digitCount = count;
+}
+
+void Counter::SetDelay(float delay)
+{
+	_delay = delay;
+}
+
+void Counter::SetSpeed(float speed)
+{
+	_speed = speed;
 }

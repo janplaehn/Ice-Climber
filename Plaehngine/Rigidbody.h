@@ -13,8 +13,6 @@ public:
 	bool _isKinematic = false;
 	bool _preventCollisions = true;
 
-	bool IsOnGround() const;
-
 	const float GRAVITY = 981.0f;
 
 	virtual void BeginPlay();
@@ -28,7 +26,6 @@ protected:
 private:
 	Vector2D _previousPosition;
 	Vector2D _targetMoveDelta;
-	bool _isOnGround;
-	class AABBCollider* _collider;
+	class AABBCollider* _collider = nullptr;
 };
 

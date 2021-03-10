@@ -4,6 +4,7 @@
 Animation::Animation()
 {
 	_renderers.push_back(this);
+	_spriteSheet = nullptr;
 }
 
 void Animation::Update()

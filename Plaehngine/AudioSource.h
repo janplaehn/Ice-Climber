@@ -15,7 +15,6 @@ public:
 	bool IsPlaying();
 	float GetVolume();
 	void SetVolume(float value);
-	void OnFinishedPlaying(int channel);
 	virtual void Update() {};
 	virtual void Destroy();
 

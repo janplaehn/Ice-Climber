@@ -1,6 +1,7 @@
 #include "Input.h"
 #include "SDL.h"
 #include "Plaehngine.h"
+#include <string>
 
 void Input::Init(Plaehngine* engine)
 {
@@ -61,7 +62,7 @@ Input::KeyStatus Input::GetKeyStatus(int scanCode)
 	{
 		if (k._scanCode == scanCode) return k._status;
 	}
-	SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Tried to read input %s, but Scancode has not been specified before!", scanCode);
+	SDL_LogError(SDL_LOG_CATEGORY_INPUT, "Tried to read input %s, but Scancode has not been specified before!", std::to_string(scanCode).c_str());
 	return UNDEFINED;
 }
 

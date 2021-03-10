@@ -14,8 +14,8 @@ GameObject::GameObject()
 
 void GameObject::BeginPlay()
 {
-	for (Component* c : _components) {
-		c->BeginPlay();
+	for (Component* component : _components) {
+		component->BeginPlay();
 	}
 }
 
@@ -24,15 +24,15 @@ void GameObject::Update()
 	if (!_enabled)
 		return;
 
-	for (Component* c : _components) {
-		c->Update();
+	for (Component* component : _components) {
+		component->Update();
 	}		
 }
 
 void GameObject::Destroy()
 {
-	for (Component* c : _components) {
-		c->Destroy();
+	for (Component* component : _components) {
+		component->Destroy();
 	}
 	_components.clear();
 	_gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), this), _gameObjects.end());
@@ -44,12 +44,6 @@ void GameObject::OnCollision(AABBCollider* otherCollider, Vector2D normal)
 	{
 		component->OnCollision(otherCollider, normal);
 	}
-}
-
-
-GameObject::~GameObject()
-{
-
 }
 
 std::vector<GameObject*> GameObject::_gameObjects;

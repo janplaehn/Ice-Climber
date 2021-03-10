@@ -162,7 +162,6 @@
     <ClCompile Include="LifeUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="MainMenuController.cpp" />
     <ClCompile Include="Nitpicker.cpp" />
     <ClCompile Include="PlayerBehaviour.cpp" />
     <ClCompile Include="PlayScene.cpp" />
@@ -187,7 +186,6 @@
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="LifeUI.h" />
     <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="MainMenuController.h" />
     <ClInclude Include="Nitpicker.h" />
     <ClInclude Include="PlayerBehaviour.h" />
     <ClInclude Include="PlayScene.h" />

@@ -23,8 +23,6 @@ public:
 
 	static std::vector<GameObject*> _gameObjects;
 
-	virtual ~GameObject();
-
 	template <class T>
 	T* AddComponent() {
 		Component* component = new T();

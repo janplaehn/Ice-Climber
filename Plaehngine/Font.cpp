@@ -8,16 +8,16 @@ Font* Font::Locate(std::string fontName)
 			return font;
 		}
 	}
-	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Font '%' can not be found in created Fonts!", fontName.c_str());
+	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Font '%s' can not be found in created Fonts!", fontName.c_str());
 	return nullptr;
 }
 
 void Font::UnloadAllFonts()
 {
-	for (int i = 0; i < _fonts.size(); i++)
+	for (Font* font : _fonts)
 	{
-		_fonts[i]->Destroy();
-		delete _fonts[i];
+		font->Destroy();
+		delete font;
 	}
 	_fonts.clear();
 }

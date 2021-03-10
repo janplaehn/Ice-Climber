@@ -5,10 +5,6 @@ Text::Text()
 	_renderers.push_back(this);
 }
 
-void Text::Update()
-{
-}
-
 void Text::BeginPlay()
 {
 	LocateFont();

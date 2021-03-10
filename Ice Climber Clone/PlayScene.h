@@ -6,4 +6,3 @@ class PlayScene : public Scene
 public:
 	virtual void Load() override;
 };
-

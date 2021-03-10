@@ -56,10 +56,10 @@ void IntroScene::Load()
 	timerGo->_transform->_pivot = Vector2D(0, 1);
 	timerGo->_transform->_position = Vector2D(24, 608);
 	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
-	timer->_text = timerGo->AddComponent<Text>();
-	timer->_text->_text = "40.0";
-	timer->_text->_fontName = "Ice Climber";
-	timer->_text->_tint = Color::IceClimberOrange();
+	Text* text = timerGo->AddComponent<Text>();
+	text->_text = "40.0";
+	text->_fontName = "Ice Climber";
+	text->_tint = Color::IceClimberOrange();
 	timer->_enabled = false;
 
 	//Setup Condor
@@ -88,9 +88,9 @@ void IntroScene::Load()
 	timerGo->_transform->_pivot = Vector2D(0, 1);
 	timerGo->_transform->_position = Vector2D(24, 848);
 	timer = timerGo->AddComponent<BonusTimer>();
-	timer->_text = timerGo->AddComponent<Text>();
-	timer->_text->_text = "40.0";
-	timer->_text->_fontName = "Ice Climber";
-	timer->_text->_tint = Color::IceClimberOrange();
+	Text* timerText = timerGo->AddComponent<Text>();
+	timerText->_text = "40.0";
+	timerText->_fontName = "Ice Climber";
+	timerText->_tint = Color::IceClimberOrange();
 	timer->_enabled = false;
 }

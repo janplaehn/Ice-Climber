@@ -105,9 +105,6 @@
     <ClCompile Include="IntroCamera.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuController.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="ScoreScreenController.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -134,9 +131,6 @@
     <ClInclude Include="HammerTrigger.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Topi.h">
-      <Filter>Header Files\Components\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Components\Enemies</Filter>
     </ClInclude>
@@ -148,9 +142,6 @@
     </ClInclude>
     <ClInclude Include="DebugPhysicsScene.h">
       <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuController.h">
-      <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="IceClimberButton.h">
       <Filter>Header Files\Components\UI</Filter>
@@ -181,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="ScoreScreenController.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Topi.h">
+      <Filter>Header Files\Components\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

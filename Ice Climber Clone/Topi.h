@@ -1,22 +1,24 @@
 #pragma once
 #include "Enemy.h"
 
+class AudioSource;
+class Animation;
+class Sprite;
+
 class Topi : public Enemy
 {
 public:
 
-	virtual void Update();
-
-	class Animation* _animation;
+	Animation* _animation;
 	GameObject* _ice;
-	class Sprite* _deathSprite;
+	Sprite* _deathSprite;
 
-	class AudioSource* _deathSource;
-	class AudioSource* _fallSource;
+	AudioSource* _deathSource;
+	AudioSource* _fallSource;
 
-protected:
-	const float WALKSPEED = 10;
-	const float FALLSPEED = 50;
+private:
+
+	virtual void Update() override;
 
 	enum TopiState
 	{
@@ -29,17 +31,16 @@ protected:
 
 	TopiState _state = WALKING;
 
-	virtual void ChangeDirection();
+	void ChangeDirection();
+	void Damage() override;
 
-private:
-
-	virtual void Damage() override;
-
-	float _fallCooldown = 0.5f;
 	float _fallTimer = 0;
-	float _rebuildCooldown = 1.0f;
 	float _rebuildTimer = 0;
 	int _tilesRebuilt = 0;
+
+	const float FALL_COOLDOWN = 0.5f;
+	const float REBUILD_COOLDOWN = 1.0f;
+	const float WALKSPEED = 10;
+	const float FALLSPEED = 50;
 	const int REBUILDCOUNT = 2;
 };
-

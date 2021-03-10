@@ -4,8 +4,6 @@
 void IceClimberButton::Awake()
 {
 	Button::Awake();
-	_buttonSound = _gameObject->AddComponent<AudioSource>();
-	//_buttonSound->_clip = Audio::LoadSound("blablaSoundbla.bla");
 }
 
 void IceClimberButton::Update()
@@ -18,13 +16,12 @@ void IceClimberButton::OnPressed()
 
 void IceClimberButton::OnSelected()
 {
-	_buttonSound->Play();
-	_text->_tint = _selectedColor;
+	_text->_tint = COLOR_SELECTED;
 }
 
 void IceClimberButton::OnDeselected()
 {
-	_text->_tint = _defaultColor;
+	_text->_tint = COLOR_DEFAULT;
 }
 
 void IceClimberButton::OnDeactivate()

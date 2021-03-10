@@ -1,5 +1,5 @@
 #include "LifeUI.h"
-#include "Renderer.h"
+#include "ComponentEssentials.h"
 
 void LifeUI::UpdateLifeCounter(int amount)
 {
@@ -9,6 +9,7 @@ void LifeUI::UpdateLifeCounter(int amount)
 	}
 }
 
-void LifeUI::Update()
+void LifeUI::AddRenderer(Renderer* renderer)
 {
+	_lifeRenderers.push_back(renderer);
 }

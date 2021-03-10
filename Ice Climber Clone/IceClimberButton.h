@@ -3,7 +3,9 @@
 
 class IceClimberButton : public Button
 {
-	virtual void Awake();
+protected:
+
+	virtual void Awake() override;
 	virtual void Update() override;
 	virtual void OnPressed() override;
 	virtual void OnSelected() override;
@@ -11,9 +13,7 @@ class IceClimberButton : public Button
 	virtual void OnDeactivate() override;
 	virtual void OnActivate() override;
 
-	Color _selectedColor = Color::White();
-	Color _defaultColor = Color(128, 128, 128);
-
-	class AudioSource* _buttonSound;
+	const Color COLOR_SELECTED = Color::White();
+	const Color COLOR_DEFAULT = Color(128, 128, 128);
 };
 

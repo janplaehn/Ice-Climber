@@ -11,7 +11,6 @@ class Physics
 public:
 	static void Run();
 
-	//For Debugging Purposes
 	static void DrawCollisions();
 
 	static bool IsColliding(Vector2D point, AABBCollider* collider);

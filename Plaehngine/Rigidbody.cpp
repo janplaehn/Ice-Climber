@@ -13,12 +13,6 @@ void Rigidbody::BeginPlay()
 	_collider = GetComponent<AABBCollider>();
 }
 
-
-bool Rigidbody::IsOnGround() const
-{
-	return _isOnGround;
-}
-
 void Rigidbody::Update()
 {
 	_previousPosition = _transform->_position;

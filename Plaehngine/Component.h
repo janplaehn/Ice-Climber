@@ -20,12 +20,9 @@ class Component
 	friend class GameObject;
 
 public:
-	GameObject* _gameObject;
-	Transform* _transform;
+	GameObject* _gameObject = nullptr;
+	Transform* _transform = nullptr;
 	bool _enabled = true;
-
-	Component();
-	virtual ~Component() {}
 
 	template <class T>
 	T* GetComponent() {
@@ -35,7 +32,7 @@ public:
 	virtual void Awake() {};
 	virtual void BeginPlay() {};
 	bool IsActiveAndEnabled();
-	virtual void Update() = 0;
+	virtual void Update() {};
 	virtual void Receive(int message) {}
 	virtual void OnCollision(class AABBCollider* otherCollider, struct Vector2D normal) {};
 	virtual void OnComponentAdded(Component* component) {};

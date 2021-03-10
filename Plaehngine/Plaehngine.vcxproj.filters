@@ -160,7 +160,7 @@
       <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
     <ClCompile Include="ObjectPool.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,7 +260,7 @@
     <ClInclude Include="Screen.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="objectPool.h">
+    <ClInclude Include="ObjectPool.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>

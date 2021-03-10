@@ -9,11 +9,8 @@ public:
 	static void LoadScene() {
 		_sceneToLoad = new T();
 	}
-	static void Quit() {
-		if (_currentScene) {
-			_currentScene->Unload();
-		}
-	}
+
+	static void Quit();
 
 	static void Run();
 

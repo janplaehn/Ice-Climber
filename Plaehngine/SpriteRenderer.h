@@ -3,7 +3,6 @@
 
 class SpriteRenderer : public Renderer
 {
-
 public:
 	SpriteRenderer();
 
@@ -11,5 +10,5 @@ public:
 	virtual void Draw();
 	virtual void Destroy();
 
-	class Sprite* _sprite;
+	class Sprite* _sprite = nullptr;
 };

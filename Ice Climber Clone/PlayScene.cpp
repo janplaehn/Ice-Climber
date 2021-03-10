@@ -117,9 +117,11 @@ void PlayScene::Load()
 		nitAnimation->_order = 1;
 		nitpicker->AddComponent<AABBCollider>()->_isTrigger = true;
 		Nitpicker* nitBehaviour = nitpicker->AddComponent<Nitpicker>();
-		nitBehaviour->_deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");
-		nitBehaviour->_deathSource = nitpicker->AddComponent<AudioSource>();
-		nitBehaviour->_deathSource->_clip = Audio::LoadSound("Assets/Sounds/nitpickerDeath.wav");
+		Sprite* deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");;
+		nitBehaviour->SetDeathSprite(deathSprite);
+		AudioSource* deathAudioSource = nitpicker->AddComponent<AudioSource>();
+		deathAudioSource->_clip = Audio::LoadSound("Assets/Sounds/nitpickerDeath.wav");
+		nitBehaviour->SetDeathAudioSource(deathAudioSource);
 	}
 
 	//Setup Ground Collider
@@ -127,7 +129,7 @@ void PlayScene::Load()
 	floor->_transform->_pivot = Vector2D(0, 1);
 	AABBCollider* floorCollider = floor->AddComponent<AABBCollider>();
 	floorCollider->_width = Screen::_width;
-	floorCollider->_height = 20;
+	floorCollider->_height = 24;
 
 	const int DEBRISCOUNT = 5;
 	hammerTrigger->_debrisPool = new ObjectPool();
@@ -140,7 +142,7 @@ void PlayScene::Load()
 		debrisGo->AddComponent<Rigidbody>();
 		debrisGo->AddComponent<Debris>();
 
-		hammerTrigger->_debrisPool->AddGameObject(debrisGo);
+		hammerTrigger->_debrisPool->Add(debrisGo);
 	}
 
 	//Setup Stage Colliders
@@ -207,11 +209,11 @@ void PlayScene::Load()
 		lifeUIelement->_transform->_isInScreenSpace = true;
 		SpriteRenderer* lifeUIelementRenderer = lifeUIelement->AddComponent<SpriteRenderer>();
 		lifeUIelementRenderer->_sprite = Sprite::Create("Assets/Sprites/UI/life.png");
-		lifeUIComponent->_lifeRenderers.push_back(lifeUIelementRenderer);
+		lifeUIComponent->AddRenderer(lifeUIelementRenderer);
 	}
 
 	GameObject* camera = new GameObject();
-	camera->AddComponent<CameraManager>()->_player = player->_transform;
+	camera->AddComponent<CameraManager>()->SetPlayerTransform(player->_transform);
 
 	//Setup Bonus Stage Colldiders :(
 	{
@@ -221,10 +223,10 @@ void PlayScene::Load()
 		timerGo->_transform->_pivot = Vector2D(0, 1);
 		timerGo->_transform->_position = Vector2D(24, 608);
 		BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
-		timer->_text = timerGo->AddComponent<Text>();
-		timer->_text->_text = "40.0";
-		timer->_text->_fontName = "Ice Climber";
-		timer->_text->_tint = Color::IceClimberOrange();
+		Text* timerText = timerGo->AddComponent<Text>();
+		timerText->_text = "40.0";
+		timerText->_fontName = "Ice Climber";
+		timerText->_tint = Color::IceClimberOrange();
 		timerGo->_enabled = false;
 		playerBehaviour->_timers.push_back(timer);
 
@@ -424,10 +426,10 @@ void PlayScene::Load()
 	timerGo->_transform->_pivot = Vector2D(0, 1);
 	timerGo->_transform->_position = Vector2D(24, 848);
 	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
-	timer->_text = timerGo->AddComponent<Text>();
-	timer->_text->_text = "40.0";
-	timer->_text->_fontName = "Ice Climber";
-	timer->_text->_tint = Color::IceClimberOrange();
+	Text* timerText = timerGo->AddComponent<Text>();
+	timerText->_text = "40.0";
+	timerText->_fontName = "Ice Climber";
+	timerText->_tint = Color::IceClimberOrange();
 	timerGo->_enabled = false;
 	playerBehaviour->_timers.push_back(timer);
 }

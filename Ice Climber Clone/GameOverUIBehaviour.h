@@ -1,10 +1,12 @@
 #pragma once
 #include "Component.h"
+
 class GameOverUIBehaviour : public Component
 {
-protected:
-	const float _moveSpeed = 75;
-	const int _maxY = Screen::_height - 56;
+private:
 
 	virtual void Update() override;
+
+	const float SPEED = 75;
+	const int MAX_POSITION_Y = Screen::_height - 56;
 };

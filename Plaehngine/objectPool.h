@@ -7,59 +7,17 @@
 class ObjectPool
 {
 public:
-	~ObjectPool()
-	{
-		for (auto it = pool.begin(); it != pool.end(); it++)
-			(*it)->Destroy();
-	}
+	~ObjectPool();
 
-	void AddGameObject(GameObject* go) {
-		pool.push_back(go);
-		go->_enabled = false;
-	}
+	void Add(GameObject* go);
 
-	GameObject* FirstAvailable()
-	{
-		for (GameObject* go : pool) {
-			if (!go->_enabled) {
-				go->_enabled = true;
-				return go;
-			}
-		}
-		return nullptr;
-	}
+	GameObject* FirstAvailable();
 
-	bool AnyAvailable() {
-		for (auto it = pool.begin(); it != pool.end(); it++)
-		{
-			if (!(**it)._enabled) return true;
-		}
-		return false;
-	}
+	bool AnyAvailable();
 
-	bool AllAvailable() {
-		for (auto it = pool.begin(); it != pool.end(); it++)
-		{
-			if ((**it)._enabled) return false;
-		}
-		return true;
-	}
+	bool AllAvailable();
 
-	// select a random, enabled element in the object pool
-	GameObject* SelectRandom()
-	{
-		int offset = (rand() / (float)RAND_MAX) * pool.size();
+private:
 
-		for (int i = 0; i < pool.size(); i++)
-		{
-			int index = (i + offset) % pool.size();
-
-			if (pool[index]->_enabled)
-				return pool[index];
-		}
-
-		return NULL;
-	}
-
-	std::vector<GameObject*> pool;
+	std::vector<GameObject*> _gameObjects;
 };

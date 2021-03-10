@@ -3,17 +3,17 @@
 
 void GameTime::Init()
 {
-	_lastTime = GetElapsedTime();
+	_lastTime = TimeSinceGameLoad();
 }
 
-float GameTime::GetElapsedTime()
+float GameTime::TimeSinceGameLoad()
 {
 	return SDL_GetTicks() / 1000.f;
 }
 
 void GameTime::Run()
 {
-	float newTime = GameTime::GetElapsedTime();
+	float newTime = GameTime::TimeSinceGameLoad();
 	_delta = newTime - _lastTime;
 	_delta = _delta * _scale;
 	_lastTime = newTime;

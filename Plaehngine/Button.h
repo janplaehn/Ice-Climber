@@ -6,8 +6,6 @@ using ButtonFunction = void(*)();
 class Button : public Component
 {
 public:
-	Button();
-
 	virtual void OnPressed() = 0;
 	virtual void OnSelected() = 0;
 	virtual void OnDeselected() = 0;
@@ -27,6 +25,5 @@ public:
 
 private:
 	bool _isActive = true;
-
 };
 

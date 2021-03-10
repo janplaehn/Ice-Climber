@@ -11,16 +11,6 @@ void Audio::Init()
     Mix_AllocateChannels(10000);
 }
 
-Mix_Music* Audio::LoadMusic(std::string path)
-{
-    Mix_Music* music = Mix_LoadMUS(path.c_str());
-    if (music == NULL)
-    {
-        printf("Failed to load music! SDL_mixer Error: %s\n", Mix_GetError());
-    }
-    return music;
-}
-
 Mix_Chunk* Audio::LoadSound(std::string path)
 {
     Mix_Chunk* sound = Mix_LoadWAV(path.c_str());

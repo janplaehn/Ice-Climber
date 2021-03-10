@@ -4,8 +4,7 @@ class GameTime
 public:
 	static void Init();
 
-	// Return the total time spent in the game, in seconds.
-	static float GetElapsedTime();
+	static float TimeSinceGameLoad();
 	static void Run();
 
 	static float _scale;

@@ -8,7 +8,7 @@ class Text : public Renderer
 public:
 	Text();
 
-	virtual void Update();
+	virtual void Update() {};
 	virtual void BeginPlay();
 	virtual void Draw();
 	virtual void Destroy();
@@ -18,6 +18,6 @@ public:
 	std::string _fontName;
 
 private:
-	class Font* _font;
+	class Font* _font = nullptr;
 };
 

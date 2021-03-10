@@ -131,7 +131,7 @@ void PlayerBehaviour::Update()
 	if (!_isInBonus && _transform->_position.y > 420) {
 		for (BonusTimer* timer : _timers) {
 			timer->_gameObject->_enabled = true;
-			timer->_currentTime = 40.0f;
+			timer->SetTime(40.0f);
 		}
 		_isInBonus = true;
 	}
@@ -153,7 +153,7 @@ void PlayerBehaviour::OnCollision(AABBCollider* other, Vector2D normal)
 	if (other->_gameObject->_tag == "Condor") {
 		condor = other->_transform;
 		for (BonusTimer* timer : _timers) {
-			timer->_shouldCount = false;
+			timer->SetIsCounting(false);
 		}
 		_hasWon = true;
 	}

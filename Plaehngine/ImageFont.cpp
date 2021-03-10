@@ -45,7 +45,7 @@ void ImageFont::Destroy()
 
 int ImageFont::FindCharInGlyphs(char c)
 {
-	for (int i = 0; i < _glyphs.size(); ++i) {
+	for (int i = 0; i < _glyphs.size(); i++) {
 		if (c == _glyphs[i]) return i;
 	}
 	return 0;

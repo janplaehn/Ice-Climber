@@ -13,7 +13,7 @@ void Topi::Update()
 
 	if (_state == WALKWITHICE && _tilesRebuilt > 0) {
 		_rebuildTimer += GameTime::_delta;
-		if (_rebuildTimer > _rebuildCooldown) {
+		if (_rebuildTimer > REBUILD_COOLDOWN) {
 			_state = WALKING;
 			_rebuildTimer = 0;
 		}
@@ -90,7 +90,7 @@ void Topi::Update()
 			else if (_state == DEADWALKING) {
 				_state = DEADFALLING;
 				_fallSource->Play();
-				_fallTimer = _fallCooldown;
+				_fallTimer = FALL_COOLDOWN;
 			}
 			else if (_state == FETCHICE) {
 				Damage();

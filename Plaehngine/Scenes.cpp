@@ -3,6 +3,13 @@
 Scene* Scenes::_currentScene;
 Scene* Scenes::_sceneToLoad;
 
+void Scenes::Quit()
+{
+	if (_currentScene) {
+		_currentScene->Unload();
+	}
+}
+
 void Scenes::Run()
 {
 	for (GameObject* go : GameObject::_gameObjects)

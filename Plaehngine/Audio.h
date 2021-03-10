@@ -9,7 +9,6 @@ public:
 	static void Init();
 
 	//Load WAVE, AIFF, RIFF, OGG, and VOC files and store them as Music or Chunks (i.e. Sounds)
-	static Mix_Music* LoadMusic(std::string path);
 	static Mix_Chunk* LoadSound(std::string path);
 
 	//Returns the channel
