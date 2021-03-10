@@ -1,5 +1,6 @@
 #include "IntroScene.h"
 #include "IntroCamera.h"
+#include "BonusTimer.h"
 
 void IntroScene::Load()
 {
@@ -49,6 +50,18 @@ void IntroScene::Load()
 		}
 	}
 
+
+	//1st timer
+	GameObject* timerGo = new GameObject();
+	timerGo->_transform->_pivot = Vector2D(0, 1);
+	timerGo->_transform->_position = Vector2D(24, 608);
+	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
+	timer->_text = timerGo->AddComponent<Text>();
+	timer->_text->_text = "40.0";
+	timer->_text->_fontName = "Ice Climber";
+	timer->_text->_tint = Color::IceClimberOrange();
+	timer->_enabled = false;
+
 	//Setup Condor
 	GameObject* condorGo = new GameObject();
 	condorGo->_tag = "Condor";
@@ -69,4 +82,15 @@ void IntroScene::Load()
 	SpriteRenderer* eggplantSprite = eggplantGo->AddComponent<SpriteRenderer>();
 	eggplantSprite->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
 	eggplantSprite->_order = 100;
+
+	//2nd timer
+	timerGo = new GameObject();
+	timerGo->_transform->_pivot = Vector2D(0, 1);
+	timerGo->_transform->_position = Vector2D(24, 848);
+	timer = timerGo->AddComponent<BonusTimer>();
+	timer->_text = timerGo->AddComponent<Text>();
+	timer->_text->_text = "40.0";
+	timer->_text->_fontName = "Ice Climber";
+	timer->_text->_tint = Color::IceClimberOrange();
+	timer->_enabled = false;
 }
