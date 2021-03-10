@@ -177,7 +177,7 @@ void PlayScene::Load()
 			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
 			tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
 			AABBCollider* tileCol =  tile->AddComponent<AABBCollider>();
-			tileCol->_width = 5;
+			tileCol->_width = 8;
 			tileCol->_height = 7;
 		}
 	}
