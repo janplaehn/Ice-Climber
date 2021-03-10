@@ -69,37 +69,16 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Components\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PlayScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IceClimberButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DebugPhysicsScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="BonusTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreScreenController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scores.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IntroCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debris.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ScoreScreen.cpp">
@@ -108,8 +87,29 @@
     <ClCompile Include="IntroScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="BonusTimer.cpp">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
     <ClCompile Include="Counter.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Debris.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="IceClimberButton.cpp">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroCamera.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuController.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreScreenController.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +140,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Components\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlayScene.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
@@ -158,29 +155,32 @@
     <ClInclude Include="IceClimberButton.h">
       <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
-    <ClInclude Include="BonusTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ScoreScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreScreenController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scores.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IntroScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="BonusTimer.h">
+      <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
-    <ClInclude Include="IntroCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Debris.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Counter.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Debris.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroCamera.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreScreenController.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

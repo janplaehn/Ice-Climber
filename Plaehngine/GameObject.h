@@ -1,6 +1,5 @@
 #pragma once
 
-// GameObject represents objects which moves are drawn
 #include <vector>
 #include "Screen.h"
 #include <string>
@@ -22,7 +21,7 @@ public:
 
 	std::string _tag = "Default";
 
-	static std::vector<GameObject*> _gameObjects;	// http://www.cplusplus.com/reference/set/set/
+	static std::vector<GameObject*> _gameObjects;
 
 	virtual ~GameObject();
 

@@ -1,7 +1,6 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "Plaehngine.h"
 #include "IceClimberGame.h"
+#include "SDL.h"
 
 int main(int argc, char** argv)
 {
