@@ -12,9 +12,6 @@
     <Filter Include="Header Files\Components">
       <UniqueIdentifier>{49e3acc9-f61e-4dc6-b778-dd282ed074d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Settings">
-      <UniqueIdentifier>{fad19ed0-c319-45ab-81f1-5d9e681ffd1b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{1d9d542b-d4a3-4f38-9f5d-9d7a37690b01}</UniqueIdentifier>
     </Filter>
@@ -191,12 +188,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Screen.h">
-      <Filter>Header Files\Settings</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
@@ -263,8 +254,14 @@
     <ClInclude Include="GameMath.h">
       <Filter>Source Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="objectPool.h">
+    <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="objectPool.h">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

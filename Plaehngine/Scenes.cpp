@@ -16,7 +16,7 @@ void Scenes::Run()
 			delete _currentScene;
 		}
 		_sceneToLoad->Load();
-		SpriteRenderer::SortRenderers();
+		Renderer::SortRenderers();
 		_currentScene = _sceneToLoad;
 		_sceneToLoad = nullptr;
 
