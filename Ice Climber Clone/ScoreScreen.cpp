@@ -1,6 +1,7 @@
 #include "ScoreScreen.h"
 #include "Scores.h"
 #include "ScoreScreenController.h"
+#include "Counter.h"
 
 void ScoreScreen::Load()
 {
@@ -44,34 +45,50 @@ void ScoreScreen::Load()
 	go->AddComponent<ScoreScreenController>();
 
 	GameObject* eggplantCounterGo = new GameObject();
+	Counter* eggplantCounterCounter = eggplantCounterGo->AddComponent<Counter>();
 	eggplantCounterGo->_transform->_position = Vector2D(104, 129);
 	Text* eggplantCounter = eggplantCounterGo->AddComponent<Text>();
 	eggplantCounter->_fontName = "Ice Climber";
-	eggplantCounter->_text = ToString(Scores::_eggplants,2);
+	eggplantCounterCounter->_digitCount = 2;
+	eggplantCounterCounter->_delay = 0.5f;
+	eggplantCounterCounter->_targetNumber = Scores::_eggplants;
 
 	GameObject* iceCounterGo = new GameObject();
+	Counter* iceCounterCounter = iceCounterGo->AddComponent<Counter>();
 	iceCounterGo->_transform->_position = Vector2D(104, 113);
 	Text* iceCounter = iceCounterGo->AddComponent<Text>();
 	iceCounter->_fontName = "Ice Climber";
-	iceCounter->_text = ToString(Scores::_ice, 2);
+	iceCounterCounter->_digitCount = 2;
+	iceCounterCounter->_delay = 1.0f;
+	iceCounterCounter->_targetNumber = Scores::_ice;
 
 	GameObject* nitpickerCounterGo = new GameObject();
 	nitpickerCounterGo->_transform->_position = Vector2D(104, 97);
+	Counter* nitCounterCounter = nitpickerCounterGo->AddComponent<Counter>();
 	Text* nitpickerCounter = nitpickerCounterGo->AddComponent<Text>();
 	nitpickerCounter->_fontName = "Ice Climber";
-	nitpickerCounter->_text = ToString(Scores::_nitpickers, 2);
+	nitCounterCounter->_digitCount = 2;
+	nitCounterCounter->_delay = 1.5f;
+	nitCounterCounter->_targetNumber = Scores::_nitpickers;
 
 	GameObject* tileCounterGo = new GameObject();
 	tileCounterGo->_transform->_position = Vector2D(104, 81);
+	Counter* tileCounterCounter = tileCounterGo->AddComponent<Counter>();
 	Text* tileCounter = tileCounterGo->AddComponent<Text>();
 	tileCounter->_fontName = "Ice Climber";
-	tileCounter->_text = ToString(Scores::_tiles, 2);
+	tileCounterCounter->_digitCount = 2;
+	tileCounterCounter->_delay = 2.0f;
+	tileCounterCounter->_targetNumber = Scores::_tiles;
 
 	GameObject* totalCounterGo = new GameObject();
 	totalCounterGo->_transform->_position = Vector2D(72, 57);
+	Counter* totalCounterCounter =  totalCounterGo->AddComponent<Counter>();
 	Text* totalCounter = totalCounterGo->AddComponent<Text>();
 	totalCounter->_fontName = "Ice Climber";
-	totalCounter->_text = ToString(Scores::CalculateTotal(), 6);
+	totalCounterCounter->_digitCount = 6;
+	totalCounterCounter->_delay = 2.5f;
+	totalCounterCounter->_targetNumber = Scores::CalculateTotal();
+	totalCounterCounter->_speed = 1.5f;
 	_mountainIndex++;
 }
 
