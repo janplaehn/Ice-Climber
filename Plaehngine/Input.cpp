@@ -19,12 +19,10 @@ void Input::ProcessInput()
 		{
 			_engine->Quit();
 		}
-
 	}
 
 	SDL_PumpEvents();
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-
 	for (int i = 0; i < _keys.size(); i++)
 	{
 		Key k = _keys[i];

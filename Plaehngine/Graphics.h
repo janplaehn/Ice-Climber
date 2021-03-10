@@ -30,5 +30,6 @@ private:
 
 	static SDL_Window* _window;
 	static SDL_Renderer* _renderer;
+	static bool _isFullscreen;
 };
 

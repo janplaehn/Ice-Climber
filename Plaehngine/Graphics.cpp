@@ -48,6 +48,8 @@ void Graphics::Init(Game* game)
 
 	//Clear screen
 	SDL_RenderClear(_renderer);
+
+	Input::WatchKey(SDL_SCANCODE_F);
 }
 
 void Graphics::Run()
@@ -61,12 +63,10 @@ void Graphics::Run()
 	//Debug Drawing
 	//Physics::DrawCollisions();
 
-	//FPS Counter:
-	/*if (dt != 0) {
-		int fps = 1.0f / dt;
-		std::string fpsText = "FPS: " + std::to_string(fps);
-		DrawText(Vector2D(0, 0), fpsText.c_str());
-	}*/
+	if (Input::GetKeyStatus(SDL_SCANCODE_F) == Input::PRESSED) {
+		_isFullscreen = !_isFullscreen;
+		SDL_SetWindowFullscreen(_window, _isFullscreen ? SDL_WINDOW_FULLSCREEN : 0);
+	}
 
 	SwapBuffers();
 	ClearWindow();
@@ -162,3 +162,4 @@ void Graphics::DrawRect(SDL_Rect* rect, Color tint)
 
 SDL_Window* Graphics::_window;
 SDL_Renderer* Graphics::_renderer;
+bool Graphics::_isFullscreen = false;
