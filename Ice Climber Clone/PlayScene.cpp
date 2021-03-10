@@ -224,6 +224,7 @@ void PlayScene::Load()
 		timer->_text = timerGo->AddComponent<Text>();
 		timer->_text->_text = "40.0";
 		timer->_text->_fontName = "Ice Climber";
+		timer->_text->_tint = Color::IceClimberOrange();
 		timerGo->_enabled = false;
 		playerBehaviour->_timers.push_back(timer);
 
@@ -418,7 +419,7 @@ void PlayScene::Load()
 	cloud->_moveRight = false;
 	cloud->_speed = 40;
 
-	//2nt timer
+	//2nd timer
 	GameObject* timerGo = new GameObject();
 	timerGo->_transform->_pivot = Vector2D(0, 1);
 	timerGo->_transform->_position = Vector2D(24, 848);
@@ -426,6 +427,7 @@ void PlayScene::Load()
 	timer->_text = timerGo->AddComponent<Text>();
 	timer->_text->_text = "40.0";
 	timer->_text->_fontName = "Ice Climber";
+	timer->_text->_tint = Color::IceClimberOrange();
 	timerGo->_enabled = false;
 	playerBehaviour->_timers.push_back(timer);
 }

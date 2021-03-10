@@ -24,7 +24,7 @@ void IceClimberGame::Init()
 	Input::WatchKey(SDL_SCANCODE_SPACE);
 	Input::WatchKey(SDL_SCANCODE_ESCAPE);
 
-	Scenes::LoadScene<PlayScene>();
+	Scenes::LoadScene<MainMenu>();
 }
 
 void IceClimberGame::Update()

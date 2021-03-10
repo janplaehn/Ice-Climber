@@ -12,5 +12,8 @@ public:
 	static Color Red();
 	static Color Green();
 	static Color Blue();
+	static Color IceClimberPink();
+	static Color IceClimberBlue();
+	static Color IceClimberOrange();
 };
 

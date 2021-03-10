@@ -2,7 +2,9 @@
 #include "MainMenuController.h"
 #include "ComponentEssentials.h"
 #include "IceClimberButton.h"
-#include <UINavigator.h>
+#include "UINavigator.h"
+#include "Scores.h"
+#include "ScoreScreen.h"
 
 void MainMenu::Load()
 {
@@ -48,4 +50,43 @@ void MainMenu::Load()
 	text->_fontName = "Ice Climber";
 
 	navigator->_buttons.push_back(button);
+
+	GameObject* totalCounterGo = new GameObject();
+	totalCounterGo->_transform->_position = Vector2D(127, 73);
+	Text* totalCounter = totalCounterGo->AddComponent<Text>();
+	totalCounter->_fontName = "Ice Climber";
+	totalCounter->_text = ToString(Scores::CalculateTotal(), 6);
+	totalCounter->_tint = Color::IceClimberPink();
+
+	GameObject* totalCounterGo1 = new GameObject();
+	totalCounterGo1->_transform->_position = Vector2D(71, 57);
+	Text* totalCounter1 = totalCounterGo1->AddComponent<Text>();
+	totalCounter1->_fontName = "Ice Climber";
+	totalCounter1->_text = ToString(Scores::CalculateTotal(), 6);
+	totalCounter1->_tint = Color::IceClimberOrange();
+
+	GameObject* totalCounterGo2 = new GameObject();
+	totalCounterGo2->_transform->_position = Vector2D(183, 57);
+	Text* totalCounter2 = totalCounterGo2->AddComponent<Text>();
+	totalCounter2->_fontName = "Ice Climber";
+	totalCounter2->_text = ToString(0, 6);
+	totalCounter2->_tint = Color::IceClimberOrange();
+
+	GameObject* mountainCounterGo = new GameObject();
+	mountainCounterGo->_transform->_position = Vector2D(Screen::_width / 2 + 31, 73);
+	Text* mountainCounter = mountainCounterGo->AddComponent<Text>();
+	mountainCounter->_fontName = "Ice Climber";
+	mountainCounter->_text = ToString(ScoreScreen::_mountainIndex, 2);
+	mountainCounter->_tint = Color::IceClimberBlue();
+}
+
+std::string MainMenu::ToString(int number, int digitCount)
+{
+	std::string string = std::to_string(number);
+	int length = string.size();
+	for (int i = 0; i < digitCount - length; i++)
+	{
+		string = '0' + string;
+	}
+	return string;
 }

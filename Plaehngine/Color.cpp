@@ -42,3 +42,15 @@ Color Color::Blue()
 {
 	return Color(0,0,255);
 }
+
+Color Color::IceClimberPink() {
+	return Color(252, 116, 180);
+}
+
+Color Color::IceClimberBlue() {
+	return Color(168, 228, 252);
+}
+
+Color Color::IceClimberOrange() {
+	return Color(252, 152, 56);
+}
