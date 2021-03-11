@@ -22,4 +22,9 @@ void Font::UnloadAllFonts()
 	_fonts.clear();
 }
 
+std::string Font::GetName()
+{
+	return _name;
+}
+
 std::vector<Font*> Font::_fonts;

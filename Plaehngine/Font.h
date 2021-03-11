@@ -6,14 +6,21 @@
 class Font
 {
 public:
-	virtual void Draw(Transform* transform, SDL_Color color, std::string message, Color tint) = 0;
-	virtual void Destroy() = 0;
 
 	static Font* Locate(std::string fontName);
+
 	static void UnloadAllFonts();
 
-	std::string _name;
+	virtual void Draw(Transform* transform, SDL_Color color, std::string message, Color tint) = 0;
+
+	virtual void Destroy() = 0;
+
+	std::string GetName();
+	
 protected:
+
+	std::string _name;
+
 	static std::vector<Font*> _fonts;
 };
 

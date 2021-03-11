@@ -15,30 +15,11 @@ Sprite::Sprite(SDL_Texture* texture)
 
 void Sprite::Draw(Transform* transform, Color tint)
 {
-	SDL_Rect rect;
-
-	if (transform->_isInScreenSpace) {
-		//Apply Position
-		rect.x = transform->_position.x;
-		rect.y = transform->_position.y * -1.0f + Screen::_height;
-	}
-	else {
-		//Apply Position & Camera
-		rect.x = transform->_position.x - Camera::_position.x;
-		rect.y = (transform->_position.y - Camera::_position.y) * -1.0f + Screen::_height;
-	}
-
-	SDL_QueryTexture(_texture, NULL, NULL, &(rect.w), &(rect.h));
-
-	//Apply Scale
-	rect.w *= transform->_scale.x;
-	rect.h *= transform->_scale.y;
-
-	//Apply Pivot
-	rect.x -= rect.w * transform->_pivot.x;
-	rect.y -= rect.h * transform->_pivot.y;
-
-	Graphics::RenderTexture(_texture, NULL /*clip*/, &rect, transform->_rotation, transform->_flipType, tint);
+	SDL_Rect clip;
+	clip.x = clip.y = 0;
+	clip.w = GetWidth();
+	clip.h = GetHeight();
+	Draw(transform, clip, tint);
 }
 
 void Sprite::Draw(Transform* transform, SDL_Rect clip, Color tint)

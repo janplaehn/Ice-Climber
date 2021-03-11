@@ -9,4 +9,3 @@ public:
 
 	std::string ToString(int number, int digitCount);
 };
-

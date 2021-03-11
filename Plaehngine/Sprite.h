@@ -9,16 +9,17 @@ class Sprite
 
 public:
 
+	static Sprite* Create(const char* path);
+
 	void Destroy();
 
 	void Draw(class Transform* transform, Color tint);
 	void Draw(class Transform* transform, SDL_Rect clip, Color tint);
 
-	static Sprite* Create(const char* path);
-
 	int GetWidth();
 	int GetHeight();
 
 protected:
+
 	SDL_Texture* _texture;
 };

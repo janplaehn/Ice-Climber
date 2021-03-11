@@ -3,14 +3,10 @@
 
 class IceClimberGame : public Game
 {
-
 public:
-
-	virtual void Init();
-
-	virtual void Update();
-
-	virtual void Destroy();
+	virtual void Init() override;
+	virtual void Update() override;
+	virtual void Destroy() override;
 
 	virtual std::string GetName() override;
 	virtual std::string GetIconPath() override;
