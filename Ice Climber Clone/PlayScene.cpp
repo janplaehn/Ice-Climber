@@ -68,15 +68,16 @@ void PlayScene::Load()
 	playerBehaviour->_hammer->_transform->_position = player->_transform->_position;
 	hammerCol->_width = 8;
 	hammerCol->_height = 8;
-	hammerTrigger->_tileBreakSource = playerBehaviour->_hammer->AddComponent<AudioSource>();
-	hammerTrigger->_tileBreakSource->_clip = Audio::LoadSound("Assets/Sounds/tileBreak.wav");
+	AudioSource* tileBreakSource = playerBehaviour->_hammer->AddComponent<AudioSource>();
+	tileBreakSource->_clip = Audio::LoadSound("Assets/Sounds/tileBreak.wav");
+	hammerTrigger->SetTileBreakAudioSource(tileBreakSource);
 
 
 	//Setup Topis
 	for (int i = 0; i < 4; i++)
 	{
 		GameObject* topi = new GameObject();
-		topi->_tag = "Topi";
+		topi->_tag = "Enemy";
 		topi->_transform->_pivot = Vector2D(0.5f, 1);
 		topi->_transform->_position.x = 0 + i * 40;
 		topi->_transform->_position.y = 24 + i * 96;
@@ -94,7 +95,7 @@ void PlayScene::Load()
 		topiBehaviour->_fallSource->_clip = Audio::LoadSound("Assets/Sounds/topiFall.wav");
 
 		topiBehaviour->_ice = new GameObject();
-		topiBehaviour->_ice->_tag = "Topi";
+		topiBehaviour->_ice->_tag = "Enemy";
 		topiBehaviour->_ice->_transform->_pivot = Vector2D(0.5f, 1);
 		topiBehaviour->_ice->_transform->_position = topi->_transform->_position + Vector2D::Left() * 16;
 		SpriteRenderer* iceRenderer = topiBehaviour->_ice->AddComponent<SpriteRenderer>();
@@ -107,7 +108,7 @@ void PlayScene::Load()
 	{
 		//Setup Nitpicker
 		GameObject* nitpicker = new GameObject();
-		nitpicker->_tag = "Topi";
+		nitpicker->_tag = "Enemy";
 		nitpicker->_transform->_position.y = 200 + i * 248;
 		nitpicker->_transform->_position.x = 0;
 		Animation* nitAnimation = nitpicker->AddComponent<Animation>();
@@ -132,7 +133,8 @@ void PlayScene::Load()
 	floorCollider->_height = 24;
 
 	const int DEBRISCOUNT = 5;
-	hammerTrigger->_debrisPool = new ObjectPool();
+	ObjectPool* debrisPool = new ObjectPool();
+	hammerTrigger->SetDebrisPool(debrisPool);
 	for (size_t i = 0; i < DEBRISCOUNT; i++)
 	{
 		GameObject* debrisGo = new GameObject();
@@ -142,7 +144,7 @@ void PlayScene::Load()
 		debrisGo->AddComponent<Rigidbody>();
 		debrisGo->AddComponent<Debris>();
 
-		hammerTrigger->_debrisPool->Add(debrisGo);
+		debrisPool->Add(debrisGo);
 	}
 
 	//Setup Stage Colliders
@@ -297,7 +299,7 @@ void PlayScene::Load()
 		stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->_width = 48;
 		stageCollider->_height = 7;
-		stage->AddComponent<Cloud>()->_moveRight = true;
+		stage->AddComponent<Cloud>()->SetMoveRight(true);
 
 
 		//The Rest I guess
@@ -351,7 +353,7 @@ void PlayScene::Load()
 		stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->_width = 48;
 		stageCollider->_height = 7;
-		stage->AddComponent<Cloud>()->_moveRight = false;
+		stage->AddComponent<Cloud>()->SetMoveRight(false);
 
 		stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(0, 1);
@@ -418,8 +420,8 @@ void PlayScene::Load()
 	condorCol->_width = 32;
 	condorCol->_height = 16;
 	Cloud* cloud = condorGo->AddComponent<Cloud>();
-	cloud->_moveRight = false;
-	cloud->_speed = 40;
+	cloud->SetMoveRight(false);
+	cloud->SetSpeed(40);
 
 	//2nd timer
 	GameObject* timerGo = new GameObject();

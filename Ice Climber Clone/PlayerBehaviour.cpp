@@ -163,7 +163,7 @@ void PlayerBehaviour::OnCollision(AABBCollider* other, Vector2D normal)
 		Scores::_eggplants++;
 	}
 
-	if ((other->_gameObject->_tag == "Topi") && !_isInvincible) {
+	if ((other->_gameObject->_tag == "Enemy") && !_isInvincible) {
 		LoseLife();
 	}
 }

@@ -3,9 +3,11 @@
 
 class ScoreScreenController : public Component
 {
-	// Inherited via Component
+private:
+
+	const float INPUT_DELAY = 3;
+
 	virtual void Update() override;
 
-private:
 	float _timer = 0;
 };

@@ -5,7 +5,7 @@
 void ScoreScreenController::Update()
 {
 	_timer += GameTime::_delta;
-	if (_timer < 3) return;
+	if (_timer < INPUT_DELAY) return;
 
 	if (Input::GetKeyStatus(SDL_SCANCODE_SPACE) == Input::PRESSED) {
 		Scenes::LoadScene<PlayScene>();

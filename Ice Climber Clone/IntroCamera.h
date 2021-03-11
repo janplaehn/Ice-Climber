@@ -1,11 +1,12 @@
 #pragma once
 #include "Component.h"
+
 class IntroCamera : public Component
 {
-public:
+private:
+	const float SPEED = 80;
+	const float MAX_POSITION_Y = 700;
 
 	virtual void Update() override;
-
-	float _speed = 80;
 };
 

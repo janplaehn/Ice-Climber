@@ -2,9 +2,7 @@
 #include "Component.h"
 class Debris : public Component
 {
-public:
-
-	// Inherited via Component
+private:
 	virtual void Update() override;
 };
 

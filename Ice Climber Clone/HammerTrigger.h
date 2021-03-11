@@ -1,19 +1,40 @@
 #pragma once
 #include "Component.h"
+
+class AABBCollider;
+class AudioSource;
+class ObjectPool;
+
 class HammerTrigger : public Component
 {
 public:
 
-	virtual void Update() override;
+	void SetTileBreakAudioSource(AudioSource* source);
 
-	void OnCollision(class AABBCollider* other, Vector2D normal) override;
-
-	class AudioSource* _tileBreakSource;
-	class ObjectPool* _debrisPool;
+	void SetDebrisPool(ObjectPool* pool);
 
 private:
-	std::vector<GameObject*> _triggeredTiles; //Making sure to only break tiles once per update and that it is the closest to the hammer!
+
+	const float OVERLAP_COOLDOWN = 0.3f;
+
+	virtual void Update() override;
+
+	void OnCollision(AABBCollider* other, Vector2D normal) override;
+
+	GameObject* FindClosestOverlappingTile();
+
+	void BreakTiles();
+
+	void BreakTile(GameObject* tile);
+
+	void SpawnDebris(Vector2D position);
+
+	AudioSource* _tileBreakSource;
+
+	ObjectPool* _debrisPool;
+
+	std::vector<GameObject*> _overlappingTiles;
+
 	float _timer = 0;
-	float _coolDown = 0.3f;
 };
 
