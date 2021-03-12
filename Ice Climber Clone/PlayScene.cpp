@@ -129,6 +129,8 @@ void PlayScene::Load()
 	AABBCollider* floorCollider = floor->AddComponent<AABBCollider>();
 	floorCollider->SetScale(Vector2D(Screen::_width, 24));
 
+	LoadStageCollider(Vector2D::Zero(), Vector2D(0, 1), Vector2D(Screen::_width, 24));
+
 	const int DEBRISCOUNT = 5;
 	ObjectPool* debrisPool = new ObjectPool();
 	hammerTrigger->SetDebrisPool(debrisPool);
@@ -153,16 +155,8 @@ void PlayScene::Load()
 		if (i == 0) width = 32;
 		if ((i == 4) || (i == 5) || (i == 6)) width = 48;
 
-		GameObject* stageLeft = new GameObject();
-		stageLeft->_transform->_pivot = Vector2D(0, 1);
-		stageLeft->_transform->_position = Vector2D(0, height);
-		AABBCollider* stageColliderLeft = stageLeft->AddComponent<AABBCollider>();
-		stageColliderLeft->SetScale(Vector2D(width, 7));
-		GameObject* stageRight = new GameObject();
-		stageRight->_transform->_pivot = Vector2D(1, 1);
-		stageRight->_transform->_position = Vector2D(Screen::_width, height);
-		AABBCollider* stageColliderRight = stageRight->AddComponent<AABBCollider>();
-		stageColliderRight->SetScale(Vector2D(width, 7));
+		LoadStageCollider(Vector2D(0, height), Vector2D(0, 1), Vector2D(width, 7));
+		LoadStageCollider(Vector2D(Screen::_width, height), Vector2D(1, 1), Vector2D(width, 7));
 
 
 		float tileCount = (i == 0) ? 24 : 22;
@@ -210,9 +204,8 @@ void PlayScene::Load()
 	GameObject* camera = new GameObject();
 	camera->AddComponent<CameraManager>()->SetPlayerTransform(player->_transform);
 
-	//Setup Bonus Stage Colldiders :(
+	//Setup Bonus Stage :(
 	{
-
 		//1st timer
 		GameObject* timerGo = new GameObject();
 		timerGo->_transform->_pivot = Vector2D(0, 1);
@@ -226,37 +219,13 @@ void PlayScene::Load()
 		playerBehaviour->_timers.push_back(timer);
 
 		//1st floor
-
-		GameObject* stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(0, 400);
-		AABBCollider* stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(56, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(1, 1);
-		stage->_transform->_position = Vector2D(Screen::_width, 400);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(56, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(72, 400);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(48, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(1, 1);
-		stage->_transform->_position = Vector2D(Screen::_width - 72, 400);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(48, 7));
+		LoadStageCollider(Vector2D(0, 400), Vector2D(0, 1), Vector2D(56, 7));
+		LoadStageCollider(Vector2D(Screen::_width, 400), Vector2D(1, 1), Vector2D(56, 7));
+		LoadStageCollider(Vector2D(72, 400), Vector2D(0, 1), Vector2D(48, 7));
+		LoadStageCollider(Vector2D(Screen::_width - 72, 400), Vector2D(1, 1), Vector2D(48, 7));
 
 		//2nd floor
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(48, 432);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(32, 7));
+		LoadStageCollider(Vector2D(48, 432), Vector2D(0, 1), Vector2D(32, 7));
 
 		GameObject* eggplant = new GameObject();
 		eggplant->_transform->_pivot = Vector2D(0, 1);
@@ -265,40 +234,22 @@ void PlayScene::Load()
 		eggplant->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
 		eggplant->AddComponent<AABBCollider>()->SetTrigger(true);
 
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(1, 1);
-		stage->_transform->_position = Vector2D(Screen::_width - 48, 432);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(32, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(104, 432);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(48, 7));
+		LoadStageCollider(Vector2D(Screen::_width - 48, 432), Vector2D(1, 1), Vector2D(32, 7));
+		LoadStageCollider(Vector2D(104, 432), Vector2D(0, 1), Vector2D(48, 7));
 
 		//First Cloud
-		stage = new GameObject();
+		GameObject* stage = new GameObject();
 		stage->_transform->_pivot = Vector2D(0.5, 1);
 		stage->_transform->_position = Vector2D(128, 480);
 		stage->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Environment/cloud.png");
-		stageCollider = stage->AddComponent<AABBCollider>();
+		AABBCollider* stageCollider = stage->AddComponent<AABBCollider>();
 		stageCollider->SetScale(Vector2D(48, 7));
 		stage->AddComponent<Cloud>()->SetMoveRight(true);
 
 
-		//The Rest I guess
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(40, 528);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(56, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(144, 520);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(32, 7));
+		//> 3rd Floor
+		LoadStageCollider(Vector2D(40, 528), Vector2D(0, 1), Vector2D(56, 7));
+		LoadStageCollider(Vector2D(144, 520), Vector2D(0, 1), Vector2D(32, 7));
 
 		eggplant = new GameObject();
 		eggplant->_transform->_pivot = Vector2D(0, 1);
@@ -307,17 +258,8 @@ void PlayScene::Load()
 		eggplant->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
 		eggplant->AddComponent<AABBCollider>()->SetTrigger(true);
 
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(168, 560);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(24, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(96, 568);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(48, 7));
+		LoadStageCollider(Vector2D(168, 560), Vector2D(0, 1), Vector2D(24, 7));
+		LoadStageCollider(Vector2D(96, 568), Vector2D(0, 1), Vector2D(48, 7));
 
 		eggplant = new GameObject();
 		eggplant->_transform->_pivot = Vector2D(0, 1);
@@ -335,47 +277,13 @@ void PlayScene::Load()
 		stageCollider->SetScale(Vector2D(48, 7));
 		stage->AddComponent<Cloud>()->SetMoveRight(false);
 
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(128, 648);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(32, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(64, 656);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(24, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(152, 680);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(24, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(96, 696);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(24, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(112, 720);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(32, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0, 1);
-		stage->_transform->_position = Vector2D(48, 760);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(56, 7));
-
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(1, 1);
-		stage->_transform->_position = Vector2D(Screen::_width - 48, 760);
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(48, 7));
+		LoadStageCollider(Vector2D(128, 648), Vector2D(0, 1), Vector2D(32, 7));
+		LoadStageCollider(Vector2D(64, 656), Vector2D(0, 1), Vector2D(24, 7));
+		LoadStageCollider(Vector2D(152, 680), Vector2D(0, 1), Vector2D(24, 7));
+		LoadStageCollider(Vector2D(96, 696), Vector2D(0, 1), Vector2D(24, 7));
+		LoadStageCollider(Vector2D(112, 720), Vector2D(0,1), Vector2D(32, 7));
+		LoadStageCollider(Vector2D(48, 760), Vector2D(0,1), Vector2D(56, 7));
+		LoadStageCollider(Vector2D(Screen::_width - 48, 760), Vector2D(1,1), Vector2D(48, 7));
 	}
 
 	//Setup Condor
@@ -406,4 +314,13 @@ void PlayScene::Load()
 	timerText->_tint = Color::IceClimberOrange();
 	timerGo->_enabled = false;
 	playerBehaviour->_timers.push_back(timer);
+}
+
+void PlayScene::LoadStageCollider(Vector2D position, Vector2D pivot, Vector2D scale)
+{
+	GameObject* gameObject = new GameObject();
+	gameObject->_transform->_pivot = pivot;
+	gameObject->_transform->_position = Vector2D(position);
+	AABBCollider* collider = gameObject->AddComponent<AABBCollider>();
+	collider->SetScale(scale);
 }
