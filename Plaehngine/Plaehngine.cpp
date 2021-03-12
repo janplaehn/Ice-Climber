@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "Scenes.h"
 #include "Graphics.h"
+#include "Physics.h"
 
 //Todo: Add A Config to initialize this
 //Todo: Add More Window Options stuffs

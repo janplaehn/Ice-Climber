@@ -24,9 +24,9 @@ bool Physics::IsColliding(Vector2D point, AABBCollider* collider)
 	float left, right, top, bottom;
 
 	left = rect.x;
-	right = rect.x + collider->_width;
+	right = rect.x + collider->GetScale().x;
 	bottom = rect.y;
-	top = rect.y + collider->_height;
+	top = rect.y + collider->GetScale().y;
 
 	if (right < point.x) return false;
 	if (point.x < left) return false;
@@ -216,7 +216,7 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 
 	float remainingtime = 1.0f - collisiontime;
 
-	if (!rb->_collider->_isTrigger && !collider->_isTrigger && !rb->_isKinematic) {
+	if (!rb->_collider->IsTrigger() && !collider->IsTrigger() && !rb->_isKinematic) {
 
 		rb->_transform->_position = rb->_transform->_position - out_normal * 0.9f;
 
@@ -230,7 +230,7 @@ void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
 
 		//This is bad and only works in our case!
 		if (out_normal.y == -1 && rb->_velocity.y < 0) {
-			rb->_transform->_position.y = collider->GetRect().y + collider->GetRect().h + rb->_collider->_offset.y - 2.0f;
+			rb->_transform->_position.y = collider->GetRect().y + collider->GetRect().h + 2.0f;
 		}
 
 		if (GameMath::Sign(out_normal.x) == GameMath::Sign(rb->_velocity.x)) {

@@ -7,6 +7,8 @@ public:
 	float x, y;
 	Vector2D();
 
+	Vector2D(float xy);
+
 	Vector2D(float x, float y);
 
 	Vector2D operator+(const Vector2D& rhs);

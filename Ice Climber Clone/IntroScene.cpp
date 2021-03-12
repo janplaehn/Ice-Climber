@@ -24,15 +24,13 @@ void IntroScene::Load()
 		stageLeft->_transform->_pivot = Vector2D(0, 1);
 		stageLeft->_transform->_position = Vector2D(0, height);
 		AABBCollider* stageColliderLeft = stageLeft->AddComponent<AABBCollider>();
-		stageColliderLeft->_width = width;
-		stageColliderLeft->_height = 7;
+		stageColliderLeft->SetScale(Vector2D(width, 7));
 
 		GameObject* stageRight = new GameObject();
 		stageRight->_transform->_pivot = Vector2D(1, 1);
 		stageRight->_transform->_position = Vector2D(Screen::_width, height);
 		AABBCollider* stageColliderRight = stageRight->AddComponent<AABBCollider>();
-		stageColliderRight->_width = width;
-		stageColliderRight->_height = 7;
+		stageColliderRight->SetScale(Vector2D(width, 7));
 
 
 		float tileCount = (i == 0) ? 24 : 22;
@@ -45,8 +43,7 @@ void IntroScene::Load()
 			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
 			tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
 			AABBCollider* tileCol = tile->AddComponent<AABBCollider>();
-			tileCol->_width = 8;
-			tileCol->_height = 7;
+			tileCol->SetScale(Vector2D(8, 7));
 		}
 	}
 

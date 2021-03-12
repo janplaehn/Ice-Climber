@@ -1,27 +1,38 @@
 #pragma once
 #include "Component.h"
-#include "Physics.h"
 
 class AABBCollider : public Component
 {
 
 public:
-	float _width = 10;
-	float _height = 10;
-	Vector2D _offset;
-	bool _isTrigger = false;
 
 	AABBCollider();
 
 	void ApplySpriteSize(class Sprite* sprite);
 
-	virtual void BeginPlay();
+	void Render();
 
-	virtual void Update();
+	SDL_Rect GetRect();
 
-	virtual void Render();
+	void SetScale(Vector2D scale);
 
-	virtual void Destroy();
+	Vector2D GetScale();
 
-	virtual SDL_Rect GetRect();
+	void SetOffset(Vector2D offset);
+
+	Vector2D GetOffset();
+
+	void SetTrigger(bool isTrigger);
+
+	bool IsTrigger();
+
+private:
+
+	virtual void Destroy() override;
+
+	Vector2D _scale = Vector2D(10,10);
+
+	Vector2D _offset;
+
+	bool _isTrigger = false;
 };

@@ -10,6 +10,12 @@ Vector2D::Vector2D()
 	this->y = 0;
 }
 
+Vector2D::Vector2D(float xy)
+{
+	this->x = xy;
+	this->y = xy;
+}
+
 Vector2D::Vector2D(float x, float y)
 {
 	this->x = x;

@@ -8,3 +8,5 @@
 #include "Rigidbody.h"
 #include "Transform.h"
 #include "Text.h"
+#include "Sprite.h"
+#include "Camera.h"

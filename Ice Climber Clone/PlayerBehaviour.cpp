@@ -34,11 +34,11 @@ void PlayerBehaviour::Update()
 		_animation->_frameRate = 8;
 		_attackTimer += GameTime::_delta;
 		_hammer->_enabled = true;
-		_hammer->GetComponent<AABBCollider>()->_offset = (_transform->_flipType == SDL_FLIP_HORIZONTAL) ? Vector2D(12, 4) :  Vector2D(-12, 4);
+		_hammer->GetComponent<AABBCollider>()->SetOffset((_transform->_flipType == SDL_FLIP_HORIZONTAL) ? Vector2D(12, 4) :  Vector2D(-12, 4));
 		if (_attackTimer > _attackDuration) {
 			_attackTimer = 0;
 			_isAttacking = false;
-			_hammer->GetComponent<AABBCollider>()->_offset = Vector2D(0, 24);
+			_hammer->GetComponent<AABBCollider>()->SetOffset(Vector2D(0, 24));
 			_hammer->_enabled = false;
 		}
 		return;
@@ -111,7 +111,7 @@ void PlayerBehaviour::Update()
 
 	_hammer->_enabled = !_isOnGround;
 	if (!_isOnGround) {
-		_hammer->GetComponent<AABBCollider>()->_offset = Vector2D(0, 24);
+		_hammer->GetComponent<AABBCollider>()->SetOffset(Vector2D(0, 24));
 	}
 	_hammer->_transform->_position = _transform->_position;
 
@@ -144,7 +144,7 @@ void PlayerBehaviour::Move(float move)
 
 void PlayerBehaviour::OnCollision(AABBCollider* other, Vector2D normal)
 {
-	if (normal.y == -1 && !other->_isTrigger) {
+	if (normal.y == -1 && !other->IsTrigger()) {
 		_timeSinceLastGroundHit = 0.0f;
 		_lastGroundedPosition = _transform->_position;
 		if (!_isAttacking) _animation->_spriteSheet = _walkSprite;
