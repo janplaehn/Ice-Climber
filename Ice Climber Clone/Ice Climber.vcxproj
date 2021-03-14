@@ -169,6 +169,11 @@
     <ClCompile Include="ScoreScene.cpp" />
     <ClCompile Include="ScoreScreenController.cpp" />
     <ClCompile Include="Topi.cpp" />
+    <ClCompile Include="TopiFallingDeadState.cpp" />
+    <ClCompile Include="TopiFetchIceState.cpp" />
+    <ClCompile Include="TopiWalkingDeadState.cpp" />
+    <ClCompile Include="TopiWalkingState.cpp" />
+    <ClCompile Include="TopiWalkWithIceState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BonusTimer.h" />
@@ -193,6 +198,11 @@
     <ClInclude Include="ScoreScene.h" />
     <ClInclude Include="ScoreScreenController.h" />
     <ClInclude Include="Topi.h" />
+    <ClInclude Include="TopiFallingDeadState.h" />
+    <ClInclude Include="TopiFetchIceState.h" />
+    <ClInclude Include="TopiWalkingDeadState.h" />
+    <ClInclude Include="TopiWalkingState.h" />
+    <ClInclude Include="TopiWalkWithIceState.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plaehngine\Plaehngine.vcxproj">

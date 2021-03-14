@@ -49,6 +49,12 @@
     <Filter Include="Header Files\Components\Camera">
       <UniqueIdentifier>{86f38bce-9238-4e96-9a80-4aa48b2fb928}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Enemies\TopiStates">
+      <UniqueIdentifier>{2c06eec5-3714-46a4-a8ff-1a288c56ab73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Enemies\TopiStates">
+      <UniqueIdentifier>{b73a7fa1-37ea-4df8-b883-01d4f4acc8d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IceClimberGame.cpp">
@@ -120,6 +126,21 @@
     <ClCompile Include="PlayerBehaviour.cpp">
       <Filter>Source Files\Components\Player</Filter>
     </ClCompile>
+    <ClCompile Include="TopiWalkingState.cpp">
+      <Filter>Source Files\Components\Enemies\TopiStates</Filter>
+    </ClCompile>
+    <ClCompile Include="TopiFetchIceState.cpp">
+      <Filter>Source Files\Components\Enemies\TopiStates</Filter>
+    </ClCompile>
+    <ClCompile Include="TopiWalkWithIceState.cpp">
+      <Filter>Source Files\Components\Enemies\TopiStates</Filter>
+    </ClCompile>
+    <ClCompile Include="TopiWalkingDeadState.cpp">
+      <Filter>Source Files\Components\Enemies\TopiStates</Filter>
+    </ClCompile>
+    <ClCompile Include="TopiFallingDeadState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IceClimberGame.h">
@@ -187,6 +208,21 @@
     </ClInclude>
     <ClInclude Include="ScoreScene.h">
       <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="TopiWalkingState.h">
+      <Filter>Header Files\Components\Enemies\TopiStates</Filter>
+    </ClInclude>
+    <ClInclude Include="TopiFetchIceState.h">
+      <Filter>Header Files\Components\Enemies\TopiStates</Filter>
+    </ClInclude>
+    <ClInclude Include="TopiWalkWithIceState.h">
+      <Filter>Header Files\Components\Enemies\TopiStates</Filter>
+    </ClInclude>
+    <ClInclude Include="TopiWalkingDeadState.h">
+      <Filter>Header Files\Components\Enemies\TopiStates</Filter>
+    </ClInclude>
+    <ClInclude Include="TopiFallingDeadState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -23,6 +23,7 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioSource.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="ImageFont.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
@@ -46,6 +47,7 @@
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TtfFont.cpp" />
@@ -57,6 +59,7 @@
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioSource.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="GameMath.h" />
     <ClInclude Include="ImageFont.h" />
     <ClInclude Include="Camera.h" />
@@ -81,6 +84,7 @@
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GameTime.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TtfFont.h" />
