@@ -1,9 +1,6 @@
 #include "PlayerBehaviour.h"
-#include "Screen.h"
 #include "ComponentEssentials.h"
 #include "LifeUI.h"
-#include "Camera.h"
-#include "Scenes.h"
 #include "BonusTimer.h"
 #include "ScoreScene.h"
 #include "Scores.h"
@@ -22,7 +19,13 @@ void PlayerBehaviour::Update()
 {
 	if (_hasWon) {
 		_transform->_position = condor->_position + Vector2D::Down() * 24;
+		_transform->_flipType = SDL_FLIP_NONE;
 		if (_transform->_position.x < 1.0f) {
+			condor->_gameObject->_enabled = false;
+			_animation->_enabled = false;
+		}
+		_winTimer += GameTime::_delta;
+		if (_winTimer > 5.3f) {
 			Scores::_hasBonus = true;
 			Scenes::LoadScene<ScoreScene>();
 		}
@@ -150,8 +153,10 @@ void PlayerBehaviour::OnCollision(AABBCollider* other, Vector2D normal)
 		if (!_isAttacking) _animation->_spriteSheet = _walkSprite;
 	}
 
-	if (other->_gameObject->_tag == "Condor") {
+	if (other->_gameObject->_tag == "Condor" && !_hasWon) {
+		_goalSource->Play();
 		condor = other->_transform;
+		_winTimer = 0;
 		for (BonusTimer* timer : _timers) {
 			timer->SetIsCounting(false);
 		}

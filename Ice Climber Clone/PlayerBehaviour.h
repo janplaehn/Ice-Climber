@@ -24,6 +24,7 @@ public:
 	class AudioSource* _jumpSource;
 	class AudioSource* _deathSource;
 	class AudioSource* _gameOverSource;
+	class AudioSource* _goalSource;
 
 	class GameObject* _gameOverUI;
 	class GameObject* _hammer;
@@ -55,5 +56,6 @@ private:
 	Transform* condor = nullptr;
 	float _attackDuration = 2.0f / 8.0f;
 	float _attackTimer = 0;
+	float _winTimer = 0;
 	float _timeSinceLastGroundHit = 0.05f;
 };

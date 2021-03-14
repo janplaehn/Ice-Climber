@@ -74,6 +74,8 @@ PlayerBehaviour* LevelScene::LoadPlayer()
 	playerBehaviour->_rigidbody = player->AddComponent<Rigidbody>();
 	playerBehaviour->_rigidbody->_linearDrag = 4.5f;
 	playerBehaviour->_rigidbody->_gravityScale = 0.5f;
+	playerBehaviour->_goalSource = player->AddComponent<AudioSource>();
+	playerBehaviour->_goalSource->_clip = Audio::LoadSound("Assets/Music/goal.wav");
 
 	playerBehaviour->_hammer = new GameObject();
 	playerBehaviour->_hammer->_tag = "Hammer";
