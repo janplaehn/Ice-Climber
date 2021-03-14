@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
-class ScoreScreen : public Scene
+
+class ScoreScene : public Scene
 {
 public:
 	virtual void Load() override;

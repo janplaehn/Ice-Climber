@@ -1,11 +1,11 @@
 #include "IceClimbergame.h"
 #include "Scenes.h"
-#include "PlayScene.h"
+#include "LevelScene.h"
 #include "MainMenu.h"
 #include "TtfFont.h"
 #include "ImageFont.h"
 #include "DebugPhysicsScene.h"
-#include "ScoreScreen.h"
+#include "ScoreScene.h"
 #include "IntroScene.h"
 
 void IceClimberGame::Init()

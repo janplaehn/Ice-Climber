@@ -7,23 +7,19 @@ class Rigidbody : public Component
 public:
 	Rigidbody();
 
-	Vector2D _velocity;
+	Vector2D _velocity = Vector2D::Zero();
 	float _gravityScale = 1.0f;
 	float _linearDrag = 0.0f;
 	bool _isKinematic = false;
-	bool _preventCollisions = true;
 
-	const float GRAVITY = 981.0f;
-
-	virtual void BeginPlay();
+private:
+	virtual void BeginPlay() override;
 	virtual void Update() override;
-	virtual void Destroy();
+	virtual void Destroy() override;
 
-protected:
 	void ApplyDrag();
 	void ApplyGravity();
 
-private:
 	Vector2D _previousPosition;
 	Vector2D _targetMoveDelta;
 	class AABBCollider* _collider = nullptr;

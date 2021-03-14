@@ -3,7 +3,7 @@
 
 class Transform;
 
-class CameraManager :	public Component
+class LevelCamera :	public Component
 {
 public:
 

@@ -99,7 +99,7 @@ void Graphics::RenderPoint(Vector2D point, Color tint)
 
 	//Apply Position
 	rect.x = point.x - Camera::_position.x;
-	rect.y = point.y + -Camera::_position.y * -1.0f + Screen::_height;
+	rect.y = point.y - Camera::_position.y * -1.0f + Screen::_height;
 	rect.w = 1;
 	rect.h = 1;
 

@@ -1,38 +1,55 @@
-#include "PlayScene.h"
+#include "LevelScene.h"
 #include "PlayerBehaviour.h"
 #include "Topi.h"
-#include "GameOverUIBehaviour.h"
+#include "GameOverUI.h"
 #include "LifeUI.h"
 #include "Nitpicker.h"
 #include "Cloud.h"
-#include "HammerTrigger.h"
-#include "CameraManager.h"
+#include "Hammer.h"
+#include "LevelCamera.h"
 #include <Random.h>
 #include "BonusTimer.h"
 #include "Scores.h"
-#include "objectPool.h"
+#include "ObjectPool.h"
 #include "Debris.h"
 
-void PlayScene::Load()
+void LevelScene::Load()
 {
 	Scores::Reset();
 
-	//Setup Background
-	GameObject* background = new GameObject();
-	SpriteRenderer* background_render = background->AddComponent<SpriteRenderer>();
-	background_render->_sprite = Sprite::Create("Assets/Sprites/Backgrounds/default.png");
-	background_render->_order = -100;
-	background->_transform->_position = Vector2D(Screen::_width / 2, background_render->_sprite->GetHeight() / 2);
+	PlayerBehaviour* player = LoadPlayer();
+	LoadBackground();
+	LoadMusic();
+	LoadTopis();
+	LoadNitpickers();
+	LoadMainStage();
+	LoadBonusStage(player);
+	LoadUI(player);
 
+	GameObject* camera = new GameObject();
+	camera->AddComponent<LevelCamera>()->SetPlayerTransform(player->_transform);	
+}
 
-	//Setup background Music
+void LevelScene::LoadBackground()
+{
+	GameObject* gameObject = new GameObject();
+	SpriteRenderer* renderer = gameObject->AddComponent<SpriteRenderer>();
+	renderer->_sprite = Sprite::Create("Assets/Sprites/Backgrounds/default.png");
+	renderer->_order = -100;
+	gameObject->_transform->_position = Vector2D(Screen::_width / 2, renderer->_sprite->GetHeight() / 2);
+}
+
+void LevelScene::LoadMusic()
+{
 	GameObject* music = new GameObject();
 	AudioSource* musicSrc = music->AddComponent<AudioSource>();
 	musicSrc->_clip = Audio::LoadSound("Assets/Music/stage.wav");
 	musicSrc->_isLooping = true;
 	musicSrc->Play();
+}
 
-	//Setup Player
+PlayerBehaviour* LevelScene::LoadPlayer()
+{
 	GameObject* player = new GameObject();
 	player->_transform->_pivot = Vector2D(0.5f, 0.75f);
 	player->_transform->_position.x = Screen::_width / 2;
@@ -60,7 +77,7 @@ void PlayScene::Load()
 
 	playerBehaviour->_hammer = new GameObject();
 	playerBehaviour->_hammer->_tag = "Hammer";
-	HammerTrigger* hammerTrigger = playerBehaviour->_hammer->AddComponent<HammerTrigger>();
+	Hammer* hammer = playerBehaviour->_hammer->AddComponent<Hammer>();
 	AABBCollider* hammerCol = playerBehaviour->_hammer->AddComponent<AABBCollider>();
 	playerBehaviour->_hammer->AddComponent<Rigidbody>()->_isKinematic = true;
 	hammerCol->SetTrigger(true);
@@ -68,10 +85,28 @@ void PlayScene::Load()
 	hammerCol->SetScale(Vector2D(8, 8));
 	AudioSource* tileBreakSource = playerBehaviour->_hammer->AddComponent<AudioSource>();
 	tileBreakSource->_clip = Audio::LoadSound("Assets/Sounds/tileBreak.wav");
-	hammerTrigger->SetTileBreakAudioSource(tileBreakSource);
+	hammer->SetTileBreakAudioSource(tileBreakSource);
 
+	const int DEBRISCOUNT = 5;
+	ObjectPool* debrisPool = new ObjectPool();
+	hammer->SetDebrisPool(debrisPool);
+	for (size_t i = 0; i < DEBRISCOUNT; i++)
+	{
+		GameObject* debrisGo = new GameObject();
+		SpriteRenderer* debrisRenderer = debrisGo->AddComponent<SpriteRenderer>();
+		debrisRenderer->_sprite = Sprite::Create("Assets/Sprites/Environment/debris_blue.png");
+		debrisRenderer->_order = 100;
+		debrisGo->AddComponent<Rigidbody>();
+		debrisGo->AddComponent<Debris>();
 
-	//Setup Topis
+		debrisPool->Add(debrisGo);
+	}
+
+	return playerBehaviour;
+}
+
+void LevelScene::LoadTopis()
+{
 	for (int i = 0; i < 4; i++)
 	{
 		GameObject* topi = new GameObject();
@@ -102,9 +137,12 @@ void PlayScene::Load()
 		topiBehaviour->_ice->AddComponent<AABBCollider>()->SetTrigger(true);
 
 	}
+}
+
+void LevelScene::LoadNitpickers()
+{
 	for (int i = 0; i < 2; i++)
 	{
-		//Setup Nitpicker
 		GameObject* nitpicker = new GameObject();
 		nitpicker->_tag = "Enemy";
 		nitpicker->_transform->_position.y = 200 + i * 248;
@@ -122,33 +160,14 @@ void PlayScene::Load()
 		deathAudioSource->_clip = Audio::LoadSound("Assets/Sounds/nitpickerDeath.wav");
 		nitBehaviour->SetDeathAudioSource(deathAudioSource);
 	}
+}
 
-	//Setup Ground Collider
-	GameObject* floor = new GameObject();
-	floor->_transform->_pivot = Vector2D(0, 1);
-	AABBCollider* floorCollider = floor->AddComponent<AABBCollider>();
-	floorCollider->SetScale(Vector2D(Screen::_width, 24));
-
+void LevelScene::LoadMainStage()
+{
 	LoadStageCollider(Vector2D::Zero(), Vector2D(0, 1), Vector2D(Screen::_width, 24));
 
-	const int DEBRISCOUNT = 5;
-	ObjectPool* debrisPool = new ObjectPool();
-	hammerTrigger->SetDebrisPool(debrisPool);
-	for (size_t i = 0; i < DEBRISCOUNT; i++)
-	{
-		GameObject* debrisGo = new GameObject();
-		SpriteRenderer* debrisRenderer = debrisGo->AddComponent<SpriteRenderer>();
-		debrisRenderer->_sprite = Sprite::Create("Assets/Sprites/Environment/debris_blue.png");
-		debrisRenderer->_order = 100;
-		debrisGo->AddComponent<Rigidbody>();
-		debrisGo->AddComponent<Debris>();
-
-		debrisPool->Add(debrisGo);
-	}
-
-	//Setup Stage Colliders
-	int COUNT = 7;
-	for (int i = 0; i < COUNT; i++)
+	int FLOORCOUNT = 7;
+	for (int i = 0; i < FLOORCOUNT; i++)
 	{
 		float height = 64 + i * 48;
 		float width = 40;
@@ -157,7 +176,6 @@ void PlayScene::Load()
 
 		LoadStageCollider(Vector2D(0, height), Vector2D(0, 1), Vector2D(width, 7));
 		LoadStageCollider(Vector2D(Screen::_width, height), Vector2D(1, 1), Vector2D(width, 7));
-
 
 		float tileCount = (i == 0) ? 24 : 22;
 		for (int x = 0; x < tileCount; x++)
@@ -168,29 +186,72 @@ void PlayScene::Load()
 			tile->_transform->_position = Vector2D(width + x * 8, height);
 			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
 			tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
-			AABBCollider* tileCol =  tile->AddComponent<AABBCollider>();
+			AABBCollider* tileCol = tile->AddComponent<AABBCollider>();
 			tileCol->SetScale(Vector2D(8, 7));
 		}
 	}
+}
 
-	//Setup UI
+void LevelScene::LoadBonusStage(PlayerBehaviour* player)
+{
+	LoadTimer(player, Vector2D(24, 608));
+	//1st floor
+	LoadStageCollider(Vector2D(0, 400), Vector2D(0, 1), Vector2D(56, 7));
+	LoadStageCollider(Vector2D(Screen::_width, 400), Vector2D(1, 1), Vector2D(56, 7));
+	LoadStageCollider(Vector2D(72, 400), Vector2D(0, 1), Vector2D(48, 7));
+	LoadStageCollider(Vector2D(Screen::_width - 72, 400), Vector2D(1, 1), Vector2D(48, 7));
+	//2nd floor
+	LoadStageCollider(Vector2D(48, 432), Vector2D(0, 1), Vector2D(32, 7));
+	LoadEggplant(Vector2D(56, 440));
+	LoadStageCollider(Vector2D(Screen::_width - 48, 432), Vector2D(1, 1), Vector2D(32, 7));
+	LoadStageCollider(Vector2D(104, 432), Vector2D(0, 1), Vector2D(48, 7));
+	LoadCloud(Vector2D(128, 480), true);
+	//> 3rd Floor
+	LoadStageCollider(Vector2D(40, 528), Vector2D(0, 1), Vector2D(56, 7));
+	LoadStageCollider(Vector2D(144, 520), Vector2D(0, 1), Vector2D(32, 7));
+	LoadEggplant(Vector2D(152, 528));
+	LoadStageCollider(Vector2D(168, 560), Vector2D(0, 1), Vector2D(24, 7));
+	LoadStageCollider(Vector2D(96, 568), Vector2D(0, 1), Vector2D(48, 7));
+	LoadEggplant(Vector2D(102, 576));
+	LoadCloud(Vector2D(128, 608), false);
+	LoadStageCollider(Vector2D(128, 648), Vector2D(0, 1), Vector2D(32, 7));
+	LoadStageCollider(Vector2D(64, 656), Vector2D(0, 1), Vector2D(24, 7));
+	LoadStageCollider(Vector2D(152, 680), Vector2D(0, 1), Vector2D(24, 7));
+	LoadStageCollider(Vector2D(96, 696), Vector2D(0, 1), Vector2D(24, 7));
+	LoadStageCollider(Vector2D(112, 720), Vector2D(0, 1), Vector2D(32, 7));
+	LoadStageCollider(Vector2D(48, 760), Vector2D(0, 1), Vector2D(56, 7));
+	LoadStageCollider(Vector2D(Screen::_width - 48, 760), Vector2D(1, 1), Vector2D(48, 7));
+	if (player)	LoadCondor();
+	LoadTimer(player, Vector2D(24, 848));
+}
 
+void LevelScene::LoadStageCollider(Vector2D position, Vector2D pivot, Vector2D scale)
+{
+	GameObject* gameObject = new GameObject();
+	gameObject->_transform->_pivot = pivot;
+	gameObject->_transform->_position = Vector2D(position);
+	AABBCollider* collider = gameObject->AddComponent<AABBCollider>();
+	collider->SetScale(scale);
+}
+
+void LevelScene::LoadUI(PlayerBehaviour* player)
+{
 	//GameOver UI
 	GameObject* gameOver = new GameObject();
 	gameOver->_transform->_position = Vector2D(128, 0);
 	SpriteRenderer* gameOverRenderer = gameOver->AddComponent<SpriteRenderer>();
 	gameOver->_transform->_isInScreenSpace = true;
 	gameOverRenderer->_sprite = Sprite::Create("Assets/Sprites/UI/gameOver.png");
-	gameOver->AddComponent<GameOverUIBehaviour>();
+	gameOver->AddComponent<GameOverUI>();
 	gameOver->_enabled = false;
-	playerBehaviour->_gameOverUI = gameOver;
+	player->_gameOverUI = gameOver;
 
 	//Lives UI
 	GameObject* lifeUI = new GameObject();
 	LifeUI* lifeUIComponent = lifeUI->AddComponent<LifeUI>();
-	playerBehaviour->_lifeUI = lifeUIComponent;
+	player->_lifeUI = lifeUIComponent;
 
-	for (int i = 0; i < playerBehaviour->_lives; i++)
+	for (int i = 0; i < player->_lives; i++)
 	{
 		GameObject* lifeUIelement = new GameObject();
 		lifeUIelement->_transform->_pivot = Vector2D(0, 0);
@@ -200,98 +261,53 @@ void PlayScene::Load()
 		lifeUIelementRenderer->_sprite = Sprite::Create("Assets/Sprites/UI/life.png");
 		lifeUIComponent->AddRenderer(lifeUIelementRenderer);
 	}
+}
 
-	GameObject* camera = new GameObject();
-	camera->AddComponent<CameraManager>()->SetPlayerTransform(player->_transform);
+void LevelScene::LoadEggplant(Vector2D position)
+{
+	GameObject* gameObject = new GameObject();
+	gameObject->_transform->_pivot = Vector2D(0, 1);
+	gameObject->_transform->_position = position;
+	gameObject->_tag = "Eggplant";
+	gameObject->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
+	gameObject->AddComponent<AABBCollider>()->SetTrigger(true);
+}
 
-	//Setup Bonus Stage :(
-	{
-		//1st timer
-		GameObject* timerGo = new GameObject();
-		timerGo->_transform->_pivot = Vector2D(0, 1);
-		timerGo->_transform->_position = Vector2D(24, 608);
-		BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
-		Text* timerText = timerGo->AddComponent<Text>();
-		timerText->_text = "40.0";
-		timerText->_fontName = "Ice Climber";
-		timerText->_tint = Color::IceClimberOrange();
-		timerGo->_enabled = false;
-		playerBehaviour->_timers.push_back(timer);
+void LevelScene::LoadCloud(Vector2D position, bool moveRight)
+{
+	GameObject* gameObject = new GameObject();
+	gameObject->_transform->_pivot = Vector2D(0.5, 1);
+	gameObject->_transform->_position = position;
+	gameObject->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Environment/cloud.png");
+	AABBCollider* stageCollider = gameObject->AddComponent<AABBCollider>();
+	stageCollider->SetScale(Vector2D(48, 7));
+	gameObject->AddComponent<Cloud>()->SetMoveRight(moveRight);
+}
 
-		//1st floor
-		LoadStageCollider(Vector2D(0, 400), Vector2D(0, 1), Vector2D(56, 7));
-		LoadStageCollider(Vector2D(Screen::_width, 400), Vector2D(1, 1), Vector2D(56, 7));
-		LoadStageCollider(Vector2D(72, 400), Vector2D(0, 1), Vector2D(48, 7));
-		LoadStageCollider(Vector2D(Screen::_width - 72, 400), Vector2D(1, 1), Vector2D(48, 7));
-
-		//2nd floor
-		LoadStageCollider(Vector2D(48, 432), Vector2D(0, 1), Vector2D(32, 7));
-
-		GameObject* eggplant = new GameObject();
-		eggplant->_transform->_pivot = Vector2D(0, 1);
-		eggplant->_transform->_position = Vector2D(56, 440);
-		eggplant->_tag = "Eggplant";
-		eggplant->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
-		eggplant->AddComponent<AABBCollider>()->SetTrigger(true);
-
-		LoadStageCollider(Vector2D(Screen::_width - 48, 432), Vector2D(1, 1), Vector2D(32, 7));
-		LoadStageCollider(Vector2D(104, 432), Vector2D(0, 1), Vector2D(48, 7));
-
-		//First Cloud
-		GameObject* stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0.5, 1);
-		stage->_transform->_position = Vector2D(128, 480);
-		stage->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Environment/cloud.png");
-		AABBCollider* stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(48, 7));
-		stage->AddComponent<Cloud>()->SetMoveRight(true);
-
-
-		//> 3rd Floor
-		LoadStageCollider(Vector2D(40, 528), Vector2D(0, 1), Vector2D(56, 7));
-		LoadStageCollider(Vector2D(144, 520), Vector2D(0, 1), Vector2D(32, 7));
-
-		eggplant = new GameObject();
-		eggplant->_transform->_pivot = Vector2D(0, 1);
-		eggplant->_transform->_position = Vector2D(152, 528);
-		eggplant->_tag = "Eggplant";
-		eggplant->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
-		eggplant->AddComponent<AABBCollider>()->SetTrigger(true);
-
-		LoadStageCollider(Vector2D(168, 560), Vector2D(0, 1), Vector2D(24, 7));
-		LoadStageCollider(Vector2D(96, 568), Vector2D(0, 1), Vector2D(48, 7));
-
-		eggplant = new GameObject();
-		eggplant->_transform->_pivot = Vector2D(0, 1);
-		eggplant->_transform->_position = Vector2D(102, 576);
-		eggplant->_tag = "Eggplant";
-		eggplant->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
-		eggplant->AddComponent<AABBCollider>()->SetTrigger(true);
-
-		//Second Cloud
-		stage = new GameObject();
-		stage->_transform->_pivot = Vector2D(0.5, 1);
-		stage->_transform->_position = Vector2D(128, 608);
-		stage->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Environment/cloud.png");
-		stageCollider = stage->AddComponent<AABBCollider>();
-		stageCollider->SetScale(Vector2D(48, 7));
-		stage->AddComponent<Cloud>()->SetMoveRight(false);
-
-		LoadStageCollider(Vector2D(128, 648), Vector2D(0, 1), Vector2D(32, 7));
-		LoadStageCollider(Vector2D(64, 656), Vector2D(0, 1), Vector2D(24, 7));
-		LoadStageCollider(Vector2D(152, 680), Vector2D(0, 1), Vector2D(24, 7));
-		LoadStageCollider(Vector2D(96, 696), Vector2D(0, 1), Vector2D(24, 7));
-		LoadStageCollider(Vector2D(112, 720), Vector2D(0,1), Vector2D(32, 7));
-		LoadStageCollider(Vector2D(48, 760), Vector2D(0,1), Vector2D(56, 7));
-		LoadStageCollider(Vector2D(Screen::_width - 48, 760), Vector2D(1,1), Vector2D(48, 7));
+void LevelScene::LoadTimer(PlayerBehaviour* player, Vector2D position)
+{
+	//1st timer
+	GameObject* timerGo = new GameObject();
+	timerGo->_transform->_pivot = Vector2D(0, 1);
+	timerGo->_transform->_position = position;
+	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
+	Text* timerText = timerGo->AddComponent<Text>();
+	timerText->_text = "40.0";
+	timerText->_fontName = "Ice Climber";
+	timerText->_tint = Color::IceClimberOrange();
+	timerGo->_enabled = false;
+	if (player) {
+		player->_timers.push_back(timer);
 	}
+}
 
-	//Setup Condor
+void LevelScene::LoadCondor()
+{
 	GameObject* condorGo = new GameObject();
 	condorGo->_tag = "Condor";
 	condorGo->_transform->_pivot = Vector2D(0.5, 1);
 	condorGo->_transform->_position = Vector2D(Screen::_width / 2, 832);
-	Animation*  condorAnim = condorGo->AddComponent<Animation>();
+	Animation* condorAnim = condorGo->AddComponent<Animation>();
 	condorAnim->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Condor/fly.png");
 	condorAnim->_spriteWidth = 32;
 	condorAnim->_frameRate = 8;
@@ -302,25 +318,4 @@ void PlayScene::Load()
 	Cloud* cloud = condorGo->AddComponent<Cloud>();
 	cloud->SetMoveRight(false);
 	cloud->SetSpeed(40);
-
-	//2nd timer
-	GameObject* timerGo = new GameObject();
-	timerGo->_transform->_pivot = Vector2D(0, 1);
-	timerGo->_transform->_position = Vector2D(24, 848);
-	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
-	Text* timerText = timerGo->AddComponent<Text>();
-	timerText->_text = "40.0";
-	timerText->_fontName = "Ice Climber";
-	timerText->_tint = Color::IceClimberOrange();
-	timerGo->_enabled = false;
-	playerBehaviour->_timers.push_back(timer);
-}
-
-void PlayScene::LoadStageCollider(Vector2D position, Vector2D pivot, Vector2D scale)
-{
-	GameObject* gameObject = new GameObject();
-	gameObject->_transform->_pivot = pivot;
-	gameObject->_transform->_position = Vector2D(position);
-	AABBCollider* collider = gameObject->AddComponent<AABBCollider>();
-	collider->SetScale(scale);
 }

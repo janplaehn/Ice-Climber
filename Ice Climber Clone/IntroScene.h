@@ -1,7 +1,7 @@
 #pragma once
-#include "Scene.h"
+#include "LevelScene.h"
 
-class IntroScene : public Scene
+class IntroScene : public LevelScene
 {
 	virtual void Load() override;
 };

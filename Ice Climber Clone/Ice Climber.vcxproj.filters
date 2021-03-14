@@ -37,6 +37,18 @@
     <Filter Include="Source Files\Scenes">
       <UniqueIdentifier>{3064126b-a39e-45b9-93c8-5a093656938a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\Camera">
+      <UniqueIdentifier>{40882d4f-5fe8-48fc-918a-1fd1279f6a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Player">
+      <UniqueIdentifier>{8433103f-5499-4334-bf12-d78c10904b20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Player">
+      <UniqueIdentifier>{3fa6ea4a-fe30-448b-9ed8-75acb2e94d89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Camera">
+      <UniqueIdentifier>{86f38bce-9238-4e96-9a80-4aa48b2fb928}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IceClimberGame.cpp">
@@ -45,19 +57,13 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBehaviour.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverUIBehaviour.cpp">
+    <ClCompile Include="GameOverUI.cpp">
       <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
     <ClCompile Include="LifeUI.cpp">
       <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
     <ClCompile Include="Cloud.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="HammerTrigger.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Nitpicker.cpp">
@@ -69,7 +75,7 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Components\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="PlayScene.cpp">
+    <ClCompile Include="LevelScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
@@ -81,7 +87,7 @@
     <ClCompile Include="Scores.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreScreen.cpp">
+    <ClCompile Include="ScoreScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="IntroScene.cpp">
@@ -89,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="BonusTimer.cpp">
       <Filter>Source Files\Components\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Counter.cpp">
       <Filter>Source Files\Components\UI</Filter>
@@ -102,21 +105,27 @@
     <ClCompile Include="IceClimberButton.cpp">
       <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
-    <ClCompile Include="IntroCamera.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="ScoreScreenController.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelCamera.cpp">
+      <Filter>Source Files\Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroCamera.cpp">
+      <Filter>Source Files\Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Hammer.cpp">
+      <Filter>Source Files\Components\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBehaviour.cpp">
+      <Filter>Source Files\Components\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IceClimberGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBehaviour.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverUIBehaviour.h">
+    <ClInclude Include="GameOverUI.h">
       <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="LifeUI.h">
@@ -128,13 +137,10 @@
     <ClInclude Include="Nitpicker.h">
       <Filter>Header Files\Components\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="HammerTrigger.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Components\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="PlayScene.h">
+    <ClInclude Include="LevelScene.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
@@ -146,25 +152,16 @@
     <ClInclude Include="IceClimberButton.h">
       <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Scores.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BonusTimer.h">
       <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Counter.h">
       <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="Debris.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="IntroCamera.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="IntroScene.h">
@@ -175,6 +172,21 @@
     </ClInclude>
     <ClInclude Include="Topi.h">
       <Filter>Header Files\Components\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelCamera.h">
+      <Filter>Header Files\Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroCamera.h">
+      <Filter>Header Files\Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Hammer.h">
+      <Filter>Header Files\Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBehaviour.h">
+      <Filter>Header Files\Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreScene.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

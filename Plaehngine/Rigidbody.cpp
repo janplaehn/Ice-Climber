@@ -39,7 +39,7 @@ void Rigidbody::ApplyDrag()
 
 void Rigidbody::ApplyGravity()
 {
-	_velocity.y -= GRAVITY * GameTime::_delta * _gravityScale;
+	_velocity.y -= Physics::GRAVITY * GameTime::_delta * _gravityScale;
 }
 
 void Rigidbody::Destroy()

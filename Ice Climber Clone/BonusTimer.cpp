@@ -1,6 +1,6 @@
 #include "BonusTimer.h"
 #include "Scenes.h"
-#include "ScoreScreen.h"
+#include "ScoreScene.h"
 #include "Scores.h"
 #include <iomanip>
 #include <sstream>
@@ -43,7 +43,7 @@ void BonusTimer::CheckTimerEnd()
 
 	_currentTime = 0;
 	Scores::_hasBonus = false;
-	Scenes::LoadScene<ScoreScreen>();
+	Scenes::LoadScene<ScoreScene>();
 }
 
 void BonusTimer::SetTime(float time)

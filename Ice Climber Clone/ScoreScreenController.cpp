@@ -1,6 +1,6 @@
 #include "ScoreScreenController.h"
 #include "Scenes.h"
-#include "PlayScene.h"
+#include "LevelScene.h"
 
 void ScoreScreenController::Update()
 {
@@ -8,6 +8,6 @@ void ScoreScreenController::Update()
 	if (_timer < INPUT_DELAY) return;
 
 	if (Input::GetKeyStatus(SDL_SCANCODE_SPACE) == Input::PRESSED) {
-		Scenes::LoadScene<PlayScene>();
+		Scenes::LoadScene<LevelScene>();
 	}
 }

@@ -10,7 +10,6 @@ class Transform;
 class GameObject
 {
 protected:
-	std::vector<GameObject*> _receivers;
 	std::vector<Component*> _components;
 
 public:

@@ -263,3 +263,4 @@ void Physics::DrawCollisions()
 std::vector<AABBCollider*> Physics::_colliders;
 std::vector<Rigidbody*> Physics::_rigidbodies;
 std::vector<Vector2D> Physics::_pointCastPositions;
+const float Physics::GRAVITY = 981.0f;;

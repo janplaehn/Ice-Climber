@@ -17,7 +17,7 @@ public:
 	static void SortRenderers();
 
 private:
-	struct furtherBack
+	struct FurtherBack
 	{
 		inline bool operator() (Renderer* sr1, Renderer* sr2) {
 			if (!sr1->_transform->_isInScreenSpace && sr2->_transform->_isInScreenSpace) {

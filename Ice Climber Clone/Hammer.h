@@ -5,7 +5,7 @@ class AABBCollider;
 class AudioSource;
 class ObjectPool;
 
-class HammerTrigger : public Component
+class Hammer : public Component
 {
 public:
 

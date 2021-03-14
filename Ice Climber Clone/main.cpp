@@ -4,12 +4,13 @@
 
 int main(int argc, char** argv)
 {
-	Plaehngine engine;
+	Plaehngine* engine = new Plaehngine();;
 	IceClimberGame* game = new IceClimberGame();
 
-	engine.Init(game);
-	engine.Run();
-	engine.Destroy();
+	engine->Init(game);
+	engine->Run();
+	engine->Destroy();
+	delete engine;
 
 	return 0;
 }

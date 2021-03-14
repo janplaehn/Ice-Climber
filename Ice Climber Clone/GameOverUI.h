@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 
-class GameOverUIBehaviour : public Component
+class GameOverUI : public Component
 {
 private:
 

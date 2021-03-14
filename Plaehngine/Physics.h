@@ -9,6 +9,9 @@ struct SDL_Rect;
 class Physics
 {
 public:
+
+	static const float GRAVITY;
+
 	static void Run();
 
 	static void DrawCollisions();

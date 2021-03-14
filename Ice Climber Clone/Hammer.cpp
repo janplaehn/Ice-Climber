@@ -1,9 +1,9 @@
-#include "HammerTrigger.h"
+#include "Hammer.h"
 #include "ComponentEssentials.h"
 #include "Enemy.h"
 #include "Scores.h"
 
-void HammerTrigger::Update()
+void Hammer::Update()
 {
 	_timer -= GameTime::_delta;
 	if (_timer > 0) return;
@@ -11,7 +11,7 @@ void HammerTrigger::Update()
 	BreakTiles();
 }
 
-void HammerTrigger::BreakTiles()
+void Hammer::BreakTiles()
 {
 	if (_overlappingTiles.size() == 0) return;
 
@@ -19,7 +19,7 @@ void HammerTrigger::BreakTiles()
 	BreakTile(closest);
 }
 
-void HammerTrigger::BreakTile(GameObject* tile)
+void Hammer::BreakTile(GameObject* tile)
 {
 	tile->_enabled = false;
 	_tileBreakSource->Play();
@@ -29,7 +29,7 @@ void HammerTrigger::BreakTile(GameObject* tile)
 	SpawnDebris(tile->_transform->_position);
 }
 
-GameObject* HammerTrigger::FindClosestOverlappingTile()
+GameObject* Hammer::FindClosestOverlappingTile()
 {
 	if (_overlappingTiles.size() == 0) return nullptr;
 
@@ -46,7 +46,7 @@ GameObject* HammerTrigger::FindClosestOverlappingTile()
 	return closest;
 }
 
-void HammerTrigger::SpawnDebris(Vector2D position)
+void Hammer::SpawnDebris(Vector2D position)
 {
 	if (_debrisPool->AnyAvailable()) {
 		GameObject* debris = _debrisPool->FirstAvailable();
@@ -61,7 +61,7 @@ void HammerTrigger::SpawnDebris(Vector2D position)
 	}
 }
 
-void HammerTrigger::OnCollision(AABBCollider* other, Vector2D normal)
+void Hammer::OnCollision(AABBCollider* other, Vector2D normal)
 {
 	if (_timer > 0) return;
 
@@ -76,12 +76,12 @@ void HammerTrigger::OnCollision(AABBCollider* other, Vector2D normal)
 	}
 }
 
-void HammerTrigger::SetTileBreakAudioSource(AudioSource* source)
+void Hammer::SetTileBreakAudioSource(AudioSource* source)
 {
 	_tileBreakSource = source;
 }
 
-void HammerTrigger::SetDebrisPool(ObjectPool* pool)
+void Hammer::SetDebrisPool(ObjectPool* pool)
 {
 	_debrisPool = pool;
 }

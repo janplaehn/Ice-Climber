@@ -8,10 +8,6 @@
 #include "Graphics.h"
 #include "Physics.h"
 
-//Todo: Add A Config to initialize this
-//Todo: Add More Window Options stuffs
-//Todo: Add Player Settings (Name, etc.)
-
 void Plaehngine::Init(Game* game)
 {
 	SDL_Log("Initializing the engine...\n");

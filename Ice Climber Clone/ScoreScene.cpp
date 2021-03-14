@@ -1,9 +1,9 @@
-#include "ScoreScreen.h"
+#include "ScoreScene.h"
 #include "Scores.h"
 #include "ScoreScreenController.h"
 #include "Counter.h"
 
-void ScoreScreen::Load()
+void ScoreScene::Load()
 {
 	//Setup Background
 	GameObject* background = new GameObject();
@@ -92,7 +92,7 @@ void ScoreScreen::Load()
 	_mountainIndex++;
 }
 
-std::string ScoreScreen::ToString(int number, int digitCount)
+std::string ScoreScene::ToString(int number, int digitCount)
 {
 	std::string string = std::to_string(number);
 	int length = string.size();
@@ -103,4 +103,4 @@ std::string ScoreScreen::ToString(int number, int digitCount)
 	return string;
 }
 
-int ScoreScreen::_mountainIndex = 1;
+int ScoreScene::_mountainIndex = 1;

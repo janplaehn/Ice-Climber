@@ -5,7 +5,7 @@
 #include "Camera.h"
 #include "Scenes.h"
 #include "BonusTimer.h"
-#include "ScoreScreen.h"
+#include "ScoreScene.h"
 #include "Scores.h"
 
 void PlayerBehaviour::BeginPlay()
@@ -24,7 +24,7 @@ void PlayerBehaviour::Update()
 		_transform->_position = condor->_position + Vector2D::Down() * 24;
 		if (_transform->_position.x < 1.0f) {
 			Scores::_hasBonus = true;
-			Scenes::LoadScene<ScoreScreen>();
+			Scenes::LoadScene<ScoreScene>();
 		}
 		return;
 	}
@@ -121,7 +121,7 @@ void PlayerBehaviour::Update()
 	if ((_transform->_position.y - Camera::_position.y) < 0) {
 		if (_isInBonus) {
 			Scores::_hasBonus = false;
-			Scenes::LoadScene<ScoreScreen>();
+			Scenes::LoadScene<ScoreScene>();
 		}
 		else {
 			LoseLife();

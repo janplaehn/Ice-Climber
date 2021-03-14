@@ -3,7 +3,7 @@
 #include "IceClimberButton.h"
 #include "UINavigator.h"
 #include "Scores.h"
-#include "ScoreScreen.h"
+#include "ScoreScene.h"
 #include "Scenes.h"
 #include "IntroScene.h"
 
@@ -74,7 +74,7 @@ void MainMenu::Load()
 	mountainCounterGo->_transform->_position = Vector2D(Screen::_width / 2 + 31, 73);
 	Text* mountainCounter = mountainCounterGo->AddComponent<Text>();
 	mountainCounter->_fontName = "Ice Climber";
-	mountainCounter->_text = ToString(ScoreScreen::_mountainIndex, 2);
+	mountainCounter->_text = ToString(ScoreScene::_mountainIndex, 2);
 	mountainCounter->_tint = Color::IceClimberBlue();
 }
 

@@ -1,13 +1,13 @@
-#include "CameraManager.h"
+#include "LevelCamera.h"
 #include <Camera.h>
 #include "ComponentEssentials.h"
 
-void CameraManager::SetPlayerTransform(Transform* player)
+void LevelCamera::SetPlayerTransform(Transform* player)
 {
 	_player = player;
 }
 
-void CameraManager::Update()
+void LevelCamera::Update()
 {
 	if (_player->_position.y > _highestPlayerPosition) {
 		_highestPlayerPosition = _player->_position.y;
