@@ -8,26 +8,19 @@ void IntroScene::Load()
 	LoadMainStage();
 	LoadTopis();
 	LoadNitpickers();
-
 	LoadCloud(Vector2D(128, 480), true);
 	LoadCloud(Vector2D(128, 608), false);
+	LoadStaticTimer(Vector2D(24, 608));
+	LoadStaticTimer(Vector2D(24, 848));
+	LoadIntroCondor();
+}
 
-	//1st timer
-	GameObject* timerGo = new GameObject();
-	timerGo->_transform->_pivot = Vector2D(0, 1);
-	timerGo->_transform->_position = Vector2D(24, 608);
-	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
-	Text* text = timerGo->AddComponent<Text>();
-	text->_text = "40.0";
-	text->_fontName = "Ice Climber";
-	text->_tint = Color::IceClimberOrange();
-	timer->_enabled = false;
-
-	//Setup Condor
+void IntroScene::LoadIntroCondor()
+{
 	GameObject* condorGo = new GameObject();
 	condorGo->_tag = "Condor";
 	condorGo->_transform->_pivot = Vector2D(0.5, 0.5);
-	condorGo->_transform->_position = Vector2D(Screen::_width / 2, Screen::_height/2);
+	condorGo->_transform->_position = Vector2D(Screen::_width / 2, Screen::_height / 2);
 	condorGo->_transform->_isInScreenSpace = true;
 	Animation* condorAnim = condorGo->AddComponent<Animation>();
 	condorAnim->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Condor/fly.png");
@@ -43,15 +36,17 @@ void IntroScene::Load()
 	SpriteRenderer* eggplantSprite = eggplantGo->AddComponent<SpriteRenderer>();
 	eggplantSprite->_sprite = Sprite::Create("Assets/Sprites/Fruits/eggplant.png");
 	eggplantSprite->_order = 100;
+}
 
-	//2nd timer
-	timerGo = new GameObject();
+void IntroScene::LoadStaticTimer(Vector2D position)
+{
+	GameObject* timerGo = new GameObject();
 	timerGo->_transform->_pivot = Vector2D(0, 1);
-	timerGo->_transform->_position = Vector2D(24, 848);
-	timer = timerGo->AddComponent<BonusTimer>();
-	Text* timerText = timerGo->AddComponent<Text>();
-	timerText->_text = "40.0";
-	timerText->_fontName = "Ice Climber";
-	timerText->_tint = Color::IceClimberOrange();
+	timerGo->_transform->_position = position;
+	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
+	Text* text = timerGo->AddComponent<Text>();
+	text->_text = "40.0";
+	text->_fontName = "Ice Climber";
+	text->_tint = Color::IceClimberOrange();
 	timer->_enabled = false;
 }

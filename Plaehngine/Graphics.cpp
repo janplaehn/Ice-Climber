@@ -61,7 +61,7 @@ void Graphics::Run()
 	}
 
 	//Debug Drawing
-	Physics::DrawCollisions();
+	//Physics::DrawCollisions();
 
 	if (Input::GetKeyStatus(SDL_SCANCODE_F) == Input::PRESSED) {
 		_isFullscreen = !_isFullscreen;
