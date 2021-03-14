@@ -5,6 +5,13 @@
 void IntroScene::Load()
 {
 	LoadBackground();
+
+	GameObject* music = new GameObject();
+	AudioSource* musicSrc = music->AddComponent<AudioSource>();
+	musicSrc->_clip = Audio::LoadSound("Assets/Music/intro.wav");
+	musicSrc->_isLooping = false;
+	musicSrc->Play();
+
 	LoadMainStage();
 	LoadTopis();
 	LoadNitpickers();
