@@ -1,2 +1,2 @@
-# Ice-Climber
+# Ice Climber
 Ice Climber Clone
