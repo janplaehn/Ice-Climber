@@ -1,9 +1,11 @@
 #include "Counter.h"
 #include "Text.h"
+#include "ComponentEssentials.h"
 
 void Counter::BeginPlay()
 {
 	_text = GetComponent<Text>();
+	_source = GetComponent<AudioSource>();
 	_text->_text = ToString(0, _digitCount);
 }
 
@@ -12,8 +14,15 @@ void Counter::Update()
 	_timer += GameTime::_delta;
 	if (_timer < _delay) return;
 
+	if (_timer - GameTime::_delta < _delay) {
+		_source->Play();
+	}
+
 	_currentNumber += _speed * GameTime::_delta * _targetNumber;
-	if (_currentNumber > _targetNumber) _currentNumber = _targetNumber;
+	if (_currentNumber >= _targetNumber) {
+		_currentNumber = _targetNumber;
+		_source->Stop();
+	}
 
 	_text->_text = ToString((int)_currentNumber, _digitCount);
 }

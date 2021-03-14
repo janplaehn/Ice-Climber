@@ -35,6 +35,7 @@ void MainMenu::Load()
 	Text* text = button->_text;
 	text->_text = "1 PLAYER GAME";
 	text->_fontName = "Ice Climber";
+	textHolder->AddComponent<AudioSource>()->_clip = Audio::LoadSound("Assets/Sounds/ui.wav");
 
 	navigator->_buttons.push_back(button);
 
@@ -46,6 +47,7 @@ void MainMenu::Load()
 	text = button->_text;
 	text->_text = "2 PLAYER GAME";
 	text->_fontName = "Ice Climber";
+	textHolder->AddComponent<AudioSource>()->_clip = Audio::LoadSound("Assets/Sounds/ui.wav");
 
 	navigator->_buttons.push_back(button);
 

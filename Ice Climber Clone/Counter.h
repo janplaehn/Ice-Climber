@@ -2,6 +2,7 @@
 #include "Component.h"
 
 class Text;
+class AudioSource;
 
 class Counter : public Component
 {
@@ -26,5 +27,6 @@ private:
 	float _timer = 0;
 	float _currentNumber = 0;
 	Text* _text = nullptr;
+	AudioSource* _source = nullptr;
 };
 

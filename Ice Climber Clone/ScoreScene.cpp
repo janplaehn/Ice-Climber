@@ -2,6 +2,7 @@
 #include "Scores.h"
 #include "ScoreScreenController.h"
 #include "Counter.h"
+#include "AudioSource.h"
 
 void ScoreScene::Load()
 {
@@ -52,6 +53,9 @@ void ScoreScene::Load()
 	eggplantCounterCounter->SetDigitCount(2);
 	eggplantCounterCounter->SetDelay(0.5f);
 	eggplantCounterCounter->SetTargetNumber(Scores::_eggplants);
+	AudioSource* source = eggplantCounterGo->AddComponent<AudioSource>();
+	source->_isLooping = true;
+	source->_clip = Audio::LoadSound("Assets/Sounds/ui.wav");
 
 	GameObject* iceCounterGo = new GameObject();
 	Counter* iceCounterCounter = iceCounterGo->AddComponent<Counter>();
@@ -61,6 +65,9 @@ void ScoreScene::Load()
 	iceCounterCounter->SetDigitCount(2);
 	iceCounterCounter->SetDelay(1.0f);
 	iceCounterCounter->SetTargetNumber(Scores::_ice);
+	source = iceCounterGo->AddComponent<AudioSource>();
+	source->_isLooping = true;
+	source->_clip = Audio::LoadSound("Assets/Sounds/ui.wav");
 
 	GameObject* nitpickerCounterGo = new GameObject();
 	nitpickerCounterGo->_transform->_position = Vector2D(104, 97);
@@ -70,6 +77,9 @@ void ScoreScene::Load()
 	nitCounterCounter->SetDigitCount(2);
 	nitCounterCounter->SetDelay(1.5f);
 	nitCounterCounter->SetTargetNumber(Scores::_nitpickers);
+	source = nitpickerCounterGo->AddComponent<AudioSource>();
+	source->_isLooping = true;
+	source->_clip = Audio::LoadSound("Assets/Sounds/ui.wav");
 
 	GameObject* tileCounterGo = new GameObject();
 	tileCounterGo->_transform->_position = Vector2D(104, 81);
@@ -79,6 +89,9 @@ void ScoreScene::Load()
 	tileCounterCounter->SetDigitCount(2);
 	tileCounterCounter->SetDelay(2.0f);
 	tileCounterCounter->SetTargetNumber(Scores::_tiles);
+	source = tileCounterGo->AddComponent<AudioSource>();
+	source->_isLooping = true;
+	source->_clip = Audio::LoadSound("Assets/Sounds/ui.wav");
 
 	GameObject* totalCounterGo = new GameObject();
 	totalCounterGo->_transform->_position = Vector2D(72, 57);
@@ -89,6 +102,9 @@ void ScoreScene::Load()
 	totalCounterCounter->SetDelay(2.5f);
 	totalCounterCounter->SetTargetNumber(Scores::CalculateTotal());
 	totalCounterCounter->SetSpeed(1.5f);
+	source = totalCounterGo->AddComponent<AudioSource>();
+	source->_isLooping = true;
+	source->_clip = Audio::LoadSound("Assets/Sounds/ui.wav");
 	_mountainIndex++;
 }
 
