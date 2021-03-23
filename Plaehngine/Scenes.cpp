@@ -1,4 +1,5 @@
 #include "Scenes.h"
+#include "SceneSerializer.h"
 
 Scene* Scenes::_currentScene;
 Scene* Scenes::_sceneToLoad;
@@ -12,7 +13,7 @@ void Scenes::Quit()
 
 void Scenes::Run()
 {
-	for (GameObject* go : GameObject::_gameObjects)
+	for (auto go : GameObject::_gameObjects)
 	{
 		go->Update();
 	}
@@ -27,7 +28,7 @@ void Scenes::Run()
 		_currentScene = _sceneToLoad;
 		_sceneToLoad = nullptr;
 
-		for (GameObject* go : GameObject::_gameObjects) {
+		for (auto go : GameObject::_gameObjects) {
 			go->BeginPlay();
 		}
 	}

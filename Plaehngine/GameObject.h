@@ -3,11 +3,12 @@
 #include <vector>
 #include "Screen.h"
 #include <string>
+#include <memory>
 
 class Component;
 class Transform;
 
-class GameObject
+class GameObject : public std::enable_shared_from_this<GameObject>
 {
 protected:
 	std::vector<Component*> _components;
@@ -20,7 +21,7 @@ public:
 
 	std::string _tag = "Default";
 
-	static std::vector<GameObject*> _gameObjects;
+	static std::vector<std::shared_ptr<GameObject>> _gameObjects;
 
 	template <class T>
 	T* AddComponent() {
@@ -54,4 +55,13 @@ public:
 	virtual void Update();
 	virtual void Destroy();
 	void OnCollision(class AABBCollider* otherCollider, struct Vector2D normal);
+
+	int x, y, z;
+
+	// This method lets cereal know which data members to serialize
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(x, y, z, _tag); // serialize things by passing them to the archive
+	}
 };

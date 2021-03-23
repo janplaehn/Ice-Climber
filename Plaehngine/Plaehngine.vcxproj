@@ -42,6 +42,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Scenes.cpp" />
+    <ClCompile Include="SceneSerializer.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Screen.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scenes.h" />
+    <ClInclude Include="SceneSerializer.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Screen.h" />
@@ -162,7 +164,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\SDL2\include;..\SDL2;..\SDL2;..\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\cereal\include;..\SDL2\include;..\SDL2;..\SDL2;..\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -179,7 +181,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\SDL2\include;..\SDL2;C:\GL\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\cereal\include;..\SDL2\include;..\SDL2;C:\GL\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
