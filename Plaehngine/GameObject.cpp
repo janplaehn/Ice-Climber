@@ -9,7 +9,7 @@
 GameObject::GameObject()
 {
 	_transform = AddComponent<Transform>();
-	_gameObjects.push_back(this);
+	_gameObjects.push_back(std::shared_ptr<GameObject>(this));
 }
 
 void GameObject::BeginPlay()
@@ -35,7 +35,7 @@ void GameObject::Destroy()
 		component->Destroy();
 	}
 	_components.clear();
-	_gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), this), _gameObjects.end());
+	_gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), std::shared_ptr<GameObject>(shared_from_this())), _gameObjects.end());
 }
 
 void GameObject::OnCollision(AABBCollider* otherCollider, Vector2D normal)
@@ -46,4 +46,4 @@ void GameObject::OnCollision(AABBCollider* otherCollider, Vector2D normal)
 	}
 }
 
-std::vector<GameObject*> GameObject::_gameObjects;
+std::vector<std::shared_ptr<GameObject>> GameObject::_gameObjects;

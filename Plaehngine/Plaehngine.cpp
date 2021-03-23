@@ -25,8 +25,6 @@ void Plaehngine::Init(Game* game)
 
 	_game = game;
 	_game->Init();
-
-	SDL_Log("Engine up and running...\n");
 }
 
 void Plaehngine::Destroy()
