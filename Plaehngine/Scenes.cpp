@@ -49,6 +49,6 @@ void Scenes::Run()
 			Physics::_rigidbodies.push_back(rb);
 		}
 
-		SceneSerializer::Serialize("test.txt");
+		SceneSerializer::Deserialize("test.txt");
 	}
 }

@@ -44,5 +44,11 @@ public:
 	static Vector2D Left();
 
 	static Vector2D One();
+
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(x,y); // serialize things by passing them to the archive
+	}
 };
 

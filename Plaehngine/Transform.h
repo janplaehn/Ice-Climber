@@ -19,7 +19,7 @@ public:
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(cereal::base_class<Component>(this), _isInScreenSpace); // serialize things by passing them to the archive
+		archive(cereal::base_class<Component>(this), _position, _rotation, _scale, _pivot, _flipType, _isInScreenSpace); // serialize things by passing them to the archive
 	}
 };
 
