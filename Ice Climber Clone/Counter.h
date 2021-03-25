@@ -28,5 +28,14 @@ private:
 	float _currentNumber = 0;
 	std::shared_ptr<Text> _text = nullptr;
 	std::shared_ptr<AudioSource> _source = nullptr;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Component>(this));
+	}
 };
 
+CEREAL_REGISTER_TYPE_WITH_NAME(Counter, "Counter")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Counter, Component)

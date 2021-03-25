@@ -11,3 +11,5 @@
 #include "Sprite.h"
 #include "Camera.h"
 #include "GameObject.h"
+#include "Button.h"
+#include "UINavigator.h"

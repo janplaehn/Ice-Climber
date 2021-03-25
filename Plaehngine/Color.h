@@ -15,5 +15,11 @@ public:
 	static Color IceClimberPink();
 	static Color IceClimberBlue();
 	static Color IceClimberOrange();
+
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(r, g, b, a);
+	}
 };
 

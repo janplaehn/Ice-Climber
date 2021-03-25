@@ -222,7 +222,7 @@
       <Filter>Header Files\Components\Enemies\TopiStates</Filter>
     </ClInclude>
     <ClInclude Include="TopiFallingDeadState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components\Enemies\TopiStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

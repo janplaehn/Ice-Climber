@@ -20,5 +20,14 @@ protected:
 	const Color COLOR_DEFAULT = Color(128, 128, 128);
 
 	std::shared_ptr<AudioSource> _source = nullptr;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Button>(this));
+	}
 };
 
+CEREAL_REGISTER_TYPE_WITH_NAME(IceClimberButton, "IceClimberButton")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(IceClimberButton, Button)

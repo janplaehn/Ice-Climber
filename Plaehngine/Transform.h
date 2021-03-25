@@ -23,5 +23,5 @@ public:
 	}
 };
 
-CEREAL_REGISTER_TYPE_WITH_NAME(Transform, "Transform");
+CEREAL_REGISTER_TYPE_WITH_NAME(Transform, "Transform")
 CEREAL_REGISTER_POLYMORPHIC_RELATION(Transform, Component)

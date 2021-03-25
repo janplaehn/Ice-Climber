@@ -19,5 +19,14 @@ public:
 
 private:
 	class Font* _font = nullptr;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Renderer>(this));
+	}
 };
 
+CEREAL_REGISTER_TYPE_WITH_NAME(Text, "Text")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Text, Renderer)

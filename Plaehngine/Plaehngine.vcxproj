@@ -81,6 +81,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scenes.h" />
     <ClInclude Include="SceneSerializer.h" />
+    <ClInclude Include="Serializable.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Screen.h" />

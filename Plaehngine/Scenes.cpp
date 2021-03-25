@@ -48,7 +48,8 @@ void Scenes::Run()
 		for (auto rb : Scenes::FindComponents<Rigidbody>()) {
 			Physics::_rigidbodies.push_back(rb);
 		}
-
-		SceneSerializer::Deserialize("test.txt");
+		SceneSerializer::Serialize("test.scene");
+		SDL_Delay(1000);
+		SceneSerializer::Deserialize("test.scene");
 	}
 }

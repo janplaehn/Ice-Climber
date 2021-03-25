@@ -35,4 +35,14 @@ private:
 	Vector2D _offset;
 
 	bool _isTrigger = false;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Component>(this));
+	}
 };
+
+CEREAL_REGISTER_TYPE_WITH_NAME(AABBCollider, "AABBCollider")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(AABBCollider, Component)

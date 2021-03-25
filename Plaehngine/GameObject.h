@@ -13,10 +13,10 @@ class AABBCollider;
 
 class GameObject : public std::enable_shared_from_this<GameObject>
 {
-protected:
-	std::vector<std::shared_ptr<Component>> _components;
 
 public:
+
+	std::vector<std::shared_ptr<Component>> _components;
 
 	std::shared_ptr<Transform> _transform = nullptr;
 	bool _enabled = true;
@@ -75,10 +75,9 @@ public:
 	virtual void Destroy();
 	void OnCollision(std::shared_ptr<AABBCollider> otherCollider, struct Vector2D normal);
 
-	// This method lets cereal know which data members to serialize
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(_tag, _enabled, _transform); // serialize things by passing them to the archive
+		archive(_tag, _enabled, _transform,  _components);
 	}
 };

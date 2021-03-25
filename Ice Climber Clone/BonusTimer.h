@@ -21,5 +21,14 @@ protected:
 	float _currentTime = 40;
 	std::shared_ptr<Text> _text = nullptr;
 	bool _isCounting = true;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Component>(this));
+	}
 };
 
+CEREAL_REGISTER_TYPE_WITH_NAME(BonusTimer, "BonusTimer")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(BonusTimer, Component)

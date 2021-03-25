@@ -29,4 +29,14 @@ private:
 			return (sr1->_order < sr2->_order);
 		}
 	};
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Component>(this));
+	}
 };
+
+CEREAL_REGISTER_TYPE_WITH_NAME(Renderer, "Renderer")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Renderer, Component)

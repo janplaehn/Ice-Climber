@@ -24,5 +24,14 @@ public:
 private:
 	float _volume = MIX_MAX_VOLUME / 2;
 	int _channel = -1;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Component>(this));
+	}
 };
 
+CEREAL_REGISTER_TYPE_WITH_NAME(AudioSource, "AudioSource")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(AudioSource, Component)

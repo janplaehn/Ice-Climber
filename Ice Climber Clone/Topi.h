@@ -22,4 +22,14 @@ public:
 	virtual void Update() override;
 	void ChangeDirection();
 	void Damage() override;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Enemy>(this));
+	}
 };
+
+CEREAL_REGISTER_TYPE_WITH_NAME(Topi, "Topi")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Topi, Enemy)

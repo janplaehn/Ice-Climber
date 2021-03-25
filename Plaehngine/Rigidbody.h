@@ -25,5 +25,14 @@ private:
 	Vector2D _previousPosition;
 	Vector2D _targetMoveDelta;
 	std::shared_ptr<AABBCollider> _collider = nullptr;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Component>(this));
+	}
 };
 
+CEREAL_REGISTER_TYPE_WITH_NAME(Rigidbody, "Rigigdbody")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Rigidbody, Component)

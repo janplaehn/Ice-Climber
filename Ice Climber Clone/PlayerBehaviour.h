@@ -67,4 +67,14 @@ private:
 	float _attackTimer = 0;
 	float _winTimer = 0;
 	float _timeSinceLastGroundHit = 0.05f;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Component>(this));
+	}
 };
+
+CEREAL_REGISTER_TYPE_WITH_NAME(PlayerBehaviour, "Player")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(PlayerBehaviour, Component)

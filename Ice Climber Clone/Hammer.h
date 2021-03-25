@@ -36,5 +36,14 @@ private:
 	std::vector< std::shared_ptr<GameObject>> _overlappingTiles;
 
 	float _timer = 0;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Component>(this));
+	}
 };
 
+CEREAL_REGISTER_TYPE_WITH_NAME(Hammer, "Hammer")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Hammer, Component)

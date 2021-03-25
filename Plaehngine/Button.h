@@ -27,5 +27,14 @@ public:
 
 private:
 	bool _isActive = true;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Component>(this));
+	}
 };
 
+CEREAL_REGISTER_TYPE_WITH_NAME(Button, "Button")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Button, Component)

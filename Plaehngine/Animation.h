@@ -16,5 +16,14 @@ public:
 
 	float _timer = 0;
 	int _frame = 0;
+
+public:
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(cereal::base_class<Renderer>(this));
+	}
 };
 
+CEREAL_REGISTER_TYPE_WITH_NAME(Animation, "Animation")
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Animation, Renderer)

@@ -48,7 +48,7 @@ public:
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(x,y); // serialize things by passing them to the archive
+		archive(x,y);
 	}
 };
 
