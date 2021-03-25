@@ -2,19 +2,19 @@
 
 ObjectPool::~ObjectPool()
 {
-	for (GameObject* go : _gameObjects) {
+	for (std::shared_ptr<GameObject> go : _gameObjects) {
 		go->Destroy();
 	}
 }
 
-void ObjectPool::Add(GameObject* go)
+void ObjectPool::Add(std::shared_ptr<GameObject> go)
 {
 	_gameObjects.push_back(go);
 	go->_enabled = false;
 }
 
-GameObject* ObjectPool::FirstAvailable() {
-	for (GameObject* go : _gameObjects) {
+std::shared_ptr<GameObject> ObjectPool::FirstAvailable() {
+	for (std::shared_ptr<GameObject> go : _gameObjects) {
 		if (!go->_enabled) {
 			go->_enabled = true;
 			return go;
@@ -25,7 +25,7 @@ GameObject* ObjectPool::FirstAvailable() {
 
 bool ObjectPool::AnyAvailable()
 {
-	for (GameObject* go : _gameObjects)
+	for (std::shared_ptr<GameObject> go : _gameObjects)
 	{
 		if (!go->_enabled) return true;
 	}
@@ -34,7 +34,7 @@ bool ObjectPool::AnyAvailable()
 
 bool ObjectPool::AllAvailable()
 {
-	for (GameObject* go : _gameObjects)
+	for (std::shared_ptr<GameObject> go : _gameObjects)
 	{
 		if (go->_enabled) return false;
 	}

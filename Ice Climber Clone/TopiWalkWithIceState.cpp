@@ -39,9 +39,8 @@ void TopiWalkWithIceState::Run()
 
 	Vector2D pointCastPosition = _transform->_flipType == SDL_FLIP_HORIZONTAL ? Vector2D(6, -4) : Vector2D(-6, -4);
 	pointCastPosition = pointCastPosition + _transform->_position;
-	AABBCollider* result = nullptr;
-
-	if (Physics::PointCast(pointCastPosition, &result, true)) {
+	std::shared_ptr<AABBCollider> result = Physics::PointCast(pointCastPosition, true);
+	if (result != nullptr) {
 		if (!result->_gameObject->_enabled) {
 			result->_gameObject->_enabled = true;
 			_rebuildTimer = 0;

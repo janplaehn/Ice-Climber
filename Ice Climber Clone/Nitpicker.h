@@ -9,7 +9,7 @@ class Nitpicker : public Enemy
 public:
 
 	virtual void SetDeathSprite(Sprite* sprite);
-	virtual void SetDeathAudioSource(AudioSource* deathSource);
+	virtual void SetDeathAudioSource(std::shared_ptr<AudioSource> deathSource);
 
 private:
 
@@ -25,7 +25,7 @@ private:
 	Vector2D _velocity = Vector2D::Zero();
 
 	Sprite* _deathSprite;
-	AudioSource* _deathAudioSource;
+	std::shared_ptr<AudioSource> _deathAudioSource;
 
 	const Vector2D ACCELERATION = Vector2D(5, 3);
 	const Vector2D MAX_VELOCITY = Vector2D(35, 10);

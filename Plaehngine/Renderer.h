@@ -13,13 +13,13 @@ public:
 	int _order = 0;
 	Color _tint = Color::White();
 
-	static std::vector<Renderer*> _renderers;
+	static std::vector<std::shared_ptr<Renderer>> _renderers;
 	static void SortRenderers();
 
 private:
 	struct FurtherBack
 	{
-		inline bool operator() (Renderer* sr1, Renderer* sr2) {
+		inline bool operator() (std::shared_ptr<Renderer> sr1, std::shared_ptr<Renderer> sr2) {
 			if (!sr1->_transform->_isInScreenSpace && sr2->_transform->_isInScreenSpace) {
 				return true;
 			}

@@ -4,28 +4,29 @@ class GameObject;
 class Transform;
 
 #include <set>
-#include "objectPool.h"
 #include "Vector2D.h"
 #include "Color.h"
-#include "GameObject.h"
-#include "Plaehngine.h"
 #include "GameTime.h"
 #include "SDL.h"
 #include "Input.h"
 #include "GameTime.h"
 #include <string>
+#include <memory>
+#include "GameObject.h"
+#include <cereal/types/polymorphic.hpp>
+#include <cereal/types/base_class.hpp>
 
 class Component
 {
 	friend class GameObject;
 
 public:
-	GameObject* _gameObject = nullptr;
-	Transform* _transform = nullptr;
+	std::shared_ptr<GameObject> _gameObject = nullptr;
+	std::shared_ptr<Transform> _transform = nullptr;
 	bool _enabled = true;
 
 	template <class T>
-	T* GetComponent() {
+	std::shared_ptr<T> GetComponent() {
 		return _gameObject->GetComponent<T>();
 	}
 
@@ -34,9 +35,22 @@ public:
 	bool IsActiveAndEnabled();
 	virtual void Update() {};
 	virtual void Receive(int message) {}
-	virtual void OnCollision(class AABBCollider* otherCollider, struct Vector2D normal) {};
-	virtual void OnComponentAdded(Component* component) {};
+	virtual void OnCollision(std::shared_ptr<AABBCollider> otherCollider, struct Vector2D normal) {};
+	virtual void OnComponentAdded(std::shared_ptr<Component> component) {};
 
-	virtual void Destroy() {}
+	virtual void Destroy() {};
+
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive(_enabled); // serialize things by passing them to the archive
+	}
+
+private:
+	template<class T>
+	static std::shared_ptr<T> Create() {
+		std::shared_ptr<T> t = std::make_shared<T>();
+		std::shared_ptr<Component> component = t;
+		return t;
+	}
 };
-

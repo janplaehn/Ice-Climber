@@ -1,6 +1,15 @@
 #pragma once
 #include "Component.h"
 
+class AABBCollider;
+class AudioSource;
+class GameObject;
+class LifeUI;
+class Rigidbody;
+class Animation;
+class AABBCollider;
+class BonusTimer;
+
 class PlayerBehaviour : public Component
 {
 
@@ -15,25 +24,25 @@ public:
 	// param move depends on the time, so the player moves always at the same speed on any computer
 	void Move(float move);
 
-	void OnCollision(class AABBCollider* other, Vector2D normal);
+	void OnCollision(std::shared_ptr<AABBCollider> other, Vector2D normal) override;
 
 	class Sprite* _walkSprite;
 	class Sprite* _jumpSprite;
 	class Sprite* _attackSprite;
 
-	class AudioSource* _jumpSource;
-	class AudioSource* _deathSource;
-	class AudioSource* _gameOverSource;
-	class AudioSource* _goalSource;
+	std::shared_ptr<AudioSource> _jumpSource;
+	std::shared_ptr<AudioSource> _deathSource;
+	std::shared_ptr<AudioSource> _gameOverSource;
+	std::shared_ptr<AudioSource> _goalSource;
 
-	class GameObject* _gameOverUI;
-	class GameObject* _hammer;
-	class LifeUI* _lifeUI;
+	std::shared_ptr<GameObject> _gameOverUI;
+	std::shared_ptr<GameObject> _hammer;
+	std::shared_ptr<LifeUI> _lifeUI;
 
-	class Rigidbody* _rigidbody;
-	class Animation* _animation;
-	class AABBCollider* _collider;
-	std::vector<class BonusTimer*> _timers;
+	std::shared_ptr<Rigidbody> _rigidbody;
+	std::shared_ptr<Animation> _animation;
+	std::shared_ptr<AABBCollider> _collider;
+	std::vector< std::shared_ptr<BonusTimer>> _timers;
 
 	int _lives = 3;
 
@@ -53,7 +62,7 @@ private:
 	bool _isAttacking = false;
 	bool _hasWon = false;
 	bool _isInBonus = false;
-	Transform* condor = nullptr;
+	std::shared_ptr<Transform> condor = nullptr;
 	float _attackDuration = 2.0f / 8.0f;
 	float _attackTimer = 0;
 	float _winTimer = 0;

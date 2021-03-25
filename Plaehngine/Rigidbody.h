@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
 
+class AABBCollider;
+
 class Rigidbody : public Component
 {
 	friend class Physics;
@@ -22,6 +24,6 @@ private:
 
 	Vector2D _previousPosition;
 	Vector2D _targetMoveDelta;
-	class AABBCollider* _collider = nullptr;
+	std::shared_ptr<AABBCollider> _collider = nullptr;
 };
 

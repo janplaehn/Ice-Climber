@@ -11,7 +11,7 @@ class TopiFallingDeadState : public State
 	virtual void Exit() override;
 
 private:
-	Topi* _topi;
+	std::shared_ptr<Topi> _topi;
 
 	const float FALL_COOLDOWN = 0.5f;
 	const float FALLSPEED = 50;

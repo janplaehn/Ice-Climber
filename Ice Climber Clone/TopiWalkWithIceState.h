@@ -15,7 +15,7 @@ private:
 	const int REBUILDCOUNT = 2;
 	const float WALKSPEED = 10;
 
-	Topi* _topi = nullptr;
+	std::shared_ptr<Topi> _topi = nullptr;
 	float _rebuildTimer = 0;
 	int _tilesRebuilt = 0;
 };

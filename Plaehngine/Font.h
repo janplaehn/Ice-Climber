@@ -11,7 +11,7 @@ public:
 
 	static void UnloadAllFonts();
 
-	virtual void Draw(Transform* transform, SDL_Color color, std::string message, Color tint) = 0;
+	virtual void Draw(std::shared_ptr<Transform> transform, SDL_Color color, std::string message, Color tint) = 0;
 
 	virtual void Destroy() = 0;
 

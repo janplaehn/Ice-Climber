@@ -6,15 +6,9 @@
 #include "GameTime.h"
 #include <set>
 
-GameObject::GameObject()
-{
-	_transform = AddComponent<Transform>();
-	_gameObjects.push_back(std::shared_ptr<GameObject>(this));
-}
-
 void GameObject::BeginPlay()
 {
-	for (Component* component : _components) {
+	for (auto component : _components) {
 		component->BeginPlay();
 	}
 }
@@ -24,25 +18,34 @@ void GameObject::Update()
 	if (!_enabled)
 		return;
 
-	for (Component* component : _components) {
+	for (auto component : _components) {
 		component->Update();
 	}		
 }
 
 void GameObject::Destroy()
 {
-	for (Component* component : _components) {
+	for (auto component : _components) {
 		component->Destroy();
 	}
 	_components.clear();
 	_gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), std::shared_ptr<GameObject>(shared_from_this())), _gameObjects.end());
 }
 
-void GameObject::OnCollision(AABBCollider* otherCollider, Vector2D normal)
+void GameObject::OnCollision(std::shared_ptr<AABBCollider> otherCollider, Vector2D normal)
 {
-	for (Component* component : _components)
+	for (auto component : _components)
 	{
 		component->OnCollision(otherCollider, normal);
+	}
+}
+
+std::shared_ptr<GameObject> GameObject::Create() {
+	{
+		std::shared_ptr<GameObject> newGo = std::make_shared<GameObject>();
+		newGo->_transform = newGo->AddComponent<Transform>();
+		_gameObjects.push_back(newGo);
+		return newGo;
 	}
 }
 

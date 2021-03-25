@@ -13,10 +13,10 @@ public:
 	void SetDelay(float delay);
 	void SetSpeed(float speed);
 
-private:
-
 	virtual void Update() override;
 	virtual void BeginPlay() override;
+
+private:
 
 	int _targetNumber = 0;
 	int _digitCount = 6;
@@ -26,7 +26,7 @@ private:
 
 	float _timer = 0;
 	float _currentNumber = 0;
-	Text* _text = nullptr;
-	AudioSource* _source = nullptr;
+	std::shared_ptr<Text> _text = nullptr;
+	std::shared_ptr<AudioSource> _source = nullptr;
 };
 

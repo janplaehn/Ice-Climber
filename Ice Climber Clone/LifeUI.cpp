@@ -9,7 +9,7 @@ void LifeUI::UpdateLifeCounter(int amount)
 	}
 }
 
-void LifeUI::AddRenderer(Renderer* renderer)
+void LifeUI::AddRenderer(std::shared_ptr<Renderer> renderer)
 {
 	_lifeRenderers.push_back(renderer);
 }

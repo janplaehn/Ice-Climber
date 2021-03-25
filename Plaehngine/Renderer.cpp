@@ -6,4 +6,4 @@ void Renderer::SortRenderers()
 	std::sort(_renderers.begin(), _renderers.end(), FurtherBack());
 }
 
-std::vector<Renderer*> Renderer::_renderers;
+std::vector<std::shared_ptr<Renderer>> Renderer::_renderers;

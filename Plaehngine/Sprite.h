@@ -2,6 +2,9 @@
 #include "SDL.h"
 #include "Plaehngine.h"
 #include "Color.h"
+#include <memory>
+
+class Transform;
 
 class Sprite
 {
@@ -13,8 +16,8 @@ public:
 
 	void Destroy();
 
-	void Draw(class Transform* transform, Color tint);
-	void Draw(class Transform* transform, SDL_Rect clip, Color tint);
+	void Draw(std::shared_ptr<Transform> transform, Color tint);
+	void Draw(std::shared_ptr<Transform> transform, SDL_Rect clip, Color tint);
 
 	int GetWidth();
 	int GetHeight();

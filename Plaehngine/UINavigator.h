@@ -8,7 +8,7 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Update() override;
 
-	std::vector<Button*> _buttons;
+	std::vector<std::shared_ptr<Button>> _buttons;
 	int _buttonIndex = 0;
 };
 

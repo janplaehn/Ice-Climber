@@ -13,7 +13,7 @@ Sprite::Sprite(SDL_Texture* texture)
 }
 
 
-void Sprite::Draw(Transform* transform, Color tint)
+void Sprite::Draw(std::shared_ptr<Transform> transform, Color tint)
 {
 	SDL_Rect clip;
 	clip.x = clip.y = 0;
@@ -22,7 +22,7 @@ void Sprite::Draw(Transform* transform, Color tint)
 	Draw(transform, clip, tint);
 }
 
-void Sprite::Draw(Transform* transform, SDL_Rect clip, Color tint)
+void Sprite::Draw(std::shared_ptr<Transform> transform, SDL_Rect clip, Color tint)
 {
 	SDL_Rect rect;
 

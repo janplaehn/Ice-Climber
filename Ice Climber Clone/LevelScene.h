@@ -11,15 +11,15 @@ public:
 protected:
 	void LoadBackground();
 	void LoadMusic();
-	PlayerBehaviour* LoadPlayer();
+	std::shared_ptr<PlayerBehaviour> LoadPlayer();
 	void LoadTopis();
 	void LoadNitpickers();
 	void LoadMainStage();
-	void LoadBonusStage(PlayerBehaviour* player);
+	void LoadBonusStage(std::shared_ptr<PlayerBehaviour> player);
 	void LoadStageCollider(Vector2D position, Vector2D pivot, Vector2D scale);
-	void LoadUI(PlayerBehaviour* player);
+	void LoadUI(std::shared_ptr<PlayerBehaviour> player);
 	void LoadEggplant(Vector2D position);
 	void LoadCloud(Vector2D position, bool moveRight);
-	void LoadTimer(PlayerBehaviour* player, Vector2D position);
+	void LoadTimer(std::shared_ptr<PlayerBehaviour> player, Vector2D position);
 	void LoadCondor();
 };

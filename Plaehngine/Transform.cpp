@@ -9,7 +9,7 @@ Transform::Transform()
 	_flipType = SDL_FLIP_NONE;
 }
 
-Transform::Transform(const Transform* transform)
+Transform::Transform(const std::shared_ptr<Transform> transform)
 {
 	_position = transform->_position;
 	_rotation = transform->_rotation;

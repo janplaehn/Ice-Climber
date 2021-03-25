@@ -13,6 +13,6 @@ public:
 
 private:
 	const float WALKSPEED = 30;
-	Topi* _topi = nullptr;
+	std::shared_ptr<Topi> _topi = nullptr;
 };
 

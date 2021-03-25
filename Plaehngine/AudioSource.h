@@ -24,7 +24,5 @@ public:
 private:
 	float _volume = MIX_MAX_VOLUME / 2;
 	int _channel = -1;
-
-	~AudioSource();
 };
 

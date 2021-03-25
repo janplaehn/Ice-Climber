@@ -17,7 +17,7 @@ void LevelScene::Load()
 {
 	Scores::Reset();
 
-	PlayerBehaviour* player = LoadPlayer();
+	std::shared_ptr<PlayerBehaviour> player = LoadPlayer();
 	LoadBackground();
 	LoadMusic();
 	LoadTopis();
@@ -26,14 +26,14 @@ void LevelScene::Load()
 	LoadBonusStage(player);
 	LoadUI(player);
 
-	GameObject* camera = new GameObject();
+	std::shared_ptr<GameObject> camera = GameObject::Create();
 	camera->AddComponent<LevelCamera>()->SetPlayerTransform(player->_transform);	
 }
 
 void LevelScene::LoadBackground()
 {
-	GameObject* gameObject = new GameObject();
-	SpriteRenderer* renderer = gameObject->AddComponent<SpriteRenderer>();
+	std::shared_ptr<GameObject> gameObject = GameObject::Create();
+	std::shared_ptr<SpriteRenderer> renderer = gameObject->AddComponent<SpriteRenderer>();
 	renderer->_sprite = Sprite::Create("Assets/Sprites/Backgrounds/default.png");
 	renderer->_order = -100;
 	gameObject->_transform->_position = Vector2D(Screen::_width / 2, renderer->_sprite->GetHeight() / 2);
@@ -41,20 +41,20 @@ void LevelScene::LoadBackground()
 
 void LevelScene::LoadMusic()
 {
-	GameObject* music = new GameObject();
-	AudioSource* musicSrc = music->AddComponent<AudioSource>();
+	std::shared_ptr<GameObject> music = GameObject::Create();
+	std::shared_ptr<AudioSource> musicSrc = music->AddComponent<AudioSource>();
 	musicSrc->_clip = Audio::LoadSound("Assets/Music/stage.wav");
 	musicSrc->_isLooping = true;
 	musicSrc->Play();
 }
 
-PlayerBehaviour* LevelScene::LoadPlayer()
+std::shared_ptr<PlayerBehaviour> LevelScene::LoadPlayer()
 {
-	GameObject* player = new GameObject();
+	std::shared_ptr<GameObject> player = GameObject::Create();
 	player->_transform->_pivot = Vector2D(0.5f, 0.75f);
 	player->_transform->_position.x = Screen::_width / 2;
 	player->_transform->_position.y = 32;
-	PlayerBehaviour* playerBehaviour = player->AddComponent<PlayerBehaviour>();
+	std::shared_ptr<PlayerBehaviour> playerBehaviour = player->AddComponent<PlayerBehaviour>();
 	playerBehaviour->_animation = player->AddComponent<Animation>();
 	playerBehaviour->_animation->_order = 10;
 	playerBehaviour->_animation->_spriteWidth = 32;
@@ -77,15 +77,15 @@ PlayerBehaviour* LevelScene::LoadPlayer()
 	playerBehaviour->_goalSource = player->AddComponent<AudioSource>();
 	playerBehaviour->_goalSource->_clip = Audio::LoadSound("Assets/Music/goal.wav");
 
-	playerBehaviour->_hammer = new GameObject();
+	playerBehaviour->_hammer = GameObject::Create();
 	playerBehaviour->_hammer->_tag = "Hammer";
-	Hammer* hammer = playerBehaviour->_hammer->AddComponent<Hammer>();
-	AABBCollider* hammerCol = playerBehaviour->_hammer->AddComponent<AABBCollider>();
+	std::shared_ptr<Hammer> hammer = playerBehaviour->_hammer->AddComponent<Hammer>();
+	std::shared_ptr<AABBCollider> hammerCol = playerBehaviour->_hammer->AddComponent<AABBCollider>();
 	playerBehaviour->_hammer->AddComponent<Rigidbody>()->_isKinematic = true;
 	hammerCol->SetTrigger(true);
 	playerBehaviour->_hammer->_transform->_position = player->_transform->_position;
 	hammerCol->SetScale(Vector2D(8, 8));
-	AudioSource* tileBreakSource = playerBehaviour->_hammer->AddComponent<AudioSource>();
+	std::shared_ptr<AudioSource> tileBreakSource = playerBehaviour->_hammer->AddComponent<AudioSource>();
 	tileBreakSource->_clip = Audio::LoadSound("Assets/Sounds/tileBreak.wav");
 	hammer->SetTileBreakAudioSource(tileBreakSource);
 
@@ -94,8 +94,8 @@ PlayerBehaviour* LevelScene::LoadPlayer()
 	hammer->SetDebrisPool(debrisPool);
 	for (size_t i = 0; i < DEBRISCOUNT; i++)
 	{
-		GameObject* debrisGo = new GameObject();
-		SpriteRenderer* debrisRenderer = debrisGo->AddComponent<SpriteRenderer>();
+		std::shared_ptr<GameObject> debrisGo = GameObject::Create();
+		std::shared_ptr<SpriteRenderer> debrisRenderer = debrisGo->AddComponent<SpriteRenderer>();
 		debrisRenderer->_sprite = Sprite::Create("Assets/Sprites/Environment/debris_blue.png");
 		debrisRenderer->_order = 100;
 		debrisGo->AddComponent<Rigidbody>();
@@ -111,12 +111,12 @@ void LevelScene::LoadTopis()
 {
 	for (int i = 0; i < 4; i++)
 	{
-		GameObject* topi = new GameObject();
+		std::shared_ptr<GameObject> topi = GameObject::Create();
 		topi->_tag = "Enemy";
 		topi->_transform->_pivot = Vector2D(0.5f, 1);
 		topi->_transform->_position.x = 0 + i * 40;
 		topi->_transform->_position.y = 24 + i * 96;
-		Topi* topiBehaviour = topi->AddComponent<Topi>();
+		std::shared_ptr<Topi> topiBehaviour = topi->AddComponent<Topi>();
 		topiBehaviour->_animation = topi->AddComponent<Animation>();
 		topiBehaviour->_animation->_order = -101;
 		topiBehaviour->_animation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Topi/walk.png");
@@ -129,11 +129,11 @@ void LevelScene::LoadTopis()
 		topiBehaviour->_fallSource = topi->AddComponent<AudioSource>();
 		topiBehaviour->_fallSource->_clip = Audio::LoadSound("Assets/Sounds/topiFall.wav");
 
-		topiBehaviour->_ice = new GameObject();
+		topiBehaviour->_ice = GameObject::Create();
 		topiBehaviour->_ice->_tag = "Enemy";
 		topiBehaviour->_ice->_transform->_pivot = Vector2D(0.5f, 1);
 		topiBehaviour->_ice->_transform->_position = topi->_transform->_position + Vector2D::Left() * 16;
-		SpriteRenderer* iceRenderer = topiBehaviour->_ice->AddComponent<SpriteRenderer>();
+		std::shared_ptr<SpriteRenderer> iceRenderer = topiBehaviour->_ice->AddComponent<SpriteRenderer>();
 		iceRenderer->_sprite = Sprite::Create("Assets/Sprites/Characters/Topi/ice.png");
 		iceRenderer->_order = topiBehaviour->_animation->_order;
 		topiBehaviour->_ice->AddComponent<AABBCollider>()->SetTrigger(true);
@@ -145,20 +145,20 @@ void LevelScene::LoadNitpickers()
 {
 	for (int i = 0; i < 2; i++)
 	{
-		GameObject* nitpicker = new GameObject();
+		std::shared_ptr<GameObject> nitpicker = GameObject::Create();
 		nitpicker->_tag = "Enemy";
 		nitpicker->_transform->_position.y = 200 + i * 248;
 		nitpicker->_transform->_position.x = 0;
-		Animation* nitAnimation = nitpicker->AddComponent<Animation>();
+		std::shared_ptr<Animation> nitAnimation = nitpicker->AddComponent<Animation>();
 		nitAnimation->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Nitpicker/fly.png");
 		nitAnimation->_spriteWidth = 16;
 		nitAnimation->_frameRate = 8;
 		nitAnimation->_order = 1;
 		nitpicker->AddComponent<AABBCollider>()->SetTrigger(true);
-		Nitpicker* nitBehaviour = nitpicker->AddComponent<Nitpicker>();
+		std::shared_ptr<Nitpicker> nitBehaviour = nitpicker->AddComponent<Nitpicker>();
 		Sprite* deathSprite = Sprite::Create("Assets/Sprites/Characters/Nitpicker/death.png");;
 		nitBehaviour->SetDeathSprite(deathSprite);
-		AudioSource* deathAudioSource = nitpicker->AddComponent<AudioSource>();
+		std::shared_ptr<AudioSource> deathAudioSource = nitpicker->AddComponent<AudioSource>();
 		deathAudioSource->_clip = Audio::LoadSound("Assets/Sounds/nitpickerDeath.wav");
 		nitBehaviour->SetDeathAudioSource(deathAudioSource);
 	}
@@ -182,19 +182,19 @@ void LevelScene::LoadMainStage()
 		float tileCount = (i == 0) ? 24 : 22;
 		for (int x = 0; x < tileCount; x++)
 		{
-			GameObject* tile = new GameObject();
+			std::shared_ptr<GameObject> tile = GameObject::Create();
 			tile->_tag = "Tile";
 			tile->_transform->_pivot = Vector2D(0, 1);
 			tile->_transform->_position = Vector2D(width + x * 8, height);
-			SpriteRenderer* tileSprite = tile->AddComponent<SpriteRenderer>();
+			std::shared_ptr<SpriteRenderer> tileSprite = tile->AddComponent<SpriteRenderer>();
 			tileSprite->_sprite = Sprite::Create("Assets/Sprites/Environment/tile_blue.png");
-			AABBCollider* tileCol = tile->AddComponent<AABBCollider>();
+			std::shared_ptr<AABBCollider> tileCol = tile->AddComponent<AABBCollider>();
 			tileCol->SetScale(Vector2D(8, 7));
 		}
 	}
 }
 
-void LevelScene::LoadBonusStage(PlayerBehaviour* player)
+void LevelScene::LoadBonusStage(std::shared_ptr<PlayerBehaviour> player)
 {
 	LoadTimer(player, Vector2D(24, 608));
 	//1st floor
@@ -229,19 +229,19 @@ void LevelScene::LoadBonusStage(PlayerBehaviour* player)
 
 void LevelScene::LoadStageCollider(Vector2D position, Vector2D pivot, Vector2D scale)
 {
-	GameObject* gameObject = new GameObject();
+	std::shared_ptr<GameObject> gameObject = GameObject::Create();
 	gameObject->_transform->_pivot = pivot;
 	gameObject->_transform->_position = Vector2D(position);
-	AABBCollider* collider = gameObject->AddComponent<AABBCollider>();
+	std::shared_ptr<AABBCollider> collider = gameObject->AddComponent<AABBCollider>();
 	collider->SetScale(scale);
 }
 
-void LevelScene::LoadUI(PlayerBehaviour* player)
+void LevelScene::LoadUI(std::shared_ptr<PlayerBehaviour> player)
 {
 	//GameOver UI
-	GameObject* gameOver = new GameObject();
+	std::shared_ptr<GameObject> gameOver = GameObject::Create();
 	gameOver->_transform->_position = Vector2D(128, 0);
-	SpriteRenderer* gameOverRenderer = gameOver->AddComponent<SpriteRenderer>();
+	std::shared_ptr<SpriteRenderer> gameOverRenderer = gameOver->AddComponent<SpriteRenderer>();
 	gameOver->_transform->_isInScreenSpace = true;
 	gameOverRenderer->_sprite = Sprite::Create("Assets/Sprites/UI/gameOver.png");
 	gameOver->AddComponent<GameOverUI>();
@@ -249,17 +249,17 @@ void LevelScene::LoadUI(PlayerBehaviour* player)
 	player->_gameOverUI = gameOver;
 
 	//Lives UI
-	GameObject* lifeUI = new GameObject();
-	LifeUI* lifeUIComponent = lifeUI->AddComponent<LifeUI>();
+	std::shared_ptr<GameObject> lifeUI = GameObject::Create();
+	std::shared_ptr<LifeUI> lifeUIComponent = lifeUI->AddComponent<LifeUI>();
 	player->_lifeUI = lifeUIComponent;
 
 	for (int i = 0; i < player->_lives; i++)
 	{
-		GameObject* lifeUIelement = new GameObject();
+		std::shared_ptr<GameObject> lifeUIelement = GameObject::Create();
 		lifeUIelement->_transform->_pivot = Vector2D(0, 0);
 		lifeUIelement->_transform->_position = Vector2D(2 + i * 10, Screen::_height - 2);
 		lifeUIelement->_transform->_isInScreenSpace = true;
-		SpriteRenderer* lifeUIelementRenderer = lifeUIelement->AddComponent<SpriteRenderer>();
+		std::shared_ptr<SpriteRenderer> lifeUIelementRenderer = lifeUIelement->AddComponent<SpriteRenderer>();
 		lifeUIelementRenderer->_sprite = Sprite::Create("Assets/Sprites/UI/life.png");
 		lifeUIComponent->AddRenderer(lifeUIelementRenderer);
 	}
@@ -267,7 +267,7 @@ void LevelScene::LoadUI(PlayerBehaviour* player)
 
 void LevelScene::LoadEggplant(Vector2D position)
 {
-	GameObject* gameObject = new GameObject();
+	std::shared_ptr<GameObject> gameObject = GameObject::Create();
 	gameObject->_transform->_pivot = Vector2D(0, 1);
 	gameObject->_transform->_position = position;
 	gameObject->_tag = "Eggplant";
@@ -277,23 +277,23 @@ void LevelScene::LoadEggplant(Vector2D position)
 
 void LevelScene::LoadCloud(Vector2D position, bool moveRight)
 {
-	GameObject* gameObject = new GameObject();
+	std::shared_ptr<GameObject> gameObject = GameObject::Create();
 	gameObject->_transform->_pivot = Vector2D(0.5, 1);
 	gameObject->_transform->_position = position;
 	gameObject->AddComponent<SpriteRenderer>()->_sprite = Sprite::Create("Assets/Sprites/Environment/cloud.png");
-	AABBCollider* stageCollider = gameObject->AddComponent<AABBCollider>();
+	std::shared_ptr<AABBCollider> stageCollider = gameObject->AddComponent<AABBCollider>();
 	stageCollider->SetScale(Vector2D(48, 7));
 	gameObject->AddComponent<Cloud>()->SetMoveRight(moveRight);
 }
 
-void LevelScene::LoadTimer(PlayerBehaviour* player, Vector2D position)
+void LevelScene::LoadTimer(std::shared_ptr<PlayerBehaviour> player, Vector2D position)
 {
 	//1st timer
-	GameObject* timerGo = new GameObject();
+	std::shared_ptr<GameObject> timerGo = GameObject::Create();
 	timerGo->_transform->_pivot = Vector2D(0, 1);
 	timerGo->_transform->_position = position;
-	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
-	Text* timerText = timerGo->AddComponent<Text>();
+	std::shared_ptr<BonusTimer> timer = timerGo->AddComponent<BonusTimer>();
+	std::shared_ptr<Text> timerText = timerGo->AddComponent<Text>();
 	timerText->_text = "40.0";
 	timerText->_fontName = "Ice Climber";
 	timerText->_tint = Color::IceClimberOrange();
@@ -305,19 +305,19 @@ void LevelScene::LoadTimer(PlayerBehaviour* player, Vector2D position)
 
 void LevelScene::LoadCondor()
 {
-	GameObject* condorGo = new GameObject();
+	std::shared_ptr<GameObject> condorGo = GameObject::Create();
 	condorGo->_tag = "Condor";
 	condorGo->_transform->_pivot = Vector2D(0.5, 1);
 	condorGo->_transform->_position = Vector2D(Screen::_width / 2, 832);
-	Animation* condorAnim = condorGo->AddComponent<Animation>();
+	std::shared_ptr<Animation> condorAnim = condorGo->AddComponent<Animation>();
 	condorAnim->_spriteSheet = Sprite::Create("Assets/Sprites/Characters/Condor/fly.png");
 	condorAnim->_spriteWidth = 32;
 	condorAnim->_frameRate = 8;
 	condorAnim->_order = 100;
-	AABBCollider* condorCol = condorGo->AddComponent<AABBCollider>();
+	std::shared_ptr<AABBCollider> condorCol = condorGo->AddComponent<AABBCollider>();
 	condorCol->SetTrigger(true);
 	condorCol->SetScale(Vector2D(32, 16));
-	Cloud* cloud = condorGo->AddComponent<Cloud>();
+	std::shared_ptr<Cloud> cloud = condorGo->AddComponent<Cloud>();
 	cloud->SetMoveRight(false);
 	cloud->SetSpeed(40);
 }

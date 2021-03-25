@@ -11,13 +11,13 @@
 
 void Physics::Run()
 {
-	for (Rigidbody* rb : _rigidbodies)
+	for (auto rb : _rigidbodies)
 	{
 		PreventCollisions(rb);
 	}
 }
 
-bool Physics::IsColliding(Vector2D point, AABBCollider* collider)
+bool Physics::IsColliding(Vector2D point, std::shared_ptr<AABBCollider> collider)
 {
 	SDL_Rect rect = collider->GetRect();
 
@@ -37,7 +37,7 @@ bool Physics::IsColliding(Vector2D point, AABBCollider* collider)
 
 }
 
-bool Physics::PointCast(Vector2D position, AABBCollider** result, bool includeDisabled)
+std::shared_ptr<AABBCollider> Physics::PointCast(Vector2D position, bool includeDisabled)
 {
 	_pointCastPositions.push_back(position);
 
@@ -46,15 +46,14 @@ bool Physics::PointCast(Vector2D position, AABBCollider** result, bool includeDi
 		if (!_colliders[j]->IsActiveAndEnabled() && !includeDisabled) continue;
 
 		if (IsColliding(position, _colliders[j])) {
-			*result = _colliders[j];
-			return true;
+			return _colliders[j];
 		}
 	}
-	return false;
+	return nullptr;
 }
 
 //https://www.gamedev.net/articles/programming/general-and-gameplay-programming/swept-aabb-collision-detection-and-response-r3084/
-float Physics::SweptAABB(Rigidbody* rb, AABBCollider* collider, Vector2D& normal)
+float Physics::SweptAABB(std::shared_ptr<Rigidbody> rb, std::shared_ptr<AABBCollider> collider, Vector2D& normal)
 {
 	float xInvEntry, yInvEntry;
 	float xInvExit, yInvExit;
@@ -170,7 +169,7 @@ bool Physics::AABBCheck(SDL_Rect r1, SDL_Rect r2)
 	return !(r1.x + r1.w < r2.x || r1.x > r2.x + r2.w || r1.y + r1.h < r2.y || r1.y > r2.y + r2.h);
 }
 
-SDL_Rect Physics::GetSweptBroadphaseRect(Rigidbody* rb)
+SDL_Rect Physics::GetSweptBroadphaseRect(std::shared_ptr<Rigidbody> rb)
 {
 	SDL_Rect rect = rb->_collider->GetRect();
 	SDL_Rect bpRect;
@@ -181,7 +180,7 @@ SDL_Rect Physics::GetSweptBroadphaseRect(Rigidbody* rb)
 	return bpRect;
 }
 
-void Physics::PreventCollisions(Rigidbody* rb)
+void Physics::PreventCollisions(std::shared_ptr<Rigidbody> rb)
 {
 	if (!rb->IsActiveAndEnabled()) return;
 
@@ -196,7 +195,7 @@ void Physics::PreventCollisions(Rigidbody* rb)
 	rb->_targetMoveDelta = Vector2D::Zero();
 }
 
-void Physics::PreventCollisions(Rigidbody* rb, AABBCollider* collider)
+void Physics::PreventCollisions(std::shared_ptr<Rigidbody> rb, std::shared_ptr<AABBCollider> collider)
 {
 	if (rb->_collider == collider) return;
 	if (!collider->IsActiveAndEnabled()) return;
@@ -260,7 +259,7 @@ void Physics::DrawCollisions()
 	_pointCastPositions.clear();
 }
 
-std::vector<AABBCollider*> Physics::_colliders;
-std::vector<Rigidbody*> Physics::_rigidbodies;
+std::vector<std::shared_ptr<AABBCollider>> Physics::_colliders;
+std::vector<std::shared_ptr<Rigidbody>> Physics::_rigidbodies;
 std::vector<Vector2D> Physics::_pointCastPositions;
 const float Physics::GRAVITY = 981.0f;;

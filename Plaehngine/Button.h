@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
 
+class Text;
+
 using ButtonFunction = void(*)();
 
 class Button : public Component
@@ -21,7 +23,7 @@ public:
 	void Activate();
 
 	ButtonFunction _onPressedFunction;
-	class Text* _text;
+	class std::shared_ptr<Text> _text;
 
 private:
 	bool _isActive = true;

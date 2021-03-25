@@ -19,7 +19,7 @@ void Nitpicker::SetDeathSprite(Sprite* sprite)
 	_deathSprite = sprite;
 }
 
-void Nitpicker::SetDeathAudioSource(AudioSource* source)
+void Nitpicker::SetDeathAudioSource(std::shared_ptr<AudioSource> source)
 {
 	_deathAudioSource = source;
 }

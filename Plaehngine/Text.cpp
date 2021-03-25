@@ -2,7 +2,6 @@
 
 Text::Text()
 {
-	_renderers.push_back(this);
 }
 
 void Text::BeginPlay()
@@ -23,5 +22,4 @@ void Text::Draw()
 
 void Text::Destroy()
 {
-	_renderers.erase(std::remove(_renderers.begin(), _renderers.end(), this), _renderers.end());
 }

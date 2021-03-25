@@ -4,8 +4,6 @@
 class SpriteRenderer : public Renderer
 {
 public:
-	SpriteRenderer();
-
 	virtual void Update();
 	virtual void Draw();
 	virtual void Destroy();

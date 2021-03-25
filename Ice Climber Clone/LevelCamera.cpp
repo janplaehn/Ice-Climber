@@ -2,7 +2,7 @@
 #include <Camera.h>
 #include "ComponentEssentials.h"
 
-void LevelCamera::SetPlayerTransform(Transform* player)
+void LevelCamera::SetPlayerTransform(std::shared_ptr<Transform> player)
 {
 	_player = player;
 }

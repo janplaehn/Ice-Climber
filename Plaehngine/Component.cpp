@@ -1,4 +1,5 @@
 #include "component.h"
+#include "GameObject.h"
 
 bool Component::IsActiveAndEnabled()
 {

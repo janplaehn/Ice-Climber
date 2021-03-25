@@ -11,7 +11,7 @@ class TopiWalkingDeadState : public State
 	virtual void Exit() override;
 
 private:
-	Topi* _topi;
+	std::shared_ptr<Topi> _topi;
 
 	const float WALKSPEED = 20;
 };

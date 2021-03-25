@@ -5,7 +5,7 @@ class ImageFont : public Font
 public:
 	static void Create(std::string path, std::string name, std::string glyphs, int glyphWidth, int glyphHeight);
 
-	virtual void Draw(Transform* transform, SDL_Color color, std::string message, Color tint) override;
+	virtual void Draw(std::shared_ptr<Transform> transform, SDL_Color color, std::string message, Color tint) override;
 
 	virtual void Destroy() override;
 

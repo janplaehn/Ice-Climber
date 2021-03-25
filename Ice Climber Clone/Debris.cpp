@@ -1,6 +1,7 @@
 #include "Debris.h"
 #include "ComponentEssentials.h"
 #include "Camera.h"
+#include "GameObject.h"
 
 void Debris::Update()
 {

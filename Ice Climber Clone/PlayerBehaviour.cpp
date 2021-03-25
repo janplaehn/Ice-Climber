@@ -133,7 +133,7 @@ void PlayerBehaviour::Update()
 	}
 
 	if (!_isInBonus && _transform->_position.y > 420) {
-		for (BonusTimer* timer : _timers) {
+		for (auto timer : _timers) {
 			timer->_gameObject->_enabled = true;
 			timer->SetTime(40.0f);
 		}
@@ -146,7 +146,7 @@ void PlayerBehaviour::Move(float move)
 	_rigidbody->_velocity.x += move;
 }
 
-void PlayerBehaviour::OnCollision(AABBCollider* other, Vector2D normal)
+void PlayerBehaviour::OnCollision(std::shared_ptr<AABBCollider> other, Vector2D normal)
 {
 	if (normal.y == -1 && !other->IsTrigger()) {
 		_timeSinceLastGroundHit = 0.0f;
@@ -158,7 +158,7 @@ void PlayerBehaviour::OnCollision(AABBCollider* other, Vector2D normal)
 		_goalSource->Play();
 		condor = other->_transform;
 		_winTimer = 0;
-		for (BonusTimer* timer : _timers) {
+		for (auto timer : _timers) {
 			timer->SetIsCounting(false);
 		}
 		_hasWon = true;

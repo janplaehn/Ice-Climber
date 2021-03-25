@@ -10,11 +10,11 @@ class Topi : public Enemy, public FiniteStateMachine
 {
 public:
 
-	Animation* _animation;
-	GameObject* _ice;
+	std::shared_ptr<Animation> _animation;
+	std::shared_ptr<GameObject> _ice;
 	Sprite* _deathSprite;
-	AudioSource* _deathSource;
-	AudioSource* _fallSource;
+	std::shared_ptr<AudioSource> _deathSource;
+	std::shared_ptr<AudioSource> _fallSource;
 
 public:
 

@@ -8,10 +8,10 @@ class LifeUI : public Component
 public:
 
 	void UpdateLifeCounter(int amount);
-	void AddRenderer(Renderer* renderer);
+	void AddRenderer(std::shared_ptr<Renderer> renderer);
 
 private:
 
-	std::vector<Renderer*> _lifeRenderers;
+	std::vector<std::shared_ptr<Renderer>> _lifeRenderers;
 };
 

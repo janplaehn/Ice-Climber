@@ -2,6 +2,8 @@
 #include "ComponentEssentials.h"
 #include "Enemy.h"
 #include "Scores.h"
+#include "ObjectPool.h"
+#include "GameObject.h"
 
 void Hammer::Update()
 {
@@ -15,11 +17,11 @@ void Hammer::BreakTiles()
 {
 	if (_overlappingTiles.size() == 0) return;
 
-	GameObject* closest = FindClosestOverlappingTile();
+	std::shared_ptr<GameObject> closest = FindClosestOverlappingTile();
 	BreakTile(closest);
 }
 
-void Hammer::BreakTile(GameObject* tile)
+void Hammer::BreakTile(std::shared_ptr<GameObject> tile)
 {
 	tile->_enabled = false;
 	_tileBreakSource->Play();
@@ -29,11 +31,11 @@ void Hammer::BreakTile(GameObject* tile)
 	SpawnDebris(tile->_transform->_position);
 }
 
-GameObject* Hammer::FindClosestOverlappingTile()
+std::shared_ptr<GameObject> Hammer::FindClosestOverlappingTile()
 {
 	if (_overlappingTiles.size() == 0) return nullptr;
 
-	GameObject* closest = _overlappingTiles[0];
+	std::shared_ptr<GameObject> closest = _overlappingTiles[0];
 	float currentDistance = abs(closest->_transform->_position.x - _transform->_position.x);
 	for (int i = 0; i < _overlappingTiles.size(); i++)
 	{
@@ -49,7 +51,7 @@ GameObject* Hammer::FindClosestOverlappingTile()
 void Hammer::SpawnDebris(Vector2D position)
 {
 	if (_debrisPool->AnyAvailable()) {
-		GameObject* debris = _debrisPool->FirstAvailable();
+		std::shared_ptr<GameObject> debris = _debrisPool->FirstAvailable();
 		debris->_transform->_position = position;
 
 		if (position.x > _transform->_position.x) {
@@ -61,7 +63,7 @@ void Hammer::SpawnDebris(Vector2D position)
 	}
 }
 
-void Hammer::OnCollision(AABBCollider* other, Vector2D normal)
+void Hammer::OnCollision(std::shared_ptr<AABBCollider> other, Vector2D normal)
 {
 	if (_timer > 0) return;
 
@@ -69,14 +71,14 @@ void Hammer::OnCollision(AABBCollider* other, Vector2D normal)
 		_overlappingTiles.push_back(other->_gameObject);
 	}
 	else if (other->_gameObject->_tag == "Enemy") {
-		Enemy* enemy = other->_gameObject->GetComponent<Enemy>();
+		std::shared_ptr<Enemy> enemy = other->_gameObject->GetComponent<Enemy>();
 		if (enemy != nullptr) {
 			enemy->Damage();
 		}
 	}
 }
 
-void Hammer::SetTileBreakAudioSource(AudioSource* source)
+void Hammer::SetTileBreakAudioSource(std::shared_ptr<AudioSource> source)
 {
 	_tileBreakSource = source;
 }

@@ -81,7 +81,3 @@ void AudioSource::Destroy() {
 		Mix_FreeChunk(_clip);
 	}
 }
-
-AudioSource::~AudioSource()
-{
-}

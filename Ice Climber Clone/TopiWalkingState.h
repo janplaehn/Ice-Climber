@@ -12,6 +12,6 @@ class TopiWalkingState : public State
 
 private:
 	const float WALKSPEED = 10;
-	Topi* _topi = nullptr;
+	std::shared_ptr<Topi> _topi = nullptr;
 };
 

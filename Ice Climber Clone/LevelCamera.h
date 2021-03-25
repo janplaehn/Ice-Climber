@@ -7,15 +7,15 @@ class LevelCamera :	public Component
 {
 public:
 
-	void SetPlayerTransform(Transform* player);
+	void SetPlayerTransform(std::shared_ptr<Transform> player);
+
+	virtual void Update() override;
 
 private:
 
 	const float MAX_CAMERA_DISTANCE = 100;
 
-	virtual void Update() override;
-
-	Transform* _player = nullptr;
+	std::shared_ptr<Transform> _player = nullptr;
 
 	float _highestPlayerPosition = 0;
 };

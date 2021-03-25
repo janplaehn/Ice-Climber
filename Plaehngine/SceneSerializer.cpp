@@ -2,13 +2,16 @@
 #include "GameObject.h"
 #include <cereal/archives/binary.hpp>
 #include <sstream>
+#include "Transform.h"
 #include <cereal/types/memory.hpp>
 #include <cereal/types/vector.hpp>
 #include <cereal/types/string.hpp>
 #include <cereal/types/complex.hpp>
+#include <cereal/types/base_class.hpp>
+#include <cereal/types/polymorphic.hpp>
 #include "sdl_log.h"
 #include <iostream>
-#include <fstream> 
+#include <fstream>
 
 struct SceneData {
 public:
@@ -40,6 +43,5 @@ void SceneSerializer::Deserialize(std::string path)
 	SceneData sd;
 	iarchive(sd); // Read the data from the archive
 	SDL_Log(sd._gameObjects[0]->_tag.c_str());
-
 	file.close();
 }

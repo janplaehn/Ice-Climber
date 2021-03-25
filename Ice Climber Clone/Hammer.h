@@ -9,31 +9,31 @@ class Hammer : public Component
 {
 public:
 
-	void SetTileBreakAudioSource(AudioSource* source);
+	void SetTileBreakAudioSource(std::shared_ptr<AudioSource> source);
 
 	void SetDebrisPool(ObjectPool* pool);
+
+	virtual void Update() override;
+
+	void OnCollision(std::shared_ptr<AABBCollider> other, Vector2D normal) override;
 
 private:
 
 	const float OVERLAP_COOLDOWN = 0.3f;
 
-	virtual void Update() override;
-
-	void OnCollision(AABBCollider* other, Vector2D normal) override;
-
-	GameObject* FindClosestOverlappingTile();
+	std::shared_ptr<GameObject> FindClosestOverlappingTile();
 
 	void BreakTiles();
 
-	void BreakTile(GameObject* tile);
+	void BreakTile(std::shared_ptr<GameObject> tile);
 
 	void SpawnDebris(Vector2D position);
 
-	AudioSource* _tileBreakSource;
+	std::shared_ptr<AudioSource> _tileBreakSource;
 
 	ObjectPool* _debrisPool;
 
-	std::vector<GameObject*> _overlappingTiles;
+	std::vector< std::shared_ptr<GameObject>> _overlappingTiles;
 
 	float _timer = 0;
 };

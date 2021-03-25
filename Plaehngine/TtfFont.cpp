@@ -17,7 +17,7 @@ void TtfFont::Create(std::string path, std::string name, int size)
 	_fonts.push_back(font);
 }
 
-void TtfFont::Draw(Transform* transform, SDL_Color color, std::string message, Color tint)
+void TtfFont::Draw(std::shared_ptr<Transform> transform, SDL_Color color, std::string message, Color tint)
 {
 	Graphics::DrawText(_ttf, transform->_position, message.c_str(), tint);
 }

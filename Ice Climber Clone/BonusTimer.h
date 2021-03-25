@@ -10,16 +10,16 @@ public:
 	void SetTime(float time);
 	void SetIsCounting(bool shouldCount);
 
-protected:
-
 	virtual void Update() override;
 	virtual void BeginPlay() override;
+
+protected:
 
 	void ApplyText();
 	void CheckTimerEnd();
 
 	float _currentTime = 40;
-	Text* _text = nullptr;
+	std::shared_ptr<Text> _text = nullptr;
 	bool _isCounting = true;
 };
 

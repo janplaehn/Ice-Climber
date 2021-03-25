@@ -9,9 +9,9 @@ class ObjectPool
 public:
 	~ObjectPool();
 
-	void Add(GameObject* go);
+	void Add(std::shared_ptr<GameObject> go);
 
-	GameObject* FirstAvailable();
+	std::shared_ptr<GameObject> FirstAvailable();
 
 	bool AnyAvailable();
 
@@ -19,5 +19,5 @@ public:
 
 private:
 
-	std::vector<GameObject*> _gameObjects;
+	std::vector<std::shared_ptr<GameObject>> _gameObjects;
 };

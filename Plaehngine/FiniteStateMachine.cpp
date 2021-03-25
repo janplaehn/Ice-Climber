@@ -3,7 +3,7 @@
 #include "ComponentEssentials.h"
 #include "SDL_log.h"
 
-void FiniteStateMachine::InitFSM(GameObject* gameObject)
+void FiniteStateMachine::InitFSM(std::shared_ptr<GameObject> gameObject)
 {
 	_fsmGameObject = gameObject;
 }

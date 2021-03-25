@@ -5,7 +5,6 @@
 
 Rigidbody::Rigidbody()
 {
-	Physics::_rigidbodies.push_back(this);
 }
 
 void Rigidbody::BeginPlay()
@@ -42,7 +41,7 @@ void Rigidbody::ApplyGravity()
 	_velocity.y -= Physics::GRAVITY * GameTime::_delta * _gravityScale;
 }
 
+
 void Rigidbody::Destroy()
 {
-	Physics::_rigidbodies.erase(std::remove(Physics::_rigidbodies.begin(), Physics::_rigidbodies.end(), this), Physics::_rigidbodies.end());
 }

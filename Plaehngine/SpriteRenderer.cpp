@@ -2,11 +2,7 @@
 #include "Sprite.h"
 #include "AABBCollider.h"
 #include <algorithm>
-
-SpriteRenderer::SpriteRenderer()
-{
-	_renderers.push_back(this);
-}
+#include "GameObject.h"
 
 void SpriteRenderer::Update()
 {
@@ -30,5 +26,4 @@ void SpriteRenderer::Destroy()
 	if (_sprite != NULL)
 		_sprite->Destroy();
 	_sprite = NULL;
-	_renderers.erase(std::remove(_renderers.begin(), _renderers.end(), this), _renderers.end());
 }

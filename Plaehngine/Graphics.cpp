@@ -55,7 +55,7 @@ void Graphics::Init(Game* game)
 void Graphics::Run()
 {
 	//Drawing
-	for (Renderer* renderer : Renderer::_renderers) {
+	for (auto renderer : Renderer::_renderers) {
 		if (renderer->_enabled && renderer->_gameObject->_enabled)
 			renderer->Draw();
 	}

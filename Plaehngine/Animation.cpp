@@ -3,7 +3,6 @@
 
 Animation::Animation()
 {
-	_renderers.push_back(this);
 	_spriteSheet = nullptr;
 }
 
@@ -36,5 +35,4 @@ void Animation::Draw()
 
 void Animation::Destroy()
 {
-	_renderers.erase(std::remove(_renderers.begin(), _renderers.end(), this), _renderers.end());
 }

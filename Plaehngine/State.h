@@ -1,6 +1,7 @@
 #pragma once
 #include "FiniteStateMachine.h"
 #include "GameObject.h"
+#include <memory>
 
 class Transform;
 
@@ -15,11 +16,11 @@ public:
 	virtual void Exit() = 0;
 
 	template <class T>
-	T* GetComponent() {
+	std::shared_ptr<T> GetComponent() {
 		return _gameObject->GetComponent<T>();
 	}
 
 protected:
-	GameObject* _gameObject;
-	Transform* _transform;
+	std::shared_ptr<GameObject> _gameObject;
+	std::shared_ptr<Transform> _transform;
 };

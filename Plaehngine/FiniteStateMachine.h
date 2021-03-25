@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 class State;
 class GameObject;
@@ -6,7 +7,7 @@ class GameObject;
 class FiniteStateMachine
 {
 public:
-	void InitFSM(GameObject* gameObject);
+	void InitFSM(std::shared_ptr<GameObject> gameObject);
 	void UpdateFSM();
 	void DestroyFSM();
 	void QueueFSMState(State* state);
@@ -14,7 +15,7 @@ public:
 private:
 	void EnterNextState();
 	State* _currentState;
-	GameObject* _fsmGameObject;
+	std::shared_ptr<GameObject> _fsmGameObject;
 	State* _nextState = nullptr;
 };
 

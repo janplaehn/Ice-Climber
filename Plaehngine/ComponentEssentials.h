@@ -10,3 +10,4 @@
 #include "Text.h"
 #include "Sprite.h"
 #include "Camera.h"
+#include "GameObject.h"

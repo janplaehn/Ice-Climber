@@ -2,7 +2,7 @@
 
 void UINavigator::BeginPlay()
 {
-	for (Button* button : _buttons)
+	for (auto button : _buttons)
 	{
 		button->Deselect();
 	}

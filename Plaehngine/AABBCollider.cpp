@@ -5,7 +5,6 @@
 
 AABBCollider::AABBCollider()
 {
-	Physics::_colliders.push_back(this);
 }
 
 void AABBCollider::ApplySpriteSize(Sprite* sprite)
@@ -28,7 +27,6 @@ void AABBCollider::Render()
 
 void AABBCollider::Destroy()
 {
-	Physics::_colliders.erase(std::remove(Physics::_colliders.begin(), Physics::_colliders.end(), this), Physics::_colliders.end());
 }
 
 SDL_Rect AABBCollider::GetRect()
