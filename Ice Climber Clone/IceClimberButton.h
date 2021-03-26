@@ -22,10 +22,12 @@ protected:
 	std::shared_ptr<AudioSource> _source = nullptr;
 
 public:
+	friend class cereal::access;
+
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(cereal::base_class<Button>(this));
+		archive(cereal::base_class<Button>(this), _source);
 	}
 };
 

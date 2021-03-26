@@ -15,7 +15,7 @@ public:
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(cereal::base_class<Component>(this));
+		archive(cereal::base_class<Component>(this), _buttons, _buttonIndex);
 	}
 };
 

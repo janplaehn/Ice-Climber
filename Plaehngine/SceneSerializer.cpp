@@ -25,7 +25,7 @@ public:
 
 void SceneSerializer::Serialize(std::string path)
 {
-	std::ofstream file(path, std::ios::out, std::ios::binary);
+	std::ofstream file(path, std::ios::out | std::ios::binary);
 	SceneData sceneData;
 	sceneData._gameObjects = GameObject::_gameObjects;
 	cereal::BinaryOutputArchive oarchive(file);
@@ -35,7 +35,7 @@ void SceneSerializer::Serialize(std::string path)
 
 void SceneSerializer::Deserialize(std::string path)
 {
-	std::ifstream file(path, std::ios::in, std::ios::binary);
+	std::ifstream file(path, std::ios::in | std::ios::binary);
 	cereal::BinaryInputArchive iarchive(file);
 	SceneData sceneData;
 	iarchive(sceneData);

@@ -20,6 +20,8 @@ private:
 	float _highestPlayerPosition = 0;
 
 public:
+	friend class cereal::access;
+
 	template<class Archive>
 	void serialize(Archive& archive)
 	{

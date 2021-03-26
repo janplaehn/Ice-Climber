@@ -21,10 +21,12 @@ private:
 	class Font* _font = nullptr;
 
 public:
+	friend class cereal::access;
+
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(cereal::base_class<Renderer>(this));
+		archive(cereal::base_class<Renderer>(this), _text, _fontName);
 	}
 };
 

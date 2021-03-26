@@ -37,10 +37,12 @@ private:
 	bool _isTrigger = false;
 
 public:
+	friend class cereal::access;
+
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(cereal::base_class<Component>(this));
+		archive(cereal::base_class<Component>(this), _scale, _offset, _isTrigger);
 	}
 };
 

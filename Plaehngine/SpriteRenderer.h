@@ -11,6 +11,8 @@ public:
 	class Sprite* _sprite = nullptr;
 
 public:
+	friend class cereal::access;
+
 	template<class Archive>
 	void serialize(Archive& archive)
 	{

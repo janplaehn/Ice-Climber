@@ -15,6 +15,7 @@ class Transform;
 #include "GameObject.h"
 #include <cereal/types/polymorphic.hpp>
 #include <cereal/types/base_class.hpp>
+#include <cereal/access.hpp>
 
 class Component
 {
@@ -40,10 +41,11 @@ public:
 
 	virtual void Destroy() {};
 
+friend class cereal::access;
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(_enabled); // serialize things by passing them to the archive
+		archive(_enabled, _gameObject, _transform); // serialize things by passing them to the archive
 	}
 
 private:

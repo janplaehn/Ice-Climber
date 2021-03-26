@@ -11,6 +11,8 @@ private:
 	const int MAX_POSITION_Y = Screen::_height - 56;
 
 public:
+	friend class cereal::access;
+
 	template<class Archive>
 	void serialize(Archive& archive)
 	{

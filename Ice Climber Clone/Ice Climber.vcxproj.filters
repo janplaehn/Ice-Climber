@@ -191,9 +191,6 @@
     <ClInclude Include="ScoreScreenController.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Topi.h">
-      <Filter>Header Files\Components\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="LevelCamera.h">
       <Filter>Header Files\Components\Camera</Filter>
     </ClInclude>
@@ -223,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="TopiFallingDeadState.h">
       <Filter>Header Files\Components\Enemies\TopiStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Topi.h">
+      <Filter>Header Files\Components\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

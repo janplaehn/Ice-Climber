@@ -4,6 +4,7 @@
 #include "Screen.h"
 #include <string>
 #include <memory>
+#include <cereal/access.hpp>
 
 class Transform;
 class AABBCollider;
@@ -15,8 +16,6 @@ class GameObject : public std::enable_shared_from_this<GameObject>
 {
 
 public:
-
-	std::vector<std::shared_ptr<Component>> _components;
 
 	std::shared_ptr<Transform> _transform = nullptr;
 	bool _enabled = true;
@@ -74,6 +73,13 @@ public:
 	virtual void Update();
 	virtual void Destroy();
 	void OnCollision(std::shared_ptr<AABBCollider> otherCollider, struct Vector2D normal);
+
+protected:
+	std::vector<std::shared_ptr<Component>> _components;
+
+
+public:
+	friend class cereal::access;
 
 	template<class Archive>
 	void serialize(Archive& archive)

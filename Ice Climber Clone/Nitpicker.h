@@ -32,10 +32,12 @@ private:
 	const Vector2D FALL_VELOCITY = Vector2D(0, -60);
 
 public:
+	friend class cereal::access;
+
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(cereal::base_class<Enemy>(this), _deathAudioSource);
+		archive(cereal::base_class<Enemy>(this), _accelerateVertically, _accelerateHorizontally, _velocity, _deathAudioSource);
 	}
 };
 

@@ -3,6 +3,9 @@
 #include "Plaehngine.h"
 #include "Color.h"
 #include <memory>
+#include <cereal/types/polymorphic.hpp>
+#include <cereal/types/base_class.hpp>
+#include <cereal/access.hpp>
 
 class Transform;
 
@@ -23,6 +26,14 @@ public:
 	int GetHeight();
 
 protected:
-
 	SDL_Texture* _texture;
+
+public:
+	friend class cereal::access;
+
+	template<class Archive>
+	void serialize(Archive& archive)
+	{
+		archive();
+	}
 };

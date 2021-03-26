@@ -26,10 +26,12 @@ private:
 	int _channel = -1;
 
 public:
+	friend class cereal::access;
+
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
-		archive(cereal::base_class<Component>(this));
+		archive(cereal::base_class<Component>(this), _volume, _isLooping);
 	}
 };
 

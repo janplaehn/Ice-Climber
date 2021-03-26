@@ -12,6 +12,8 @@ protected:
     bool _isDead = false;
 
 public:
+	friend class cereal::access;
+
 	template<class Archive>
 	void serialize(Archive& archive)
 	{
