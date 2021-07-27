@@ -21,7 +21,7 @@ void MainMenu::Load()
 	AudioSource* musicSrc = music->AddComponent<AudioSource>();
 	musicSrc->_clip = Audio::LoadSound("Assets/Music/bonus.wav");
 	musicSrc->_isLooping = true;
-	musicSrc->Play();
+	musicSrc->_playOnBeginPlay = true;
 
 	GameObject* navigatorGo = new GameObject();
 	UINavigator* navigator =  navigatorGo->AddComponent<UINavigator>();
@@ -34,7 +34,7 @@ void MainMenu::Load()
 	button->_onPressedFunction = &(Scenes::LoadScene<IntroScene>);
 	Text* text = button->_text;
 	text->_text = "1 PLAYER GAME";
-	text->_fontName = "Ice Climber";
+	text->SetFont("Ice Climber");
 	textHolder->AddComponent<AudioSource>()->_clip = Audio::LoadSound("Assets/Sounds/ui.wav");
 
 	navigator->_buttons.push_back(button);
@@ -46,7 +46,7 @@ void MainMenu::Load()
 	button = textHolder->AddComponent<IceClimberButton>();
 	text = button->_text;
 	text->_text = "2 PLAYER GAME";
-	text->_fontName = "Ice Climber";
+	text->SetFont("Ice Climber");
 	textHolder->AddComponent<AudioSource>()->_clip = Audio::LoadSound("Assets/Sounds/ui.wav");
 
 	navigator->_buttons.push_back(button);
@@ -54,28 +54,28 @@ void MainMenu::Load()
 	GameObject* totalCounterGo = new GameObject();
 	totalCounterGo->_transform->_position = Vector2D(127, 73);
 	Text* totalCounter = totalCounterGo->AddComponent<Text>();
-	totalCounter->_fontName = "Ice Climber";
+	totalCounter->SetFont("Ice Climber");
 	totalCounter->_text = ToString(Scores::CalculateTotal(), 6);
 	totalCounter->_tint = Color::IceClimberPink();
 
 	GameObject* totalCounterGo1 = new GameObject();
 	totalCounterGo1->_transform->_position = Vector2D(71, 57);
 	Text* totalCounter1 = totalCounterGo1->AddComponent<Text>();
-	totalCounter1->_fontName = "Ice Climber";
+	totalCounter1->SetFont("Ice Climber");
 	totalCounter1->_text = ToString(Scores::CalculateTotal(), 6);
 	totalCounter1->_tint = Color::IceClimberOrange();
 
 	GameObject* totalCounterGo2 = new GameObject();
 	totalCounterGo2->_transform->_position = Vector2D(183, 57);
 	Text* totalCounter2 = totalCounterGo2->AddComponent<Text>();
-	totalCounter2->_fontName = "Ice Climber";
+	totalCounter2->SetFont("Ice Climber");
 	totalCounter2->_text = ToString(0, 6);
 	totalCounter2->_tint = Color::IceClimberOrange();
 
 	GameObject* mountainCounterGo = new GameObject();
 	mountainCounterGo->_transform->_position = Vector2D(Screen::_width / 2 + 31, 73);
 	Text* mountainCounter = mountainCounterGo->AddComponent<Text>();
-	mountainCounter->_fontName = "Ice Climber";
+	mountainCounter->SetFont("Ice Climber");
 	mountainCounter->_text = ToString(ScoreScene::_mountainIndex, 2);
 	mountainCounter->_tint = Color::IceClimberBlue();
 }

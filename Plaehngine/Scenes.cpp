@@ -1,5 +1,7 @@
 #include "Scenes.h"
 #include "SceneSerializer.h"
+#include "GameTime.h"
+#include "ApplicationState.h"
 
 Scene* Scenes::_currentScene;
 Scene* Scenes::_sceneToLoad;
@@ -13,9 +15,11 @@ void Scenes::Quit()
 
 void Scenes::Run()
 {
-	for (auto go : GameObject::_gameObjects)
-	{
-		go->Update();
+	if (ApplicationState::IsRunning()) {
+		for (auto go : GameObject::_gameObjects)
+		{
+			go->Update();
+		}
 	}
 
 	if (_sceneToLoad != nullptr) {
@@ -28,8 +32,17 @@ void Scenes::Run()
 		_currentScene = _sceneToLoad;
 		_sceneToLoad = nullptr;
 
-		for (auto go : GameObject::_gameObjects) {
-			go->BeginPlay();
+		if (ApplicationState::IsRunning()) {
+			BeginPlay();
 		}
+	}
+}
+
+void Scenes::BeginPlay()
+{
+	Camera::_position = Vector2D::Zero();
+	Camera::_tiling = 1.0f;
+	for (auto go : GameObject::_gameObjects) {
+		go->BeginPlay();
 	}
 }

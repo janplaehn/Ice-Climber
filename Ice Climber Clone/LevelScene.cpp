@@ -45,7 +45,7 @@ void LevelScene::LoadMusic()
 	AudioSource* musicSrc = music->AddComponent<AudioSource>();
 	musicSrc->_clip = Audio::LoadSound("Assets/Music/stage.wav");
 	musicSrc->_isLooping = true;
-	musicSrc->Play();
+	musicSrc->_playOnBeginPlay = true;
 }
 
 PlayerBehaviour* LevelScene::LoadPlayer()
@@ -295,7 +295,7 @@ void LevelScene::LoadTimer(PlayerBehaviour* player, Vector2D position)
 	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
 	Text* timerText = timerGo->AddComponent<Text>();
 	timerText->_text = "40.0";
-	timerText->_fontName = "Ice Climber";
+	timerText->SetFont("Ice Climber");
 	timerText->_tint = Color::IceClimberOrange();
 	timerGo->_enabled = false;
 	if (player) {

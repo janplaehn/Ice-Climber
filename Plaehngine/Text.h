@@ -9,15 +9,15 @@ public:
 	Text();
 
 	virtual void Update() {};
-	virtual void BeginPlay();
+	virtual void BeginPlay() override {};
 	virtual void Draw();
 	virtual void Destroy();
-	virtual void LocateFont();
+	virtual void SetFont(std::string fontName);
 
 	std::string _text;
-	std::string _fontName;
 
 private:
+	std::string _fontName;
 	class Font* _font = nullptr;
 };
 

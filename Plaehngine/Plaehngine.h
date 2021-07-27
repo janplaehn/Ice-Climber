@@ -1,15 +1,19 @@
 #pragma once
 
+#include "SDL.h"
+
+#ifndef NDEBUG
+#define PLAEHNGINE_EDITOR
+#endif
+
 class Game;
 
 class Plaehngine final
 {
 
 public:
+	Plaehngine(Game* game);
 
-	// Creates the main window. Returns true on success.
-	// Use Player Settings instead
-	void Init(Game* game);
 	void Run();
 
 	// Destroys the Plaehngine instance
@@ -19,6 +23,6 @@ public:
 	void Quit();
 
 private:
-	Game* _game;
+	static void Init(Game* game);
 };
 

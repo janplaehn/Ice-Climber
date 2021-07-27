@@ -11,8 +11,8 @@ public:
 	}
 
 	static void Quit();
-
 	static void Run();
+	static void BeginPlay();
 
 private:
 	static Scene* _currentScene;

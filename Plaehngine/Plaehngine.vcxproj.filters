@@ -64,6 +64,12 @@
     <Filter Include="Header Files\Components\UI">
       <UniqueIdentifier>{670a8679-f40b-456a-a1f5-619be60db698}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Editor">
+      <UniqueIdentifier>{236e2e30-bb27-4228-acb9-dcf2bbe04824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Editor">
+      <UniqueIdentifier>{7c1a856b-8088-46e0-9cf8-0e251607d463}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp">
@@ -169,6 +175,15 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="SceneSerializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSceneView.cpp">
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationState.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaehngineEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -279,6 +294,15 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="SceneSerializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorSceneView.h">
+      <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationState.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaehngineEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

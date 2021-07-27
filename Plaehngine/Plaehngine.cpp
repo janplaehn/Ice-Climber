@@ -1,3 +1,4 @@
+#include "ApplicationState.h"
 #include "Plaehngine.h"
 #include "Random.h"
 #include "Audio.h"
@@ -8,23 +9,31 @@
 #include "Graphics.h"
 #include "Physics.h"
 
+#ifdef PLAEHNGINE_EDITOR
+#include "PlaehngineEditor.h"
+#endif
+
+Plaehngine::Plaehngine(Game* game) {
+	Init(game);
+	Run();
+	Quit();
+}
+
 void Plaehngine::Init(Game* game)
 {
-	SDL_Log("Initializing the engine...\n");
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-	{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "SDL failed the initialization: %s\n", SDL_GetError());
-	}
+	SDL_Init(SDL_INIT_EVERYTHING);
 
 	Graphics::Init(game);
-	Input::Init(this);
-	Audio::Init();
+	Input::Init();
+	Audio::Init(game);
 	Random::Init();
-	GameTime::Init();
+	game->Init();
 
-	_game = game;
-	_game->Init();
+#ifdef PLAEHNGINE_EDITOR
+	PlaehngineEditor::Init();
+#else 
+	ApplicationState::Start();
+#endif
 }
 
 void Plaehngine::Destroy()
@@ -34,7 +43,6 @@ void Plaehngine::Destroy()
 	Audio::Quit();
 	Input::Quit();
 	SDL_Quit();
-	delete _game;
 }
 
 void Plaehngine::Quit() {
@@ -46,10 +54,18 @@ void Plaehngine::Run()
 {
 	while (true)
 	{
+		Physics::Run();
+		Input::ProcessInput();
 		GameTime::Run();
 		Scenes::Run();
-		Physics::Run();
 		Graphics::Run();
-		Input::ProcessInput();
+
+#ifdef PLAEHNGINE_EDITOR
+		PlaehngineEditor::Run();
+#endif
+
+		if (Input::_isQueueingQuit) {
+			break;
+		}
 	}
 }

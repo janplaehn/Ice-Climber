@@ -7,6 +7,7 @@ class AudioSource : public Component
 {
 public:
 
+	virtual void BeginPlay() override;
 	void Play();
 	void Pause();
 	void UnPause();
@@ -19,6 +20,7 @@ public:
 	virtual void Destroy();
 
 	bool _isLooping = false;
+	bool _playOnBeginPlay = false;
 	Mix_Chunk* _clip;
 
 private:

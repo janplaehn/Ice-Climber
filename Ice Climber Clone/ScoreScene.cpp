@@ -16,7 +16,7 @@ void ScoreScene::Load()
 	GameObject* mountainCounterGo = new GameObject();
 	mountainCounterGo->_transform->_position = Vector2D(Screen::_width / 2 + 32, Screen::_height - 31);
 	Text* mountainCounter =  mountainCounterGo->AddComponent<Text>();
-	mountainCounter->_fontName = "Ice Climber";
+	mountainCounter->SetFont("Ice Climber");
 	mountainCounter->_text = ToString(_mountainIndex, 2);
 
 	if (Scores::_hasBonus) {
@@ -49,7 +49,7 @@ void ScoreScene::Load()
 	Counter* eggplantCounterCounter = eggplantCounterGo->AddComponent<Counter>();
 	eggplantCounterGo->_transform->_position = Vector2D(104, 129);
 	Text* eggplantCounter = eggplantCounterGo->AddComponent<Text>();
-	eggplantCounter->_fontName = "Ice Climber";
+	eggplantCounter->SetFont("Ice Climber");
 	eggplantCounterCounter->SetDigitCount(2);
 	eggplantCounterCounter->SetDelay(0.5f);
 	eggplantCounterCounter->SetTargetNumber(Scores::_eggplants);
@@ -61,7 +61,7 @@ void ScoreScene::Load()
 	Counter* iceCounterCounter = iceCounterGo->AddComponent<Counter>();
 	iceCounterGo->_transform->_position = Vector2D(104, 113);
 	Text* iceCounter = iceCounterGo->AddComponent<Text>();
-	iceCounter->_fontName = "Ice Climber";
+	iceCounter->SetFont("Ice Climber");
 	iceCounterCounter->SetDigitCount(2);
 	iceCounterCounter->SetDelay(1.0f);
 	iceCounterCounter->SetTargetNumber(Scores::_ice);
@@ -73,7 +73,7 @@ void ScoreScene::Load()
 	nitpickerCounterGo->_transform->_position = Vector2D(104, 97);
 	Counter* nitCounterCounter = nitpickerCounterGo->AddComponent<Counter>();
 	Text* nitpickerCounter = nitpickerCounterGo->AddComponent<Text>();
-	nitpickerCounter->_fontName = "Ice Climber";
+	nitpickerCounter->SetFont("Ice Climber");
 	nitCounterCounter->SetDigitCount(2);
 	nitCounterCounter->SetDelay(1.5f);
 	nitCounterCounter->SetTargetNumber(Scores::_nitpickers);
@@ -85,7 +85,7 @@ void ScoreScene::Load()
 	tileCounterGo->_transform->_position = Vector2D(104, 81);
 	Counter* tileCounterCounter = tileCounterGo->AddComponent<Counter>();
 	Text* tileCounter = tileCounterGo->AddComponent<Text>();
-	tileCounter->_fontName = "Ice Climber";
+	tileCounter->SetFont("Ice Climber");
 	tileCounterCounter->SetDigitCount(2);
 	tileCounterCounter->SetDelay(2.0f);
 	tileCounterCounter->SetTargetNumber(Scores::_tiles);
@@ -97,7 +97,7 @@ void ScoreScene::Load()
 	totalCounterGo->_transform->_position = Vector2D(72, 57);
 	Counter* totalCounterCounter =  totalCounterGo->AddComponent<Counter>();
 	Text* totalCounter = totalCounterGo->AddComponent<Text>();
-	totalCounter->_fontName = "Ice Climber";
+	totalCounter->SetFont("Ice Climber");
 	totalCounterCounter->SetDigitCount(6);
 	totalCounterCounter->SetDelay(2.5f);
 	totalCounterCounter->SetTargetNumber(Scores::CalculateTotal());

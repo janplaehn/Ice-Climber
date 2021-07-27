@@ -36,11 +36,20 @@ void Sprite::Draw(Transform* transform, SDL_Rect clip, Color tint)
 		//Apply Position & Camera
 		rect.x = transform->_position.x - Camera::_position.x;
 		rect.y = (transform->_position.y - Camera::_position.y) * -1.0f + Screen::_height;
+
+		//Apply Camera Zoom
+		rect.x *= Camera::_tiling;
+		rect.y *= Camera::_tiling;
 	}
 
 	//Apply Scale
 	rect.w = clip.w * transform->_scale.x;
 	rect.h = clip.h * transform->_scale.y;
+
+	if (!transform->_isInScreenSpace) {
+		rect.w *= Camera::_tiling;
+		rect.h *= Camera::_tiling;
+	}
 
 	//Apply Pivot
 	rect.x -= rect.w * transform->_pivot.x;

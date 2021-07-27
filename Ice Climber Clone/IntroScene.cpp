@@ -10,7 +10,7 @@ void IntroScene::Load()
 	AudioSource* musicSrc = music->AddComponent<AudioSource>();
 	musicSrc->_clip = Audio::LoadSound("Assets/Music/intro.wav");
 	musicSrc->_isLooping = false;
-	musicSrc->Play();
+	musicSrc->_playOnBeginPlay = true;
 
 	LoadMainStage();
 	LoadTopis();
@@ -53,7 +53,7 @@ void IntroScene::LoadStaticTimer(Vector2D position)
 	BonusTimer* timer = timerGo->AddComponent<BonusTimer>();
 	Text* text = timerGo->AddComponent<Text>();
 	text->_text = "40.0";
-	text->_fontName = "Ice Climber";
+	text->SetFont("Ice Climber");
 	text->_tint = Color::IceClimberOrange();
 	timer->_enabled = false;
 }

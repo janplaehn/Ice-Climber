@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="ApplicationState.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioSource.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="EditorSceneView.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="ImageFont.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -37,6 +39,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Plaehngine.cpp" />
+    <ClCompile Include="PlaehngineEditor.cpp" />
     <ClCompile Include="PlayerSettings.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -57,9 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="ApplicationState.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioSource.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="EditorSceneView.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="GameMath.h" />
     <ClInclude Include="ImageFont.h" />
@@ -76,6 +81,7 @@
     <ClInclude Include="AABBCollider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="PlaehngineEditor.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />

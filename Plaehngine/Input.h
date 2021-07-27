@@ -1,10 +1,15 @@
 #pragma once
 #include <vector>
+#include <SDL_scancode.h>
+#include <SDL_mouse.h>
+
+
+struct Vector2D;
 
 class Input
 {
 public:
-	static void Init(class Plaehngine* engine);
+	static void Init();
 
 	enum KeyStatus {
 		IDLE,
@@ -21,15 +26,23 @@ public:
 
 	static std::vector<Key> _keys;
 
+	static std::vector<Key> _buttons;
+
 	static void ProcessInput();
 
 	static KeyStatus GetKeyStatus(int scanCode);
+
+	static KeyStatus GetButtonStatus(int button);
+
+	static void WatchButton(int button);
 
 	static void WatchKey(int scanCode);
 
 	static void Quit();
 
-private:
-	static class Plaehngine* _engine;
+	static Vector2D _mousePosition;
+	static Vector2D _mouseDelta;
+	static Vector2D _mouseWheelDelta;
+	static bool _isQueueingQuit;
 };
 

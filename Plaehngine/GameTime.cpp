@@ -1,21 +1,27 @@
 #include "GameTime.h"
 #include "SDL.h"
+#include "ApplicationState.h"
 
 void GameTime::Init()
 {
-	_lastTime = TimeSinceGameLoad();
+	_lastTime = SDLTicks();
 }
 
-float GameTime::TimeSinceGameLoad()
+float GameTime::SDLTicks()
 {
 	return SDL_GetTicks() / 1000.f;
 }
 
 void GameTime::Run()
 {
-	float newTime = GameTime::TimeSinceGameLoad();
-	_delta = newTime - _lastTime;
-	_delta = _delta * _scale;
+	float newTime = GameTime::SDLTicks();
+	if (ApplicationState::IsRunning()) {
+		_delta = newTime - _lastTime;
+		_delta = _delta * _scale;
+		_timeSinceGameLoad += _delta;
+	}
+	_unscaledDelta = newTime - _lastTime;
+	_unscaledTimeSinceGameLoad += _unscaledDelta;
 	_lastTime = newTime;
 	
 
@@ -28,3 +34,6 @@ void GameTime::Run()
 float GameTime::_scale = 1.0f;
 float GameTime::_lastTime = 0;
 float GameTime::_delta = 0;
+float GameTime::_unscaledDelta = 0;
+float GameTime::_timeSinceGameLoad = 0;
+float GameTime::_unscaledTimeSinceGameLoad = 0;

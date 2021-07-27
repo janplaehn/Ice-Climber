@@ -4,4 +4,5 @@
 class Camera {
 public:
 	static Vector2D _position;
+	static float _tiling;
 };

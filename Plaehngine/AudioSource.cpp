@@ -2,6 +2,12 @@
 #include "Audio.h"
 #include <SDL_mixer.h>
 
+void AudioSource::BeginPlay() {
+	if (_playOnBeginPlay) {
+		Play();
+	}
+}
+
 void AudioSource::Play()
 {
 	if (_clip == nullptr) {

@@ -8,9 +8,13 @@
 #include "Graphics.h"
 #include <limits>
 #include "GameMath.h"
+#include "ApplicationState.h"
 
 void Physics::Run()
 {
+	if (!ApplicationState::IsRunning()) {
+		return;
+	}
 	for (Rigidbody* rb : _rigidbodies)
 	{
 		PreventCollisions(rb);
